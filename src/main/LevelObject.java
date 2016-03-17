@@ -23,7 +23,7 @@ public abstract class LevelObject {
 	
 	public LevelObject getNeighbour(Direction dir){
 		System.out.println("getNeighbour");
-		return null;
+		return null; //Javítani kell
 	}
 	
 	public void setNeighbour(Direction dir, LevelObject l){
