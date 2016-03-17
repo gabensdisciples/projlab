@@ -5,6 +5,7 @@ public class Main {
 		System.out.println("Test22");
 //KURVAAAA
 		// eclipse teszt
+		//Gábornak vajon sikerül?
 	}
 
 }
