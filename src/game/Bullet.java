@@ -1,4 +1,4 @@
-package main;
+package game;
 
 public class Bullet {
 	private Direction direction;

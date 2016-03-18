@@ -1,4 +1,4 @@
-package main;
+package game;
 
 
 public class Character {
@@ -14,7 +14,7 @@ public class Character {
 	}
 	
 	public void shoot(){
-		System.out.println("Shoot függvény vagyok");
+		System.out.println("Shoot fï¿½ggvï¿½ny vagyok");
 	}
 	
 	public void changeColor(){

@@ -1,4 +1,4 @@
-package main;
+package game;
 
 public class Box extends Item{
 	public void pickUp(Character c){

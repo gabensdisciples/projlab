@@ -1,4 +1,4 @@
-package main;
+package game;
 
 public final class Wormhole{
 	private SpecWall blueSpecWall;

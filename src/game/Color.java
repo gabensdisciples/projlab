@@ -1,7 +1,7 @@
-package main;
+package game;
 
 public class Color {
-	//Kéne még egy metódus ami vissza adja a state állapotát.
+	//Kï¿½ne mï¿½g egy metï¿½dus ami vissza adja a state ï¿½llapotï¿½t.
 	public enum state{
 		blue,
 		yellow

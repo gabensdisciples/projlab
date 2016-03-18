@@ -1,4 +1,4 @@
-package main;
+package game;
 
 public abstract class LevelObject {
 	private LevelObject neighbourNorth;
@@ -23,7 +23,7 @@ public abstract class LevelObject {
 	
 	public LevelObject getNeighbour(Direction dir){
 		System.out.println("getNeighbour");
-		return null; //Javítani kell
+		return null; //Javï¿½tani kell
 	}
 	
 	public void setNeighbour(Direction dir, LevelObject l){
