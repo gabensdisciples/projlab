@@ -1,11 +1,8 @@
 package game;
 
-public class ItemState {
+public enum ItemState {
 	
-	enum state{
 		gotItem,
 		noItem,
 		forbiddenArea
-	}
-
 }

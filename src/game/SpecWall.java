@@ -4,10 +4,16 @@ public class SpecWall extends LevelObject {
 	
 	private StarGate gate;
 
-	public SpecWall(boolean walkable) {
-		super(walkable);
+	public SpecWall() {
+		super(false);
+		System.out.println("SpecWall konstruktor");
 	}
-
+	
+	public ItemState hasItem() {
+		System.out.println("SpecWall hasItem");
+		return null;
+	}
+	
 	@Override
 	public void interactCharacter(Character c) {
 		System.out.println("SpecWall interactCharacter");
@@ -18,14 +24,8 @@ public class SpecWall extends LevelObject {
 		System.out.println("SpecWall interactBullet");
 	}
 
-	@Override
-	public ItemState hasItem() {
-		System.out.println("SpecWall hasItem");
-		return null;
-	}
-	
-	public void StarGate(StarGate gate){
-		System.out.println("SpecWall konstruktor");
+	public void SetStarGate(StarGate gate){
+		System.out.println("SpecWall setStarGate");
 		this.gate = gate;
 	}
 }

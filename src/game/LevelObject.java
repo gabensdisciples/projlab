@@ -5,16 +5,12 @@ public abstract class LevelObject {
 	private LevelObject neighbourEast;
 	private LevelObject neighbourSouth;
 	private LevelObject neighbourWest;
-	private boolean walkable;
+	//Protected lett, isWalkable metodus megszunt : dokumentalni kell!
+	protected boolean walkable;
 	
 	public LevelObject(boolean walkable){
 		System.out.println("LevelOject konstruktor");
 		this.walkable = walkable;
-	}
-	
-	public boolean isWalkable(){
-		System.out.println("isWalkable");
-		return walkable;
 	}
 	
 	public abstract void interactCharacter(Character c);
@@ -23,7 +19,7 @@ public abstract class LevelObject {
 	
 	public LevelObject getNeighbour(Direction dir){
 		System.out.println("getNeighbour");
-		return null; //Jav�tani kell
+		return null; //Javitani kell
 	}
 	
 	public void setNeighbour(Direction dir, LevelObject l){
