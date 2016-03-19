@@ -4,16 +4,16 @@ import enumerations.ItemState;
 import game.Bullet;
 import game.Character;
 import items.Item;
+import items.Box;
 
 public class Scale extends LevelObject {
-	//TODO: Item lett a Box helyett, dokumnetalni kell!
-	private Item item;
+	private Box box;
 	private boolean active;
 	private Door door;
 	
 	public Scale(Door door) {
 		super(true);
-		item = null;
+		box = null;
 		active = false;
 		this.door = door;
 		System.out.println("Scale konstruktor");
@@ -46,7 +46,7 @@ public class Scale extends LevelObject {
 	@Override
 	public void getItem(Character c) {
 		System.out.println("Scale getItem");
-		item.pickUp(c);
+		box.pickUp(c);
 	}
 	
 	@Override

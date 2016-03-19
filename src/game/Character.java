@@ -61,6 +61,10 @@ public class Character {
 		this.position = position;
 	}
 	
+	public LevelObject getPosition() {
+		return position;
+	}
+	
 	//karakternél levõ ZPM modulok számának növelése
 	public void incrementZPMCount(){
 		System.out.println("Character IncrementZPMCount");
@@ -76,8 +80,6 @@ public class Character {
 	public void drop(){
 		System.out.println("Character drop");
 		
-		//Igy ranezve szerintem a hasItem hivasa itt folosleges, mert...
-		//TODO: Ha igy van, dokumentalni kell! (szekvenciakon is :( )
 		position.placeItem((Item) box);
 	}
 	
@@ -85,7 +87,6 @@ public class Character {
 	public void take(){
 		System.out.println("Character take");
 		
-		//Ugyanaz, mint a lerakasnal: foloslegesnek tunik a hasItem...
 		position.getItem(this);
 	}
 }
