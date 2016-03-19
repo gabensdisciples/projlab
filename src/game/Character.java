@@ -51,7 +51,7 @@ public class Character {
 	//karakter mozgatása
 	public void move(Direction dir){
 		System.out.println("Character move");
-		//nullt ad vissza, meg kellene csinalni
+		//TODO: nullt ad vissza, meg kellene csinalni
 		position.getNeighbour(dir).interactCharacter(this);
 	}
 	
