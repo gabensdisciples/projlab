@@ -34,7 +34,6 @@ public class Character {
 	//kilövendõ golyó színének megváltoztatása
 	public void changeColor(){
 		System.out.println("Character Changecolor");
-		//nullt ad vissza, meg kellene csinalni
 		bulletColor = bulletColor.getOtherColor();
 	}
 	
@@ -51,8 +50,9 @@ public class Character {
 	}
 	
 	//karakter helyzetének beállítása
-	public void setPosition(LevelObject Position){
+	public void setPosition(LevelObject position){
 		System.out.println("Character setPosition");
+		this.position = position;
 	}
 	
 	//karakternél levõ ZPM modulok számának növelése
@@ -63,6 +63,7 @@ public class Character {
 	//karakterhez kerül egy doboz
 	public void setBox(Box b){
 		System.out.println("Character setBox");
+		box = b;
 	}
 	
 	//tárgy lerakása
@@ -78,7 +79,7 @@ public class Character {
 	public void take(){
 		System.out.println("Character take");
 		
-		//Ugyanaz, mint a lerakasnal: foloslegesnek tunik a hasItem
+		//Ugyanaz, mint a lerakasnal: foloslegesnek tunik a hasItem...
 		position.getItem(this);
 	}
 }

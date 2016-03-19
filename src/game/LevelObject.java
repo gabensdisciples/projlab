@@ -19,11 +19,25 @@ public abstract class LevelObject {
 	
 	public LevelObject getNeighbour(Direction dir){
 		System.out.println("getNeighbour");
-		return null; //Javitani kell
+		
+		switch(dir) {
+			case North : return neighbourNorth;
+			case East : return neighbourEast;
+			case South : return neighbourSouth;
+			case West : return neighbourWest;
+			default : return null;
+		}
 	}
 	
 	public void setNeighbour(Direction dir, LevelObject l){
 		System.out.println("setNeighbour");
+		
+		switch(dir) {
+		case North : neighbourNorth = l; break;
+		case East : neighbourEast = l; break;
+		case South : neighbourSouth = l; break;
+		case West : neighbourWest = l; break;
+		}
 	}
 	
 	public abstract ItemState hasItem();

@@ -8,6 +8,9 @@ public enum Color {
 	//Valtozott a szignatura, dokumentalni kell!
 	public Color getOtherColor(){
 		System.out.println("getOtherColor");
-		return null;
+		if(this == Color.blue)
+			return Color.yellow;
+		
+		else return Color.blue;
 	}
 }

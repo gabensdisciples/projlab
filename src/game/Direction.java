@@ -1,11 +1,8 @@
 package game;
 
-public class Direction {
-
-	enum state{
-		North,
-		East,
-		South,
-		West
-	}
+public enum Direction {
+	North,
+	East,
+	South,
+	West;
 }
