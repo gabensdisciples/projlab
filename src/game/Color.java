@@ -1,15 +1,13 @@
 package game;
 
-public class Color {
-	//K�ne m�g egy met�dus ami vissza adja a state �llapot�t.
-	public enum state{
-		blue,
-		yellow
-	};
+public enum Color {
 	
-	public Color getOtherColor(Color color){
+	blue,
+	yellow;
+	
+	//Valtozott a szignatura, dokumentalni kell!
+	public Color getOtherColor(){
 		System.out.println("getOtherColor");
 		return null;
 	}
-
 }
