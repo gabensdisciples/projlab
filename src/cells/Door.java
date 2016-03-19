@@ -1,4 +1,8 @@
-package game;
+package cells;
+
+import enumerations.ItemState;
+import game.Bullet;
+import game.Character;
 
 public class Door extends LevelObject{
 	

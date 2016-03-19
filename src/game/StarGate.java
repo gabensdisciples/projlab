@@ -1,5 +1,7 @@
 package game;
 
+import enumerations.Color;
+
 public class StarGate {
 	
 	private Color color;
