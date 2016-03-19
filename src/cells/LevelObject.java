@@ -11,12 +11,16 @@ public abstract class LevelObject {
 	private LevelObject neighbourEast;
 	private LevelObject neighbourSouth;
 	private LevelObject neighbourWest;
-	//TODO: Protected lett, isWalkable metodus megszunt : dokumentalni kell!
+	//TODO: Protected lett, dokumentalni kell!
 	protected boolean walkable;
 	
 	public LevelObject(boolean walkable){
 		this.walkable = walkable;
 		System.out.println("LevelOject konstruktor");
+	}
+	
+	public boolean isWalkable() {
+		return walkable;
 	}
 	
 	public abstract void interactCharacter(Character c);
