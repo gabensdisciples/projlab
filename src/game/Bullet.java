@@ -27,6 +27,7 @@ public class Bullet {
 	
 	public void die(){
 		System.out.println("Bullet die");
+		
 	}
 	
 	public StarGate createStarGate(){

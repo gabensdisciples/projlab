@@ -5,7 +5,7 @@ public enum Color {
 	blue,
 	yellow;
 	
-	//Valtozott a szignatura, dokumentalni kell!
+	//TODO: Valtozott a szignatura, dokumentalni kell!
 	public Color getOtherColor(){
 		System.out.println("getOtherColor");
 		if(this == Color.blue)

@@ -45,6 +45,7 @@ public class Character {
 	//karakter halála
 	public void die(){
 		System.out.println("Character die");
+		
 	}
 	
 	//karakter mozgatása

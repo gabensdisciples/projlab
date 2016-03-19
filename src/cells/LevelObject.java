@@ -11,12 +11,12 @@ public abstract class LevelObject {
 	private LevelObject neighbourEast;
 	private LevelObject neighbourSouth;
 	private LevelObject neighbourWest;
-	//Protected lett, isWalkable metodus megszunt : dokumentalni kell!
+	//TODO: Protected lett, isWalkable metodus megszunt : dokumentalni kell!
 	protected boolean walkable;
 	
 	public LevelObject(boolean walkable){
-		System.out.println("LevelOject konstruktor");
 		this.walkable = walkable;
+		System.out.println("LevelOject konstruktor");
 	}
 	
 	public abstract void interactCharacter(Character c);
@@ -32,6 +32,7 @@ public abstract class LevelObject {
 			case South : return neighbourSouth;
 			case West : return neighbourWest;
 			default : return null;
+			//TODO: Dobjunk Exception-t defaultnál?
 		}
 	}
 	

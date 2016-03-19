@@ -6,7 +6,7 @@ import game.Character;
 import items.Item;
 
 public class Scale extends LevelObject {
-	//Item lett a Box helyett, dokumnetalni kell!
+	//TODO: Item lett a Box helyett, dokumnetalni kell!
 	private Item item;
 	private boolean active;
 	private Door door;
@@ -19,7 +19,7 @@ public class Scale extends LevelObject {
 		System.out.println("Scale konstruktor");
 	}
 	
-	//Valtozott a szignatura, dokumentalni kell!
+	//TODO: Valtozott a szignatura, dokumentalni kell!
 	public void setDoorState(boolean open) {
 		System.out.println("Scale openDoor");
 	}
