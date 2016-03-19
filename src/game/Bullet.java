@@ -1,5 +1,9 @@
 package game;
 
+import cells.LevelObject;
+import enumerations.Color;
+import enumerations.Direction;
+
 public class Bullet {
 	private Direction direction;
 	private Color color;

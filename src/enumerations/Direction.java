@@ -1,4 +1,4 @@
-package game;
+package enumerations;
 
 public enum Direction {
 	North,

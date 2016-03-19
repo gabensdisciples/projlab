@@ -1,5 +1,8 @@
 package game;
 
+import cells.SpecWall;
+import enumerations.Color;
+
 public final class Wormhole{
 	private static SpecWall blueSpecWall = null;
 	private static SpecWall yellowSpecWall = null;

@@ -1,5 +1,10 @@
 package game;
 
+import cells.LevelObject;
+import enumerations.Color;
+import enumerations.Direction;
+import items.Box;
+import items.Item;
 
 public class Character {
 	

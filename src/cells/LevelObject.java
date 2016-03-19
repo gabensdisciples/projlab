@@ -1,4 +1,10 @@
-package game;
+package cells;
+
+import enumerations.Direction;
+import enumerations.ItemState;
+import game.Bullet;
+import game.Character;
+import items.Item;
 
 public abstract class LevelObject {
 	private LevelObject neighbourNorth;

@@ -1,4 +1,9 @@
-package game;
+package cells;
+
+import enumerations.ItemState;
+import game.Bullet;
+import game.Character;
+import items.Item;
 
 public class Floor extends LevelObject{
 	private Item item;
