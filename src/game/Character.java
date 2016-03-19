@@ -51,7 +51,7 @@ public class Character {
 	//karakter mozgatása
 	public void move(Direction dir){
 		System.out.println("Character move");
-		//nullt ad vissza, meg kellene csinalni
+		//TODO: nullt ad vissza, meg kellene csinalni
 		position.getNeighbour(dir).interactCharacter(this);
 	}
 	
@@ -77,7 +77,7 @@ public class Character {
 		System.out.println("Character drop");
 		
 		//Igy ranezve szerintem a hasItem hivasa itt folosleges, mert...
-		//Ha igy van, dokumentalni kell! (szekvenciakon is :( )
+		//TODO: Ha igy van, dokumentalni kell! (szekvenciakon is :( )
 		position.placeItem((Item) box);
 	}
 	
