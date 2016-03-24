@@ -21,17 +21,16 @@ public class Bullet {
 	}
 
 	public void setPosition(LevelObject position){
-		System.out.println("setPosition");
+		System.out.println("Bullet setPosition");
 		this.position = position;
 	}
 	
 	public void die(){
 		System.out.println("Bullet die");
-		
 	}
 	
 	public StarGate createStarGate(){
-		System.out.println("createStarGate");
+		System.out.println("Bullet createStarGate");
 		return new StarGate(color);
 	}
 }
