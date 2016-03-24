@@ -20,7 +20,7 @@ public class Character {
 	private Box box;
 	
 	
-	//konsrtuktor - játszható karakter létrehozása
+	//konstruktor - játszható karakter létrehozása
 	public Character(LevelObject Position, Color color, Direction direction){
 		System.out.println("Character konstruktor");
 		
@@ -32,7 +32,7 @@ public class Character {
 	//golyó kilövése
 	public void shoot(){
 		System.out.println("Character Shoot");
-		Bullet b = new Bullet(position, direction, bulletColor);
+		Bullet b = new Bullet(position.getNeighbour(direction), direction, bulletColor);
 		b.fly();
 	}
 	
@@ -43,7 +43,7 @@ public class Character {
 	}
 	
 	//karakter halála
-	public void die(){
+	public void die() {
 		System.out.println("Character die");
 		
 	}
@@ -68,6 +68,7 @@ public class Character {
 	//karakternél levõ ZPM modulok számának növelése
 	public void incrementZPMCount(){
 		System.out.println("Character IncrementZPMCount");
+		zpmCount++;
 	}
 	
 	//karakterhez kerül egy doboz
@@ -81,6 +82,7 @@ public class Character {
 		System.out.println("Character drop");
 		
 		position.placeItem((Item) box);
+		box = null;
 	}
 	
 	//tárgy felvétele

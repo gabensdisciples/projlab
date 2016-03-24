@@ -16,12 +16,23 @@ public class Floor extends LevelObject{
 	
 	public ItemState hasItem() {
 		System.out.println("Floor hasItem");
-		return null;
+		if(!walkable)
+			return ItemState.forbiddenArea;
+		
+		else if(item != null) return ItemState.gotItem;
+		
+		else return ItemState.noItem;
 	}
 	
 	public void interactCharacter(Character c) {
 		System.out.println("Floor interactCharacter");
-		c.setPosition(this);
+		if(walkable)
+			c.setPosition(this);
+		
+		//TODO: szekvencia valtozott, dokumentalni kell!
+		//esetleges problema: parral rendelkezo csillagkapurol falnak megy
+		// -> atkerul a parjara
+		else c.getPosition().interactCharacter(c);
 	}
 	
 	public void interactBullet(Bullet b) {
@@ -42,5 +53,6 @@ public class Floor extends LevelObject{
 	@Override
 	public void placeItem(Item item) {
 		System.out.println("Floor placeItem");
+		this.item = item;
 	}
 }

@@ -7,10 +7,12 @@ import game.Character;
 import items.Item;
 
 public abstract class LevelObject {
-	private LevelObject neighbourNorth;
-	private LevelObject neighbourEast;
-	private LevelObject neighbourSouth;
-	private LevelObject neighbourWest;
+	//TODO: privaterol protectedek lettek a szomszedok, dokumentalni kell!
+	//(a Scale override-ja miatt kell)
+	protected LevelObject neighbourNorth;
+	protected LevelObject neighbourEast;
+	protected LevelObject neighbourSouth;
+	protected LevelObject neighbourWest;
 	//TODO: Protected lett, dokumentalni kell!
 	protected boolean walkable;
 	
@@ -28,7 +30,7 @@ public abstract class LevelObject {
 	public abstract void interactBullet(Bullet b);
 	
 	public LevelObject getNeighbour(Direction dir){
-		System.out.println("getNeighbour");
+		System.out.println("LevelObject getNeighbour");
 		
 		switch(dir) {
 			case North : return neighbourNorth;
@@ -44,10 +46,10 @@ public abstract class LevelObject {
 		System.out.println("setNeighbour");
 		
 		switch(dir) {
-		case North : neighbourNorth = l; break;
-		case East : neighbourEast = l; break;
-		case South : neighbourSouth = l; break;
-		case West : neighbourWest = l; break;
+		case North : neighbourNorth = l; 	break;
+		case East : neighbourEast = l; 		break;
+		case South : neighbourSouth = l; 	break;
+		case West : neighbourWest = l; 		break;
 		}
 	}
 	
