@@ -1,2 +1,0 @@
-Ötlet: a bullet konstruktorában ne a positiont adjuk át, hanem getNeighbour(dir) - t, tehát kezdje az útját rögtön a szomszédos mezõn, így a bullet arra a mezõre, ahonnan lövik, soha nem hív getNeighbour-t.
-Probléma (eddig is volt, csak nem vettük észre) : mûködõ csillagkapuról ha falnak megy a karakter, akkor áthelyezõdik a párjára. Megoldási lehetõség: ne akkor teleportáljon a karakter, ha rálép a kapura, hanem ha rajta van, akkor kezdeményezhesse. Probléma ezzel: a karakter nem ismeri a pozícióját, csak egy LevelObjectet lát :(
