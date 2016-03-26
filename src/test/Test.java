@@ -49,15 +49,19 @@ public class Test {
 	}
 
 	public static void pickupZPM() {
-		LevelObject position = new LevelObject(true);
-		Character character = new Character(position, Color.YELLOW, Direction.WEST);
-		ZPM zmp = new ZPM();
+		LevelObject position1 = new LevelObject(true);
+		Character character1 = new Character(position1, Color.YELLOW, Direction.WEST);
+		ZPM zpm = new ZPM();
 		
 		character.take();
 	}
 
 	public static void pickupBox() {
-
+		LevelObject position2 = new LevelObject(true);
+		Character character2 = new Character(position2, Color.YELLOW, Direction.WEST);
+		Box box = new Box();
+		
+		character2.take();
 	}
 
 	public static void pickupForbidden() {
