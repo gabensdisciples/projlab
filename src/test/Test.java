@@ -36,19 +36,19 @@ public class Test {
 				+ "\t1.5 Merlegre lep\n"
 				+ "Adja meg a kivant teszt kodjat: ");
 		/**
-		 * T�lt�ny sz�n v�lt�s
+		 * Töltény szín váltás
 		 */
 		changeBulletColor();
 		/**
-		 * Doboz lerak�s
+		 * Doboz lerakás
 		 */
 		placeBox();
 		/**
-		 * Doboz lerak�s rossz helyre
+		 * Doboz lerakás rossz helyre
 		 */
 		placeBox();
 		/**
-		 * M�rlegre l�p
+		 * Mérlegre lép
 		 */
 		walkScale();
 	}
