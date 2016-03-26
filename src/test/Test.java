@@ -25,7 +25,6 @@ public class Test {
 		 * Test 1
 		 */
 		changeBulletColor();
-		pickupZPM();
 	}
 
 	public static void walkFloorOrWall() {
