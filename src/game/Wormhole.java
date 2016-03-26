@@ -18,12 +18,12 @@ public final class Wormhole {
 			yellowSpecWall.setStarGate(null);
 			yellowSpecWall = specWall;
 		}
-		Logger.Logout();
+		Logger.logout();
 	}
 
 	public static SpecWall getSpecWall(Color color) {
 		Logger.log("getSpecWall");
-		Logger.Logout();
+		Logger.logout();
 		if (color == Color.BLUE)
 			return blueSpecWall;
 

@@ -10,12 +10,12 @@ public class Door extends LevelObject{
 	public Door() {
 		super(false);
 		Logger.log("Door konstruktor");
-		Logger.Logout();
+		Logger.logout();
 	}
 	
 	public ItemState hasItem() {
 		Logger.log("Door hasItem");
-		Logger.Logout();
+		Logger.logout();
 		return ItemState.FORBIDDENAREA;
 	}
 	
@@ -24,7 +24,7 @@ public class Door extends LevelObject{
 
 		if(walkable)
 			c.setPosition(this);
-		Logger.Logout();
+		Logger.logout();
 	}
 	
 	public void interactBullet(Bullet b) {
@@ -34,12 +34,12 @@ public class Door extends LevelObject{
 			b.setPosition(this);
 		else
 			b.die();
-		Logger.Logout();
+		Logger.logout();
 	}
 	
 	public void setWalkable(boolean walkable) {
 		this.walkable = walkable;
 		Logger.log("Door setWalkable");
-		Logger.Logout();
+		Logger.logout();
 	}
 }

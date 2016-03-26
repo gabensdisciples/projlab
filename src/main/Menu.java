@@ -10,11 +10,11 @@ public class Menu {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Logger.log("Menu main");
-		Logger.Logout();
+		Logger.logout();
 	}
 	
 	public static void showHelp() {
 		Logger.log("Menu showHelp");
-		Logger.Logout();
+		Logger.logout();
 	}
 }

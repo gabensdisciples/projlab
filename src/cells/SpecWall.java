@@ -15,12 +15,12 @@ public class SpecWall extends LevelObject {
 	public SpecWall() {
 		super(false);
 		Logger.log("SpecWall konstruktor");
-		Logger.Logout();
+		Logger.logout();
 	}
 	
 	public ItemState hasItem() {
 		Logger.log("SpecWall hasItem");
-		Logger.Logout();
+		Logger.logout();
 		return ItemState.FORBIDDENAREA;
 	}
 	
@@ -29,7 +29,7 @@ public class SpecWall extends LevelObject {
 		Logger.log("SpecWall interactCharacter");
 		if(isWalkable())
 			c.setPosition(this);			
-		Logger.Logout();
+		Logger.logout();
 	}
 
 	@Override
@@ -39,7 +39,7 @@ public class SpecWall extends LevelObject {
 			gate = b.createStarGate();
 		b.die();
 		walkable = true;
-		Logger.Logout();
+		Logger.logout();
 	}
 
 	public void setStarGate(StarGate gate){
@@ -48,6 +48,6 @@ public class SpecWall extends LevelObject {
 		if(gate == null){
 			walkable = false;
 		}
-		Logger.Logout();
+		Logger.logout();
 	}
 }

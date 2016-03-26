@@ -22,26 +22,26 @@ public class Scale extends LevelObject {
 		active = false;
 		this.door = door;
 		Logger.log("Scale konstruktor");
-		Logger.Logout();
+		Logger.logout();
 	}
 
 	// TODO: Valtozott a szignatura, dokumentalni kell!
 	public void setDoorState(boolean open) {
 		Logger.log("Scale openDoor");
 		door.setWalkable(open);
-		Logger.Logout();
+		Logger.logout();
 	}
 
 	public void setActive(boolean active) {
 		Logger.log("Scale setActive");
 		this.active = active;
 		setDoorState(active);
-		Logger.Logout();
+		Logger.logout();
 	}
 
 	public ItemState hasItem() {
 		Logger.log("Scale hasItem");
-		Logger.Logout();
+		Logger.logout();
 		if (box != null) {
 			return ItemState.GOTITEM;
 		} else {
@@ -54,13 +54,13 @@ public class Scale extends LevelObject {
 		c.setPosition(this);
 		setActive(true);
 		// character = c;
-		Logger.Logout();
+		Logger.logout();
 	}
 
 	public void interactBullet(Bullet b) {
 		Logger.log("Scale interactBullet");
 		b.setPosition(this);
-		Logger.Logout();
+		Logger.logout();
 	}
 
 	@Override
@@ -92,7 +92,7 @@ public class Scale extends LevelObject {
 				// character = null;
 			}
 		}
-		Logger.Logout();
+		Logger.logout();
 		switch (dir) {
 		case NORTH:
 			return neighbourNorth;
@@ -114,7 +114,7 @@ public class Scale extends LevelObject {
 		box.pickUp(c);
 		box = null;
 		setActive(false);
-		Logger.Logout();
+		Logger.logout();
 	}
 
 	@Override
@@ -122,6 +122,6 @@ public class Scale extends LevelObject {
 		Logger.log("Scale placeItem");
 		box = (Box) item;
 		setActive(true);
-		Logger.Logout();
+		Logger.logout();
 	}
 }

@@ -26,7 +26,7 @@ public class Character {
 		this.position = position;
 		bulletColor = color;
 		this.direction = direction;
-		Logger.Logout();
+		Logger.logout();
 	}
 
 	// goly� kil�v�se
@@ -34,39 +34,39 @@ public class Character {
 		Logger.log("Character Shoot");
 		Bullet b = new Bullet(position, direction, bulletColor);
 		b.fly();
-		Logger.Logout();
+		Logger.logout();
 	}
 
 	// kil�vend� goly� sz�n�nek megv�ltoztat�sa
 	public void changeColor() {
 		Logger.log("Character Changecolor");
 		bulletColor = bulletColor.getOtherColor();
-		Logger.Logout();
+		Logger.logout();
 	}
 
 	// karakter hal�la
 	public void die() {
 		Logger.log("Character die");
-		Logger.Logout();
+		Logger.logout();
 	}
 
 	// karakter mozgat�sa
 	public void move(Direction dir) {
 		Logger.log("Character move");
 		position.getNeighbour(dir, true).interactCharacter(this);
-		Logger.Logout();
+		Logger.logout();
 	}
 
 	// karakter helyzet�nek be�ll�t�sa
 	public void setPosition(LevelObject position) {
 		Logger.log("Character setPosition");
 		this.position = position;
-		Logger.Logout();
+		Logger.logout();
 	}
 
 	public LevelObject getPosition() {
 		Logger.log("Character getPosition");
-		Logger.Logout();
+		Logger.logout();
 		return position;
 	}
 
@@ -74,14 +74,14 @@ public class Character {
 	public void incrementZPMCount() {
 		Logger.log("Character IncrementZPMCount");
 		zpmCount++;
-		Logger.Logout();
+		Logger.logout();
 	}
 
 	// karakterhez ker�l egy doboz
 	public void setBox(Box b) {
 		Logger.log("Character setBox");
 		box = b;
-		Logger.Logout();
+		Logger.logout();
 	}
 
 	// t�rgy lerak�sa
@@ -90,13 +90,13 @@ public class Character {
 
 		position.placeItem((Item) box);
 		box = null;
-		Logger.Logout();
+		Logger.logout();
 	}
 
 	// t�rgy felv�tele
 	public void take() {
 		Logger.log("Character take");
 		position.getItem(this);
-		Logger.Logout();
+		Logger.logout();
 	}
 }

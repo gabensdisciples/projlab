@@ -13,21 +13,21 @@ public class Floor extends LevelObject{
 		super(walkable);
 		this.item = item;
 		Logger.log("Floor konstruktor");
-		Logger.Logout();
+		Logger.logout();
 	}
 	
 	public ItemState hasItem() {
 		Logger.log("Floor hasItem");
 		if(!walkable){
-			Logger.Logout();
+			Logger.logout();
 			return ItemState.FORBIDDENAREA;
 		}
 		else if(item != null){ 
-			Logger.Logout();
+			Logger.logout();
 			return ItemState.GOTITEM;
 		}
 		else {
-			Logger.Logout();
+			Logger.logout();
 			return ItemState.NOITEM;
 		}
 	}
@@ -36,7 +36,7 @@ public class Floor extends LevelObject{
 		Logger.log("Floor interactCharacter");
 		if(walkable)
 			c.setPosition(this);
-		Logger.Logout();
+		Logger.logout();
 	}
 	
 	public void interactBullet(Bullet b) {
@@ -45,7 +45,7 @@ public class Floor extends LevelObject{
 		if(walkable)
 			b.setPosition(this);
 		else b.die();
-		Logger.Logout();
+		Logger.logout();
 	}
 	
 	@Override
@@ -53,13 +53,13 @@ public class Floor extends LevelObject{
 		Logger.log("Floor getItem");
 		item.pickUp(c);
 		item = null;
-		Logger.Logout();
+		Logger.logout();
 	}
 	
 	@Override
 	public void placeItem(Item item) {
 		Logger.log("Floor placeItem");
 		this.item = item;
-		Logger.Logout();
+		Logger.logout();
 	}
 }

@@ -10,7 +10,7 @@ public class Logger {
 		System.out.println(s);
 	}
 
-	public static void Logout() {
+	public static void logout() {
 		tabCount--;
 	}
 }

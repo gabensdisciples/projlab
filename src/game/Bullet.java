@@ -15,7 +15,7 @@ public class Bullet {
 		this.position = position;
 		this.direction = direction;
 		this.color = color;
-		Logger.Logout();
+		Logger.logout();
 	}
 
 	public void fly() {
@@ -25,23 +25,23 @@ public class Bullet {
 			position = position.getNeighbour(direction, false);
 			position.interactBullet(this);
 		}
-		Logger.Logout();
+		Logger.logout();
 	}
 
 	public void setPosition(LevelObject position) {
 		Logger.log("Bullet setPosition");
 		this.position = position;
-		Logger.Logout();
+		Logger.logout();
 	}
 
 	public void die() {
 		Logger.log("Bullet die");
-		Logger.Logout();
+		Logger.logout();
 	}
 
 	public StarGate createStarGate() {
 		Logger.log("Bullet createStarGate");
-		Logger.Logout();
+		Logger.logout();
 		return new StarGate(color);
 	}
 }

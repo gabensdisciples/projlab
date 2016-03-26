@@ -7,6 +7,6 @@ public class Box extends Item {
 	public void pickUp(Character c) {
 		Logger.log("Box pickUp");
 		c.setBox(this);
-		Logger.Logout();
+		Logger.logout();
 	}
 }

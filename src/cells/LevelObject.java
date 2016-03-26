@@ -20,12 +20,12 @@ public abstract class LevelObject {
 	public LevelObject(boolean walkable) {
 		this.walkable = walkable;
 		Logger.log("LevelObject konstruktor");
-		Logger.Logout();
+		Logger.logout();
 	}
 
 	public boolean isWalkable() {
 		Logger.log("LevelObject isWalkable");
-		Logger.Logout();
+		Logger.logout();
 		return walkable;
 
 	}
@@ -36,7 +36,7 @@ public abstract class LevelObject {
 
 	public LevelObject getNeighbour(Direction dir, boolean characterCalled) {
 		Logger.log("LevelObject getNeighbour");
-		Logger.Logout();
+		Logger.logout();
 		switch (dir) {
 		case NORTH:
 			return neighbourNorth;
@@ -69,19 +69,19 @@ public abstract class LevelObject {
 			neighbourWest = l;
 			break;
 		}
-		Logger.Logout();
+		Logger.logout();
 	}
 
 	public abstract ItemState hasItem();
 
 	public void getItem(Character c) {
 		Logger.log("LevelObject getItem");
-		Logger.Logout();
+		Logger.logout();
 	}
 
 	public void placeItem(Item item) {
 		Logger.log("LevelObject placeItem");
-		Logger.Logout();
+		Logger.logout();
 	}
 
 }

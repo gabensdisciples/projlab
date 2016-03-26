@@ -10,6 +10,6 @@ public class StarGate {
 	public StarGate(Color color) {
 		Logger.log("StarGate konstruktor");
 		this.color = color;
-		Logger.Logout();
+		Logger.logout();
 	}
 }

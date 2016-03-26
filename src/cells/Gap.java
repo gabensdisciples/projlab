@@ -9,24 +9,24 @@ public class Gap extends LevelObject {
 	public Gap() {
 		super(false);
 		Logger.log("Gap konstruktor");
-		Logger.Logout();
+		Logger.logout();
 	}
 
 	public ItemState hasItem() {
 		Logger.log("Gap hasItem");
-		Logger.Logout();
+		Logger.logout();
 		return ItemState.FORBIDDENAREA;
 	}
 
 	public void interactCharacter(Character c) {
 		Logger.log("Gap interactCharacter");
 		c.die();
-		Logger.Logout();
+		Logger.logout();
 	}
 
 	public void interactBullet(Bullet b) {
 		Logger.log("Gap interactBullet");
 		b.setPosition(this);
-		Logger.Logout();
+		Logger.logout();
 	}
 }
