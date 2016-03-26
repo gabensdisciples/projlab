@@ -24,7 +24,16 @@ public class Test {
 
 	public static void main(String[] args) {
 		System.out.println(
-				"1.1 Lépés\n"
+				"1. Lépés\n "
+				+ "\t1.1 Floorra/falra\n"
+				+ "\t\t1.1.1. isWalkable()? T/F\n"
+				+ "\t1.2 Szakadékba\n"
+				+ "\t1.3 SpecWallra/StarGatere lép\n"
+				+ "\t\t1.3.1 Van StarGate? T/F\n"
+				+ "\t\t\t1.3.1.1 Van StarGate-nek párja? T/F\n"
+				+ "\t1.4 Ajtóra\n"
+				+ "\t\t1.4.1 Nyitva van? T/F\n"
+				+ "\t1.5 Mérlegre lép\n"
 				+ "Adja meg a kívánt teszt kódját: ");
 		/**
 		 * T�lt�ny sz�n v�lt�s
