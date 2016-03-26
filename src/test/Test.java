@@ -74,7 +74,10 @@ public class Test {
 	}
 
 	public static void pickupForbidden() {
-
+		Floor floor3 = new Floor(true, null);
+		Character character3 = new Character(floor3, Color.YELLOW, Direction.WEST);
+		
+		character3.take();
 	}
 
 	public static void placeBox() {
