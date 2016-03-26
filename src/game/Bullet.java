@@ -11,27 +11,37 @@ public class Bullet {
 	private LevelObject position;
 
 	public Bullet(LevelObject position, Direction direction, Color color) {
-		System.out.println("Bullet konstruktor");
+		Logger.Log("Bullet konstruktor");
 		this.position = position;
 		this.direction = direction;
 		this.color = color;
+		Logger.Logout();
 	}
 
 	public void fly() {
-		System.out.println("fly");
+		Logger.Log("Bullet fly");
+		while(position.isWalkable())
+		{
+			position = position.getNeighbour(direction, false);
+			position.interactBullet(this);
+		}
+		Logger.Logout();
 	}
 
 	public void setPosition(LevelObject position) {
-		System.out.println("Bullet setPosition");
+		Logger.Log("Bullet setPosition");
 		this.position = position;
+		Logger.Logout();
 	}
 
 	public void die() {
-		System.out.println("Bullet die");
+		Logger.Log("Bullet die");
+		Logger.Logout();
 	}
 
 	public StarGate createStarGate() {
-		System.out.println("Bullet createStarGate");
+		Logger.Log("Bullet createStarGate");
+		Logger.Logout();
 		return new StarGate(color);
 	}
 }
