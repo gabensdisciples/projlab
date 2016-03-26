@@ -17,13 +17,13 @@ public class Floor extends LevelObject {
 	public ItemState hasItem() {
 		System.out.println("Floor hasItem");
 		if (!walkable)
-			return ItemState.forbiddenArea;
+			return ItemState.FORBIDDENAREA;
 
 		else if (item != null)
-			return ItemState.gotItem;
+			return ItemState.GOTITEM;
 
 		else
-			return ItemState.noItem;
+			return ItemState.NOITEM;
 	}
 
 	public void interactCharacter(Character c) {

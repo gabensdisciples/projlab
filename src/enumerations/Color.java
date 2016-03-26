@@ -2,15 +2,15 @@ package enumerations;
 
 public enum Color {
 
-	blue, yellow;
+	BLUE, YELLOW;
 
 	// TODO: Valtozott a szignatura, dokumentalni kell!
 	public Color getOtherColor() {
 		System.out.println("getOtherColor");
-		if (this == Color.blue)
-			return Color.yellow;
+		if (this == Color.BLUE)
+			return Color.YELLOW;
 
 		else
-			return Color.blue;
+			return Color.BLUE;
 	}
 }

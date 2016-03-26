@@ -12,7 +12,7 @@ public class Gap extends LevelObject {
 
 	public ItemState hasItem() {
 		System.out.println("Gap hasItem");
-		return ItemState.forbiddenArea;
+		return ItemState.FORBIDDENAREA;
 	}
 
 	public void interactCharacter(Character c) {

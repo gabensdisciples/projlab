@@ -13,7 +13,7 @@ public class Door extends LevelObject {
 
 	public ItemState hasItem() {
 		System.out.println("Door hasItem");
-		return ItemState.forbiddenArea;
+		return ItemState.FORBIDDENAREA;
 	}
 
 	public void interactCharacter(Character c) {
