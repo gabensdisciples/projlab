@@ -15,5 +15,4 @@ public class Menu {
 	public void showHelp() {
 		System.out.println("Menu showHelp");
 	}
-
 }

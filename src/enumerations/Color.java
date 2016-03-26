@@ -1,16 +1,16 @@
 package enumerations;
 
 public enum Color {
-	
-	blue,
-	yellow;
-	
-	//TODO: Valtozott a szignatura, dokumentalni kell!
-	public Color getOtherColor(){
+
+	BLUE, YELLOW;
+
+	// TODO: Valtozott a szignatura, dokumentalni kell!
+	public Color getOtherColor() {
 		System.out.println("getOtherColor");
-		if(this == Color.blue)
-			return Color.yellow;
-		
-		else return Color.blue;
+		if (this == Color.BLUE)
+			return Color.YELLOW;
+
+		else
+			return Color.BLUE;
 	}
 }

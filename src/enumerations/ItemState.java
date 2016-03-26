@@ -1,8 +1,6 @@
 package enumerations;
 
 public enum ItemState {
-	
-		gotItem,
-		noItem,
-		forbiddenArea
+
+	GOTITEM, NOITEM, FORBIDDENAREA
 }
