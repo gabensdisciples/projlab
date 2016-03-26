@@ -115,9 +115,9 @@ public class Test {
 		Character character = new Character(floor, Color.YELLOW, Direction.WEST);
 		character.changeColor();
 	}
-
+	
 	public static void shootOverWalkable() {
-
+		
 	}
 
 	public static void shootSpecWall() {
