@@ -27,19 +27,19 @@ public class Test {
 				"1.1 Lépés\n"
 				+ "Adja meg a kívánt teszt kódját: ");
 		/**
-		 * T�lt�ny sz�n v�lt�s
+		 * Töltény szín váltás
 		 */
 		changeBulletColor();
 		/**
-		 * Doboz lerak�s
+		 * Doboz lerakás
 		 */
 		placeBox();
 		/**
-		 * Doboz lerak�s rossz helyre
+		 * Doboz lerakás rossz helyre
 		 */
 		placeBox();
 		/**
-		 * M�rlegre l�p
+		 * Mérlegre lép
 		 */
 		walkScale();
 	}
