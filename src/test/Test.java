@@ -23,20 +23,23 @@ import cells.LevelObject;
 public class Test {
 
 	public static void main(String[] args) {
+		System.out.println(
+				"1.1 LÃ©pÃ©s\n"
+				+ "Adja meg a kÃ­vÃ¡nt teszt kÃ³djÃ¡t: ");
 		/**
-		 * Töltény szín váltás
+		 * Tï¿½ltï¿½ny szï¿½n vï¿½ltï¿½s
 		 */
 		changeBulletColor();
 		/**
-		 * Doboz lerakás
+		 * Doboz lerakï¿½s
 		 */
 		placeBox();
 		/**
-		 * Doboz lerakás rossz helyre
+		 * Doboz lerakï¿½s rossz helyre
 		 */
 		placeBox();
 		/**
-		 * Mérlegre lép
+		 * Mï¿½rlegre lï¿½p
 		 */
 		walkScale();
 	}
