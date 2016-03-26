@@ -156,7 +156,12 @@ public class Test {
 	}
 
 	public static void shootSpecWall() {
-
+		Floor floor1 = new Floor(true, null);
+		SpecWall floor2 = new SpecWall();
+		floor1.setNeighbour(Direction.WEST, floor2);
+		floor2.setNeighbour(Direction.WEST, floor1);
+		Character character = new Character(floor1, Color.YELLOW, Direction.WEST);
+		character.shoot();
 	}
 
 	public static void shootDoorOrWall() {
