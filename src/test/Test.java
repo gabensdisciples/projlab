@@ -54,11 +54,11 @@ public class Test {
 	}
 
 	public static void walkFloorOrWall() {
-		Floor floorToStand = new Floor(true, null);
-		Floor floorToMove = new Floor(true, null);
-		Character oniell = new Character(floorToStand, Color.YELLOW, Direction.WEST);
-		floorToStand.setNeighbour(Direction.EAST, floorToMove);
-		oniell.move(Direction.EAST);
+		Floor position = new Floor(true, null);
+		Floor target = new Floor(true, null);
+		Character oneill = new Character(position, Color.YELLOW, Direction.WEST);
+		position.setNeighbour(Direction.EAST, target);
+		oneill.move(Direction.EAST);
 	}
 
 	public static void walkGap() {
