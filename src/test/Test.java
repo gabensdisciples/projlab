@@ -24,8 +24,17 @@ public class Test {
 
 	public static void main(String[] args) {
 		System.out.println(
-				"1.1 Lépés\n"
-				+ "Adja meg a kívánt teszt kódját: ");
+				"1. Lepes\n "
+				+ "\t1.1 Floorra/falra\n"
+				+ "\t\t1.1.1. isWalkable()? T/F\n"
+				+ "\t1.2 Szakadekba\n"
+				+ "\t1.3 SpecWallra/StarGatere lep\n"
+				+ "\t\t1.3.1 Van StarGate? T/F\n"
+				+ "\t\t\t1.3.1.1 Van StarGate-nek parja? T/F\n"
+				+ "\t1.4 Ajtora\n"
+				+ "\t\t1.4.1 Nyitva van? T/F\n"
+				+ "\t1.5 Merlegre lep\n"
+				+ "Adja meg a kivant teszt kodjat: ");
 		/**
 		 * Töltény szín váltás
 		 */
