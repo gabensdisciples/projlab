@@ -1,8 +1,5 @@
 package enumerations;
 
 public enum Direction {
-	North,
-	East,
-	South,
-	West;
+	NORTH, EAST, SOUTH, WEST;
 }

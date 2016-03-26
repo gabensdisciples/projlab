@@ -9,17 +9,17 @@ public class Gap extends LevelObject {
 		super(false);
 		System.out.println("Gap konstruktor");
 	}
-	
+
 	public ItemState hasItem() {
 		System.out.println("Gap hasItem");
-		return ItemState.forbiddenArea;
+		return ItemState.FORBIDDENAREA;
 	}
-	
+
 	public void interactCharacter(Character c) {
 		System.out.println("Gap interactCharacter");
 		c.die();
 	}
-	
+
 	public void interactBullet(Bullet b) {
 		System.out.println("Gap interactBullet");
 		b.setPosition(this);
