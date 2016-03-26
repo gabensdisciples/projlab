@@ -1,0 +1,3 @@
+Otletek:
+1. A karakter tarolja a mindenkori bulletjet, mely null, ha nincs, a kilott bullet pedig tarolja a karaktert, aki kilotte. Igy ha a Scale getNeighbour-jet hivjak, leellenorizhetjuk, hogy letezik-e mar Bullet (az ertelemszeru metodusok hozzaadasaval). Sajnos ez nem a legjobb, de legalabb mukodni latszik.
+2. A LevelObject getNeighbour-je plusz parametert kap: boolean characterCalled. Szerintem ez is mukodokepes, raadasul nincs is szukseg igy karaktert tarolni a scalen, de igy mindig, minden getNeighbour hivasnal meg kell adni ezt a parametert, holott csak a Scale-nel van ertelme (Overridolasnal nem lehet megvaltoztatni a parameterlistat). 
