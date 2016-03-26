@@ -49,7 +49,11 @@ public class Test {
 	}
 
 	public static void walkGap() {
-
+		Floor position = new Floor(true, null);
+		Character oneill = new Character(position, Color.BLUE, Direction.EAST);
+		Gap target = new Gap();
+		position.setNeighbour(Direction.EAST, target);
+		oneill.move(Direction.EAST);
 	}
 
 	public static void walkSpecWallStarGate() {
@@ -132,6 +136,6 @@ public class Test {
 	}
 
 	public static void openHelp() {
-
+		Menu.showHelp();
 	}
 }

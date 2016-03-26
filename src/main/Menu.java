@@ -4,7 +4,7 @@ import logger.Logger;
 
 public class Menu {
 	
-	private MenuPoints points;
+	private static MenuPoints points;
 	
 	
 	public static void main(String[] args) {
@@ -13,7 +13,7 @@ public class Menu {
 		Logger.Logout();
 	}
 	
-	public void showHelp() {
+	public static void showHelp() {
 		Logger.Log("Menu showHelp");
 		Logger.Logout();
 	}
