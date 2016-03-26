@@ -58,7 +58,7 @@ public class Test {
 	}
 
 	public static void walkSpecWallStarGate() {
-		//asdsadsd
+		
 	}
 
 	public static void walkDoor() {
