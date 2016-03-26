@@ -3,37 +3,43 @@ package cells;
 import enumerations.ItemState;
 import game.Bullet;
 import game.Character;
+import logger.Logger;
 
 public class Door extends LevelObject{
 	
 	public Door() {
 		super(false);
-		System.out.println("Door konstruktor");
+		Logger.Log("Door konstruktor");
+		Logger.Logout();
 	}
 	
 	public ItemState hasItem() {
-		System.out.println("Door hasItem");
+		Logger.Log("Door hasItem");
+		Logger.Logout();
 		return ItemState.forbiddenArea;
 	}
 	
 	public void interactCharacter(Character c) {
-		System.out.println("Door interactCharacter");
+		Logger.Log("Door interactCharacter");
 
 		if(walkable)
-			c.setPosition(this);		
+			c.setPosition(this);
+		Logger.Logout();
 	}
 	
 	public void interactBullet(Bullet b) {
-		System.out.println("Door interactBullet");
+		Logger.Log("Door interactBullet");
 		
 		if(walkable)
 			b.setPosition(this);
-		
-		else b.die();
+		else
+			b.die();
+		Logger.Logout();
 	}
 	
 	public void setWalkable(boolean walkable) {
 		this.walkable = walkable;
-		System.out.println("Door setWalkable");
+		Logger.Log("Door setWalkable");
+		Logger.Logout();
 	}
 }

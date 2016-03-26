@@ -4,6 +4,7 @@ import enumerations.ItemState;
 import game.Bullet;
 import game.Character;
 import items.Item;
+import logger.Logger;
 
 public class Floor extends LevelObject{
 	private Item item;
@@ -11,44 +12,54 @@ public class Floor extends LevelObject{
 	public Floor(boolean walkable, Item item) {
 		super(walkable);
 		this.item = item;
-		System.out.println("Floor konstruktor");
+		Logger.Log("Floor konstruktor");
+		Logger.Logout();
 	}
 	
 	public ItemState hasItem() {
-		System.out.println("Floor hasItem");
-		if(!walkable)
+		Logger.Log("Floor hasItem");
+		if(!walkable){
+			Logger.Logout();
 			return ItemState.forbiddenArea;
-		
-		else if(item != null) return ItemState.gotItem;
-		
-		else return ItemState.noItem;
+		}
+		else if(item != null){ 
+			Logger.Logout();
+			return ItemState.gotItem;
+		}
+		else {
+			Logger.Logout();
+			return ItemState.noItem;
+		}
 	}
 	
 	public void interactCharacter(Character c) {
-		System.out.println("Floor interactCharacter");
+		Logger.Log("Floor interactCharacter");
 		if(walkable)
 			c.setPosition(this);
+		Logger.Logout();
 	}
 	
 	public void interactBullet(Bullet b) {
-		System.out.println("Floor interactBullet");
+		Logger.Log("Floor interactBullet");
 		
 		if(walkable)
 			b.setPosition(this);
-		
 		else b.die();
+		Logger.Logout();
 	}
 	
 	@Override
 	public void getItem(Character c) {
-		System.out.println("Floor getItem");
+		Logger.Log("Floor getItem");
 		item.pickUp(c);
 		item = null;
+		Logger.Logout();
 	}
 	
 	@Override
 	public void placeItem(Item item) {
-		System.out.println("Floor placeItem");
+		Logger.Log("Floor placeItem");
 		this.item = item;
+		Logger.Logout();
 	}
 }

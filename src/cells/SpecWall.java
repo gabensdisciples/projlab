@@ -4,6 +4,7 @@ import enumerations.ItemState;
 import game.Bullet;
 import game.Character;
 import game.StarGate;
+import logger.Logger;
 
 public class SpecWall extends LevelObject {
 	
@@ -11,26 +12,31 @@ public class SpecWall extends LevelObject {
 
 	public SpecWall() {
 		super(false);
-		System.out.println("SpecWall konstruktor");
+		Logger.Log("SpecWall konstruktor");
+		Logger.Logout();
 	}
 	
 	public ItemState hasItem() {
-		System.out.println("SpecWall hasItem");
+		Logger.Log("SpecWall hasItem");
+		Logger.Logout();
 		return null;
 	}
 	
 	@Override
 	public void interactCharacter(Character c) {
-		System.out.println("SpecWall interactCharacter");
+		Logger.Log("SpecWall interactCharacter");
+		Logger.Logout();
 	}
 
 	@Override
 	public void interactBullet(Bullet b) {
-		System.out.println("SpecWall interactBullet");
+		Logger.Log("SpecWall interactBullet");
+		Logger.Logout();
 	}
 
 	public void SetStarGate(StarGate gate){
-		System.out.println("SpecWall setStarGate");
+		Logger.Log("SpecWall setStarGate");
 		this.gate = gate;
+		Logger.Logout();
 	}
 }

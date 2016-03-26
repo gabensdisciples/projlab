@@ -3,25 +3,30 @@ package cells;
 import enumerations.ItemState;
 import game.Bullet;
 import game.Character;
+import logger.Logger;
 
 public class Gap extends LevelObject {
 	public Gap() {
 		super(false);
-		System.out.println("Gap konstruktor");
+		Logger.Log("Gap konstruktor");
+		Logger.Logout();
 	}
-	
+
 	public ItemState hasItem() {
-		System.out.println("Gap hasItem");
+		Logger.Log("Gap hasItem");
+		Logger.Logout();
 		return ItemState.forbiddenArea;
 	}
-	
+
 	public void interactCharacter(Character c) {
-		System.out.println("Gap interactCharacter");
+		Logger.Log("Gap interactCharacter");
 		c.die();
+		Logger.Logout();
 	}
-	
+
 	public void interactBullet(Bullet b) {
-		System.out.println("Gap interactBullet");
+		Logger.Log("Gap interactBullet");
 		b.setPosition(this);
+		Logger.Logout();
 	}
 }
