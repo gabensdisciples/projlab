@@ -5,6 +5,7 @@ import enumerations.ItemState;
 import game.Bullet;
 import game.Character;
 import items.Item;
+import logger.Logger;
 
 public abstract class LevelObject {
 	// TODO: privaterol protectedek lettek a szomszedok, dokumentalni kell!
@@ -18,11 +19,15 @@ public abstract class LevelObject {
 
 	public LevelObject(boolean walkable) {
 		this.walkable = walkable;
-		System.out.println("LevelOject konstruktor");
+		Logger.Log("LevelObject konstruktor");
+		Logger.Logout();
 	}
 
 	public boolean isWalkable() {
+		Logger.Log("LevelObject isWalkable");
+		Logger.Logout();
 		return walkable;
+
 	}
 
 	public abstract void interactCharacter(Character c);
@@ -30,16 +35,16 @@ public abstract class LevelObject {
 	public abstract void interactBullet(Bullet b);
 
 	public LevelObject getNeighbour(Direction dir, boolean characterCalled) {
-		System.out.println("LevelObject getNeighbour");
-
+		Logger.Log("LevelObject getNeighbour");
+		Logger.Logout();
 		switch (dir) {
-		case NORTH:
+		case North:
 			return neighbourNorth;
-		case EAST:
+		case East:
 			return neighbourEast;
-		case SOUTH:
+		case South:
 			return neighbourSouth;
-		case WEST:
+		case West:
 			return neighbourWest;
 		default:
 			return null;
@@ -48,32 +53,35 @@ public abstract class LevelObject {
 	}
 
 	public void setNeighbour(Direction dir, LevelObject l) {
-		System.out.println("LevelObject setNeighbour");
+		Logger.Log("LevelObject setNeighbour");
 
 		switch (dir) {
-		case NORTH:
+		case North:
 			neighbourNorth = l;
 			break;
-		case EAST:
+		case East:
 			neighbourEast = l;
 			break;
-		case SOUTH:
+		case South:
 			neighbourSouth = l;
 			break;
-		case WEST:
+		case West:
 			neighbourWest = l;
 			break;
 		}
+		Logger.Logout();
 	}
 
 	public abstract ItemState hasItem();
 
 	public void getItem(Character c) {
-		System.out.println("LevelObject getItem");
+		Logger.Log("LevelObject getItem");
+		Logger.Logout();
 	}
 
 	public void placeItem(Item item) {
-		System.out.println("LevelObject placeItem");
+		Logger.Log("LevelObject placeItem");
+		Logger.Logout();
 	}
 
 }
