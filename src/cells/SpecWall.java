@@ -35,13 +35,19 @@ public class SpecWall extends LevelObject {
 	@Override
 	public void interactBullet(Bullet b) {
 		Logger.Log("SpecWall interactBullet");
-		
+		if(gate == null)
+			gate = b.createStarGate();
+		b.die();
+		walkable = true;
 		Logger.Logout();
 	}
 
-	public void SetStarGate(StarGate gate){
+	public void setStarGate(StarGate gate){
 		Logger.Log("SpecWall setStarGate");
 		this.gate = gate;
+		if(gate == null){
+			walkable = false;
+		}
 		Logger.Logout();
 	}
 }

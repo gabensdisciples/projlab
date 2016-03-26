@@ -11,11 +11,11 @@ public final class Wormhole {
 	public static void setSpecWall(SpecWall specWall, Color color) {
 		Logger.Log("setSpecWall");
 		if (color == Color.BLUE){
-			
+			blueSpecWall.setStarGate(null);
 			blueSpecWall = specWall;
 		}
 		else{
-			
+			yellowSpecWall.setStarGate(null);
 			yellowSpecWall = specWall;
 		}
 		Logger.Logout();
