@@ -29,7 +29,7 @@ public abstract class LevelObject {
 	
 	public abstract void interactBullet(Bullet b);
 	
-	public LevelObject getNeighbour(Direction dir){
+	public LevelObject getNeighbour(Direction dir, boolean characterCalled){
 		System.out.println("LevelObject getNeighbour");
 		
 		switch(dir) {
@@ -43,7 +43,7 @@ public abstract class LevelObject {
 	}
 	
 	public void setNeighbour(Direction dir, LevelObject l){
-		System.out.println("setNeighbour");
+		System.out.println("LevelObject setNeighbour");
 		
 		switch(dir) {
 		case North : neighbourNorth = l; 	break;
@@ -56,11 +56,11 @@ public abstract class LevelObject {
 	public abstract ItemState hasItem();
 	
 	public void getItem(Character c){
-		System.out.println("getItem");
+		System.out.println("LevelObject getItem");
 	}
 	
 	public void placeItem(Item item){
-		System.out.println("placeItem");
+		System.out.println("LevelObject placeItem");
 	}
 	
 }

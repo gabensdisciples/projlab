@@ -32,7 +32,7 @@ public class Character {
 	//golyó kilövése
 	public void shoot(){
 		System.out.println("Character Shoot");
-		Bullet b = new Bullet(position.getNeighbour(direction), direction, bulletColor);
+		Bullet b = new Bullet(position, direction, bulletColor);
 		b.fly();
 	}
 	
@@ -51,8 +51,7 @@ public class Character {
 	//karakter mozgatása
 	public void move(Direction dir){
 		System.out.println("Character move");
-		//TODO: nullt ad vissza, meg kellene csinalni
-		position.getNeighbour(dir).interactCharacter(this);
+		position.getNeighbour(dir, true).interactCharacter(this);
 	}
 	
 	//karakter helyzetének beállítása

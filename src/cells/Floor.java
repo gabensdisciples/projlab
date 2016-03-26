@@ -28,11 +28,6 @@ public class Floor extends LevelObject{
 		System.out.println("Floor interactCharacter");
 		if(walkable)
 			c.setPosition(this);
-		
-		//TODO: szekvencia valtozott, dokumentalni kell!
-		//esetleges problema: parral rendelkezo csillagkapurol falnak megy
-		// -> atkerul a parjara
-		else c.getPosition().interactCharacter(c);
 	}
 	
 	public void interactBullet(Bullet b) {
@@ -48,6 +43,7 @@ public class Floor extends LevelObject{
 	public void getItem(Character c) {
 		System.out.println("Floor getItem");
 		item.pickUp(c);
+		item = null;
 	}
 	
 	@Override

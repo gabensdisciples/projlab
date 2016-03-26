@@ -12,12 +12,12 @@ public class Scale extends LevelObject {
 	private boolean active;
 	private Door door;
 	//TODO: uj tagvaltozo, dokumentalni kell!
-	private Character character;
+	//private Character character;
 	
 	public Scale(Door door) {
 		super(true);
 		box = null;
-		character = null;
+		//character = null;
 		active = false;
 		this.door = door;
 		System.out.println("Scale konstruktor");
@@ -32,6 +32,7 @@ public class Scale extends LevelObject {
 	public void setActive(boolean active) {
 		System.out.println("Scale setActive");
 		this.active = active;
+		setDoorState(active);
 	}
 	
 	public ItemState hasItem() {
@@ -45,7 +46,8 @@ public class Scale extends LevelObject {
 	public void interactCharacter(Character c) {
 		System.out.println("Scale interactCharacter");
 		c.setPosition(this);
-		character = c;
+		setActive(true);
+		//character = c;
 	}
 	
 	public void interactBullet(Bullet b) {
@@ -54,14 +56,27 @@ public class Scale extends LevelObject {
 	}
 	
 	@Override
-	public LevelObject getNeighbour(Direction dir){
+	public LevelObject getNeighbour(Direction dir, boolean characterCalled){
 		System.out.println("Scale getNeighbour");
-		//nincs doboz, de van karakter
-		if(box == null && character != null) {
-			setDoorState(false);
-			character = null;
+		
+		if(characterCalled && box == null) {
+			Character dummy = new Character(this, null, dir);
+			LevelObject neighbour = null;
+			
+			switch(dir) {
+			case North : neighbour = neighbourNorth; 	break;
+			case East : neighbour = neighbourEast; 		break;
+			case South : neighbour = neighbourSouth; 	break;
+			case West : neighbour = neighbourWest; 		break;
+			}
+			
+			neighbour.interactCharacter(dummy);
+			//ha sikeres lesz a lepes
+			if(dummy.getPosition() != this) {
+				setActive(false);
+				//character = null;
+			}
 		}
-
 		switch(dir) {
 			case North : return neighbourNorth;
 			case East : return neighbourEast;
@@ -76,13 +91,14 @@ public class Scale extends LevelObject {
 	public void getItem(Character c) {
 		System.out.println("Scale getItem");
 		box.pickUp(c);
+		box = null;
+		setActive(false);
 	}
 	
 	@Override
 	public void placeItem(Item item) {
 		System.out.println("Scale placeItem");
 		box = (Box) item;
-		setDoorState(true);
-	}
-	
+		setActive(true);
+	}	
 }
