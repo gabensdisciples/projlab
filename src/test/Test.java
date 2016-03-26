@@ -25,6 +25,7 @@ public class Test {
 		 * Test 1
 		 */
 		changeBulletColor();
+		pickupZPM();
 	}
 
 	public static void walkFloorOrWall() {
@@ -48,7 +49,11 @@ public class Test {
 	}
 
 	public static void pickupZPM() {
-
+		LevelObject position = new LevelObject();
+		Character character = new Character(position, Color.YELLOW, Direction.WEST);
+		ZMP zmp = new ZMP();
+		
+		character.take();
 	}
 
 	public static void pickupBox() {
