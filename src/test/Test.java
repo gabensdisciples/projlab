@@ -58,17 +58,17 @@ public class Test {
 	}
 
 	public static void pickupZPM() {
-		LevelObject position1 = new LevelObject(true);
-		Character character1 = new Character(position1, Color.YELLOW, Direction.WEST);
 		ZPM zpm = new ZPM();
+		Floor floor1 = new Floor(true, zpm);
+		Character character1 = new Character(floor1, Color.YELLOW, Direction.WEST);
 		
-		character.take();
+		character1.take();
 	}
 
 	public static void pickupBox() {
-		LevelObject position2 = new LevelObject(true);
-		Character character2 = new Character(position2, Color.YELLOW, Direction.WEST);
 		Box box = new Box();
+		Floor floor2 = new Floor(true, box);
+		Character character2 = new Character(floor2, Color.YELLOW, Direction.WEST);
 		
 		character2.take();
 	}
