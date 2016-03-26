@@ -101,10 +101,10 @@ public class Test {
 
 	public static void pickupBox() {
 		Box box = new Box();
-		Floor floor2 = new Floor(true, box);
-		Character character2 = new Character(floor2, Color.YELLOW, Direction.WEST);
+		Floor position = new Floor(true, box);
+		Character oneill = new Character(position, Color.YELLOW, Direction.WEST);
 		
-		character2.take();
+		oneill.take();
 	}
 
 	public static void pickupForbidden() {
