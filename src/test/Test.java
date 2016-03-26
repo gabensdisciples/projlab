@@ -16,37 +16,15 @@ import items.ZPM;
 import main.LevelBuilder;
 import main.Menu;
 import main.MenuPoints;
+import game.Character;
 
 public class Test {
-	public static void main(String[] args) {
 
+	public static void main(String[] args) {
 		/**
-		 * cells
+		 * Test 1
 		 */
-		Door door = null;
-		Floor floor = null;
-		Gap gap = null;
-		Scale scale = null;
-		SpecWall specWall = null;
-		/**
-		 * game
-		 */
-		Bullet bullet = null;
-		Character character = null;
-		StarGate starGate = null;
-		Wormhole wormhole = null;
-		/**
-		 * items
-		 */
-		Box box = null;
-		Item item = null;
-		ZPM zpm = null;
-		/**
-		 * main
-		 */
-		LevelBuilder levelBuilder = null;
-		Menu menu = null;
-		MenuPoints menuPoints = null;
+		changeBulletColor();
 	}
 
 	public static void walkFloorOrWall() {
@@ -90,9 +68,10 @@ public class Test {
 	}
 
 	public static void changeBulletColor() {
-//		box = new Box();
-//		floor = new Floor(true);
-//		bullet = new Bullet(levelObject, Direction.EAST, Color.BLUE);
+		Box box = new Box();
+		Floor floor = new Floor(true, box);
+		Character character = new Character(floor, Color.YELLOW, Direction.WEST);
+		character.changeColor();
 
 	}
 

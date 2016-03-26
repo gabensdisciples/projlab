@@ -20,11 +20,11 @@ public class Character {
 	private Box box;
 
 	// konstruktor - játszható karakter létrehozása
-	public Character(LevelObject Position, Color color, Direction direction) {
+	public Character(LevelObject position, Color color, Direction direction) {
 		System.out.println("Character konstruktor");
 
 		this.position = position;
-		bulletColor = color;
+		this.bulletColor = color;
 		this.direction = direction;
 	}
 
