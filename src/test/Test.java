@@ -7,6 +7,7 @@ import cells.Scale;
 import cells.SpecWall;
 import enumerations.Color;
 import enumerations.Direction;
+import enumerations.ItemState;
 import game.Bullet;
 import game.StarGate;
 import game.Wormhole;
@@ -22,9 +23,17 @@ public class Test {
 
 	public static void main(String[] args) {
 		/**
-		 * Test 1
+		 * Töltény szín váltás
 		 */
 		changeBulletColor();
+		/**
+		 * Doboz lerakás
+		 */
+		placeBox();
+		/**
+		 * Doboz lerakás rossz helyre
+		 */
+		placeBox();
 	}
 
 	public static void walkFloorOrWall() {
@@ -60,19 +69,29 @@ public class Test {
 	}
 
 	public static void placeBox() {
-
-	}
-
-	public static void placeBoxForbidden() {
-
-	}
-
-	public static void changeBulletColor() {
 		Box box = new Box();
 		Floor floor = new Floor(true, box);
 		Character character = new Character(floor, Color.YELLOW, Direction.WEST);
-		character.changeColor();
+		character.setBox(box);
+		character.drop();
+	}
 
+	public static void placeBoxForbidden() {
+		Box box = new Box();
+		Floor floor = new Floor(true, box);
+		Character character = new Character(floor, Color.YELLOW, Direction.WEST);
+		if (floor.hasItem() == ItemState.FORBIDDENAREA) {
+			System.out.println("Ide nem tehetsz dobozt kocsog");
+		} else {
+			character.setBox(box);
+			character.drop();
+		}
+	}
+
+	public static void changeBulletColor() {
+		Floor floor = new Floor(true, null);
+		Character character = new Character(floor, Color.YELLOW, Direction.WEST);
+		character.changeColor();
 	}
 
 	public static void shootOverWalkable() {
