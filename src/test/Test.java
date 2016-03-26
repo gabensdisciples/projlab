@@ -93,10 +93,10 @@ public class Test {
 
 	public static void pickupZPM() {
 		ZPM zpm = new ZPM();
-		Floor floor1 = new Floor(true, zpm);
-		Character character1 = new Character(floor1, Color.YELLOW, Direction.WEST);
+		Floor position = new Floor(true, zpm);
+		Character oneill = new Character(position, Color.YELLOW, Direction.WEST);
 		
-		character1.take();
+		oneill.take();
 	}
 
 	public static void pickupBox() {
