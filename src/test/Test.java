@@ -43,9 +43,10 @@ public class Test {
 
 	public static void walkFloorOrWall() {
 		Floor floorToStand = new Floor(true, null);
+		Floor floorToMove = new Floor(true, null);
 		Character oniell = new Character(floorToStand, Color.YELLOW, Direction.WEST);
-		
-		oniell.move(Direction.NORTH);
+		floorToStand.setNeighbour(Direction.EAST, floorToMove);
+		oniell.move(Direction.EAST);
 	}
 
 	public static void walkGap() {
@@ -61,7 +62,11 @@ public class Test {
 	}
 
 	public static void walkDoor() {
-
+		Door opendoor = new Door();
+		Floor place = new Floor(true, null);
+		Character oneill = new Character(place, Color.YELLOW, Direction.WEST);
+		place.setNeighbour(Direction.EAST, opendoor);
+		oneill.move(Direction.EAST);
 	}
 
 	public static void walkScale() {
@@ -122,9 +127,20 @@ public class Test {
 		Character character = new Character(floor, Color.YELLOW, Direction.WEST);
 		character.changeColor();
 	}
-
+	
 	public static void shootOverWalkable() {
-
+		Floor floor1 = new Floor(true, null);
+		Floor floor2 = new Floor(true, null);
+		Floor floor3 = new Floor(true, null);
+		Floor floor4 = new Floor(false, null);
+		floor1.setNeighbour(Direction.WEST, floor2);
+		floor2.setNeighbour(Direction.WEST, floor1);
+		floor2.setNeighbour(Direction.WEST, floor3);
+		floor3.setNeighbour(Direction.WEST, floor2);
+		floor3.setNeighbour(Direction.WEST, floor4);
+		floor4.setNeighbour(Direction.WEST, floor3);
+		Character character = new Character(floor1, Color.YELLOW, Direction.WEST);
+		character.shoot();
 	}
 
 	public static void shootSpecWall() {
