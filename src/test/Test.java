@@ -38,7 +38,10 @@ public class Test {
 	}
 
 	public static void walkFloorOrWall() {
-
+		Floor floorToStand = new Floor(true, null);
+		Character oniell = new Character(floorToStand, Color.YELLOW, Direction.WEST);
+		
+		oniell.move(Direction.NORTH);
 	}
 
 	public static void walkGap() {
