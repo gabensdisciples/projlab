@@ -3,7 +3,7 @@ package logger;
 public class Logger {
 	private static int tabcount;
 
-	public logger() {
+	public Logger() {
 		tabcount = 0;
 	}
 
