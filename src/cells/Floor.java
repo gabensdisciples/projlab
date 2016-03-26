@@ -12,12 +12,12 @@ public class Floor extends LevelObject{
 	public Floor(boolean walkable, Item item) {
 		super(walkable);
 		this.item = item;
-		Logger.Log("Floor konstruktor");
+		Logger.log("Floor konstruktor");
 		Logger.Logout();
 	}
 	
 	public ItemState hasItem() {
-		Logger.Log("Floor hasItem");
+		Logger.log("Floor hasItem");
 		if(!walkable){
 			Logger.Logout();
 			return ItemState.FORBIDDENAREA;
@@ -33,14 +33,14 @@ public class Floor extends LevelObject{
 	}
 	
 	public void interactCharacter(Character c) {
-		Logger.Log("Floor interactCharacter");
+		Logger.log("Floor interactCharacter");
 		if(walkable)
 			c.setPosition(this);
 		Logger.Logout();
 	}
 	
 	public void interactBullet(Bullet b) {
-		Logger.Log("Floor interactBullet");
+		Logger.log("Floor interactBullet");
 		
 		if(walkable)
 			b.setPosition(this);
@@ -50,7 +50,7 @@ public class Floor extends LevelObject{
 	
 	@Override
 	public void getItem(Character c) {
-		Logger.Log("Floor getItem");
+		Logger.log("Floor getItem");
 		item.pickUp(c);
 		item = null;
 		Logger.Logout();
@@ -58,7 +58,7 @@ public class Floor extends LevelObject{
 	
 	@Override
 	public void placeItem(Item item) {
-		Logger.Log("Floor placeItem");
+		Logger.log("Floor placeItem");
 		this.item = item;
 		Logger.Logout();
 	}

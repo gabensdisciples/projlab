@@ -19,12 +19,12 @@ public abstract class LevelObject {
 
 	public LevelObject(boolean walkable) {
 		this.walkable = walkable;
-		Logger.Log("LevelObject konstruktor");
+		Logger.log("LevelObject konstruktor");
 		Logger.Logout();
 	}
 
 	public boolean isWalkable() {
-		Logger.Log("LevelObject isWalkable");
+		Logger.log("LevelObject isWalkable");
 		Logger.Logout();
 		return walkable;
 
@@ -35,7 +35,7 @@ public abstract class LevelObject {
 	public abstract void interactBullet(Bullet b);
 
 	public LevelObject getNeighbour(Direction dir, boolean characterCalled) {
-		Logger.Log("LevelObject getNeighbour");
+		Logger.log("LevelObject getNeighbour");
 		Logger.Logout();
 		switch (dir) {
 		case NORTH:
@@ -48,12 +48,12 @@ public abstract class LevelObject {
 			return neighbourWest;
 		default:
 			return null;
-		// TODO: Dobjunk Exception-t defaultnál?
+		// TODO: Dobjunk Exception-t defaultnï¿½l?
 		}
 	}
 
 	public void setNeighbour(Direction dir, LevelObject l) {
-		Logger.Log("LevelObject setNeighbour");
+		Logger.log("LevelObject setNeighbour");
 
 		switch (dir) {
 		case NORTH:
@@ -75,12 +75,12 @@ public abstract class LevelObject {
 	public abstract ItemState hasItem();
 
 	public void getItem(Character c) {
-		Logger.Log("LevelObject getItem");
+		Logger.log("LevelObject getItem");
 		Logger.Logout();
 	}
 
 	public void placeItem(Item item) {
-		Logger.Log("LevelObject placeItem");
+		Logger.log("LevelObject placeItem");
 		Logger.Logout();
 	}
 

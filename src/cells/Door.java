@@ -9,18 +9,18 @@ public class Door extends LevelObject{
 	
 	public Door() {
 		super(false);
-		Logger.Log("Door konstruktor");
+		Logger.log("Door konstruktor");
 		Logger.Logout();
 	}
 	
 	public ItemState hasItem() {
-		Logger.Log("Door hasItem");
+		Logger.log("Door hasItem");
 		Logger.Logout();
 		return ItemState.FORBIDDENAREA;
 	}
 	
 	public void interactCharacter(Character c) {
-		Logger.Log("Door interactCharacter");
+		Logger.log("Door interactCharacter");
 
 		if(walkable)
 			c.setPosition(this);
@@ -28,7 +28,7 @@ public class Door extends LevelObject{
 	}
 	
 	public void interactBullet(Bullet b) {
-		Logger.Log("Door interactBullet");
+		Logger.log("Door interactBullet");
 		
 		if(walkable)
 			b.setPosition(this);
@@ -39,7 +39,7 @@ public class Door extends LevelObject{
 	
 	public void setWalkable(boolean walkable) {
 		this.walkable = walkable;
-		Logger.Log("Door setWalkable");
+		Logger.log("Door setWalkable");
 		Logger.Logout();
 	}
 }

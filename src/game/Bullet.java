@@ -11,7 +11,7 @@ public class Bullet {
 	private LevelObject position;
 
 	public Bullet(LevelObject position, Direction direction, Color color) {
-		Logger.Log("Bullet konstruktor");
+		Logger.log("Bullet konstruktor");
 		this.position = position;
 		this.direction = direction;
 		this.color = color;
@@ -19,7 +19,7 @@ public class Bullet {
 	}
 
 	public void fly() {
-		Logger.Log("Bullet fly");
+		Logger.log("Bullet fly");
 		while(position.isWalkable())
 		{
 			position = position.getNeighbour(direction, false);
@@ -29,18 +29,18 @@ public class Bullet {
 	}
 
 	public void setPosition(LevelObject position) {
-		Logger.Log("Bullet setPosition");
+		Logger.log("Bullet setPosition");
 		this.position = position;
 		Logger.Logout();
 	}
 
 	public void die() {
-		Logger.Log("Bullet die");
+		Logger.log("Bullet die");
 		Logger.Logout();
 	}
 
 	public StarGate createStarGate() {
-		Logger.Log("Bullet createStarGate");
+		Logger.log("Bullet createStarGate");
 		Logger.Logout();
 		return new StarGate(color);
 	}

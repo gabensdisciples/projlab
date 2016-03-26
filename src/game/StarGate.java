@@ -8,7 +8,7 @@ public class StarGate {
 	private Color color;
 
 	public StarGate(Color color) {
-		Logger.Log("StarGate konstruktor");
+		Logger.log("StarGate konstruktor");
 		this.color = color;
 		Logger.Logout();
 	}

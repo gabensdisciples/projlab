@@ -14,19 +14,19 @@ public class SpecWall extends LevelObject {
 
 	public SpecWall() {
 		super(false);
-		Logger.Log("SpecWall konstruktor");
+		Logger.log("SpecWall konstruktor");
 		Logger.Logout();
 	}
 	
 	public ItemState hasItem() {
-		Logger.Log("SpecWall hasItem");
+		Logger.log("SpecWall hasItem");
 		Logger.Logout();
 		return ItemState.FORBIDDENAREA;
 	}
 	
 	@Override
 	public void interactCharacter(Character c) {
-		Logger.Log("SpecWall interactCharacter");
+		Logger.log("SpecWall interactCharacter");
 		if(isWalkable())
 			c.setPosition(this);			
 		Logger.Logout();
@@ -34,7 +34,7 @@ public class SpecWall extends LevelObject {
 
 	@Override
 	public void interactBullet(Bullet b) {
-		Logger.Log("SpecWall interactBullet");
+		Logger.log("SpecWall interactBullet");
 		if(gate == null)
 			gate = b.createStarGate();
 		b.die();
@@ -43,7 +43,7 @@ public class SpecWall extends LevelObject {
 	}
 
 	public void setStarGate(StarGate gate){
-		Logger.Log("SpecWall setStarGate");
+		Logger.log("SpecWall setStarGate");
 		this.gate = gate;
 		if(gate == null){
 			walkable = false;

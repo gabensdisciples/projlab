@@ -21,26 +21,26 @@ public class Scale extends LevelObject {
 		// character = null;
 		active = false;
 		this.door = door;
-		Logger.Log("Scale konstruktor");
+		Logger.log("Scale konstruktor");
 		Logger.Logout();
 	}
 
 	// TODO: Valtozott a szignatura, dokumentalni kell!
 	public void setDoorState(boolean open) {
-		Logger.Log("Scale openDoor");
+		Logger.log("Scale openDoor");
 		door.setWalkable(open);
 		Logger.Logout();
 	}
 
 	public void setActive(boolean active) {
-		Logger.Log("Scale setActive");
+		Logger.log("Scale setActive");
 		this.active = active;
 		setDoorState(active);
 		Logger.Logout();
 	}
 
 	public ItemState hasItem() {
-		Logger.Log("Scale hasItem");
+		Logger.log("Scale hasItem");
 		Logger.Logout();
 		if (box != null) {
 			return ItemState.GOTITEM;
@@ -50,7 +50,7 @@ public class Scale extends LevelObject {
 	}
 
 	public void interactCharacter(Character c) {
-		Logger.Log("Scale interactCharacter");
+		Logger.log("Scale interactCharacter");
 		c.setPosition(this);
 		setActive(true);
 		// character = c;
@@ -58,14 +58,14 @@ public class Scale extends LevelObject {
 	}
 
 	public void interactBullet(Bullet b) {
-		Logger.Log("Scale interactBullet");
+		Logger.log("Scale interactBullet");
 		b.setPosition(this);
 		Logger.Logout();
 	}
 
 	@Override
 	public LevelObject getNeighbour(Direction dir, boolean characterCalled) {
-		Logger.Log("Scale getNeighbour");
+		Logger.log("Scale getNeighbour");
 
 		if (characterCalled && box == null) {
 			Character dummy = new Character(this, null, dir);
@@ -104,13 +104,13 @@ public class Scale extends LevelObject {
 			return neighbourWest;
 		default:
 			return null;
-		// TODO: Dobjunk Exception-t defaultnál?
+		// TODO: Dobjunk Exception-t defaultnï¿½l?
 		}
 	}
 
 	@Override
 	public void getItem(Character c) {
-		Logger.Log("Scale getItem");
+		Logger.log("Scale getItem");
 		box.pickUp(c);
 		box = null;
 		setActive(false);
@@ -119,7 +119,7 @@ public class Scale extends LevelObject {
 
 	@Override
 	public void placeItem(Item item) {
-		Logger.Log("Scale placeItem");
+		Logger.log("Scale placeItem");
 		box = (Box) item;
 		setActive(true);
 		Logger.Logout();

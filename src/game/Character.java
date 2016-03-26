@@ -9,93 +9,93 @@ import logger.Logger;
 
 public class Character {
 
-	// merre néz a karakter
+	// merre nï¿½z a karakter
 	private Direction direction;
-	// a kilövendõ lövedék színe
+	// a kilï¿½vendï¿½ lï¿½vedï¿½k szï¿½ne
 	private Color bulletColor;
-	// a karakter helyének tárolása a pályán
+	// a karakter helyï¿½nek tï¿½rolï¿½sa a pï¿½lyï¿½n
 	private LevelObject position;
-	// az összegyûjtött ZPM modulok száma
+	// az ï¿½sszegyï¿½jtï¿½tt ZPM modulok szï¿½ma
 	private int zpmCount;
-	// referencia a karakternél lévõ dobozra
+	// referencia a karakternï¿½l lï¿½vï¿½ dobozra
 	private Box box;
 
-	// konstruktor - játszható karakter létrehozása
+	// konstruktor - jï¿½tszhatï¿½ karakter lï¿½trehozï¿½sa
 	public Character(LevelObject position, Color color, Direction direction) {
-		Logger.Log("Character konstruktor");
+		Logger.log("Character konstruktor");
 		this.position = position;
 		bulletColor = color;
 		this.direction = direction;
 		Logger.Logout();
 	}
 
-	// golyó kilövése
+	// golyï¿½ kilï¿½vï¿½se
 	public void shoot() {
-		Logger.Log("Character Shoot");
+		Logger.log("Character Shoot");
 		Bullet b = new Bullet(position, direction, bulletColor);
 		b.fly();
 		Logger.Logout();
 	}
 
-	// kilövendõ golyó színének megváltoztatása
+	// kilï¿½vendï¿½ golyï¿½ szï¿½nï¿½nek megvï¿½ltoztatï¿½sa
 	public void changeColor() {
-		Logger.Log("Character Changecolor");
+		Logger.log("Character Changecolor");
 		bulletColor = bulletColor.getOtherColor();
 		Logger.Logout();
 	}
 
-	// karakter halála
+	// karakter halï¿½la
 	public void die() {
-		Logger.Log("Character die");
+		Logger.log("Character die");
 		Logger.Logout();
 	}
 
-	// karakter mozgatása
+	// karakter mozgatï¿½sa
 	public void move(Direction dir) {
-		Logger.Log("Character move");
+		Logger.log("Character move");
 		position.getNeighbour(dir, true).interactCharacter(this);
 		Logger.Logout();
 	}
 
-	// karakter helyzetének beállítása
+	// karakter helyzetï¿½nek beï¿½llï¿½tï¿½sa
 	public void setPosition(LevelObject position) {
-		Logger.Log("Character setPosition");
+		Logger.log("Character setPosition");
 		this.position = position;
 		Logger.Logout();
 	}
 
 	public LevelObject getPosition() {
-		Logger.Log("Character getPosition");
+		Logger.log("Character getPosition");
 		Logger.Logout();
 		return position;
 	}
 
-	// karakternél levõ ZPM modulok számának növelése
+	// karakternï¿½l levï¿½ ZPM modulok szï¿½mï¿½nak nï¿½velï¿½se
 	public void incrementZPMCount() {
-		Logger.Log("Character IncrementZPMCount");
+		Logger.log("Character IncrementZPMCount");
 		zpmCount++;
 		Logger.Logout();
 	}
 
-	// karakterhez kerül egy doboz
+	// karakterhez kerï¿½l egy doboz
 	public void setBox(Box b) {
-		Logger.Log("Character setBox");
+		Logger.log("Character setBox");
 		box = b;
 		Logger.Logout();
 	}
 
-	// tárgy lerakása
+	// tï¿½rgy lerakï¿½sa
 	public void drop() {
-		Logger.Log("Character drop");
+		Logger.log("Character drop");
 
 		position.placeItem((Item) box);
 		box = null;
 		Logger.Logout();
 	}
 
-	// tárgy felvétele
+	// tï¿½rgy felvï¿½tele
 	public void take() {
-		Logger.Log("Character take");
+		Logger.log("Character take");
 		position.getItem(this);
 		Logger.Logout();
 	}
