@@ -43,9 +43,10 @@ public class Test {
 
 	public static void walkFloorOrWall() {
 		Floor floorToStand = new Floor(true, null);
+		Floor floorToMove = new Floor(true, null);
 		Character oniell = new Character(floorToStand, Color.YELLOW, Direction.WEST);
-		
-		oniell.move(Direction.NORTH);
+		floorToStand.setNeighbour(Direction.EAST, floorToMove);
+		oniell.move(Direction.EAST);
 	}
 
 	public static void walkGap() {
@@ -57,7 +58,11 @@ public class Test {
 	}
 
 	public static void walkDoor() {
-
+		Door opendoor = new Door();
+		Floor place = new Floor(true, null);
+		Character oneill = new Character(place, Color.YELLOW, Direction.WEST);
+		place.setNeighbour(Direction.EAST, opendoor);
+		oneill.move(Direction.EAST);
 	}
 
 	public static void walkScale() {
