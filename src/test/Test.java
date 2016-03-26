@@ -35,6 +35,10 @@ public class Test {
 		 * Doboz lerakás rossz helyre
 		 */
 		placeBox();
+		/**
+		 * Mérlegre lép
+		 */
+		walkScale();
 	}
 
 	public static void walkFloorOrWall() {
@@ -57,7 +61,13 @@ public class Test {
 	}
 
 	public static void walkScale() {
-
+		Door door = new Door();
+		Scale scale = new Scale(door);
+		Floor position = new Floor(true, null);
+		Character character = new Character(position, Color.YELLOW, Direction.WEST);
+		position.setNeighbour(Direction.EAST, scale);
+		character.move(Direction.EAST);
+		
 	}
 
 	public static void pickupZPM() {
