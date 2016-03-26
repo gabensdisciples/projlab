@@ -5,6 +5,8 @@ import cells.Floor;
 import cells.Gap;
 import cells.Scale;
 import cells.SpecWall;
+import enumerations.Color;
+import enumerations.Direction;
 import game.Bullet;
 import game.StarGate;
 import game.Wormhole;
@@ -47,65 +49,66 @@ public class Test {
 		MenuPoints menuPoints = null;
 	}
 
-	public void walkFloorOrWall() {
+	public static void walkFloorOrWall() {
 
 	}
 
-	public void walkGap() {
+	public static void walkGap() {
 
 	}
 
-	public void walkSpecWallStarGate() {
+	public static void walkSpecWallStarGate() {
 
 	}
 
-	public void walkDoor() {
+	public static void walkDoor() {
 
 	}
 
-	public void walkScale() {
+	public static void walkScale() {
 
 	}
 
-	public void pickupZPM() {
+	public static void pickupZPM() {
 
 	}
 
-	public void pickupBox() {
+	public static void pickupBox() {
 
 	}
 
-	public void pickupForbidden() {
+	public static void pickupForbidden() {
 
 	}
 
-	public void placeBox() {
+	public static void placeBox() {
 
 	}
 
-	public void placeBoxForbidden() {
+	public static void placeBoxForbidden() {
 
 	}
 
-	public void changeBulletColor() {
-		// Floor levelObject = new Floor(true);
-		// Bullet b = new Bullet(levelObject, Direction.EAST, Color.BLUE);
+	public static void changeBulletColor() {
+//		box = new Box();
+//		floor = new Floor(true);
+//		bullet = new Bullet(levelObject, Direction.EAST, Color.BLUE);
 
 	}
 
-	public void shootOverWalkable() {
+	public static void shootOverWalkable() {
 
 	}
 
-	public void shootSpecWall() {
+	public static void shootSpecWall() {
 
 	}
 
-	public void shootDoorOrWall() {
+	public static void shootDoorOrWall() {
 
 	}
 
-	public void openHelp() {
+	public static void openHelp() {
 
 	}
 }
