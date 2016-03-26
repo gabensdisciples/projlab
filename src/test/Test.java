@@ -54,11 +54,11 @@ public class Test {
 	}
 
 	public static void walkFloorOrWall() {
-		Floor position = new Floor(true, null);
-		Floor target = new Floor(true, null);
-		Character oneill = new Character(position, Color.YELLOW, Direction.WEST);
-		position.setNeighbour(Direction.EAST, target);
-		oneill.move(Direction.EAST);
+		Floor floorToStand = new Floor(true, null);
+		Floor floorToMove = new Floor(true, null);
+		Character oniell = new Character(floorToStand, Color.YELLOW, Direction.WEST);
+		floorToStand.setNeighbour(Direction.EAST, floorToMove);
+		oniell.move(Direction.EAST);
 	}
 
 	public static void walkGap() {
@@ -93,10 +93,10 @@ public class Test {
 
 	public static void pickupZPM() {
 		ZPM zpm = new ZPM();
-		Floor position = new Floor(true, zpm);
-		Character oneill = new Character(position, Color.YELLOW, Direction.WEST);
+		Floor floor1 = new Floor(true, zpm);
+		Character character1 = new Character(floor1, Color.YELLOW, Direction.WEST);
 		
-		oneill.take();
+		character1.take();
 	}
 
 	public static void pickupBox() {
@@ -146,26 +146,31 @@ public class Test {
 		Floor floor3 = new Floor(true, null);
 		Floor floor4 = new Floor(false, null);
 		floor1.setNeighbour(Direction.WEST, floor2);
-		floor2.setNeighbour(Direction.WEST, floor1);
+		floor2.setNeighbour(Direction.EAST, floor1);
 		floor2.setNeighbour(Direction.WEST, floor3);
-		floor3.setNeighbour(Direction.WEST, floor2);
+		floor3.setNeighbour(Direction.EAST, floor2);
 		floor3.setNeighbour(Direction.WEST, floor4);
-		floor4.setNeighbour(Direction.WEST, floor3);
-		Character character = new Character(floor1, Color.YELLOW, Direction.WEST);
-		character.shoot();
+		floor4.setNeighbour(Direction.EAST, floor3);
+		Character oneill = new Character(floor1, Color.YELLOW, Direction.WEST);
+		oneill.shoot();
 	}
 
 	public static void shootSpecWall() {
 		Floor floor1 = new Floor(true, null);
-		SpecWall floor2 = new SpecWall();
-		floor1.setNeighbour(Direction.WEST, floor2);
-		floor2.setNeighbour(Direction.WEST, floor1);
-		Character character = new Character(floor1, Color.YELLOW, Direction.WEST);
-		character.shoot();
+		SpecWall target = new SpecWall();
+		floor1.setNeighbour(Direction.WEST, target);
+		target.setNeighbour(Direction.EAST, floor1);
+		Character oneill = new Character(floor1, Color.YELLOW, Direction.WEST);
+		oneill.shoot();
 	}
 
 	public static void shootDoorOrWall() {
-
+		Floor floor1 = new Floor(true, null);
+		SpecWall target = new SpecWall();
+		floor1.setNeighbour(Direction.WEST, target);
+		target.setNeighbour(Direction.EAST, floor1);
+		Character oneill = new Character(floor1, Color.YELLOW, Direction.WEST);
+		oneill.shoot();
 	}
 
 	public static void openHelp() {
