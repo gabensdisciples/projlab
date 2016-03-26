@@ -8,7 +8,8 @@ public class StarGate {
 	private Color color;
 
 	public StarGate(Color color) {
-		System.out.println("StarGate konstruktor");
+		Logger.Log("StarGate konstruktor");
 		this.color = color;
+		Logger.Logout();
 	}
 }

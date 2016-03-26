@@ -9,16 +9,18 @@ public final class Wormhole {
 	private static SpecWall yellowSpecWall = null;
 
 	public static void setSpecWall(SpecWall specWall, Color color) {
-		System.out.println("setSpecWall");
+		Logger.Log("setSpecWall");
 		if (color == Color.BLUE)
 			blueSpecWall = specWall;
 
 		else
 			yellowSpecWall = specWall;
+		Logger.Logout();
 	}
 
 	public static SpecWall getSpecWall(Color color) {
-		System.out.println("getSpecWall");
+		Logger.Log("getSpecWall");
+		Logger.Logout();
 		if (color == Color.BLUE)
 			return blueSpecWall;
 
