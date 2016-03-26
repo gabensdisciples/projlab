@@ -10,11 +10,14 @@ public final class Wormhole {
 
 	public static void setSpecWall(SpecWall specWall, Color color) {
 		Logger.Log("setSpecWall");
-		if (color == Color.BLUE)
+		if (color == Color.BLUE){
+			
 			blueSpecWall = specWall;
-
-		else
+		}
+		else{
+			
 			yellowSpecWall = specWall;
+		}
 		Logger.Logout();
 	}
 

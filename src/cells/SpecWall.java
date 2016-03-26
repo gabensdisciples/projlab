@@ -1,5 +1,7 @@
 package cells;
 
+import java.text.Normalizer.Form;
+
 import enumerations.ItemState;
 import game.Bullet;
 import game.Character;
@@ -19,18 +21,21 @@ public class SpecWall extends LevelObject {
 	public ItemState hasItem() {
 		Logger.Log("SpecWall hasItem");
 		Logger.Logout();
-		return null;
+		return ItemState.FORBIDDENAREA;
 	}
 	
 	@Override
 	public void interactCharacter(Character c) {
 		Logger.Log("SpecWall interactCharacter");
+		if(isWalkable())
+			c.setPosition(this);			
 		Logger.Logout();
 	}
 
 	@Override
 	public void interactBullet(Bullet b) {
 		Logger.Log("SpecWall interactBullet");
+		
 		Logger.Logout();
 	}
 
