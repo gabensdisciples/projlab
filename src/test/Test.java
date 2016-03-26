@@ -1,13 +1,10 @@
 package test;
 
-import main.String;
 
 public class Test {
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-		System.out.println("Menu main");
-
+		//Kezelőfelület plz
+		
 	}
 	
 	public void walkFloorOrWall() {
