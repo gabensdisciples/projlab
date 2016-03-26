@@ -2,7 +2,7 @@ package main;
 
 public class Menu {
 	
-	private menuPoints points;
+	private MenuPoints points;
 	
 	
 	public static void main(String[] args) {

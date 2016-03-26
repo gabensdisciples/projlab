@@ -1,5 +1,5 @@
 package main;
 
-public enum menuPoints {
+public enum MenuPoints {
 	play, help, exit;
 }
