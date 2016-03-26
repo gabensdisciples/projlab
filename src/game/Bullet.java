@@ -8,28 +8,28 @@ public class Bullet {
 	private Direction direction;
 	private Color color;
 	private LevelObject position;
-	
-	public Bullet(LevelObject position, Direction direction, Color color){
+
+	public Bullet(LevelObject position, Direction direction, Color color) {
 		System.out.println("Bullet konstruktor");
 		this.position = position;
 		this.direction = direction;
-		this.color = color;		
+		this.color = color;
 	}
-	
-	public void fly(){
+
+	public void fly() {
 		System.out.println("fly");
 	}
 
-	public void setPosition(LevelObject position){
+	public void setPosition(LevelObject position) {
 		System.out.println("Bullet setPosition");
 		this.position = position;
 	}
-	
-	public void die(){
+
+	public void die() {
 		System.out.println("Bullet die");
 	}
-	
-	public StarGate createStarGate(){
+
+	public StarGate createStarGate() {
 		System.out.println("Bullet createStarGate");
 		return new StarGate(color);
 	}

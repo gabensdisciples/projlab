@@ -5,47 +5,50 @@ import game.Bullet;
 import game.Character;
 import items.Item;
 
-public class Floor extends LevelObject{
+public class Floor extends LevelObject {
 	private Item item;
-	
+
 	public Floor(boolean walkable, Item item) {
 		super(walkable);
 		this.item = item;
 		System.out.println("Floor konstruktor");
 	}
-	
+
 	public ItemState hasItem() {
 		System.out.println("Floor hasItem");
-		if(!walkable)
+		if (!walkable)
 			return ItemState.forbiddenArea;
-		
-		else if(item != null) return ItemState.gotItem;
-		
-		else return ItemState.noItem;
+
+		else if (item != null)
+			return ItemState.gotItem;
+
+		else
+			return ItemState.noItem;
 	}
-	
+
 	public void interactCharacter(Character c) {
 		System.out.println("Floor interactCharacter");
-		if(walkable)
+		if (walkable)
 			c.setPosition(this);
 	}
-	
+
 	public void interactBullet(Bullet b) {
 		System.out.println("Floor interactBullet");
-		
-		if(walkable)
+
+		if (walkable)
 			b.setPosition(this);
-		
-		else b.die();
+
+		else
+			b.die();
 	}
-	
+
 	@Override
 	public void getItem(Character c) {
 		System.out.println("Floor getItem");
 		item.pickUp(c);
 		item = null;
 	}
-	
+
 	@Override
 	public void placeItem(Item item) {
 		System.out.println("Floor placeItem");
