@@ -21,7 +21,7 @@ public class Character {
 	private Box box;
 
 	// konstruktor - játszható karakter létrehozása
-	public Character(LevelObject Position, Color color, Direction direction) {
+	public Character(LevelObject position, Color color, Direction direction) {
 		Logger.Log("Character konstruktor");
 		this.position = position;
 		bulletColor = color;
