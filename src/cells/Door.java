@@ -16,7 +16,7 @@ public class Door extends LevelObject{
 	public ItemState hasItem() {
 		Logger.Log("Door hasItem");
 		Logger.Logout();
-		return ItemState.forbiddenArea;
+		return ItemState.FORBIDDENAREA;
 	}
 	
 	public void interactCharacter(Character c) {

@@ -43,9 +43,9 @@ public class Scale extends LevelObject {
 		Logger.Log("Scale hasItem");
 		Logger.Logout();
 		if (box != null) {
-			return ItemState.gotItem;
+			return ItemState.GOTITEM;
 		} else {
-			return ItemState.noItem;
+			return ItemState.NOITEM;
 		}
 	}
 
@@ -71,16 +71,16 @@ public class Scale extends LevelObject {
 			Character dummy = new Character(this, null, dir);
 			LevelObject neighbour = null;
 			switch (dir) {
-			case North:
+			case NORTH:
 				neighbour = neighbourNorth;
 				break;
-			case East:
+			case EAST:
 				neighbour = neighbourEast;
 				break;
-			case South:
+			case SOUTH:
 				neighbour = neighbourSouth;
 				break;
-			case West:
+			case WEST:
 				neighbour = neighbourWest;
 				break;
 			}
@@ -94,13 +94,13 @@ public class Scale extends LevelObject {
 		}
 		Logger.Logout();
 		switch (dir) {
-		case North:
+		case NORTH:
 			return neighbourNorth;
-		case East:
+		case EAST:
 			return neighbourEast;
-		case South:
+		case SOUTH:
 			return neighbourSouth;
-		case West:
+		case WEST:
 			return neighbourWest;
 		default:
 			return null;

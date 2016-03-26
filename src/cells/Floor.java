@@ -20,15 +20,15 @@ public class Floor extends LevelObject{
 		Logger.Log("Floor hasItem");
 		if(!walkable){
 			Logger.Logout();
-			return ItemState.forbiddenArea;
+			return ItemState.FORBIDDENAREA;
 		}
 		else if(item != null){ 
 			Logger.Logout();
-			return ItemState.gotItem;
+			return ItemState.GOTITEM;
 		}
 		else {
 			Logger.Logout();
-			return ItemState.noItem;
+			return ItemState.NOITEM;
 		}
 	}
 	

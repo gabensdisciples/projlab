@@ -38,13 +38,13 @@ public abstract class LevelObject {
 		Logger.Log("LevelObject getNeighbour");
 		Logger.Logout();
 		switch (dir) {
-		case North:
+		case NORTH:
 			return neighbourNorth;
-		case East:
+		case EAST:
 			return neighbourEast;
-		case South:
+		case SOUTH:
 			return neighbourSouth;
-		case West:
+		case WEST:
 			return neighbourWest;
 		default:
 			return null;
@@ -56,16 +56,16 @@ public abstract class LevelObject {
 		Logger.Log("LevelObject setNeighbour");
 
 		switch (dir) {
-		case North:
+		case NORTH:
 			neighbourNorth = l;
 			break;
-		case East:
+		case EAST:
 			neighbourEast = l;
 			break;
-		case South:
+		case SOUTH:
 			neighbourSouth = l;
 			break;
-		case West:
+		case WEST:
 			neighbourWest = l;
 			break;
 		}
