@@ -18,6 +18,7 @@ import main.LevelBuilder;
 import main.Menu;
 import main.MenuPoints;
 import game.Character;
+import cells.LevelObject;
 
 public class Test {
 
@@ -57,7 +58,11 @@ public class Test {
 	}
 
 	public static void pickupZPM() {
-
+		LevelObject position = new LevelObject(true);
+		Character character = new Character(position, Color.YELLOW, Direction.WEST);
+		ZPM zmp = new ZPM();
+		
+		character.take();
 	}
 
 	public static void pickupBox() {

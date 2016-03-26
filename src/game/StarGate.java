@@ -1,6 +1,7 @@
 package game;
 
 import enumerations.Color;
+import logger.Logger;
 
 public class StarGate {
 
