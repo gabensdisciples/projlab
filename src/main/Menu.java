@@ -1,5 +1,7 @@
 package main;
 
+import logger.Logger;
+
 public class Menu {
 	
 	private MenuPoints points;
@@ -7,12 +9,12 @@ public class Menu {
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-
-		System.out.println("Menu main");
-
+		Logger.Log("Menu main");
+		Logger.Logout();
 	}
 	
 	public void showHelp() {
-		System.out.println("Menu showHelp");
+		Logger.Log("Menu showHelp");
+		Logger.Logout();
 	}
 }

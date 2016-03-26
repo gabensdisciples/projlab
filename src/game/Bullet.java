@@ -3,6 +3,7 @@ package game;
 import cells.LevelObject;
 import enumerations.Color;
 import enumerations.Direction;
+import logger.Logger;
 
 public class Bullet {
 	private Direction direction;

@@ -2,6 +2,7 @@ package game;
 
 import cells.SpecWall;
 import enumerations.Color;
+import logger.Logger;
 
 public final class Wormhole {
 	private static SpecWall blueSpecWall = null;

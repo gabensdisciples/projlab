@@ -1,10 +1,12 @@
 package items;
 
 import game.Character;
+import logger.Logger;
 
 public class ZPM extends Item {
 	public void pickUp(Character c) {
-		System.out.println("ZPM pickUp");
+		Logger.Log("ZPM pickUp");
 		c.incrementZPMCount();
+		Logger.Logout();
 	}
 }

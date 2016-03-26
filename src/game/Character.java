@@ -5,6 +5,7 @@ import enumerations.Color;
 import enumerations.Direction;
 import items.Box;
 import items.Item;
+import logger.Logger;
 
 public class Character {
 
@@ -20,73 +21,82 @@ public class Character {
 	private Box box;
 
 	// konstruktor - játszható karakter létrehozása
-	public Character(LevelObject position, Color color, Direction direction) {
-		System.out.println("Character konstruktor");
-
+	public Character(LevelObject Position, Color color, Direction direction) {
+		Logger.Log("Character konstruktor");
 		this.position = position;
-		this.bulletColor = color;
+		bulletColor = color;
 		this.direction = direction;
+		Logger.Logout();
 	}
 
 	// golyó kilövése
 	public void shoot() {
-		System.out.println("Character Shoot");
+		Logger.Log("Character Shoot");
 		Bullet b = new Bullet(position, direction, bulletColor);
 		b.fly();
+		Logger.Logout();
 	}
 
 	// kilövendõ golyó színének megváltoztatása
 	public void changeColor() {
-		System.out.println("Character Changecolor");
+		Logger.Log("Character Changecolor");
 		bulletColor = bulletColor.getOtherColor();
+		Logger.Logout();
 	}
 
 	// karakter halála
 	public void die() {
-		System.out.println("Character die");
-
+		Logger.Log("Character die");
+		Logger.Logout();
 	}
 
 	// karakter mozgatása
 	public void move(Direction dir) {
-		System.out.println("Character move");
+		Logger.Log("Character move");
 		position.getNeighbour(dir, true).interactCharacter(this);
+		Logger.Logout();
 	}
 
 	// karakter helyzetének beállítása
 	public void setPosition(LevelObject position) {
-		System.out.println("Character setPosition");
+		Logger.Log("Character setPosition");
 		this.position = position;
+		Logger.Logout();
 	}
 
 	public LevelObject getPosition() {
+		Logger.Log("Character getPosition");
+		Logger.Logout();
 		return position;
 	}
 
 	// karakternél levõ ZPM modulok számának növelése
 	public void incrementZPMCount() {
-		System.out.println("Character IncrementZPMCount");
+		Logger.Log("Character IncrementZPMCount");
 		zpmCount++;
+		Logger.Logout();
 	}
 
 	// karakterhez kerül egy doboz
 	public void setBox(Box b) {
-		System.out.println("Character setBox");
+		Logger.Log("Character setBox");
 		box = b;
+		Logger.Logout();
 	}
 
 	// tárgy lerakása
 	public void drop() {
-		System.out.println("Character drop");
+		Logger.Log("Character drop");
 
 		position.placeItem((Item) box);
 		box = null;
+		Logger.Logout();
 	}
 
 	// tárgy felvétele
 	public void take() {
-		System.out.println("Character take");
-
+		Logger.Log("Character take");
 		position.getItem(this);
+		Logger.Logout();
 	}
 }
