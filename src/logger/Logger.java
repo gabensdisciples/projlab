@@ -7,16 +7,16 @@ public class Logger {
 		tabcount = 0;
 	}
 	
-	public void LogTab(){
+	public static void LogTab(){
 		for(int i = 0; i< tabcount;i++)
 			System.out.print("\t");
 	}
 		
-	public void Login(){
+	public static void Login(){
 		tabcount++;
 	}
 	
-	public void Logout(){
+	public static void Logout(){
 		tabcount--;
 	}
 }
