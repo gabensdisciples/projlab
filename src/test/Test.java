@@ -70,6 +70,10 @@ public class Test {
 	}
 
 	public static void walkSpecWallStarGate() {
+		Floor position = new Floor(true,null);
+		Character oneill = new Character(position, Color.BLUE, Direction.EAST);
+		SpecWall target = new SpecWall();
+		Wormhole wormhole = new Wormhole();
 
 	}
 
@@ -176,4 +180,6 @@ public class Test {
 	public static void openHelp() {
 		Menu.showHelp();
 	}
+	
+
 }
