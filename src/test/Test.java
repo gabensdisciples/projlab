@@ -121,33 +121,30 @@ public class Test {
 			placeBoxForbidden();
 			break;
 		case 8:
-			changeBulletColor();
-			break;
-		case 9:
 			shootDoorOrWall();
 			break;
-		case 10:
+		case 9:
 			shootOverWalkable();
 			break;
-		case 11:
+		case 10:
 			shootSpecWall();
 			break;
-		case 12:
+		case 11:
 			walkDoor();
 			break;
-		case 13:
+		case 12:
 			walkFloorOrWall();
 			break;
-		case 14:
+		case 13:
 			walkGap();
 			break;
-		case 15:
+		case 14:
 			walkScale();
 			break;
-		case 16:
+		case 15:
 			walkSpecWallStarGate();
 			break;
-		case 17:
+		case 16:
 			System.exit(0);
 			break;
 		default:
