@@ -230,10 +230,12 @@ public class Test {
    */
   public static void pickupZPM() {
     Zpm zpm = new Zpm();
-    Floor floor1 = new Floor(true, zpm);
-    Character character1 = new Character(floor1, Color.YELLOW, Direction.WEST);
+    Floor position = new Floor(true, zpm);
+    Character oneill = new Character(position, Color.YELLOW, Direction.WEST);
 
-    character1.take();
+    if(position.hasItem() == ItemState.GOTITEM) {
+      oneill.take();
+    }
   }
 
   /**
@@ -243,18 +245,31 @@ public class Test {
     Box box = new Box();
     Floor position = new Floor(true, box);
     Character oneill = new Character(position, Color.YELLOW, Direction.WEST);
-
-    oneill.take();
+    
+    if(position.hasItem() == ItemState.GOTITEM) {
+      oneill.take();
+    }
   }
 
   /**
    * Trying to pick a up a box, but he can't.
    */
   public static void pickupForbidden() {
-    Floor floor3 = new Floor(true, null);
-    Character character3 = new Character(floor3, Color.YELLOW, Direction.WEST);
-
-    character3.take();
+    Door position = new Door();
+    Character oneill = new Character(position, Color.YELLOW, Direction.WEST);
+    
+    if(position.hasItem() == ItemState.GOTITEM) {
+      oneill.take();
+    }
+  }
+  
+  public static void pickupNoItemPresent() {
+    Floor position = new Floor(true, null);
+    Character oneill = new Character(position, Color.YELLOW, Direction.WEST);
+    
+    if(position.hasItem() == ItemState.GOTITEM) {
+      oneill.take();
+    }
   }
 
   /**
@@ -262,10 +277,10 @@ public class Test {
    */
   public static void placeBox() {
     Box box = new Box();
-    Floor floor = new Floor(true, box);
-    Character character = new Character(floor, Color.YELLOW, Direction.WEST);
-    character.setBox(box);
-    character.drop();
+    Floor position = new Floor(true, box);
+    Character oneill = new Character(position, Color.YELLOW, Direction.WEST);
+    oneill.setBox(box);
+    oneill.drop();
   }
 
   /**
@@ -273,13 +288,13 @@ public class Test {
    */
   public static void placeBoxForbidden() {
     Box box = new Box();
-    Floor floor = new Floor(true, box);
-    Character character = new Character(floor, Color.YELLOW, Direction.WEST);
-    if (floor.hasItem() == ItemState.FORBIDDENAREA) {
+    Floor position = new Floor(true, box);
+    Character oneill = new Character(position, Color.YELLOW, Direction.WEST);
+    if (position.hasItem() == ItemState.FORBIDDENAREA) {
       System.out.println("Ide nem tehetsz dobozt kocsog");
     } else {
-      character.setBox(box);
-      character.drop();
+      oneill.setBox(box);
+      oneill.drop();
     }
   }
 
@@ -287,26 +302,26 @@ public class Test {
    * Change bullet color.
    */
   public static void changeBulletColor() {
-    Floor floor = new Floor(true, null);
-    Character character = new Character(floor, Color.YELLOW, Direction.WEST);
-    character.changeColor();
+    Floor position = new Floor(true, null);
+    Character oneill = new Character(position, Color.YELLOW, Direction.WEST);
+    oneill.changeColor();
   }
 
   /**
    * Shoot over walkable objects.
    */
   public static void shootOverWalkable() {
-    Floor floor1 = new Floor(true, null);
+    Floor position = new Floor(true, null);
     Floor floor2 = new Floor(true, null);
     Floor floor3 = new Floor(true, null);
     Floor floor4 = new Floor(false, null);
-    floor1.setNeighbour(Direction.WEST, floor2);
-    floor2.setNeighbour(Direction.EAST, floor1);
+    position.setNeighbour(Direction.WEST, floor2);
+    floor2.setNeighbour(Direction.EAST, position);
     floor2.setNeighbour(Direction.WEST, floor3);
     floor3.setNeighbour(Direction.EAST, floor2);
     floor3.setNeighbour(Direction.WEST, floor4);
     floor4.setNeighbour(Direction.EAST, floor3);
-    Character oneill = new Character(floor1, Color.YELLOW, Direction.WEST);
+    Character oneill = new Character(position, Color.YELLOW, Direction.WEST);
     oneill.shoot();
   }
 
@@ -314,11 +329,11 @@ public class Test {
    * Shoot on a special wall transforms it into a stargate.
    */
   public static void shootSpecWall() {
-    Floor floor1 = new Floor(true, null);
+    Floor position = new Floor(true, null);
     SpecWall target = new SpecWall();
-    floor1.setNeighbour(Direction.WEST, target);
-    target.setNeighbour(Direction.EAST, floor1);
-    Character oneill = new Character(floor1, Color.YELLOW, Direction.WEST);
+    position.setNeighbour(Direction.WEST, target);
+    target.setNeighbour(Direction.EAST, position);
+    Character oneill = new Character(position, Color.YELLOW, Direction.WEST);
     oneill.shoot();
   }
 
@@ -326,11 +341,11 @@ public class Test {
    * Shoot door or wall.
    */
   public static void shootDoorOrWall() {
-    Floor floor1 = new Floor(true, null);
+    Floor position = new Floor(true, null);
     SpecWall target = new SpecWall();
-    floor1.setNeighbour(Direction.WEST, target);
-    target.setNeighbour(Direction.EAST, floor1);
-    Character oneill = new Character(floor1, Color.YELLOW, Direction.WEST);
+    position.setNeighbour(Direction.WEST, target);
+    target.setNeighbour(Direction.EAST, position);
+    Character oneill = new Character(position, Color.YELLOW, Direction.WEST);
     oneill.shoot();
   }
 
