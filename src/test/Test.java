@@ -101,6 +101,30 @@ public class Test {
 			pickupBox();
 		case 4:
 			pickupForbidden();
+		case 5:
+			pickupZPM();
+		case 6:
+			placeBox();
+		case 7:
+			placeBoxForbidden();
+		case 8:
+			changeBulletColor();
+		case 9:
+			shootDoorOrWall();
+		case 10:
+			shootOverWalkable();
+		case 11:
+			shootSpecWall();
+		case 12:
+			walkDoor();
+		case 13:
+			walkFloorOrWall();
+		case 14:
+			walkGap();
+		case 15:
+			walkScale();
+		case 16:
+			walkSpecWallStarGate();
 		}
 	}
 
