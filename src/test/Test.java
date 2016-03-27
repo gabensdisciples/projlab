@@ -1,5 +1,7 @@
 package test;
 
+import java.util.Scanner;
+
 import cells.Door;
 import cells.Floor;
 import cells.Gap;
@@ -8,17 +10,10 @@ import cells.SpecWall;
 import enumerations.Color;
 import enumerations.Direction;
 import enumerations.ItemState;
-import game.Bullet;
-import game.StarGate;
-import game.Wormhole;
-import items.Box;
-import items.Item;
-import items.Zpm;
-import main.LevelBuilder;
-import main.Menu;
-import main.MenuPoints;
 import game.Character;
-import cells.LevelObject;
+import items.Box;
+import items.Zpm;
+import main.Menu;
 
 /**
  * Test class.
@@ -27,36 +22,102 @@ import cells.LevelObject;
  * 
  */
 public class Test {
-  
-  /**
-   * Main method for testing.
-   * @param args - init params
-   */
-  public static void main(String[] args) {
-    System.out.println("1. Lepes\n " + "\t1.1 Floorra/falra\n" + "\t\t1.1.1. isWalkable()?"
-        + " T/F\n" + "\t1.2 Szakadekba\n"
-        + "\t1.3 SpecWallra/StarGatere lep\n" + "\t\t1.3.1 Van StarGate? T/F\n"
-        + "\t\t\t1.3.1.1 Van StarGate-nek parja? T/F\n" + "\t1.4 Ajtora\n" + "\t\t1.4.1 "
-        + "Nyitva van? T/F\n"
-        + "\t1.5 Merlegre lep\n" + "Adja meg a kivant teszt kodjat: ");
-    /**
-     * Töltény szín váltás
-     */
-    changeBulletColor();
-    /**
-     * Doboz lerakás
-     */
-    placeBox();
-    /**
-     * Doboz lerakás rossz helyre
-     */
-    placeBox();
-    /**
-     * Mérlegre lép
-     */
-    walkScale();
+
+  public static void testSwitch() {
+    System.out.println("\nKerlek valaszd ki, melyik teszteset erdekel!\n");
+    int i = 0;
+    i++;
+    System.out.println(i + " " + "changeBulletColor()");
+    i++;
+    System.out.println(i + " " + "openHelp()");
+    i++;
+    System.out.println(i + " " + "pickupBox()");
+    i++;
+    System.out.println(i + " " + "pickupForbidden()");
+    i++;
+    System.out.println(i + " " + "pickupZPM()");
+    i++;
+    System.out.println(i + " " + "placeBox()");
+    i++;
+    System.out.println(i + " " + "placeBoxForbidden()");
+    i++;
+    System.out.println(i + " " + "shootDoorOrWall()");
+    i++;
+    System.out.println(i + " " + "shootOverWalkable()");
+    i++;
+    System.out.println(i + " " + "shootSpecWall()");
+    i++;
+    System.out.println(i + " " + "walkDoor()");
+    i++;
+    System.out.println(i + " " + "walkFloorOrWall()");
+    i++;
+    System.out.println(i + " " + "walkGap()");
+    i++;
+    System.out.println(i + " " + "walkScale()");
+    i++;
+    System.out.println(i + " " + "walkSpecWallStarGate()");
+    i++;
+    System.out.println(i + " " + "Kilépés a programból");
+
+    Scanner in = new Scanner(System.in);
+    i = in.nextInt();
+    System.out.println(i);
+
+    switch (i) {
+      case 1:
+        changeBulletColor();
+        break;
+      case 2:
+        openHelp();
+        break;
+      case 3:
+        pickupBox();
+        break;
+      case 4:
+        pickupForbidden();
+        break;
+      case 5:
+        pickupZPM();
+        break;
+      case 6:
+        placeBox();
+        break;
+      case 7:
+        placeBoxForbidden();
+        break;
+      case 8:
+        shootDoorOrWall();
+        break;
+      case 9:
+        shootOverWalkable();
+        break;
+      case 10:
+        shootSpecWall();
+        break;
+      case 11:
+        walkDoor();
+        break;
+      case 12:
+        walkFloorOrWall();
+        break;
+      case 13:
+        walkGap();
+        break;
+      case 14:
+        walkScale();
+        break;
+      case 15:
+        walkSpecWallStarGate();
+        break;
+      case 16:
+        System.exit(0);
+        break;
+      default:
+        System.out.println("Nem menő");
+    }
+    return;
   }
-  
+
   /**
    * Walk over floor or wall.
    */
@@ -67,7 +128,7 @@ public class Test {
     floorToStand.setNeighbour(Direction.EAST, floorToMove);
     oniell.move(Direction.EAST);
   }
-  
+
   /**
    * Walk over a gap.
    */
@@ -78,7 +139,7 @@ public class Test {
     position.setNeighbour(Direction.EAST, target);
     oneill.move(Direction.EAST);
   }
-  
+
   /**
    * Walk through a stargate.
    */
@@ -86,7 +147,6 @@ public class Test {
     Floor position = new Floor(true, null);
     Character oneill = new Character(position, Color.BLUE, Direction.EAST);
     SpecWall target = new SpecWall();
-    Wormhole wormhole = new Wormhole();
     target.interactCharacter(oneill);
     // Szekvencia diagram alapján
     // wormhole.getSpecWall(Color.getOtherColor(target.color()));
@@ -97,7 +157,7 @@ public class Test {
       oneill.setPosition(target);
     }
   }
-  
+
   /**
    * Walk through a door.
    */
@@ -108,9 +168,9 @@ public class Test {
     place.setNeighbour(Direction.EAST, opendoor);
     oneill.move(Direction.EAST);
   }
-  
+
   /**
-   * Stand upon a scale.
+   * Stand on a scale.
    */
   public static void walkScale() {
     Door door = new Door();
@@ -121,18 +181,18 @@ public class Test {
     character.move(Direction.EAST);
 
   }
-  
+
   /**
    * Pick up a Zpm.
    */
-  public static void pickupZpm() {
+  public static void pickupZPM() {
     Zpm zpm = new Zpm();
     Floor floor1 = new Floor(true, zpm);
     Character character1 = new Character(floor1, Color.YELLOW, Direction.WEST);
 
     character1.take();
   }
-  
+
   /**
    * Pick up a box.
    */
@@ -143,7 +203,7 @@ public class Test {
 
     oneill.take();
   }
-  
+
   /**
    * Trying to pick a up a box, but he can't.
    */
@@ -153,7 +213,7 @@ public class Test {
 
     character3.take();
   }
-  
+
   /**
    * Place a box on a cell.
    */
@@ -164,7 +224,7 @@ public class Test {
     character.setBox(box);
     character.drop();
   }
-  
+
   /**
    * Trying to place a box on a forbidden place.
    */
@@ -179,7 +239,7 @@ public class Test {
       character.drop();
     }
   }
-  
+
   /**
    * Change bullet color.
    */
@@ -188,9 +248,9 @@ public class Test {
     Character character = new Character(floor, Color.YELLOW, Direction.WEST);
     character.changeColor();
   }
-  
+
   /**
-   * Shoor over walkable objects.
+   * Shoot over walkable objects.
    */
   public static void shootOverWalkable() {
     Floor floor1 = new Floor(true, null);
@@ -206,9 +266,9 @@ public class Test {
     Character oneill = new Character(floor1, Color.YELLOW, Direction.WEST);
     oneill.shoot();
   }
-  
+
   /**
-   * Shooting on a special wall transforms it into a stargate.
+   * Shoot on a special wall transforms it into a stargate.
    */
   public static void shootSpecWall() {
     Floor floor1 = new Floor(true, null);
@@ -218,7 +278,7 @@ public class Test {
     Character oneill = new Character(floor1, Color.YELLOW, Direction.WEST);
     oneill.shoot();
   }
-  
+
   /**
    * Shoot door or wall.
    */
@@ -230,7 +290,7 @@ public class Test {
     Character oneill = new Character(floor1, Color.YELLOW, Direction.WEST);
     oneill.shoot();
   }
-  
+
   /**
    * Opens the help menu.
    */

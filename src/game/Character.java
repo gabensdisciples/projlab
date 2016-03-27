@@ -21,8 +21,6 @@ public class Character {
 
   private LevelObject position;
 
-  private int zpmCount;
-
   private Box box;
 
   /**
@@ -107,7 +105,6 @@ public class Character {
    */
   public void incrementZpmCount() {
     Logger.log("Character IncrementZPMCount");
-    zpmCount++;
     Logger.logout();
   }
 
