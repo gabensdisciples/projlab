@@ -52,6 +52,41 @@ public class Test {
 		 */
 		walkScale();
 	}
+	
+	public static void testSwitch(){
+		System.out.println("Kerlek valaszd ki, melyik teszteset erdekel!");
+		int i = 0;
+		i++;
+		System.out.println(i +"changeBulletColor()");
+		i++;
+		System.out.println(i +"openHelp()");
+		i++;
+		System.out.println(i +"pickupBox()");
+		i++;
+		System.out.println(i +"pickupForbidden()");
+		i++;
+		System.out.println(i +"pickupZPM()");
+		i++;
+		System.out.println(i +"placeBox()");
+		i++;
+		System.out.println(i +"placeBoxForbidden()");
+		i++;
+		System.out.println(i +"shootDoorOrWall()");
+		i++;
+		System.out.println(i +"shootOverWalkable()");
+		i++;
+		System.out.println(i +"shootSpecWall()");
+		i++;
+		System.out.println(i +"walkDoor()");
+		i++;
+		System.out.println(i +"walkFloorOrWall()");
+		i++;
+		System.out.println(i +"walkGap()");
+		i++;
+		System.out.println(i +"walkScale()");
+		i++;
+		System.out.println(i +"walkSpecWallStarGate()");
+	}
 
 	public static void walkFloorOrWall() {
 		Floor floorToStand = new Floor(true, null);
