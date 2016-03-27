@@ -178,7 +178,6 @@ public class Test {
       target.setStarGate(gateBlue);
       
       System.out.println("Van a StarGate-nek parja? T/F");
-      in.nextLine();
       answer = in.nextLine().toLowerCase();
       boolean isTherePair = answer.equals("t");
       
