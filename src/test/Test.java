@@ -119,6 +119,7 @@ public class Test {
         walkSpecWallStarGate();
         break;
       case 16:
+        in.close();
         System.exit(0);
         break;
       default:
