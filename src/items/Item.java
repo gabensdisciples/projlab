@@ -1,9 +1,15 @@
 package items;
 
 import game.Character;
-import logger.Logger;
 
+/**
+ * Abstract item class.
+ * 
+ * @author Gaben's Disciples
+ * 
+ */
 public abstract class Item {
 
-	public abstract void pickUp(Character c);
+  public abstract void pickUp(Character character);
+
 }

@@ -7,96 +7,139 @@ import items.Box;
 import items.Item;
 import logger.Logger;
 
+/**
+ * Defines the character.
+ * 
+ * @author Gaben's Disciples
+ * 
+ */
 public class Character {
 
-	// merre n�z a karakter
-	private Direction direction;
-	// a kil�vend� l�ved�k sz�ne
-	private Color bulletColor;
-	// a karakter hely�nek t�rol�sa a p�ly�n
-	private LevelObject position;
-	// az �sszegy�jt�tt ZPM modulok sz�ma
-	private int zpmCount;
-	// referencia a karaktern�l l�v� dobozra
-	private Box box;
+  private Direction direction;
 
-	// konstruktor - j�tszhat� karakter l�trehoz�sa
-	public Character(LevelObject position, Color color, Direction direction) {
-		Logger.log("Character konstruktor");
-		this.position = position;
-		bulletColor = color;
-		this.direction = direction;
-		Logger.logout();
-	}
+  private Color bulletColor;
 
-	// goly� kil�v�se
-	public void shoot() {
-		Logger.log("Character Shoot");
-		Bullet b = new Bullet(position, direction, bulletColor);
-		b.fly();
-		Logger.logout();
-	}
+  private LevelObject position;
 
-	// kil�vend� goly� sz�n�nek megv�ltoztat�sa
-	public void changeColor() {
-		Logger.log("Character Changecolor");
-		bulletColor = bulletColor.getOtherColor();
-		Logger.logout();
-	}
+  private int zpmCount;
 
-	// karakter hal�la
-	public void die() {
-		Logger.log("Character die");
-		Logger.logout();
-	}
+  private Box box;
 
-	// karakter mozgat�sa
-	public void move(Direction dir) {
-		Logger.log("Character move");
-		position.getNeighbour(dir, true).interactCharacter(this);
-		Logger.logout();
-	}
+  /**
+   * Character constructor.
+   * 
+   * @param position
+   *          - where the character stands
+   * @param color
+   *          - the bullet color
+   * @param direction
+   *          - the character's direction
+   */
+  public Character(LevelObject position, Color color, Direction direction) {
+    Logger.log("Character konstruktor");
+    this.position = position;
+    bulletColor = color;
+    this.direction = direction;
+    Logger.logout();
+  }
 
-	// karakter helyzet�nek be�ll�t�sa
-	public void setPosition(LevelObject position) {
-		Logger.log("Character setPosition");
-		this.position = position;
-		Logger.logout();
-	}
+  /**
+   * The character shoots a bullet in a direction with specified color.
+   */
+  public void shoot() {
+    Logger.log("Character Shoot");
+    Bullet bullet = new Bullet(position, direction, bulletColor);
+    bullet.fly();
+    Logger.logout();
+  }
 
-	public LevelObject getPosition() {
-		Logger.log("Character getPosition");
-		Logger.logout();
-		return position;
-	}
+  /**
+   * Changes the bullet color.
+   */
+  public void changeColor() {
+    Logger.log("Character Changecolor");
+    bulletColor = bulletColor.getOtherColor();
+    Logger.logout();
+  }
 
-	// karaktern�l lev� ZPM modulok sz�m�nak n�vel�se
-	public void incrementZPMCount() {
-		Logger.log("Character IncrementZPMCount");
-		zpmCount++;
-		Logger.logout();
-	}
+  public void die() {
+    Logger.log("Character die");
+    Logger.logout();
+  }
 
-	// karakterhez ker�l egy doboz
-	public void setBox(Box b) {
-		Logger.log("Character setBox");
-		box = b;
-		Logger.logout();
-	}
+  /**
+   * Makes the character move to a cell.
+   * 
+   * @param dir
+   *          - the specified direction
+   */
+  public void move(Direction dir) {
+    Logger.log("Character move");
+    position.getNeighbour(dir, true).interactCharacter(this);
+    Logger.logout();
+  }
 
-	// t�rgy lerak�sa
-	public void drop() {
-		Logger.log("Character drop");
+  /**
+   * Sets the character's position to the given cell.
+   * 
+   * @param position
+   *          - LevelObject, cell
+   */
+  public void setPosition(LevelObject position) {
+    Logger.log("Character setPosition");
+    this.position = position;
+    Logger.logout();
+  }
 
-		position.placeItem((Item) box);
-		box = null;
-		Logger.logout();
-	}
+  /**
+   * Gets the character's postion.
+   * 
+   * @return the position as LevelObject
+   */
+  public LevelObject getPosition() {
+    Logger.log("Character getPosition");
+    Logger.logout();
+    return position;
+  }
 
-	// t�rgy felv�tele
-	public void take() {
-		Logger.log("Character take");
-		position.getItem(this);
-		Logger.logout();
-	}
+  /**
+   * Increments the ZPM's at the character when he pickes up one.
+   */
+  public void incrementZpmCount() {
+    Logger.log("Character IncrementZPMCount");
+    zpmCount++;
+    Logger.logout();
+  }
+
+  /**
+   * Sets the box object belong to the character when he picks up one.
+   * 
+   * @param box
+   *          - the box he picked up
+   */
+  public void setBox(Box box) {
+    Logger.log("Character setBox");
+    this.box = box;
+    Logger.logout();
+  }
+
+  /**
+   * Drops the box.
+   */
+  public void drop() {
+    Logger.log("Character drop");
+
+    position.placeItem((Item) box);
+    box = null;
+    Logger.logout();
+  }
+
+  /**
+   * Takes a box.
+   */
+  public void take() {
+    Logger.log("Character take");
+    position.getItem(this);
+    Logger.logout();
+  }
 }

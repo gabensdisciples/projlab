@@ -1,10 +1,14 @@
 package main;
 
-import game.*;
-
+/**
+ * Builds a level from LevelObjects.
+ * 
+ * @author Gaben's Disciples
+ * 
+ */
 public class LevelBuilder {
 
-	// TODO: Ide kellenének függvények, ami beállítja a LevelObjectek
-	// szomszédreferenciáit, nem?
+  // TODO: Ide kellenek fÃ¼ggvÃ©nyek, amik beÃ¡llÃ­tjÃ¡k a LevelObjectek
+  // szomszÃ©dreferenciÃ¡it, nem?
 
 }

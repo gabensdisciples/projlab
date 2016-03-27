@@ -4,19 +4,19 @@ import game.Character;
 import logger.Logger;
 
 /**
- * Defines the box.
+ * Defines the ZPM.
  * 
  * @author Gaben's Disciples
  * 
  */
-public class Box extends Item {
-  
+public class Zpm extends Item {
+
   /**
-   * Set's the character box reference to itself.
+   * Increase the character's ZpmCount property when he picks up one.
    */
   public void pickUp(Character character) {
-    Logger.log("Box pickUp");
-    character.setBox(this);
+    Logger.log("ZPM pickUp");
+    character.incrementZpmCount();
     Logger.logout();
   }
 }

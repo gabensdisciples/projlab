@@ -4,124 +4,151 @@ import enumerations.Direction;
 import enumerations.ItemState;
 import game.Bullet;
 import game.Character;
-import items.Item;
 import items.Box;
+import items.Item;
 import logger.Logger;
 
+/**
+ * LevelObject class.
+ * 
+ * @author Gaben's Disciples
+ * 
+ */
 public class Scale extends LevelObject {
-	private Box box;
-	private boolean active;
-	private Door door;
-	// TODO: uj tagvaltozo, dokumentalni kell!
-	// private Character character;
+  private Box box;
+  private boolean active;
+  private Door door;
 
-	public Scale(Door door) {
-		super(true);
-		box = null;
-		// character = null;
-		active = false;
-		this.door = door;
-		Logger.log("Scale konstruktor");
-		Logger.logout();
-	}
+  /**
+   * Scale constructor.
+   * 
+   * @param door
+   *          - the door which the scale opens
+   */
+  public Scale(Door door) {
+    super(true);
+    box = null;
+    active = false;
+    this.door = door;
+    Logger.log("Scale konstruktor");
+    Logger.logout();
+  }
 
-	// TODO: Valtozott a szignatura, dokumentalni kell!
-	public void setDoorState(boolean open) {
-		Logger.log("Scale openDoor");
-		door.setWalkable(open);
-		Logger.logout();
-	}
+  /**
+   * Opens the door.
+   * 
+   * @param open
+   *          - boolean
+   */
+  public void setDoorState(boolean open) {
+    Logger.log("Scale openDoor");
+    door.setWalkable(open);
+    Logger.logout();
+  }
 
-	public void setActive(boolean active) {
-		Logger.log("Scale setActive");
-		this.active = active;
-		setDoorState(active);
-		Logger.logout();
-	}
+  /**
+   * Sets the scale active.
+   * 
+   * @param active
+   *          - boolean
+   */
+  public void setActive(boolean active) {
+    Logger.log("Scale setActive");
+    this.active = active;
+    setDoorState(active);
+    Logger.logout();
+  }
 
-	public ItemState hasItem() {
-		Logger.log("Scale hasItem");
-		Logger.logout();
-		if (box != null) {
-			return ItemState.GOTITEM;
-		} else {
-			return ItemState.NOITEM;
-		}
-	}
+  /**
+   * Cell's property.
+   */
+  public ItemState hasItem() {
+    Logger.log("Scale hasItem");
+    Logger.logout();
+    if (box != null) {
+      return ItemState.GOTITEM;
+    } else {
+      return ItemState.NOITEM;
+    }
+  }
 
-	public void interactCharacter(Character c) {
-		Logger.log("Scale interactCharacter");
-		c.setPosition(this);
-		setActive(true);
-		// character = c;
-		Logger.logout();
-	}
+  /**
+   * Creates interaction between the character and level objects.
+   */
+  public void interactCharacter(Character character) {
+    Logger.log("Scale interactCharacter");
+    character.setPosition(this);
+    setActive(true);
+    Logger.logout();
+  }
 
-	public void interactBullet(Bullet b) {
-		Logger.log("Scale interactBullet");
-		b.setPosition(this);
-		Logger.logout();
-	}
+  /**
+   * Creates interaction between the bullet and level objects.
+   */
+  public void interactBullet(Bullet bullet) {
+    Logger.log("Scale interactBullet");
+    bullet.setPosition(this);
+    Logger.logout();
+  }
 
-	@Override
-	public LevelObject getNeighbour(Direction dir, boolean characterCalled) {
-		Logger.log("Scale getNeighbour");
+  @Override
+  public LevelObject getNeighbour(Direction dir, boolean characterCalled) {
+    Logger.log("Scale getNeighbour");
 
-		if (characterCalled && box == null) {
-			Character dummy = new Character(this, null, dir);
-			LevelObject neighbour = null;
-			switch (dir) {
-			case NORTH:
-				neighbour = neighbourNorth;
-				break;
-			case EAST:
-				neighbour = neighbourEast;
-				break;
-			case SOUTH:
-				neighbour = neighbourSouth;
-				break;
-			case WEST:
-				neighbour = neighbourWest;
-				break;
-			}
+    if (characterCalled && box == null) {
+      Character dummy = new Character(this, null, dir);
+      LevelObject neighbour = null;
+      switch (dir) {
+        case NORTH:
+          neighbour = neighbourNorth;
+          break;
+        case EAST:
+          neighbour = neighbourEast;
+          break;
+        case SOUTH:
+          neighbour = neighbourSouth;
+          break;
+        case WEST:
+          neighbour = neighbourWest;
+          break;
+        default:
+          break;
+      }
 
-			neighbour.interactCharacter(dummy);
-			// ha sikeres lesz a lepes
-			if (dummy.getPosition() != this) {
-				setActive(false);
-				// character = null;
-			}
-		}
-		Logger.logout();
-		switch (dir) {
-		case NORTH:
-			return neighbourNorth;
-		case EAST:
-			return neighbourEast;
-		case SOUTH:
-			return neighbourSouth;
-		case WEST:
-			return neighbourWest;
-		default:
-			return null;
-		// TODO: Dobjunk Exception-t defaultn�l?
-		}
-	}
+      neighbour.interactCharacter(dummy);
+      if (dummy.getPosition() != this) {
+        setActive(false);
+      }
+    }
+    Logger.logout();
+    switch (dir) {
+      case NORTH:
+        return neighbourNorth;
+      case EAST:
+        return neighbourEast;
+      case SOUTH:
+        return neighbourSouth;
+      case WEST:
+        return neighbourWest;
+      default:
+        return null;
+    }
+  }
 
-	@Override
-	public void getItem(Character c) {
-		Logger.log("Scale getItem");
-		box.pickUp(c);
-		box = null;
-		setActive(false);
-		Logger.logout();
-	}
+  @Override
+  public void getItem(Character character) {
+    Logger.log("Scale getItem");
+    box.pickUp(character);
+    box = null;
+    setActive(false);
+    Logger.logout();
+  }
 
-	@Override
-	public void placeItem(Item item) {
-		Logger.log("Scale placeItem");
-		box = (Box) item;
-		setActive(true);
-		Logger.logout();
-	}
+  @Override
+  public void placeItem(Item item) {
+    Logger.log("Scale placeItem");
+    box = (Box) item;
+    setActive(true);
+    Logger.logout();
+  }
 }

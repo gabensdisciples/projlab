@@ -1,5 +1,11 @@
 package main;
 
+/**
+ * Menupoints enum class.
+ * 
+ * @author Gaben's Disciples
+ * 
+ */
 public enum MenuPoints {
-	play, help, exit;
+  PLAY, HELP, EXIT;
 }
