@@ -21,6 +21,7 @@ public class SpecWall extends LevelObject {
    */
   public SpecWall() {
     super(false);
+    gate = null;
     Logger.log("SpecWall konstruktor");
     Logger.logout();
   }
