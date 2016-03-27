@@ -1,5 +1,12 @@
 package logger;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+
 /**
  * Logger util class.
  * 
@@ -16,11 +23,36 @@ public class Logger {
    *          - string to log
    */
   public static void log(String string) {
+    File logFile = new File("skeleton.log");
+    if(!logFile.exists()) {
+        try {
+          logFile.createNewFile();
+        } catch (IOException e) {
+          // TODO Auto-generated catch block
+          e.printStackTrace();
+        }
+    } 
+    FileOutputStream logFileStream;
+
+
+    
     tabCount++;
     for (int i = 0; i < tabCount; i++) {
-      System.out.print("\t");
+      string = "\t" + string;
+      //System.out.print("\t");
     }
     System.out.println(string);
+    try {
+      logFileStream = new FileOutputStream(logFile, true);
+      BufferedWriter logBufferedWriter = new BufferedWriter(new OutputStreamWriter(logFileStream));
+      logBufferedWriter.write(string);
+      logBufferedWriter.newLine();
+      logBufferedWriter.close();
+    } catch (IOException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
+
   }
 
   public static void logout() {
