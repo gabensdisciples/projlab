@@ -178,10 +178,16 @@ public class Test {
    * Walk through a door.
    */
   public static void walkDoor() {
-    Door opendoor = new Door();
-    Floor place = new Floor(true, null);
-    Character oneill = new Character(place, Color.YELLOW, Direction.WEST);
-    place.setNeighbour(Direction.EAST, opendoor);
+    System.out.println("Nyitva van az ajtó? T/F");
+    in.nextLine();
+    String answer = in.nextLine().toLowerCase();
+    boolean doorOpen = answer.equals("t");
+    
+    Door target = new Door();
+    target.setWalkable(doorOpen);
+    Floor position = new Floor(true, null);
+    Character oneill = new Character(position, Color.YELLOW, Direction.WEST);
+    position.setNeighbour(Direction.EAST, target);
     oneill.move(Direction.EAST);
   }
 
