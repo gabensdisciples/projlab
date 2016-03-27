@@ -53,6 +53,8 @@ public class Test {
 		 * Mérlegre lép
 		 */
 		walkScale();
+		
+		testSwitch();
 	}
 	
 	public static void testSwitch(){
