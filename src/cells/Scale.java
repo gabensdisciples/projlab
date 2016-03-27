@@ -77,8 +77,8 @@ public class Scale extends LevelObject {
    */
   public void interactCharacter(Character character) {
     Logger.log("Scale interactCharacter");
-    character.setPosition(this);
     setActive(true);
+    character.setPosition(this);
     Logger.logout();
   }
 
