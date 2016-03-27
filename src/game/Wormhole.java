@@ -13,11 +13,14 @@ import logger.Logger;
 public final class Wormhole {
   private static SpecWall blueSpecWall = null;
   private static SpecWall yellowSpecWall = null;
-  
+
   /**
    * Sets the SpecWall objects to the wormhole.
-   * @param specWall - the object
-   * @param color - the SpecWall's color
+   * 
+   * @param specWall
+   *          - the object
+   * @param color
+   *          - the SpecWall's color
    */
   public static void setSpecWall(SpecWall specWall, Color color) {
     Logger.log("setSpecWall");
@@ -35,10 +38,12 @@ public final class Wormhole {
 
     Logger.logout();
   }
-  
+
   /**
    * Gets the current SpecWall object.
-   * @param color - the SpecWall's color
+   * 
+   * @param color
+   *          - the SpecWall's color
    * @return the SpecWall object
    */
   public static SpecWall getSpecWall(Color color) {

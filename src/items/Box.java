@@ -10,7 +10,7 @@ import logger.Logger;
  * 
  */
 public class Box extends Item {
-  
+
   /**
    * Set's the character box reference to itself.
    */

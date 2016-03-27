@@ -11,10 +11,12 @@ import logger.Logger;
 public class Menu {
 
   private static MenuPoints points;
-  
+
   /**
    * Main method to start the game.
-   * @param args - init parameters
+   * 
+   * @param args
+   *          - init parameters
    */
   public static void main(String[] args) {
     // TODO Auto-generated method stub

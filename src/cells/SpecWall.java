@@ -15,7 +15,7 @@ import logger.Logger;
 public class SpecWall extends LevelObject {
 
   private StarGate gate;
-  
+
   /**
    * SpecWall constructor.
    */
@@ -24,7 +24,7 @@ public class SpecWall extends LevelObject {
     Logger.log("SpecWall konstruktor");
     Logger.logout();
   }
-  
+
   /**
    * Cell's property.
    */
@@ -53,10 +53,12 @@ public class SpecWall extends LevelObject {
     walkable = true;
     Logger.logout();
   }
-  
+
   /**
    * Sets the stargate to the current SpecWall.
-   * @param gate the startgate object
+   * 
+   * @param gate
+   *          the startgate object
    */
   public void setStarGate(StarGate gate) {
     Logger.log("SpecWall setStarGate");

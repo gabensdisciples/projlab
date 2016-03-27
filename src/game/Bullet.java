@@ -45,10 +45,12 @@ public class Bullet {
     }
     Logger.logout();
   }
-  
+
   /**
    * Sets the bullet's position.
-   * @param position - the cell where the bullet is
+   * 
+   * @param position
+   *          - the cell where the bullet is
    */
   public void setPosition(LevelObject position) {
     Logger.log("Bullet setPosition");
@@ -60,7 +62,7 @@ public class Bullet {
     Logger.log("Bullet die");
     Logger.logout();
   }
-  
+
   /**
    * Creates a stargate.
    */

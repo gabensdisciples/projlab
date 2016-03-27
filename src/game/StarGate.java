@@ -12,10 +12,12 @@ import logger.Logger;
 public class StarGate {
 
   private Color color;
-  
+
   /**
    * Sets the stargate's color.
-   * @param color - color to set
+   * 
+   * @param color
+   *          - color to set
    */
   public StarGate(Color color) {
     Logger.log("StarGate konstruktor");

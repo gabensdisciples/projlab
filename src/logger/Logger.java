@@ -8,10 +8,12 @@ package logger;
  */
 public class Logger {
   private static int tabCount = -1;
-  
+
   /**
    * Creates indentation while logging the call chain.
-   * @param string - string to log
+   * 
+   * @param string
+   *          - string to log
    */
   public static void log(String string) {
     tabCount++;

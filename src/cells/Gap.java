@@ -12,7 +12,7 @@ import logger.Logger;
  * 
  */
 public class Gap extends LevelObject {
-  
+
   /**
    * Gap constructor.
    */
@@ -21,7 +21,7 @@ public class Gap extends LevelObject {
     Logger.log("Gap konstruktor");
     Logger.logout();
   }
-  
+
   /**
    * Checks if the cell has any item.
    */
@@ -30,7 +30,7 @@ public class Gap extends LevelObject {
     Logger.logout();
     return ItemState.FORBIDDENAREA;
   }
-  
+
   /**
    * Makes interaction between the character and level objects.
    */
@@ -39,7 +39,7 @@ public class Gap extends LevelObject {
     character.die();
     Logger.logout();
   }
-  
+
   /**
    * Makes interaction between the bullet and level objects.
    */

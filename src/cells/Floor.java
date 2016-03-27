@@ -57,7 +57,7 @@ public class Floor extends LevelObject {
     }
     Logger.logout();
   }
-  
+
   /**
    * Makes interaction between the bullet and level objects.
    */
