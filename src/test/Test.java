@@ -11,6 +11,8 @@ import enumerations.Color;
 import enumerations.Direction;
 import enumerations.ItemState;
 import game.Character;
+import game.StarGate;
+import game.Wormhole;
 import items.Box;
 import items.Zpm;
 import main.Menu;
@@ -157,21 +159,40 @@ public class Test {
   }
 
   /**
-   * Walk through a stargate.
+   * Walk through a stargate if there's one.
+   * @TODO prompt van stargate rajta? prompt van a stargate-nek párja?
    */
   public static void walkSpecWallStarGate() {
     Floor position = new Floor(true, null);
     Character oneill = new Character(position, Color.BLUE, Direction.EAST);
     SpecWall target = new SpecWall();
-    target.interactCharacter(oneill);
-    // Szekvencia diagram alapján
-    // wormhole.getSpecWall(Color.getOtherColor(target.color()));
-    SpecWall pair = new SpecWall();
-    if (pair != null) {
-      oneill.setPosition(pair);
-    } else {
-      oneill.setPosition(target);
+    position.setNeighbour(Direction.EAST, target);
+    
+    System.out.println("Van StarGate? T/F");
+    in.nextLine();
+    String answer = in.nextLine().toLowerCase();
+    boolean isThereStarGate = answer.equals("t");
+    
+    if (isThereStarGate) {
+      StarGate gateBlue = new StarGate(Color.BLUE);
+      target.setStarGate(gateBlue);
+      
+      System.out.println("Van a StarGate-nek parja? T/F");
+      in.nextLine();
+      answer = in.nextLine().toLowerCase();
+      boolean isTherePair = answer.equals("t");
+      
+      if (isTherePair) {
+        StarGate gateYellow = new StarGate(Color.YELLOW);
+        SpecWall pair = new SpecWall();
+        pair.setStarGate(gateYellow);
+        Wormhole.setSpecWall(target, Color.BLUE);
+        Wormhole.setSpecWall(pair, Color.YELLOW);
+      }
     }
+    
+    oneill.move(Direction.EAST);
+    
   }
 
   /**
