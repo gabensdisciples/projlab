@@ -1,5 +1,7 @@
 package test;
 
+import java.util.Scanner;
+
 import cells.Door;
 import cells.Floor;
 import cells.Gap;
@@ -86,6 +88,20 @@ public class Test {
 		System.out.println(i +"walkScale()");
 		i++;
 		System.out.println(i +"walkSpecWallStarGate()");
+		
+		Scanner in = new Scanner(System.in);
+		i= in.nextInt();
+		
+		switch (i){
+		case 1:
+			changeBulletColor();
+		case 2:
+			openHelp();
+		case 3:
+			pickupBox();
+		case 4:
+			pickupForbidden();
+		}
 	}
 
 	public static void walkFloorOrWall() {
