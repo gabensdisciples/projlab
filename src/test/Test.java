@@ -262,16 +262,6 @@ public class Test {
       oneill.take();
     }
   }
-  
-  public static void pickupNoItemPresent() {
-    Floor position = new Floor(true, null);
-    Character oneill = new Character(position, Color.YELLOW, Direction.WEST);
-    
-    if(position.hasItem() == ItemState.GOTITEM) {
-      oneill.take();
-    }
-  }
-
   /**
    * Place a box on a cell.
    */
