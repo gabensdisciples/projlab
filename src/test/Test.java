@@ -53,12 +53,13 @@ public class Test {
 		 * Mérlegre lép
 		 */
 		walkScale();
-		
+		while(true){		
 		testSwitch();
+		}
 	}
 	
 	public static void testSwitch(){
-		System.out.println("Kerlek valaszd ki, melyik teszteset erdekel!");
+		System.out.println("\nKerlek valaszd ki, melyik teszteset erdekel!");
 		int i = 0;
 		i++;
 		System.out.println(i+" " +"changeBulletColor()");
@@ -90,44 +91,69 @@ public class Test {
 		System.out.println(i+" "  +"walkScale()");
 		i++;
 		System.out.println(i+" "  +"walkSpecWallStarGate()");
+		i++;
+		System.out.println(i+" "  +"Kilépés a programból");
 		
 		Scanner in = new Scanner(System.in);
 		i= in.nextInt();
+		System.out.println(i);
 		
 		switch (i){
 		case 1:
 			changeBulletColor();
+			break;
 		case 2:
 			openHelp();
+			break;
 		case 3:
 			pickupBox();
+			break;
 		case 4:
 			pickupForbidden();
+			break;
 		case 5:
 			pickupZPM();
+			break;
 		case 6:
 			placeBox();
+			break;
 		case 7:
 			placeBoxForbidden();
+			break;
 		case 8:
 			changeBulletColor();
+			break;
 		case 9:
 			shootDoorOrWall();
+			break;
 		case 10:
 			shootOverWalkable();
+			break;
 		case 11:
 			shootSpecWall();
+			break;
 		case 12:
 			walkDoor();
+			break;
 		case 13:
 			walkFloorOrWall();
+			break;
 		case 14:
 			walkGap();
+			break;
 		case 15:
 			walkScale();
+			break;
 		case 16:
 			walkSpecWallStarGate();
+			break;
+		case 17:
+			System.exit(0);
+			break;
+		default:
+			System.out.println("Nem menő");
 		}
+		return;
 	}
 
 	public static void walkFloorOrWall() {
