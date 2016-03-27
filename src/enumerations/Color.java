@@ -8,7 +8,7 @@ public enum Color {
 
 	// TODO: Valtozott a szignatura, dokumentalni kell!
 	public Color getOtherColor() {
-		Logger.log("getOtherColor");
+		Logger.log("Color getOtherColor");
 		Logger.logout();
 		if (this == Color.BLUE)
 			return Color.YELLOW;

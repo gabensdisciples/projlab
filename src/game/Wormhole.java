@@ -11,13 +11,19 @@ public final class Wormhole {
 	public static void setSpecWall(SpecWall specWall, Color color) {
 		Logger.log("setSpecWall");
 		if (color == Color.BLUE){
-			blueSpecWall.setStarGate(null);
+			if(blueSpecWall != null)
+				blueSpecWall.setStarGate(null);
+			
 			blueSpecWall = specWall;
 		}
-		else{
-			yellowSpecWall.setStarGate(null);
+		
+		else {
+			if(yellowSpecWall != null)
+				yellowSpecWall.setStarGate(null);
+			
 			yellowSpecWall = specWall;
 		}
+		
 		Logger.logout();
 	}
 
