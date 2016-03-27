@@ -74,8 +74,17 @@ public class Test {
 		Character oneill = new Character(position, Color.BLUE, Direction.EAST);
 		SpecWall target = new SpecWall();
 		Wormhole wormhole = new Wormhole();
-
+		target.interactCharacter(oneill);
+		//Szekvencia diagram alapján
+		//wormhole.getSpecWall(Color.getOtherColor(target.color()));
+		SpecWall pair = new SpecWall();
+		if (pair!= null){
+			oneill.setPosition(pair);
+		}
+		else{
+			oneill.setPosition(target);
 	}
+}
 
 	public static void walkDoor() {
 		Door opendoor = new Door();
