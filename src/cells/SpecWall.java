@@ -4,6 +4,7 @@ import enumerations.ItemState;
 import game.Bullet;
 import game.Character;
 import game.StarGate;
+import game.Wormhole;
 import logger.Logger;
 
 /**
@@ -38,8 +39,14 @@ public class SpecWall extends LevelObject {
   @Override
   public void interactCharacter(Character character) {
     Logger.log("SpecWall interactCharacter");
-    if (isWalkable()) {
-      character.setPosition(this);
+    if(gate != null){
+      LevelObject pair = Wormhole.getSpecWall(gate.getColor().getOtherColor());
+      if(pair != null){
+        character.setPosition(pair);
+      }
+      else{
+        character.setPosition(this);
+      }
     }
     Logger.logout();
   }
