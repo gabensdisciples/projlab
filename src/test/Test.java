@@ -23,6 +23,15 @@ import main.Menu;
  */
 public class Test {
 
+	private static Scanner in;
+
+	public static void main(String[] args) {
+		in = new Scanner(System.in);
+		while(true) {		
+			testSwitch();
+		}
+	}
+	
   public static void testSwitch() {
     System.out.println("\nKerlek valaszd ki, melyik teszteset erdekel!\n");
     int i = 0;
@@ -59,7 +68,7 @@ public class Test {
     i++;
     System.out.println(i + " " + "Kilépés a programból");
 
-    Scanner in = new Scanner(System.in);
+
     i = in.nextInt();
     System.out.println(i);
 
@@ -122,11 +131,17 @@ public class Test {
    * Walk over floor or wall.
    */
   public static void walkFloorOrWall() {
-    Floor floorToStand = new Floor(true, null);
-    Floor floorToMove = new Floor(true, null);
-    Character oniell = new Character(floorToStand, Color.YELLOW, Direction.WEST);
-    floorToStand.setNeighbour(Direction.EAST, floorToMove);
-    oniell.move(Direction.EAST);
+	System.out.println("isWalkable? T/F");
+	in.nextLine();
+	String answer = in.nextLine().toLowerCase();
+	
+	boolean isWalkable = answer.equals("t");
+	Floor target = new Floor(isWalkable, null);
+	Floor position = new Floor(true, null);
+	
+	Character oniell = new Character(position, Color.YELLOW, Direction.WEST);
+	position.setNeighbour(Direction.EAST, target);
+	oniell.move(Direction.EAST);
   }
 
   /**
