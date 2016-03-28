@@ -23,7 +23,7 @@ public final class Wormhole {
    *          - the SpecWall's color
    */
   public static void setSpecWall(SpecWall specWall, Color color) {
-    Logger.log("setSpecWall");
+    Logger.log("Wormhole setSpecWall");
     if (color == Color.BLUE) {
       if (blueSpecWall != null) {
         blueSpecWall.setStarGate(null);
@@ -47,7 +47,7 @@ public final class Wormhole {
    * @return the SpecWall object
    */
   public static SpecWall getSpecWall(Color color) {
-    Logger.log("getSpecWall");
+    Logger.log("Wormhole getSpecWall");
     Logger.logout();
     if (color == Color.BLUE) {
       return blueSpecWall;

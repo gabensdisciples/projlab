@@ -269,7 +269,9 @@ public class Test {
     Floor position = new Floor(true, box);
     Character oneill = new Character(position, Color.YELLOW, Direction.WEST);
     oneill.setBox(box);
-    oneill.drop();
+    if(position.hasItem() == ItemState.NOITEM) {
+      oneill.drop();
+    }
   }
 
   /**
@@ -279,10 +281,8 @@ public class Test {
     Box box = new Box();
     Floor position = new Floor(true, box);
     Character oneill = new Character(position, Color.YELLOW, Direction.WEST);
-    if (position.hasItem() == ItemState.FORBIDDENAREA) {
-      System.out.println("Ide nem tehetsz dobozt kocsog");
-    } else {
-      oneill.setBox(box);
+    ItemState result = position.hasItem();
+    if(result != ItemState.FORBIDDENAREA && result != ItemState.GOTITEM && box != null ) {
       oneill.drop();
     }
   }
@@ -331,7 +331,8 @@ public class Test {
    */
   public static void shootDoorOrWall() {
     Floor position = new Floor(true, null);
-    SpecWall target = new SpecWall();
+    Door target = new Door();
+    target.setWalkable(false);
     position.setNeighbour(Direction.WEST, target);
     target.setNeighbour(Direction.EAST, position);
     Character oneill = new Character(position, Color.YELLOW, Direction.WEST);
