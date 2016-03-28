@@ -34,6 +34,7 @@ public class Test {
     in = new Scanner(System.in);
     while (true) {
       testSwitch();
+      System.out.println("Nyomj egy entert a menube visszatereshez...");
       in.nextLine();
       in.nextLine();
     }
@@ -43,45 +44,46 @@ public class Test {
    * Choose test cases.
    */
   public static void testSwitch() {
-    System.out.println("\nKerlek valaszd ki, melyik teszteset erdekel!\n");
     int caseNumber = 0;
     caseNumber++;
-    System.out.println(caseNumber + " " + "Toltenyt valt (changeBulletColor())");
+    System.out.println(caseNumber + ". " + "Toltenyt valt (changeBulletColor())");
     caseNumber++;
-    System.out.println(caseNumber + " " + "Sugo (openHelp())");
+    System.out.println(caseNumber + ". " + "Sugo (openHelp())");
     caseNumber++;
     System.out.println("Felvesz tesztesetek:");
-    System.out.println("\t" + caseNumber + " " + "Felvesz dobozt (pickupBox())");
+    System.out.println("\t" + caseNumber + ". " + "Felvesz dobozt (pickupBox())");
     caseNumber++;
-    System.out.println("\t" + caseNumber + " " + "Felvenne, de nincs mit (pickupForbidden())");
+    System.out.println("\t" + caseNumber + ". " + "Felvenne, de nincs mit (pickupForbidden())");
     caseNumber++;
-    System.out.println("\t" + caseNumber + " " + "Felvesz ZPM-et (pickupZPM())");
+    System.out.println("\t" + caseNumber + ". " + "Felvesz ZPM-et (pickupZPM())");
     caseNumber++;
     System.out.println("Letesz tesztesetek:");
-    System.out.println("\t" + caseNumber + " " + "Letesz dobozt (placeBox())");
+    System.out.println("\t" + caseNumber + ". " + "Letesz dobozt (placeBox())");
     caseNumber++;
-    System.out.println("\t" + caseNumber + " " + "Letenne, de nem tud (placeBoxForbidden())");
+    System.out.println("\t" + caseNumber + ". " + "Letenne, de nem tud (placeBoxForbidden())");
     caseNumber++;
-    System.out.println("Lövés tesztesetek:");
-    System.out.println("\t" + caseNumber + " " + "Lo zart ajtora vagy falra (shootDoorOrWall())");
+    System.out.println("Loves tesztesetek:");
+    System.out.println("\t" + caseNumber + ". " + "Lo zart ajtora vagy falra (shootDoorOrWall())");
     caseNumber++;
-    System.out.println("\t" + caseNumber + " " + "Lo atjarható mezok felett (shootOverWalkable())");
+    System.out.println("\t" + caseNumber + ". " + "Lo atjarható mezok felett (shootOverWalkable())");
     caseNumber++;
-    System.out.println("\t" + caseNumber + " " + "Lo Spec Fal (shootSpecWall())");
+    System.out.println("\t" + caseNumber + ". " + "Lo Spec Fal (shootSpecWall())");
     caseNumber++;
-    System.out.println("Lépés tesztesetek:");
-    System.out.println("\t" + caseNumber + " " + "Ajtora lep (walkDoor())");
+    System.out.println("Lepes tesztesetek:");
+    System.out.println("\t" + caseNumber + ". " + "Ajtora lep (walkDoor())");
     caseNumber++;
-    System.out.println("\t" + caseNumber + " " + "Lep (walkFloorOrWall())");
+    System.out.println("\t" + caseNumber + ". " + "Lep (walkFloorOrWall())");
     caseNumber++;
-    System.out.println("\t" + caseNumber + " " + "Szakadekba lep (walkGap())");
+    System.out.println("\t" + caseNumber + ". " + "Szakadekba lep (walkGap())");
     caseNumber++;
-    System.out.println("\t" + caseNumber + " " + "Merlegre lep (walkScale())");
+    System.out.println("\t" + caseNumber + ". " + "Merlegre lep (walkScale())");
     caseNumber++;
-    System.out.println("\t" + caseNumber + " " + "Feregjaratba lep (walkSpecWallStarGate())");
+    System.out.println("\t" + caseNumber + ". " + "Feregjaratba lep (walkSpecWallStarGate())");
     caseNumber++;
-    System.out.println(caseNumber + " " + "Kilepes a programbol");
-
+    System.out.println(caseNumber + ". " + "Kilepes a programbol");
+    
+    System.out.println("\nKerlek valaszd ki a teszteset kodjat: ");
+    
     caseNumber = in.nextInt();
     System.out.println(caseNumber);
 
@@ -136,7 +138,7 @@ public class Test {
         System.exit(0);
         break;
       default:
-        System.out.println("Nem menő");
+        System.out.println("Ervenytelen menupont");
     }
     return;
   }
