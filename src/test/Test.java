@@ -232,10 +232,9 @@ public class Test {
     Door door = new Door();
     Scale scale = new Scale(door);
     Floor position = new Floor(true, null);
-    Character character = new Character(position, Color.YELLOW, Direction.WEST);
+    Character oneill = new Character(position, Color.YELLOW, Direction.WEST);
     position.setNeighbour(Direction.EAST, scale);
-    character.move(Direction.EAST);
-
+    oneill.move(Direction.EAST);
   }
 
   /**
@@ -271,10 +270,8 @@ public class Test {
    * Place a box on a cell.
    */
   public static void placeBox() {
-    Box box = new Box();
-    Floor position = new Floor(true, box);
+    Floor position = new Floor(true, null);
     Character oneill = new Character(position, Color.YELLOW, Direction.WEST);
-    oneill.setBox(box);
     oneill.drop();
   }
 
@@ -346,5 +343,4 @@ public class Test {
   public static void openHelp() {
     Menu.showHelp();
   }
-
 }
