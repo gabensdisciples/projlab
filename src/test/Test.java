@@ -45,6 +45,7 @@ public class Test {
    */
   public static void testSwitch() {
     int caseNumber = 0;
+    System.out.println("-= GabeN's Disciples csapat szkeleton kezelőfelület =-");
     caseNumber++;
     System.out.println(caseNumber + ". " + "Toltenyt valt (changeBulletColor())");
     caseNumber++;
