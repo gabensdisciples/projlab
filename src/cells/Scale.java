@@ -16,7 +16,6 @@ import logger.Logger;
  */
 public class Scale extends LevelObject {
   private Box box;
-  private boolean active;
   private Door door;
 
   /**
@@ -28,7 +27,6 @@ public class Scale extends LevelObject {
   public Scale(Door door) {
     super(true);
     box = null;
-    active = false;
     this.door = door;
     Logger.log("Scale konstruktor");
     Logger.logout();
@@ -41,21 +39,8 @@ public class Scale extends LevelObject {
    *          - boolean
    */
   public void setDoorState(boolean open) {
-    Logger.log("Scale openDoor");
+    Logger.log("Scale setDoorState");
     door.setWalkable(open);
-    Logger.logout();
-  }
-
-  /**
-   * Sets the scale active.
-   * 
-   * @param active
-   *          - boolean
-   */
-  public void setActive(boolean active) {
-    Logger.log("Scale setActive");
-    this.active = active;
-    setDoorState(active);
     Logger.logout();
   }
 
@@ -77,7 +62,7 @@ public class Scale extends LevelObject {
    */
   public void interactCharacter(Character character) {
     Logger.log("Scale interactCharacter");
-    setActive(true);
+    setDoorState(true);
     character.setPosition(this);
     Logger.logout();
   }
@@ -117,7 +102,7 @@ public class Scale extends LevelObject {
 
       neighbour.interactCharacter(dummy);
       if (dummy.getPosition() != this) {
-        setActive(false);
+        setDoorState(false);
       }
     }
     Logger.logout();
@@ -140,7 +125,7 @@ public class Scale extends LevelObject {
     Logger.log("Scale getItem");
     box.pickUp(character);
     box = null;
-    setActive(false);
+    setDoorState(false);
     Logger.logout();
   }
 
@@ -148,7 +133,7 @@ public class Scale extends LevelObject {
   public void placeItem(Item item) {
     Logger.log("Scale placeItem");
     box = (Box) item;
-    setActive(true);
+    setDoorState(true);
     Logger.logout();
   }
 }
