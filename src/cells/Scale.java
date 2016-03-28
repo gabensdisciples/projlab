@@ -27,6 +27,7 @@ public class Scale extends LevelObject {
   public Scale(Door door) {
     super(true);
     box = null;
+    walkable = true;
     this.door = door;
     Logger.log("Scale konstruktor");
     Logger.logout();
