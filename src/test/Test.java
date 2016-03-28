@@ -148,7 +148,7 @@ public class Test {
    * Walk over floor or wall.
    */
   public static void walkFloorOrWall() {
-    System.out.println("Járható a mező (isWalkable)? T/F");
+    System.out.println("Jarhato a mezo (isWalkable)? T/F");
     in.nextLine();
     String answer = in.nextLine().toLowerCase();
 
@@ -212,7 +212,7 @@ public class Test {
    * Walk through a door.
    */
   public static void walkDoor() {
-    System.out.println("Nyitva van az ajtó? T/F");
+    System.out.println("Nyitva van az ajto? T/F");
     in.nextLine();
     String answer = in.nextLine().toLowerCase();
     boolean doorOpen = answer.equals("t");
