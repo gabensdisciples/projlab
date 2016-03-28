@@ -3,6 +3,7 @@ package game;
 import cells.LevelObject;
 import enumerations.Color;
 import enumerations.Direction;
+import enumerations.ItemState;
 import items.Box;
 import items.Item;
 import logger.Logger;
@@ -125,9 +126,12 @@ public class Character {
    */
   public void drop() {
     Logger.log("Character drop");
+    
+    if(position.hasItem() == ItemState.NOITEM) {
+      position.placeItem((Item) box);
+      box = null;
+    }
 
-    position.placeItem((Item) box);
-    box = null;
     Logger.logout();
   }
 
@@ -136,7 +140,11 @@ public class Character {
    */
   public void take() {
     Logger.log("Character take");
-    position.getItem(this);
+    
+    if (position.hasItem() == ItemState.GOTITEM) {
+      position.getItem(this);
+    }
+    
     Logger.logout();
   }
 }
