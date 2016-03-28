@@ -9,7 +9,6 @@ import cells.Scale;
 import cells.SpecWall;
 import enumerations.Color;
 import enumerations.Direction;
-import enumerations.ItemState;
 import game.Character;
 import game.StarGate;
 import game.Wormhole;
@@ -240,10 +239,7 @@ public class Test {
     Zpm zpm = new Zpm();
     Floor position = new Floor(true, zpm);
     Character oneill = new Character(position, Color.YELLOW, Direction.WEST);
-
-    if (position.hasItem() == ItemState.GOTITEM) {
-      oneill.take();
-    }
+    oneill.take();
   }
 
   /**
@@ -253,10 +249,7 @@ public class Test {
     Box box = new Box();
     Floor position = new Floor(true, box);
     Character oneill = new Character(position, Color.YELLOW, Direction.WEST);
-
-    if (position.hasItem() == ItemState.GOTITEM) {
-      oneill.take();
-    }
+    oneill.take();
   }
 
   /**
@@ -265,10 +258,7 @@ public class Test {
   public static void pickupForbidden() {
     Door position = new Door();
     Character oneill = new Character(position, Color.YELLOW, Direction.WEST);
-
-    if (position.hasItem() == ItemState.GOTITEM) {
-      oneill.take();
-    }
+    oneill.take();
   }
 
   /**
@@ -279,9 +269,7 @@ public class Test {
     Floor position = new Floor(true, box);
     Character oneill = new Character(position, Color.YELLOW, Direction.WEST);
     oneill.setBox(box);
-    if (position.hasItem() == ItemState.NOITEM) {
-      oneill.drop();
-    }
+    oneill.drop();
   }
 
   /**
@@ -291,10 +279,7 @@ public class Test {
     Box box = new Box();
     Floor position = new Floor(true, box);
     Character oneill = new Character(position, Color.YELLOW, Direction.WEST);
-    ItemState result = position.hasItem();
-    if (result != ItemState.FORBIDDENAREA && result != ItemState.GOTITEM && box != null) {
-      oneill.drop();
-    }
+    oneill.drop();
   }
 
   /**
