@@ -25,56 +25,62 @@ import main.Menu;
  */
 public class Test {
 
-	private static Scanner in;
-
-	public static void main(String[] args) {
-		in = new Scanner(System.in);
-		while(true) {		
-			testSwitch();
-		}
-	}
-	
+  private static Scanner in;
+  
+  /**
+   * Main method for testing.
+   * @param args - init params
+   */
+  public static void main(String[] args) {
+    in = new Scanner(System.in);
+    while (true) {
+      testSwitch();
+    }
+  }
+  
+  /**
+   * Choose test cases.
+   */
   public static void testSwitch() {
     System.out.println("\nKerlek valaszd ki, melyik teszteset erdekel!\n");
-    int i = 0;
-    i++;
-    System.out.println(i + " " + "changeBulletColor()");
-    i++;
-    System.out.println(i + " " + "openHelp()");
-    i++;
-    System.out.println(i + " " + "pickupBox()");
-    i++;
-    System.out.println(i + " " + "pickupForbidden()");
-    i++;
-    System.out.println(i + " " + "pickupZPM()");
-    i++;
-    System.out.println(i + " " + "placeBox()");
-    i++;
-    System.out.println(i + " " + "placeBoxForbidden()");
-    i++;
-    System.out.println(i + " " + "shootDoorOrWall()");
-    i++;
-    System.out.println(i + " " + "shootOverWalkable()");
-    i++;
-    System.out.println(i + " " + "shootSpecWall()");
-    i++;
-    System.out.println(i + " " + "walkDoor()");
-    i++;
-    System.out.println(i + " " + "walkFloorOrWall()");
-    i++;
-    System.out.println(i + " " + "walkGap()");
-    i++;
-    System.out.println(i + " " + "walkScale()");
-    i++;
-    System.out.println(i + " " + "walkSpecWallStarGate()");
-    i++;
-    System.out.println(i + " " + "Kilépés a programból");
+    int caseNumber = 0;
+    caseNumber++;
+    System.out.println(caseNumber + " " + "changeBulletColor()");
+    caseNumber++;
+    System.out.println(caseNumber + " " + "openHelp()");
+    caseNumber++;
+    System.out.println(caseNumber + " " + "pickupBox()");
+    caseNumber++;
+    System.out.println(caseNumber + " " + "pickupForbidden()");
+    caseNumber++;
+    System.out.println(caseNumber + " " + "pickupZPM()");
+    caseNumber++;
+    System.out.println(caseNumber + " " + "placeBox()");
+    caseNumber++;
+    System.out.println(caseNumber + " " + "placeBoxForbidden()");
+    caseNumber++;
+    System.out.println(caseNumber + " " + "shootDoorOrWall()");
+    caseNumber++;
+    System.out.println(caseNumber + " " + "shootOverWalkable()");
+    caseNumber++;
+    System.out.println(caseNumber + " " + "shootSpecWall()");
+    caseNumber++;
+    System.out.println(caseNumber + " " + "walkDoor()");
+    caseNumber++;
+    System.out.println(caseNumber + " " + "walkFloorOrWall()");
+    caseNumber++;
+    System.out.println(caseNumber + " " + "walkGap()");
+    caseNumber++;
+    System.out.println(caseNumber + " " + "walkScale()");
+    caseNumber++;
+    System.out.println(caseNumber + " " + "walkSpecWallStarGate()");
+    caseNumber++;
+    System.out.println(caseNumber + " " + "Kilépés a programból");
 
+    caseNumber = in.nextInt();
+    System.out.println(caseNumber);
 
-    i = in.nextInt();
-    System.out.println(i);
-
-    switch (i) {
+    switch (caseNumber) {
       case 1:
         changeBulletColor();
         break;
@@ -88,7 +94,7 @@ public class Test {
         pickupForbidden();
         break;
       case 5:
-        pickupZPM();
+        pickupZpm();
         break;
       case 6:
         placeBox();
@@ -134,17 +140,17 @@ public class Test {
    * Walk over floor or wall.
    */
   public static void walkFloorOrWall() {
-	System.out.println("isWalkable? T/F");
-	in.nextLine();
-	String answer = in.nextLine().toLowerCase();
-	
-	boolean isWalkable = answer.equals("t");
-	Floor target = new Floor(isWalkable, null);
-	Floor position = new Floor(true, null);
-	
-	Character oniell = new Character(position, Color.YELLOW, Direction.WEST);
-	position.setNeighbour(Direction.EAST, target);
-	oniell.move(Direction.EAST);
+    System.out.println("isWalkable? T/F");
+    in.nextLine();
+    String answer = in.nextLine().toLowerCase();
+
+    boolean isWalkable = answer.equals("t");
+    Floor target = new Floor(isWalkable, null);
+    Floor position = new Floor(true, null);
+
+    Character oniell = new Character(position, Color.YELLOW, Direction.WEST);
+    position.setNeighbour(Direction.EAST, target);
+    oniell.move(Direction.EAST);
   }
 
   /**
@@ -160,6 +166,7 @@ public class Test {
 
   /**
    * Walk through a stargate if there's one.
+   * 
    * @TODO prompt van stargate rajta? prompt van a stargate-nek párja?
    */
   public static void walkSpecWallStarGate() {
@@ -167,20 +174,20 @@ public class Test {
     Character oneill = new Character(position, Color.BLUE, Direction.EAST);
     SpecWall target = new SpecWall();
     position.setNeighbour(Direction.EAST, target);
-    
+
     System.out.println("Van StarGate? T/F");
     in.nextLine();
     String answer = in.nextLine().toLowerCase();
     boolean isThereStarGate = answer.equals("t");
-    
+
     if (isThereStarGate) {
       StarGate gateBlue = new StarGate(Color.BLUE);
       target.setStarGate(gateBlue);
-      
+
       System.out.println("Van a StarGate-nek parja? T/F");
       answer = in.nextLine().toLowerCase();
       boolean isTherePair = answer.equals("t");
-      
+
       if (isTherePair) {
         StarGate gateYellow = new StarGate(Color.YELLOW);
         SpecWall pair = new SpecWall();
@@ -189,9 +196,9 @@ public class Test {
         Wormhole.setSpecWall(pair, Color.YELLOW);
       }
     }
-    
+
     oneill.move(Direction.EAST);
-    
+
   }
 
   /**
@@ -202,7 +209,7 @@ public class Test {
     in.nextLine();
     String answer = in.nextLine().toLowerCase();
     boolean doorOpen = answer.equals("t");
-    
+
     Door target = new Door();
     target.setWalkable(doorOpen);
     Floor position = new Floor(true, null);
@@ -227,12 +234,12 @@ public class Test {
   /**
    * Pick up a Zpm.
    */
-  public static void pickupZPM() {
+  public static void pickupZpm() {
     Zpm zpm = new Zpm();
     Floor position = new Floor(true, zpm);
     Character oneill = new Character(position, Color.YELLOW, Direction.WEST);
 
-    if(position.hasItem() == ItemState.GOTITEM) {
+    if (position.hasItem() == ItemState.GOTITEM) {
       oneill.take();
     }
   }
@@ -244,8 +251,8 @@ public class Test {
     Box box = new Box();
     Floor position = new Floor(true, box);
     Character oneill = new Character(position, Color.YELLOW, Direction.WEST);
-    
-    if(position.hasItem() == ItemState.GOTITEM) {
+
+    if (position.hasItem() == ItemState.GOTITEM) {
       oneill.take();
     }
   }
@@ -256,11 +263,12 @@ public class Test {
   public static void pickupForbidden() {
     Door position = new Door();
     Character oneill = new Character(position, Color.YELLOW, Direction.WEST);
-    
-    if(position.hasItem() == ItemState.GOTITEM) {
+
+    if (position.hasItem() == ItemState.GOTITEM) {
       oneill.take();
     }
   }
+
   /**
    * Place a box on a cell.
    */
@@ -269,7 +277,7 @@ public class Test {
     Floor position = new Floor(true, box);
     Character oneill = new Character(position, Color.YELLOW, Direction.WEST);
     oneill.setBox(box);
-    if(position.hasItem() == ItemState.NOITEM) {
+    if (position.hasItem() == ItemState.NOITEM) {
       oneill.drop();
     }
   }
@@ -282,7 +290,7 @@ public class Test {
     Floor position = new Floor(true, box);
     Character oneill = new Character(position, Color.YELLOW, Direction.WEST);
     ItemState result = position.hasItem();
-    if(result != ItemState.FORBIDDENAREA && result != ItemState.GOTITEM && box != null ) {
+    if (result != ItemState.FORBIDDENAREA && result != ItemState.GOTITEM && box != null) {
       oneill.drop();
     }
   }

@@ -2,7 +2,6 @@ package logger;
 
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
@@ -24,22 +23,20 @@ public class Logger {
    */
   public static void log(String string) {
     File logFile = new File("skeleton.log");
-    if(!logFile.exists()) {
-        try {
-          logFile.createNewFile();
-        } catch (IOException e) {
-          // TODO Auto-generated catch block
-          e.printStackTrace();
-        }
-    } 
+    if (!logFile.exists()) {
+      try {
+        logFile.createNewFile();
+      } catch (IOException exception) {
+        // TODO Auto-generated catch block
+        exception.printStackTrace();
+      }
+    }
     FileOutputStream logFileStream;
 
-
-    
     tabCount++;
     for (int i = 0; i < tabCount; i++) {
       string = "\t" + string;
-      //System.out.print("\t");
+      // System.out.print("\t");
     }
     System.out.println(string);
     try {
@@ -48,9 +45,9 @@ public class Logger {
       logBufferedWriter.write(string);
       logBufferedWriter.newLine();
       logBufferedWriter.close();
-    } catch (IOException e) {
+    } catch (IOException exception) {
       // TODO Auto-generated catch block
-      e.printStackTrace();
+      exception.printStackTrace();
     }
 
   }

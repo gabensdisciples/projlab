@@ -25,7 +25,7 @@ public class StarGate {
     Logger.logout();
   }
 
-  public Color getColor(){
+  public Color getColor() {
     return color;
   }
 }

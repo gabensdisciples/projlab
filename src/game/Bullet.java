@@ -43,8 +43,8 @@ public class Bullet {
     Logger.log("Bullet fly");
     while (!collision) {
       position.interactBullet(this);
-      if(!collision) {
-        position = position.getNeighbour(direction, false);        
+      if (!collision) {
+        position = position.getNeighbour(direction, false);
       }
     }
     Logger.logout();
@@ -62,6 +62,9 @@ public class Bullet {
     Logger.logout();
   }
 
+  /**
+   * Destroy bullet.
+   */
   public void die() {
     Logger.log("Bullet die");
     collision = true;
