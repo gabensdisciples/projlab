@@ -15,6 +15,7 @@ public class Bullet {
   private Direction direction;
   private Color color;
   private LevelObject position;
+  private boolean collision;
 
   /**
    * Bullet constructor.
@@ -31,6 +32,7 @@ public class Bullet {
     this.position = position;
     this.direction = direction;
     this.color = color;
+    collision = false;
     Logger.logout();
   }
 
@@ -39,9 +41,11 @@ public class Bullet {
    */
   public void fly() {
     Logger.log("Bullet fly");
-    while (position.isWalkable()) {
-      position = position.getNeighbour(direction, false);
+    while (!collision) {
       position.interactBullet(this);
+      if(!collision) {
+        position = position.getNeighbour(direction, false);        
+      }
     }
     Logger.logout();
   }
@@ -60,6 +64,7 @@ public class Bullet {
 
   public void die() {
     Logger.log("Bullet die");
+    collision = true;
     Logger.logout();
   }
 
