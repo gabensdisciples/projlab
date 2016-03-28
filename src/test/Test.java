@@ -35,6 +35,8 @@ public class Test {
     in = new Scanner(System.in);
     while (true) {
       testSwitch();
+      in.nextLine();
+      in.nextLine();
     }
   }
   
@@ -167,7 +169,7 @@ public class Test {
   /**
    * Walk through a stargate if there's one.
    * 
-   * @TODO prompt van stargate rajta? prompt van a stargate-nek párja?
+   * TODO prompt van stargate rajta? prompt van a stargate-nek párja?
    */
   public static void walkSpecWallStarGate() {
     Floor position = new Floor(true, null);
