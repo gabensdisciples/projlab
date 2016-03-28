@@ -55,6 +55,7 @@ public class SpecWall extends LevelObject {
     Logger.log("SpecWall interactBullet");
     if (gate == null) {
       gate = bullet.createStarGate();
+      Wormhole.setSpecWall(this, gate.getColor());
     }
     bullet.die();
     walkable = true;
