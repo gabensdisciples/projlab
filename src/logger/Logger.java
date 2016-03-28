@@ -27,7 +27,6 @@ public class Logger {
       try {
         logFile.createNewFile();
       } catch (IOException exception) {
-        // TODO Auto-generated catch block
         exception.printStackTrace();
       }
     }
@@ -36,7 +35,6 @@ public class Logger {
     tabCount++;
     for (int i = 0; i < tabCount; i++) {
       string = "\t" + string;
-      // System.out.print("\t");
     }
     System.out.println(string);
     try {
@@ -46,7 +44,6 @@ public class Logger {
       logBufferedWriter.newLine();
       logBufferedWriter.close();
     } catch (IOException exception) {
-      // TODO Auto-generated catch block
       exception.printStackTrace();
     }
 
