@@ -148,7 +148,7 @@ public class Test {
    * Walk over floor or wall.
    */
   public static void walkFloorOrWall() {
-    System.out.println("isWalkable? T/F");
+    System.out.println("Járható a mező (isWalkable)? T/F");
     in.nextLine();
     String answer = in.nextLine().toLowerCase();
 
@@ -175,7 +175,6 @@ public class Test {
   /**
    * Walk through a stargate if there's one.
    * 
-   * TODO prompt van stargate rajta? prompt van a stargate-nek párja?
    */
   public static void walkSpecWallStarGate() {
     Floor position = new Floor(true, null);
@@ -183,7 +182,7 @@ public class Test {
     SpecWall target = new SpecWall();
     position.setNeighbour(Direction.EAST, target);
 
-    System.out.println("Van StarGate? T/F");
+    System.out.println("Van StarGate a SpecWallon? T/F");
     in.nextLine();
     String answer = in.nextLine().toLowerCase();
     boolean isThereStarGate = answer.equals("t");
