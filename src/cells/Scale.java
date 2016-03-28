@@ -33,18 +33,6 @@ public class Scale extends LevelObject {
   }
 
   /**
-   * Opens the door.
-   * 
-   * @param open
-   *          - boolean
-   */
-  public void setDoorState(boolean open) {
-    Logger.log("Scale setDoorState");
-    door.setWalkable(open);
-    Logger.logout();
-  }
-
-  /**
    * Cell's property.
    */
   public ItemState hasItem() {
@@ -62,7 +50,7 @@ public class Scale extends LevelObject {
    */
   public void interactCharacter(Character character) {
     Logger.log("Scale interactCharacter");
-    setDoorState(true);
+    door.setWalkable(true);
     character.setPosition(this);
     Logger.logout();
   }
@@ -102,7 +90,7 @@ public class Scale extends LevelObject {
 
       neighbour.interactCharacter(dummy);
       if (dummy.getPosition() != this) {
-        setDoorState(false);
+        door.setWalkable(false);
       }
     }
     Logger.logout();
@@ -125,7 +113,7 @@ public class Scale extends LevelObject {
     Logger.log("Scale getItem");
     box.pickUp(character);
     box = null;
-    setDoorState(false);
+    door.setWalkable(false);
     Logger.logout();
   }
 
@@ -133,7 +121,7 @@ public class Scale extends LevelObject {
   public void placeItem(Item item) {
     Logger.log("Scale placeItem");
     box = (Box) item;
-    setDoorState(true);
+    door.setWalkable(true);
     Logger.logout();
   }
 }
