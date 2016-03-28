@@ -46,7 +46,7 @@ public class Character {
    * The character shoots a bullet in a direction with specified color.
    */
   public void shoot() {
-    Logger.log("Character Shoot");
+    Logger.log("Character shoot");
     Bullet bullet = new Bullet(position, direction, bulletColor);
     bullet.fly();
     Logger.logout();
@@ -105,7 +105,7 @@ public class Character {
    * Increments the ZPM's at the character when he pickes up one.
    */
   public void incrementZpmCount() {
-    Logger.log("Character IncrementZPMCount");
+    Logger.log("Character incrementZpmCount");
     Logger.logout();
   }
 
