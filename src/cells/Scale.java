@@ -1,5 +1,7 @@
 package cells;
 
+import java.util.Stack;
+
 import enumerations.Direction;
 import enumerations.ItemState;
 import game.Bullet;
@@ -16,8 +18,9 @@ import logger.Logger;
  * 
  */
 public class Scale extends LevelObject {
-  private Box box;
+  private Stack<Box> box;
   private Door door;
+  private int limit;
 
   /**
    * Default constructor.
@@ -31,12 +34,13 @@ public class Scale extends LevelObject {
    * 
    * @param door
    *          - the door which the scale opens
-   */
-  public Scale(Door door) {
+   */  
+  public Scale(Door door, int limit) {
     super(true);
-    box = null;
+    box = new Stack<Box>();
     walkable = true;
     this.door = door;
+    this.limit = limit;
     Logger.log("Scale konstruktor");
     Logger.logout();
   }
@@ -47,7 +51,7 @@ public class Scale extends LevelObject {
   public ItemState hasItem() {
     Logger.log("Scale hasItem");
     Logger.logout();
-    if (box != null) {
+    if (!box.isEmpty()) {
       return ItemState.GOTITEM;
     } else {
       return ItemState.NOITEM;
@@ -59,7 +63,9 @@ public class Scale extends LevelObject {
    */
   public void interactCharacter(Character character) {
     Logger.log("Scale interactCharacter");
-    door.setWalkable(true);
+    if(box.size()+1 >= limit){
+      door.setWalkable(true);
+    }
     character.setPosition(this);
     Logger.logout();
   }
@@ -77,7 +83,7 @@ public class Scale extends LevelObject {
   public LevelObject getNeighbour(Direction dir, boolean characterCalled) {
     Logger.log("Scale getNeighbour");
 
-    if (characterCalled && box == null) {
+    if (characterCalled && box.size() < limit) {
       Character dummy = new Character(this, null, dir);
       LevelObject neighbour = null;
       switch (dir) {
@@ -120,17 +126,20 @@ public class Scale extends LevelObject {
   @Override
   public void getItem(Character character) {
     Logger.log("Scale getItem");
-    box.pickUp(character);
-    box = null;
-    door.setWalkable(false);
+    box.pop().pickUp(character);
+    if (box.size()+1 < limit){
+      door.setWalkable(false);
+    }
     Logger.logout();
   }
 
   @Override
   public void placeItem(Item item) {
     Logger.log("Scale placeItem");
-    box = (Box) item;
-    door.setWalkable(true);
+    box.push((Box)item);
+    if(box.size()+1 >= limit){
+      door.setWalkable(true);
+    }
     Logger.logout();
   }
 

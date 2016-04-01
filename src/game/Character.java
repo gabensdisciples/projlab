@@ -1,11 +1,14 @@
 package game;
 
+import java.util.Random;
+
 import cells.LevelObject;
 import enumerations.Color;
 import enumerations.Direction;
 import enumerations.ItemState;
 import items.Box;
 import items.Item;
+import items.Zpm;
 import logger.Logger;
 
 /**
@@ -23,6 +26,8 @@ public class Character {
   private LevelObject position;
 
   private Box box;
+  
+  private int zpmCount;
 
   /**
    * Character constructor.
@@ -106,6 +111,49 @@ public class Character {
    */
   public void incrementZpmCount() {
     Logger.log("Character incrementZpmCount");
+    zpmCount++;
+    if (zpmCount == 2 && (bulletColor == Color.BLUE || bulletColor == Color.YELLOW)) {
+      Random rand = new Random();
+      int direction = rand.nextInt(4);
+      int limit = rand.nextInt(101);
+      int i = 0;
+      LevelObject current = position;
+      while(true) {
+        while(i < limit) {
+          switch (direction) {
+            case 0 :
+              if(current.getNeighbour(Direction.NORTH, false) != null) {
+                current = current.getNeighbour(Direction.NORTH, false);
+              }
+              break;
+            case 1 :
+              if(current.getNeighbour(Direction.EAST, false) != null) {
+                current = current.getNeighbour(Direction.EAST, false);
+              }
+              break;
+            case 2 :
+              if(current.getNeighbour(Direction.SOUTH, false) != null) {
+                current = current.getNeighbour(Direction.SOUTH, false);
+              }
+              break;
+            case 3 :
+              if(current.getNeighbour(Direction.WEST, false) != null) {
+                current = current.getNeighbour(Direction.WEST, false);
+              }
+              break; 
+          }
+          direction = rand.nextInt(4);
+          i++;
+        }
+        
+        if(current.hasItem() == ItemState.NOITEM) {
+          this.drop((Item) new Zpm());
+          break;
+        }
+        i = 0;
+      }
+      
+    }
     Logger.logout();
   }
 
@@ -124,7 +172,7 @@ public class Character {
   /**
    * Drops the box.
    */
-  public void drop() {
+  public void drop(Item item) {
     Logger.log("Character drop");
     
     if (position.hasItem() == ItemState.NOITEM) {
