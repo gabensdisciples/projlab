@@ -1,0 +1,3 @@
+FW FNW FB
+D1 G SC1
+FZ G D2

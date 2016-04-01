@@ -7,6 +7,7 @@ import game.Character;
 import items.Box;
 import items.Item;
 import logger.Logger;
+//változott: default konstruktor, setDoor!
 
 /**
  * LevelObject class.
@@ -17,6 +18,13 @@ import logger.Logger;
 public class Scale extends LevelObject {
   private Box box;
   private Door door;
+
+  /**
+   * Default constructor.
+   */
+  public Scale() {
+    super(true);
+  }
 
   /**
    * Scale constructor.
@@ -125,4 +133,9 @@ public class Scale extends LevelObject {
     door.setWalkable(true);
     Logger.logout();
   }
+
+  public void setDoor(Door door) {
+    this.door = door;
+  }
+
 }

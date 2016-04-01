@@ -127,7 +127,7 @@ public class Character {
   public void drop() {
     Logger.log("Character drop");
     
-    if(position.hasItem() == ItemState.NOITEM) {
+    if (position.hasItem() == ItemState.NOITEM) {
       position.placeItem((Item) box);
       box = null;
     }
