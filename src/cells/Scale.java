@@ -29,7 +29,7 @@ public class Scale extends LevelObject {
    */  
   public Scale(Door door, int limit) {
     super(true);
-    box = new Stack();
+    box = new Stack<Box>();
     walkable = true;
     this.door = door;
     this.limit = limit;
