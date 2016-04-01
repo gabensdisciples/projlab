@@ -270,9 +270,10 @@ public class Test {
    * Place a box on a cell.
    */
   public static void placeBox() {
+    Box box = new Box();
     Floor position = new Floor(true, null);
     Character oneill = new Character(position, Color.YELLOW, Direction.WEST);
-    oneill.drop();
+    oneill.drop(box);
   }
 
   /**
@@ -282,7 +283,7 @@ public class Test {
     Box box = new Box();
     Floor position = new Floor(true, box);
     Character oneill = new Character(position, Color.YELLOW, Direction.WEST);
-    oneill.drop();
+    oneill.drop(box);
   }
 
   /**
