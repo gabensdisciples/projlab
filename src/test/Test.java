@@ -25,10 +25,12 @@ import main.Menu;
 public class Test {
 
   private static Scanner in;
-  
+
   /**
    * Main method for testing.
-   * @param args - init params
+   * 
+   * @param args
+   *          - init params
    */
   public static void main(String[] args) {
     in = new Scanner(System.in);
@@ -39,7 +41,7 @@ public class Test {
       in.nextLine();
     }
   }
-  
+
   /**
    * Choose test cases.
    */
@@ -82,9 +84,9 @@ public class Test {
     System.out.println("\t" + caseNumber + ". " + "Feregjaratba lep (walkSpecWallStarGate())");
     caseNumber++;
     System.out.println(caseNumber + ". " + "Kilepes a programbol");
-    
+
     System.out.println("\nKerlek valaszd ki a teszteset kodjat: ");
-    
+
     caseNumber = in.nextInt();
     System.out.println(caseNumber);
 
@@ -230,7 +232,7 @@ public class Test {
    */
   public static void walkScale() {
     Door door = new Door();
-    Scale scale = new Scale(door,1);
+    Scale scale = new Scale(door, 1);
     Floor position = new Floor(true, null);
     Character oneill = new Character(position, Color.YELLOW, Direction.WEST);
     position.setNeighbour(Direction.EAST, scale);

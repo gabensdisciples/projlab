@@ -20,11 +20,11 @@ public class Menu {
    */
   public static void main(String[] args) {
     // TODO Auto-generated method stub
-//    Logger.log("Menu main");
-//    Logger.logout();    
-    LevelBuilder lb = LevelBuilder.getInstance();
-    lb.init(3);
-    lb.printObjectMatrix();
+    // Logger.log("Menu main");
+    // Logger.logout();
+    LevelBuilder levelBuilder = LevelBuilder.getInstance();
+    levelBuilder.init(3);
+    levelBuilder.printObjectMatrix();
 
   }
 

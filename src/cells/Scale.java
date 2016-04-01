@@ -34,7 +34,7 @@ public class Scale extends LevelObject {
    * 
    * @param door
    *          - the door which the scale opens
-   */  
+   */
   public Scale(Door door, int limit) {
     super(true);
     box = new Stack<Box>();
@@ -63,7 +63,7 @@ public class Scale extends LevelObject {
    */
   public void interactCharacter(Character character) {
     Logger.log("Scale interactCharacter");
-    if(box.size()+1 >= limit){
+    if (box.size() + 1 >= limit) {
       door.setWalkable(true);
     }
     character.setPosition(this);
@@ -127,7 +127,7 @@ public class Scale extends LevelObject {
   public void getItem(Character character) {
     Logger.log("Scale getItem");
     box.pop().pickUp(character);
-    if (box.size()+1 < limit){
+    if (box.size() + 1 < limit) {
       door.setWalkable(false);
     }
     Logger.logout();
@@ -136,8 +136,8 @@ public class Scale extends LevelObject {
   @Override
   public void placeItem(Item item) {
     Logger.log("Scale placeItem");
-    box.push((Box)item);
-    if(box.size()+1 >= limit){
+    box.push((Box) item);
+    if (box.size() + 1 >= limit) {
       door.setWalkable(true);
     }
     Logger.logout();

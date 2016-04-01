@@ -218,7 +218,7 @@ public class LevelBuilder {
       }
     }
   }
-  
+
   /**
    * Prints the stringMatrix.
    */
@@ -242,7 +242,7 @@ public class LevelBuilder {
       System.out.println();
     }
   }
-  
+
   /**
    * Private constructor for the singleton class.
    */

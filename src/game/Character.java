@@ -26,7 +26,7 @@ public class Character {
   private LevelObject position;
 
   private Box box;
-  
+
   private int zpmCount;
 
   /**
@@ -118,41 +118,43 @@ public class Character {
       int limit = rand.nextInt(101);
       int i = 0;
       LevelObject current = position;
-      while(true) {
-        while(i < limit) {
+      while (true) {
+        while (i < limit) {
           switch (direction) {
-            case 0 :
-              if(current.getNeighbour(Direction.NORTH, false) != null) {
+            case 0:
+              if (current.getNeighbour(Direction.NORTH, false) != null) {
                 current = current.getNeighbour(Direction.NORTH, false);
               }
               break;
-            case 1 :
-              if(current.getNeighbour(Direction.EAST, false) != null) {
+            case 1:
+              if (current.getNeighbour(Direction.EAST, false) != null) {
                 current = current.getNeighbour(Direction.EAST, false);
               }
               break;
-            case 2 :
-              if(current.getNeighbour(Direction.SOUTH, false) != null) {
+            case 2:
+              if (current.getNeighbour(Direction.SOUTH, false) != null) {
                 current = current.getNeighbour(Direction.SOUTH, false);
               }
               break;
-            case 3 :
-              if(current.getNeighbour(Direction.WEST, false) != null) {
+            case 3:
+              if (current.getNeighbour(Direction.WEST, false) != null) {
                 current = current.getNeighbour(Direction.WEST, false);
               }
-              break; 
+              break;
+            default:
+              break;
           }
           direction = rand.nextInt(4);
           i++;
         }
-        
-        if(current.hasItem() == ItemState.NOITEM) {
+
+        if (current.hasItem() == ItemState.NOITEM) {
           this.drop((Item) new Zpm());
           break;
         }
         i = 0;
       }
-      
+
     }
     Logger.logout();
   }
@@ -174,7 +176,7 @@ public class Character {
    */
   public void drop(Item item) {
     Logger.log("Character drop");
-    
+
     if (position.hasItem() == ItemState.NOITEM) {
       position.placeItem((Item) box);
       box = null;
@@ -188,11 +190,11 @@ public class Character {
    */
   public void take() {
     Logger.log("Character take");
-    
+
     if (position.hasItem() == ItemState.GOTITEM) {
       position.getItem(this);
     }
-    
+
     Logger.logout();
   }
 }
