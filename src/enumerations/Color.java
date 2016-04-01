@@ -22,10 +22,10 @@ public enum Color {
     Logger.log("Color getOtherColor");
     Logger.logout();
     switch (c) {
-      case BLUE:return Color.BLUE;
+      case BLUE:return Color.YELLOW;
       case YELLOW:return Color.BLUE;
-      case GREEN:return Color.BLUE;
-      case RED:return Color.BLUE;
+      case GREEN:return Color.RED;
+      case RED:return Color.GREEN;
     }
     return null;
   }
