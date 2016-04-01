@@ -10,7 +10,7 @@ import logger.Logger;
  */
 public enum Color {
 
-  BLUE, YELLOW;
+  BLUE, YELLOW, GREEN, RED;
 
   // TODO: Valtozott a szignatura, dokumentalni kell!
   /**
@@ -18,13 +18,15 @@ public enum Color {
    * 
    * @return the color enum value
    */
-  public Color getOtherColor() {
+  public Color getOtherColor(Color c) {
     Logger.log("Color getOtherColor");
     Logger.logout();
-    if (this == Color.BLUE) {
-      return Color.YELLOW;
-    } else {
-      return Color.BLUE;
+    switch (c) {
+      case BLUE:return Color.BLUE;
+      case YELLOW:return Color.BLUE;
+      case GREEN:return Color.BLUE;
+      case RED:return Color.BLUE;
     }
+    return null;
   }
 }

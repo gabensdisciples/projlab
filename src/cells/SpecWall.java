@@ -40,7 +40,7 @@ public class SpecWall extends LevelObject {
   public void interactCharacter(Character character) {
     Logger.log("SpecWall interactCharacter");
     if (gate != null) {
-      LevelObject pair = Wormhole.getSpecWall(gate.getColor().getOtherColor());
+      LevelObject pair = Wormhole.getSpecWall(gate.getColor().getOtherColor(gate.getColor()));
       if (pair != null) {
         character.setPosition(pair);
       } else {

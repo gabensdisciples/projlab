@@ -57,7 +57,7 @@ public class Character {
    */
   public void changeColor() {
     Logger.log("Character Changecolor");
-    bulletColor = bulletColor.getOtherColor();
+    bulletColor = bulletColor.getOtherColor(bulletColor);
     Logger.logout();
   }
 
