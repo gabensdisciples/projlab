@@ -18,10 +18,10 @@ public enum Color {
    * 
    * @return the color enum value
    */
-  public Color getOtherColor(Color c) {
+  public Color getOtherColor() {
     Logger.log("Color getOtherColor");
     Logger.logout();
-    switch (c) {
+    switch (this) {
       case BLUE:return Color.YELLOW;
       case YELLOW:return Color.BLUE;
       case GREEN:return Color.RED;
