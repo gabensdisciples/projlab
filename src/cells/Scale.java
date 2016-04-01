@@ -26,7 +26,7 @@ public class Scale extends LevelObject {
    * 
    * @param door
    *          - the door which the scale opens
-   */
+   */  
   public Scale(Door door, int limit) {
     super(true);
     box = new Stack();

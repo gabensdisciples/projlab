@@ -230,7 +230,7 @@ public class Test {
    */
   public static void walkScale() {
     Door door = new Door();
-    Scale scale = new Scale(door);
+    Scale scale = new Scale(door,1);
     Floor position = new Floor(true, null);
     Character oneill = new Character(position, Color.YELLOW, Direction.WEST);
     position.setNeighbour(Direction.EAST, scale);
