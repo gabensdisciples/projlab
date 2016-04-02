@@ -45,5 +45,9 @@ public class Replicator extends Character {
     Logger.logout();
     return position;
   }
-
+  
+  public void die() {
+    
+  }
+  
 }

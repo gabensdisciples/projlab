@@ -4,6 +4,7 @@ import enumerations.Direction;
 import enumerations.ItemState;
 import game.Bullet;
 import game.Character;
+import game.Player;
 import items.Item;
 import logger.Logger;
 
@@ -110,7 +111,7 @@ public abstract class LevelObject {
 
   public abstract ItemState hasItem();
 
-  public void getItem(Character character) {
+  public void getItem(Player character) {
     Logger.log("LevelObject getItem");
     Logger.logout();
   }

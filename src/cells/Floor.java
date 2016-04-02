@@ -3,6 +3,7 @@ package cells;
 import enumerations.ItemState;
 import game.Bullet;
 import game.Character;
+import game.Player;
 import items.Item;
 import logger.Logger;
 
@@ -73,7 +74,7 @@ public class Floor extends LevelObject {
   }
 
   @Override
-  public void getItem(Character character) {
+  public void getItem(Player character) {
     Logger.log("Floor getItem");
     item.pickUp(character);
     item = null;

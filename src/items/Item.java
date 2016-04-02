@@ -1,6 +1,6 @@
 package items;
 
-import game.Character;
+import game.Player;
 
 /**
  * Abstract item class.
@@ -10,6 +10,6 @@ import game.Character;
  */
 public abstract class Item {
 
-  public abstract void pickUp(Character character);
+  public abstract void pickUp(Player character);
 
 }

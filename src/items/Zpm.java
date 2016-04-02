@@ -1,6 +1,6 @@
 package items;
 
-import game.Character;
+import game.Player;
 import logger.Logger;
 
 /**
@@ -14,7 +14,7 @@ public class Zpm extends Item {
   /**
    * Increase the character's ZpmCount property when he picks up one.
    */
-  public void pickUp(Character character) {
+  public void pickUp(Player character) {
     Logger.log("ZPM pickUp");
     character.incrementZpmCount();
     Logger.logout();

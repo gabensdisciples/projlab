@@ -6,6 +6,7 @@ import enumerations.Direction;
 import enumerations.ItemState;
 import game.Bullet;
 import game.Character;
+import game.Player;
 import items.Box;
 import items.Item;
 import logger.Logger;
@@ -84,7 +85,7 @@ public class Scale extends LevelObject {
     Logger.log("Scale getNeighbour");
 
     if (characterCalled && box.size() < limit) {
-      Character dummy = new Character(this, null, dir);
+      Player dummy = new Player(this, null, dir);
       LevelObject neighbour = null;
       switch (dir) {
         case NORTH:
@@ -124,7 +125,7 @@ public class Scale extends LevelObject {
   }
 
   @Override
-  public void getItem(Character character) {
+  public void getItem(Player character) {
     Logger.log("Scale getItem");
     box.pop().pickUp(character);
     if (box.size() + 1 < limit) {

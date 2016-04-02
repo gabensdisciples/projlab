@@ -15,7 +15,6 @@ import cells.Scale;
 import cells.SpecWall;
 import enumerations.Color;
 import enumerations.Direction;
-import game.Character;
 import game.Player;
 import items.Box;
 import items.Zpm;

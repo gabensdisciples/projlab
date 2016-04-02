@@ -11,7 +11,7 @@ import logger.Logger;
  * @author Gaben's Disciples
  * 
  */
-public class Character {
+public abstract class Character {
 
   protected LevelObject position;
 
@@ -62,5 +62,7 @@ public class Character {
     Logger.logout();
     return position;
   }
+  
+  public abstract void die();
 
 }
