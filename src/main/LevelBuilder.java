@@ -30,33 +30,9 @@ public class LevelBuilder {
 
   private static int SIZE;
 
-  private static final Map<String, LevelObject> objectMap;
-
   private static LevelBuilder instance = null;
 
   private Player oneill;
-
-  static {
-    objectMap = new HashMap<>();
-    // Empty
-    objectMap.put("E", null);
-    // Walkable floor
-    objectMap.put("FW", new Floor(true, null));
-    // Nonwalkable floor
-    objectMap.put("FNW", new Floor(false, null));
-    // Floor with box
-    objectMap.put("FB", new Floor(true, new Box()));
-    // Floor with zpm
-    objectMap.put("FZ", new Floor(true, new Zpm()));
-    // Door
-    objectMap.put("D", new Door());
-    // Gap
-    objectMap.put("G", new Gap());
-    // Scale (Door = null)
-    objectMap.put("SC", new Scale());
-    // SpecWall
-    objectMap.put("SP", new SpecWall());
-  }
 
   // Parsed from stringMatrix
   public LevelObject[][] objectMatrix;
@@ -134,19 +110,28 @@ public class LevelBuilder {
     for (int i = 0; i < SIZE; i++) {
       for (int j = 0; j < SIZE; j++) {
         String currentString = stringMatrix[i][j];
-        // Now we can only put oneill to walkable floor.
         if (currentString.equals("O")) {
-          objectMatrix[i][j] = objectMap.get("FW");
+          // Oneill gets an empty walkable floor.
+          objectMatrix[i][j] = new Floor(true, null);
           oneill = new Player(objectMatrix[i][j], Color.BLUE, Direction.NORTH);
-          System.out.println("ObjectMap.get(FW): " + objectMatrix[i][j].hashCode());
-          System.out.println("Oneills getPosition: " + oneill.getPosition().hashCode());
-          System.out.println("i = " + i + " j = " + j + "\n");
+        } else if (currentString.equals("FW")) {
+          objectMatrix[i][j] = new Floor(true, null);
+        } else if (currentString.equals("FNW")) {
+          objectMatrix[i][j] = new Floor(false, null);
+        } else if (currentString.equals("FB")) {
+          objectMatrix[i][j] = new Floor(true, new Box());
+        } else if (currentString.equals("FZ")) {
+          objectMatrix[i][j] = new Floor(true, new Zpm());
+        } else if (currentString.equals("G")) {
+          objectMatrix[i][j] = new Gap();
+        } else if (currentString.equals("SP")) {
+          objectMatrix[i][j] = new SpecWall();
+        } else if (currentString.equals("E")) {
+          objectMatrix[i][j] = null;
         } else if (currentString.substring(0, 1).equals("D")) {
-          objectMatrix[i][j] = objectMap.get("D");
+          objectMatrix[i][j] = new Door();
         } else if (currentString.length() >= 2 && currentString.substring(0, 2).equals("SC")) {
-          objectMatrix[i][j] = objectMap.get("SC");
-        } else if (objectMap.get(stringMatrix[i][j]) != null) {
-          objectMatrix[i][j] = objectMap.get(stringMatrix[i][j]);
+          objectMatrix[i][j] = new Scale();
         } else {
           throw new RuntimeException("Wrong abbreviation in text file.");
         }
@@ -239,31 +224,29 @@ public class LevelBuilder {
   public void printStringMatrix() {
     int[] position = getPlayerPosition();
     StringBuilder sb = new StringBuilder();
-    sb.append("  ");
-    for (int s = 0; s < (SIZE - 1) * 8 + 2; s++) {
+    sb.append(" ");
+    for (int s = 0; s < (SIZE - 1) * 7 + 2; s++) {
       sb.append("-");
     }
     System.out.println("\n" + sb.toString());
     for (int i = 0; i < stringMatrix[0].length; i++) {
       for (int j = 0; j < stringMatrix[0].length; j++) {
         if (j == 0) {
-          System.out.print(" | " + stringMatrix[i][j]);
           if (i == position[0] && j == position[1]) {
-//            System.out.println("i = " + i + " j = " + j + "\n");
+            System.out.print("  | ");
             System.out.print(Character.toChars(0x1F600));
             System.out.print(" | ");
           } else {
-            System.out.print("  | ");
+            System.out.print(" | " + stringMatrix[i][j] + " | ");
           }
-          
+
         } else {
-          System.out.print(String.format("%3s", stringMatrix[i][j]));
           if (i == position[0] && j == position[1]) {
-//            System.out.println("i = " + i + " j = " + j + "\n");
+            System.out.print(" ");
             System.out.print(Character.toChars(0x1F600));
-            System.out.print(" | ");
+            System.out.print("    | ");
           } else {
-            System.out.print("  | ");
+            System.out.print(String.format("%3s", stringMatrix[i][j]) + " | ");
           }
         }
       }
@@ -277,24 +260,23 @@ public class LevelBuilder {
   public void printObjectMatrix() {
     for (int i = 0; i < SIZE; i++) {
       for (int j = 0; j < SIZE; j++) {
-        System.out.print(objectMatrix[i][j].getClass() + " ");
       }
       System.out.println();
     }
   }
-  
+
   /**
    * Finds O'neill position in the objectMatrix.
+   * 
    * @return the coordinates
    */
   public int[] getPlayerPosition() {
     int[] position = new int[2];
-    
+
     LevelObject playerPositon = oneill.getPosition();
     for (int i = 0; i < SIZE; i++) {
       for (int j = 0; j < SIZE; j++) {
         if (objectMatrix[i][j].equals(playerPositon)) {
-          System.out.println("Oneills getPosition 2: " + playerPositon.hashCode());
           position[0] = i;
           position[1] = j;
         }
@@ -302,7 +284,7 @@ public class LevelBuilder {
     }
     return position;
   }
-  
+
   /**
    * Private constructor for the singleton class.
    */
@@ -331,10 +313,6 @@ public class LevelBuilder {
 
   public void setStringMatrix(String[][] stringMatrix) {
     this.stringMatrix = stringMatrix;
-  }
-
-  public static Map<String, LevelObject> getObjectmap() {
-    return objectMap;
   }
 
   public Player getOneill() {
