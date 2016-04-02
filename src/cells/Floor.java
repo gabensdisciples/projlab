@@ -4,6 +4,8 @@ import enumerations.ItemState;
 import game.Bullet;
 import game.Character;
 import game.Player;
+import game.Replicator;
+import game.ReplicatorContainer;
 import items.Item;
 import logger.Logger;
 
@@ -66,7 +68,14 @@ public class Floor extends LevelObject {
     Logger.log("Floor interactBullet");
 
     if (walkable) {
-      bullet.setPosition(this);
+      Replicator replicator = ReplicatorContainer.getReplicator(this);
+      if (replicator != null) {
+        replicator.die();
+        bullet.die();
+      }
+        else {
+          bullet.setPosition(this);
+        }
     } else {
       bullet.die();
     }

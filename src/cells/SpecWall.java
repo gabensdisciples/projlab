@@ -3,6 +3,8 @@ package cells;
 import enumerations.ItemState;
 import game.Bullet;
 import game.Character;
+import game.Replicator;
+import game.ReplicatorContainer;
 import game.StarGate;
 import game.Wormhole;
 import logger.Logger;
@@ -56,6 +58,12 @@ public class SpecWall extends LevelObject {
     if (gate == null) {
       gate = bullet.createStarGate();
       Wormhole.setSpecWall(this, gate.getColor());
+    }
+    else {
+      Replicator replicator = ReplicatorContainer.getReplicator(this);
+      if (replicator != null) {
+        replicator.die();
+      }
     }
     bullet.die();
     walkable = true;

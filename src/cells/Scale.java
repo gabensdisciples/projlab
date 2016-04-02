@@ -7,6 +7,8 @@ import enumerations.ItemState;
 import game.Bullet;
 import game.Character;
 import game.Player;
+import game.Replicator;
+import game.ReplicatorContainer;
 import items.Box;
 import items.Item;
 import logger.Logger;
@@ -76,7 +78,14 @@ public class Scale extends LevelObject {
    */
   public void interactBullet(Bullet bullet) {
     Logger.log("Scale interactBullet");
-    bullet.setPosition(this);
+    Replicator replicator = ReplicatorContainer.getReplicator(this);
+    if (replicator != null) {
+      replicator.die();
+      bullet.die();
+    }
+    else {
+      bullet.setPosition(this);
+    }
     Logger.logout();
   }
 
@@ -147,5 +156,4 @@ public class Scale extends LevelObject {
   public void setDoor(Door door) {
     this.door = door;
   }
-
 }

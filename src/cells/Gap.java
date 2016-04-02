@@ -3,6 +3,8 @@ package cells;
 import enumerations.ItemState;
 import game.Bullet;
 import game.Character;
+import game.Replicator;
+import game.ReplicatorContainer;
 import logger.Logger;
 
 /**
@@ -36,7 +38,14 @@ public class Gap extends LevelObject {
    */
   public void interactCharacter(Character character) {
     Logger.log("Gap interactCharacter");
-    character.die();
+    if(!walkable) {
+      character.die();
+      this.walkable = true;
+    }
+    
+    else {
+      character.setPosition(this);
+    }
     Logger.logout();
   }
 
@@ -45,7 +54,16 @@ public class Gap extends LevelObject {
    */
   public void interactBullet(Bullet bullet) {
     Logger.log("Gap interactBullet");
-    bullet.setPosition(this);
+    if (walkable) {
+      Replicator replicator = ReplicatorContainer.getReplicator(this);
+      if (replicator != null) {
+        replicator.die();
+        bullet.die();
+      } 
+    }
+    else {
+      bullet.setPosition(this);
+    }
     Logger.logout();
   }
 }
