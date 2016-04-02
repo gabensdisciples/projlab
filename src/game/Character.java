@@ -117,8 +117,9 @@ public class Character {
       int direction = rand.nextInt(4);
       int limit = rand.nextInt(101);
       int i = 0;
+      boolean iterate = true;
       LevelObject current = position;
-      while (true) {
+      while (iterate) {
         while (i < limit) {
           switch (direction) {
             case 0:
@@ -150,7 +151,7 @@ public class Character {
 
         if (current.hasItem() == ItemState.NOITEM) {
           this.drop((Item) new Zpm());
-          break;
+          iterate = false;
         }
         i = 0;
       }
