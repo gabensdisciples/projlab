@@ -34,12 +34,18 @@ public class Test {
    */
   public static void main(String[] args) {
     in = new Scanner(System.in);
-    while (true) {
-      testSwitch();
-      System.out.println("Nyomj egy entert a menube visszatereshez...");
-      in.nextLine();
-      in.nextLine();
-    }
+    String cmd;
+    do {
+      cmd = in.nextLine().toLowerCase();
+      String[] cmdArgs;
+      // If we got spaces, we propably got some parameters
+      if (cmd.matches("\\s")) {
+        cmdArgs = cmd.split("\\s");
+      } else {
+        // commands without parametres go here
+      }
+        
+    } while (!cmd.equals("exit"));
   }
   
   public static void loadMap() {
