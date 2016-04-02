@@ -19,8 +19,6 @@ import logger.Logger;
  */
 public class Character {
 
-<<<<<<< HEAD
-=======
   private Direction direction;
 
   private Color bulletColor;
@@ -200,5 +198,4 @@ public class Character {
 
     Logger.logout();
   }
->>>>>>> branch 'master' of https://github.com/gabensdisciples/projlab.git
 }
