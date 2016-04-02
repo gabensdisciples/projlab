@@ -13,9 +13,11 @@ import cells.Gap;
 import cells.LevelObject;
 import cells.Scale;
 import cells.SpecWall;
+import enumerations.Color;
 import enumerations.Direction;
 import items.Box;
 import items.Zpm;
+import game.Character;
 
 /**
  * Singleton utility class, builds a level from txt file.
@@ -30,6 +32,8 @@ public class LevelBuilder {
   private static final Map<String, LevelObject> objectMap;
 
   private static LevelBuilder instance = null;
+
+  private Character oneill;
 
   static {
     objectMap = new HashMap<>();
@@ -127,6 +131,10 @@ public class LevelBuilder {
     for (int i = 0; i < SIZE; i++) {
       for (int j = 0; j < SIZE; j++) {
         String currentString = stringMatrix[i][j];
+        if (currentString.equals("C")) {
+          objectMatrix[i][j] = objectMap.get("FW");
+          oneill = new Character(objectMatrix[i][j], Color.BLUE, Direction.NORTH);
+        }
         if (currentString.substring(0, 1).equals("D")) {
           objectMatrix[i][j] = objectMap.get("D");
         } else if (currentString.length() >= 2 && currentString.substring(0, 2).equals("SC")) {
@@ -275,6 +283,14 @@ public class LevelBuilder {
 
   public static Map<String, LevelObject> getObjectmap() {
     return objectMap;
+  }
+
+  public Character getOneill() {
+    return oneill;
+  }
+
+  public void setOneill(Character oneill) {
+    this.oneill = oneill;
   }
 
 }
