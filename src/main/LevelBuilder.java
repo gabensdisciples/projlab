@@ -131,11 +131,10 @@ public class LevelBuilder {
     for (int i = 0; i < SIZE; i++) {
       for (int j = 0; j < SIZE; j++) {
         String currentString = stringMatrix[i][j];
-        if (currentString.equals("C")) {
+        if (currentString.equals("O")) {
           objectMatrix[i][j] = objectMap.get("FW");
           oneill = new Character(objectMatrix[i][j], Color.BLUE, Direction.NORTH);
-        }
-        if (currentString.substring(0, 1).equals("D")) {
+        } else if (currentString.substring(0, 1).equals("D")) {
           objectMatrix[i][j] = objectMap.get("D");
         } else if (currentString.length() >= 2 && currentString.substring(0, 2).equals("SC")) {
           objectMatrix[i][j] = objectMap.get("SC");
