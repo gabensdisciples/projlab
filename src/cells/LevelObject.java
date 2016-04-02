@@ -122,16 +122,5 @@ public abstract class LevelObject {
     Logger.log("LevelObject placeItem");
     Logger.logout();
   }
-  
-  public void checkReplicator(Bullet bullet) {
-    Replicator replicator = ReplicatorContainer.getReplicator(this);
-    if (replicator != null) {
-      replicator.die();
-      bullet.die();
-    }
-      else {
-        bullet.setPosition(this);
-      }
-  }
 
 }
