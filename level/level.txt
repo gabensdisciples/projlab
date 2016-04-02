@@ -1,3 +1,5 @@
-FW FNW FB
-D1 G SC1
-FZ O D2
+FW  FNW  FB   FW FW
+D1   G   SC1  FW FW
+FZ   O   D2   FW FW
+FW  FW   FW   FW FW
+FW  FW   FW   FW FW

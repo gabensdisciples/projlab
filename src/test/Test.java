@@ -41,7 +41,27 @@ public class Test {
       in.nextLine();
     }
   }
-
+  
+  public static void loadMap() {
+    
+  }
+  
+  public static void move() {
+    
+  }
+  
+  public static void shoot() {
+    
+  }
+  
+  public static void pickUp() {
+    
+  }
+  
+  public static void drop() {
+    
+  }
+  
   /**
    * Choose test cases.
    */
@@ -346,4 +366,7 @@ public class Test {
   public static void openHelp() {
     Menu.showHelp();
   }
+  
+
+  
 }
