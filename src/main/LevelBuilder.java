@@ -297,11 +297,11 @@ public class LevelBuilder {
     return objectMap;
   }
 
-  public Character getOneill() {
+  public Player getOneill() {
     return oneill;
   }
 
-  public void setOneill(Character oneill) {
+  public void setOneill(Player oneill) {
     this.oneill = oneill;
   }
 
