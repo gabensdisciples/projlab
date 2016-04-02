@@ -40,7 +40,7 @@ public class Player extends Character {
    *          - the character's direction
    */
   public Player(LevelObject position, Color color, Direction direction) {
-    super(position);
+    super(position);                    // Logger a character konstruktorát íra ki
     bulletColor = color;
     this.direction = direction;
   }
