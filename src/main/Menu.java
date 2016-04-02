@@ -23,8 +23,8 @@ public class Menu {
     // Logger.log("Menu main");
     // Logger.logout();
     LevelBuilder levelBuilder = LevelBuilder.getInstance();
-    levelBuilder.init(3);
-    levelBuilder.printObjectMatrix();
+    levelBuilder.init(5);
+    levelBuilder.printStringMatrix();
 
   }
 

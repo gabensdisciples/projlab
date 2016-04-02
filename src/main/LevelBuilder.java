@@ -102,7 +102,7 @@ public class LevelBuilder {
         String line;
         int row = 0;
         while ((line = br.readLine()) != null) {
-          String[] values = line.split(" ");
+          String[] values = line.split("\\s+");
           for (int column = 0; column < values.length; column++) {
             stringMatrix[row][column] = values[column];
           }
@@ -113,6 +113,8 @@ public class LevelBuilder {
       } finally {
         br.close();
       }
+    } catch (ArrayIndexOutOfBoundsException exception) {
+      throw new ArrayIndexOutOfBoundsException("Set the correct size of the text file matrix!");
     } catch (IOException exception) {
       exception.printStackTrace();
     }
@@ -230,11 +232,20 @@ public class LevelBuilder {
    * Prints the stringMatrix.
    */
   public void printStringMatrix() {
+    StringBuilder sb = new StringBuilder();
+    for (int s = 0; s < (SIZE - 1) * 8; s++) {
+      sb.append("*");
+    }
+    System.out.println("\n" + sb.toString());
     for (int i = 0; i < stringMatrix[0].length; i++) {
       for (int j = 0; j < stringMatrix[0].length; j++) {
-        System.out.print(stringMatrix[i][j] + " ");
+        if (j == 0) {
+          System.out.print(stringMatrix[i][j]);
+        } else {
+          System.out.print(String.format("%7s", stringMatrix[i][j]));
+        }
       }
-      System.out.println();
+      System.out.println("\n" + sb.toString());
     }
   }
 
