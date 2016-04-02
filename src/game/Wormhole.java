@@ -1,5 +1,7 @@
 package game;
 
+import java.util.HashMap;
+import java.util.Map;
 import cells.SpecWall;
 import enumerations.Color;
 import logger.Logger;
@@ -11,8 +13,9 @@ import logger.Logger;
  * 
  */
 public final class Wormhole {
-  private static SpecWall blueSpecWall = null;
-  private static SpecWall yellowSpecWall = null;
+  private static Map <Color,SpecWall> SpecWalls = new HashMap<Color,SpecWall>();
+  /*private static SpecWall blueSpecWall = null;
+  private static SpecWall yellowSpecWall = null;*/
 
   /**
    * Sets the SpecWall objects to the wormhole.
@@ -24,18 +27,10 @@ public final class Wormhole {
    */
   public static void setSpecWall(SpecWall specWall, Color color) {
     Logger.log("Wormhole setSpecWall");
-    if (color == Color.BLUE) {
-      if (blueSpecWall != null) {
-        blueSpecWall.setStarGate(null);
-      }
-      blueSpecWall = specWall;
-    } else {
-      if (yellowSpecWall != null) {
-        yellowSpecWall.setStarGate(null);
-      }
-      yellowSpecWall = specWall;
+    if(SpecWalls.containsKey(color)){
+      SpecWalls.remove(color);
     }
-
+    SpecWalls.put(color, specWall);
     Logger.logout();
   }
 
@@ -49,10 +44,11 @@ public final class Wormhole {
   public static SpecWall getSpecWall(Color color) {
     Logger.log("Wormhole getSpecWall");
     Logger.logout();
-    if (color == Color.BLUE) {
-      return blueSpecWall;
-    } else {
-      return yellowSpecWall;
+    if(SpecWalls.containsKey(color)){
+      return SpecWalls.get(color);
+    }
+    else {
+      return null;
     }
   }
 }
