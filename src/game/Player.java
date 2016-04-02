@@ -63,11 +63,6 @@ public class Player extends Character {
     bulletColor = bulletColor.getOtherColor();
     Logger.logout();
   }
-
-  public void die() {
-    Logger.log("Character die");
-    Logger.logout();
-  }
   
   /**
    * Increments the ZPM's at the character when he pickes up one.
@@ -159,6 +154,11 @@ public class Player extends Character {
       position.getItem(this);
     }
 
+    Logger.logout();
+  }
+  
+  public void die() {
+    Logger.log("Character die");
     Logger.logout();
   }
 }

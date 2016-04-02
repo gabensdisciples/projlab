@@ -3,6 +3,8 @@ package cells;
 import enumerations.ItemState;
 import game.Bullet;
 import game.Character;
+import game.Replicator;
+import game.ReplicatorContainer;
 import logger.Logger;
 
 /**
@@ -50,7 +52,14 @@ public class Door extends LevelObject {
     Logger.log("Door interactBullet");
 
     if (walkable) {
-      bullet.setPosition(this);
+      Replicator replicator = ReplicatorContainer.getReplicator(this);
+      if (replicator != null) {
+        replicator.die();
+        bullet.die();
+      }
+        else {
+          bullet.setPosition(this);
+        }
     } else {
       bullet.die();
     }
