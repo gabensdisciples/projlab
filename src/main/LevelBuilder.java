@@ -233,16 +233,17 @@ public class LevelBuilder {
    */
   public void printStringMatrix() {
     StringBuilder sb = new StringBuilder();
-    for (int s = 0; s < (SIZE - 1) * 8; s++) {
-      sb.append("*");
+    sb.append("  ");
+    for (int s = 0; s < (SIZE - 1) * 8 - 3; s++) {
+      sb.append("-");
     }
     System.out.println("\n" + sb.toString());
     for (int i = 0; i < stringMatrix[0].length; i++) {
       for (int j = 0; j < stringMatrix[0].length; j++) {
         if (j == 0) {
-          System.out.print(stringMatrix[i][j]);
+          System.out.print(" | " + stringMatrix[i][j] + " | ");
         } else {
-          System.out.print(String.format("%7s", stringMatrix[i][j]));
+          System.out.print(String.format("%3s", stringMatrix[i][j]) + " | ");
         }
       }
       System.out.println("\n" + sb.toString());
