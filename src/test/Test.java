@@ -9,7 +9,7 @@ import cells.Scale;
 import cells.SpecWall;
 import enumerations.Color;
 import enumerations.Direction;
-import game.Character;
+import game.Player;
 import game.StarGate;
 import game.Wormhole;
 import items.Box;
@@ -184,7 +184,7 @@ public class Test {
     Floor target = new Floor(isWalkable, null);
     Floor position = new Floor(true, null);
 
-    Character oniell = new Character(position, Color.YELLOW, Direction.WEST);
+    Player oniell = new Player(position, Color.YELLOW, Direction.WEST);
     position.setNeighbour(Direction.EAST, target);
     oniell.move(Direction.EAST);
   }
@@ -194,7 +194,7 @@ public class Test {
    */
   public static void walkGap() {
     Floor position = new Floor(true, null);
-    Character oneill = new Character(position, Color.BLUE, Direction.EAST);
+    Player oneill = new Player(position, Color.BLUE, Direction.EAST);
     Gap target = new Gap();
     position.setNeighbour(Direction.EAST, target);
     oneill.move(Direction.EAST);
@@ -206,7 +206,7 @@ public class Test {
    */
   public static void walkSpecWallStarGate() {
     Floor position = new Floor(true, null);
-    Character oneill = new Character(position, Color.BLUE, Direction.EAST);
+    Player oneill = new Player(position, Color.BLUE, Direction.EAST);
     SpecWall target = new SpecWall();
     position.setNeighbour(Direction.EAST, target);
 
@@ -248,7 +248,7 @@ public class Test {
     Door target = new Door();
     target.setWalkable(doorOpen);
     Floor position = new Floor(true, null);
-    Character oneill = new Character(position, Color.YELLOW, Direction.WEST);
+    Player oneill = new Player(position, Color.YELLOW, Direction.WEST);
     position.setNeighbour(Direction.EAST, target);
     oneill.move(Direction.EAST);
   }
@@ -260,7 +260,7 @@ public class Test {
     Door door = new Door();
     Scale scale = new Scale(door, 1);
     Floor position = new Floor(true, null);
-    Character oneill = new Character(position, Color.YELLOW, Direction.WEST);
+    Player oneill = new Player(position, Color.YELLOW, Direction.WEST);
     position.setNeighbour(Direction.EAST, scale);
     oneill.move(Direction.EAST);
   }
@@ -271,7 +271,7 @@ public class Test {
   public static void pickupZpm() {
     Zpm zpm = new Zpm();
     Floor position = new Floor(true, zpm);
-    Character oneill = new Character(position, Color.YELLOW, Direction.WEST);
+    Player oneill = new Player(position, Color.YELLOW, Direction.WEST);
     oneill.take();
   }
 
@@ -281,7 +281,7 @@ public class Test {
   public static void pickupBox() {
     Box box = new Box();
     Floor position = new Floor(true, box);
-    Character oneill = new Character(position, Color.YELLOW, Direction.WEST);
+    Player oneill = new Player(position, Color.YELLOW, Direction.WEST);
     oneill.take();
   }
 
@@ -290,7 +290,7 @@ public class Test {
    */
   public static void pickupForbidden() {
     Door position = new Door();
-    Character oneill = new Character(position, Color.YELLOW, Direction.WEST);
+    Player oneill = new Player(position, Color.YELLOW, Direction.WEST);
     oneill.take();
   }
 
@@ -300,7 +300,7 @@ public class Test {
   public static void placeBox() {
     Box box = new Box();
     Floor position = new Floor(true, null);
-    Character oneill = new Character(position, Color.YELLOW, Direction.WEST);
+    Player oneill = new Player(position, Color.YELLOW, Direction.WEST);
     oneill.drop(box);
   }
 
@@ -310,7 +310,7 @@ public class Test {
   public static void placeBoxForbidden() {
     Box box = new Box();
     Floor position = new Floor(true, box);
-    Character oneill = new Character(position, Color.YELLOW, Direction.WEST);
+    Player oneill = new Player(position, Color.YELLOW, Direction.WEST);
     oneill.drop(box);
   }
 
@@ -319,7 +319,7 @@ public class Test {
    */
   public static void changeBulletColor() {
     Floor position = new Floor(true, null);
-    Character oneill = new Character(position, Color.YELLOW, Direction.WEST);
+    Player oneill = new Player(position, Color.YELLOW, Direction.WEST);
     oneill.changeColor();
   }
 
@@ -337,7 +337,7 @@ public class Test {
     floor3.setNeighbour(Direction.EAST, floor2);
     floor3.setNeighbour(Direction.WEST, floor4);
     floor4.setNeighbour(Direction.EAST, floor3);
-    Character oneill = new Character(position, Color.YELLOW, Direction.WEST);
+    Player oneill = new Player(position, Color.YELLOW, Direction.WEST);
     oneill.shoot();
   }
 
@@ -349,7 +349,7 @@ public class Test {
     SpecWall target = new SpecWall();
     position.setNeighbour(Direction.WEST, target);
     target.setNeighbour(Direction.EAST, position);
-    Character oneill = new Character(position, Color.YELLOW, Direction.WEST);
+    Player oneill = new Player(position, Color.YELLOW, Direction.WEST);
     oneill.shoot();
   }
 
@@ -362,7 +362,7 @@ public class Test {
     target.setWalkable(false);
     position.setNeighbour(Direction.WEST, target);
     target.setNeighbour(Direction.EAST, position);
-    Character oneill = new Character(position, Color.YELLOW, Direction.WEST);
+    Player oneill = new Player(position, Color.YELLOW, Direction.WEST);
     oneill.shoot();
   }
 
