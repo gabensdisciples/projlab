@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.SynchronousQueue;
 
 import cells.Door;
 import cells.Floor;
@@ -20,7 +21,7 @@ import items.Box;
 import items.Zpm;
 
 /**
- * Singleton utility class, builds a level from txt file.
+ * Singleton utility class, builds a level from text file.
  * 
  * @author Gaben's Disciples
  * 
@@ -133,9 +134,13 @@ public class LevelBuilder {
     for (int i = 0; i < SIZE; i++) {
       for (int j = 0; j < SIZE; j++) {
         String currentString = stringMatrix[i][j];
+        // Now we can only put oneill to walkable floor.
         if (currentString.equals("O")) {
           objectMatrix[i][j] = objectMap.get("FW");
           oneill = new Player(objectMatrix[i][j], Color.BLUE, Direction.NORTH);
+          System.out.println("ObjectMap.get(FW): " + objectMatrix[i][j].hashCode());
+          System.out.println("Oneills getPosition: " + oneill.getPosition().hashCode());
+          System.out.println("i = " + i + " j = " + j + "\n");
         } else if (currentString.substring(0, 1).equals("D")) {
           objectMatrix[i][j] = objectMap.get("D");
         } else if (currentString.length() >= 2 && currentString.substring(0, 2).equals("SC")) {
@@ -232,18 +237,34 @@ public class LevelBuilder {
    * Prints the stringMatrix.
    */
   public void printStringMatrix() {
+    int[] position = getPlayerPosition();
     StringBuilder sb = new StringBuilder();
     sb.append("  ");
-    for (int s = 0; s < (SIZE - 1) * 8 - 3; s++) {
+    for (int s = 0; s < (SIZE - 1) * 8 + 2; s++) {
       sb.append("-");
     }
     System.out.println("\n" + sb.toString());
     for (int i = 0; i < stringMatrix[0].length; i++) {
       for (int j = 0; j < stringMatrix[0].length; j++) {
         if (j == 0) {
-          System.out.print(" | " + stringMatrix[i][j] + " | ");
+          System.out.print(" | " + stringMatrix[i][j]);
+          if (i == position[0] && j == position[1]) {
+//            System.out.println("i = " + i + " j = " + j + "\n");
+            System.out.print(Character.toChars(0x1F600));
+            System.out.print(" | ");
+          } else {
+            System.out.print("  | ");
+          }
+          
         } else {
-          System.out.print(String.format("%3s", stringMatrix[i][j]) + " | ");
+          System.out.print(String.format("%3s", stringMatrix[i][j]));
+          if (i == position[0] && j == position[1]) {
+//            System.out.println("i = " + i + " j = " + j + "\n");
+            System.out.print(Character.toChars(0x1F600));
+            System.out.print(" | ");
+          } else {
+            System.out.print("  | ");
+          }
         }
       }
       System.out.println("\n" + sb.toString());
@@ -261,7 +282,27 @@ public class LevelBuilder {
       System.out.println();
     }
   }
-
+  
+  /**
+   * Finds O'neill position in the objectMatrix.
+   * @return the coordinates
+   */
+  public int[] getPlayerPosition() {
+    int[] position = new int[2];
+    
+    LevelObject playerPositon = oneill.getPosition();
+    for (int i = 0; i < SIZE; i++) {
+      for (int j = 0; j < SIZE; j++) {
+        if (objectMatrix[i][j].equals(playerPositon)) {
+          System.out.println("Oneills getPosition 2: " + playerPositon.hashCode());
+          position[0] = i;
+          position[1] = j;
+        }
+      }
+    }
+    return position;
+  }
+  
   /**
    * Private constructor for the singleton class.
    */

@@ -37,7 +37,7 @@ public class Logger {
     for (int i = 0; i < tabCount; i++) {
       string = "\t" + string;
     }
-    System.out.println(string);
+    //System.out.println(string);
     try {
       logFileStream = new FileOutputStream(logFile, true);
       BufferedWriter logBufferedWriter = new BufferedWriter(new OutputStreamWriter(logFileStream));
