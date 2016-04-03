@@ -14,6 +14,7 @@ import java.io.OutputStreamWriter;
  */
 public class Logger {
   private static int tabCount = -1;
+  private static String current = "";
 
   /**
    * Creates indentation while logging the call chain. Logs to stdout and to a
@@ -37,6 +38,7 @@ public class Logger {
     for (int i = 0; i < tabCount; i++) {
       string = "\t" + string;
     }
+    current += string + "\n";
     //System.out.println(string);
     try {
       logFileStream = new FileOutputStream(logFile, true);
@@ -50,6 +52,12 @@ public class Logger {
 
   }
 
+  public static String currentOut(){
+    String tmp = current;
+    current = "";
+    return tmp;
+  }
+  
   public static void logout() {
     tabCount--;
   }

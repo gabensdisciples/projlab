@@ -1,5 +1,7 @@
 package test;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 import cells.Door;
@@ -14,6 +16,7 @@ import game.StarGate;
 import game.Wormhole;
 import items.Box;
 import items.Zpm;
+import logger.Logger;
 import main.Menu;
 
 /**
@@ -25,6 +28,7 @@ import main.Menu;
 public class Test {
 
   private static Scanner in;
+  private static Map <String,Runnable> commands = new HashMap<>();
 
   /**
    * Main method for testing.
@@ -33,16 +37,18 @@ public class Test {
    *          - init params
    */
   public static void main(String[] args) {
+    commands.put("loadMap", () -> loadMap());
+    commands.put("move", () -> move());
+    commands.put("shoot", () -> shoot());
+    commands.put("pickUp", () -> pickUp());
+    commands.put("drop", () -> drop());
+    commands.put("changeColor", () -> changeColor());
     in = new Scanner(System.in);
     String cmd;
     do {
       cmd = in.nextLine().toLowerCase();
-      String[] cmdArgs;
-      // If we got spaces, we probably got some parameters
-      if (cmd.matches("\\s")) {
-        cmdArgs = cmd.split("\\s");
-      } else {
-        // commands without parametres go here
+      if(commands.containsKey(cmd)){
+        commands.get(cmd).run();
       }
         
     } while (!cmd.equals("exit"));
@@ -53,19 +59,32 @@ public class Test {
   }
   
   public static void move() {
-    
+    walkDoor();
+    walkFloorOrWall();
+    walkGap();
+    walkScale();
+    walkSpecWallStarGate();
   }
   
   public static void shoot() {
-    
+    shootDoorOrWall();
+    shootOverWalkable();
+    shootSpecWall();
+  }
+  
+  public static void changeColor(){
+    changeBulletColor();
   }
   
   public static void pickUp() {
-    
+    pickupBox();
+    pickupForbidden();
+    pickupZpm();
   }
   
   public static void drop() {
-    
+    placeBox();
+    placeBoxForbidden();
   }
   
   /**
@@ -198,6 +217,10 @@ public class Test {
     Gap target = new Gap();
     position.setNeighbour(Direction.EAST, target);
     oneill.move(Direction.EAST);
+    String check = "LevelObject konstruktor\nFloor konstruktor\nCharacter konstruktor\nPlayer konstruktor\nLevelObject konstruktor\nGap konstruktor\nLevelObject setNeighbour\nCharacter move\n\tLevelObject getNeighbour\n\tGap interactCharacter\n\t\tPlayer die\n";
+    if (check.equals(Logger.currentOut())){
+      System.out.println("win");
+    }
   }
 
   /**
