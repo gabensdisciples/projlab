@@ -38,14 +38,12 @@ public class Floor extends LevelObject {
    */
   public ItemState hasItem() {
     Logger.log("Floor hasItem");
-    if (!walkable) {
-      Logger.logout();
+    Logger.logout();
+    if (!walkable) {  
       return ItemState.FORBIDDENAREA;
     } else if (item != null) {
-      Logger.logout();
       return ItemState.GOTITEM;
     } else {
-      Logger.logout();
       return ItemState.NOITEM;
     }
   }
