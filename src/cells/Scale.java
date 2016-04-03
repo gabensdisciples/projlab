@@ -82,8 +82,7 @@ public class Scale extends LevelObject {
     if (replicator != null) {
       replicator.die();
       bullet.die();
-    }
-    else {
+    } else {
       bullet.setPosition(this);
     }
     Logger.logout();

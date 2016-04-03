@@ -16,13 +16,13 @@ import logger.Logger;
  */
 public abstract class LevelObject {
   protected LevelObject neighbourNorth;
-  
+
   protected LevelObject neighbourEast;
-  
+
   protected LevelObject neighbourSouth;
-  
+
   protected LevelObject neighbourWest;
-  
+
   protected boolean walkable;
 
   /**

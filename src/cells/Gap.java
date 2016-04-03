@@ -15,7 +15,7 @@ import logger.Logger;
  * 
  */
 public class Gap extends LevelObject {
-  
+
   private Item item;
 
   /**
@@ -33,14 +33,12 @@ public class Gap extends LevelObject {
    */
   public ItemState hasItem() {
     Logger.log("Gap hasItem");
+    Logger.logout();
     if (!walkable) {
-      Logger.logout();
       return ItemState.FORBIDDENAREA;
     } else if (item != null) {
-      Logger.logout();
       return ItemState.GOTITEM;
     } else {
-      Logger.logout();
       return ItemState.NOITEM;
     }
   }
@@ -50,13 +48,12 @@ public class Gap extends LevelObject {
    */
   public void interactCharacter(Character character) {
     Logger.log("Gap interactCharacter");
-    if(!walkable) {
-      if(ReplicatorContainer.getReplicator(this) != null) {
+    if (!walkable) {
+      if (ReplicatorContainer.getReplicator(this) != null) {
         walkable = true;
       }
       character.die();
-    }
-    else {
+    } else {
       character.setPosition(this);
     }
     Logger.logout();
@@ -72,12 +69,10 @@ public class Gap extends LevelObject {
       if (replicator != null) {
         replicator.die();
         bullet.die();
-      } 
-      else {
+      } else {
         bullet.setPosition(this);
       }
-    }
-    else {
+    } else {
       bullet.setPosition(this);
     }
     Logger.logout();

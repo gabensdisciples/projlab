@@ -56,10 +56,9 @@ public class Door extends LevelObject {
       if (replicator != null) {
         replicator.die();
         bullet.die();
+      } else {
+        bullet.setPosition(this);
       }
-        else {
-          bullet.setPosition(this);
-        }
     } else {
       bullet.die();
     }
