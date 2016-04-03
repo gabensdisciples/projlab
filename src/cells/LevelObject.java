@@ -5,8 +5,6 @@ import enumerations.ItemState;
 import game.Bullet;
 import game.Character;
 import game.Player;
-import game.Replicator;
-import game.ReplicatorContainer;
 import items.Item;
 import logger.Logger;
 

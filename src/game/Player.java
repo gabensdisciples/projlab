@@ -40,16 +40,18 @@ public class Player extends Character {
    *          - the character's direction
    */
   public Player(LevelObject position, Color color, Direction direction) {
-    super(position);                    // Logger a character konstruktorát íra ki
+    super(position);
+    Logger.log("Player konstruktor");
     bulletColor = color;
     this.direction = direction;
+    Logger.logout();
   }
   
   /**
    * The character shoots a bullet in a direction with specified color.
    */
   public void shoot() {
-    Logger.log("Character shoot");
+    Logger.log("Player shoot");
     Bullet bullet = new Bullet(position, direction, bulletColor);
     bullet.fly();
     Logger.logout();
@@ -59,7 +61,7 @@ public class Player extends Character {
    * Changes the bullet color.
    */
   public void changeColor() {
-    Logger.log("Character Changecolor");
+    Logger.log("Player Changecolor");
     bulletColor = bulletColor.getOtherColor();
     Logger.logout();
   }
@@ -68,8 +70,9 @@ public class Player extends Character {
    * Increments the ZPM's at the character when he pickes up one.
    */
   public void incrementZpmCount() {
-    Logger.log("Character incrementZpmCount");
+    Logger.log("Player incrementZpmCount");
     zpmCount++;
+    
     if (zpmCount == 2 && (bulletColor == Color.BLUE || bulletColor == Color.YELLOW)) {
       Random rand = new Random();
       int direction = rand.nextInt(4);
@@ -113,7 +116,6 @@ public class Player extends Character {
         }
         i = 0;
       }
-
     }
     Logger.logout();
   }
@@ -125,7 +127,7 @@ public class Player extends Character {
    *          - the box he picked up
    */
   public void setBox(Box box) {
-    Logger.log("Character setBox");
+    Logger.log("Player setBox");
     this.box = box;
     Logger.logout();
   }
@@ -134,7 +136,7 @@ public class Player extends Character {
    * Drops the box.
    */
   public void drop(Item item) {
-    Logger.log("Character drop");
+    Logger.log("Player drop");
 
     if (position.hasItem() == ItemState.NOITEM) {
       position.placeItem((Item) box);
@@ -148,7 +150,7 @@ public class Player extends Character {
    * Takes a box.
    */
   public void take() {
-    Logger.log("Character take");
+    Logger.log("Player take");
 
     if (position.hasItem() == ItemState.GOTITEM) {
       position.getItem(this);
@@ -158,7 +160,7 @@ public class Player extends Character {
   }
   
   public void die() {
-    Logger.log("Character die");
+    Logger.log("Player die");
     Logger.logout();
   }
 }

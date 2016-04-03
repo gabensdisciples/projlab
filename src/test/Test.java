@@ -38,7 +38,7 @@ public class Test {
     do {
       cmd = in.nextLine().toLowerCase();
       String[] cmdArgs;
-      // If we got spaces, we propably got some parameters
+      // If we got spaces, we probably got some parameters
       if (cmd.matches("\\s")) {
         cmdArgs = cmd.split("\\s");
       } else {

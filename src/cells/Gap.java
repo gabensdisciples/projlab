@@ -5,6 +5,7 @@ import game.Bullet;
 import game.Character;
 import game.Replicator;
 import game.ReplicatorContainer;
+import items.Item;
 import logger.Logger;
 
 /**
@@ -14,6 +15,8 @@ import logger.Logger;
  * 
  */
 public class Gap extends LevelObject {
+  
+  private Item item;
 
   /**
    * Gap constructor.
@@ -21,6 +24,7 @@ public class Gap extends LevelObject {
   public Gap() {
     super(false);
     Logger.log("Gap konstruktor");
+    item = null;
     Logger.logout();
   }
 
@@ -29,8 +33,16 @@ public class Gap extends LevelObject {
    */
   public ItemState hasItem() {
     Logger.log("Gap hasItem");
-    Logger.logout();
-    return ItemState.FORBIDDENAREA;
+    if (!walkable) {
+      Logger.logout();
+      return ItemState.FORBIDDENAREA;
+    } else if (item != null) {
+      Logger.logout();
+      return ItemState.GOTITEM;
+    } else {
+      Logger.logout();
+      return ItemState.NOITEM;
+    }
   }
 
   /**
@@ -39,10 +51,11 @@ public class Gap extends LevelObject {
   public void interactCharacter(Character character) {
     Logger.log("Gap interactCharacter");
     if(!walkable) {
+      if(ReplicatorContainer.getReplicator(this) != null) {
+        walkable = true;
+      }
       character.die();
-      this.walkable = true;
     }
-    
     else {
       character.setPosition(this);
     }
@@ -60,6 +73,9 @@ public class Gap extends LevelObject {
         replicator.die();
         bullet.die();
       } 
+      else {
+        bullet.setPosition(this);
+      }
     }
     else {
       bullet.setPosition(this);
