@@ -14,9 +14,9 @@ public class Zpm extends Item {
   /**
    * Increase the character's ZpmCount property when he picks up one.
    */
-  public void pickUp(Player character) {
+  public void pickUp(Player player) {
     Logger.log("ZPM pickUp");
-    character.incrementZpmCount();
+    player.incrementZpmCount();
     Logger.logout();
   }
 }

@@ -21,4 +21,8 @@ public class ReplicatorContainer {
   public static void remove(Replicator replicator) {
     replicators.remove(replicator);
   }
+  
+  public static void add(Replicator replicator) {
+    replicators.add(replicator);
+  }
 }

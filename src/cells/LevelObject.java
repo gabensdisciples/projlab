@@ -15,13 +15,14 @@ import logger.Logger;
  * 
  */
 public abstract class LevelObject {
-  // TODO: privaterol protectedek lettek a szomszedok, dokumentalni kell!
-  // (a Scale override-ja miatt kell)
   protected LevelObject neighbourNorth;
+  
   protected LevelObject neighbourEast;
+  
   protected LevelObject neighbourSouth;
+  
   protected LevelObject neighbourWest;
-  // TODO: Protected lett, dokumentalni kell!
+  
   protected boolean walkable;
 
   /**
@@ -120,5 +121,4 @@ public abstract class LevelObject {
     Logger.log("LevelObject placeItem");
     Logger.logout();
   }
-
 }

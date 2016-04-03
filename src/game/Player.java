@@ -24,9 +24,9 @@ public class Player extends Character {
 
   private Color bulletColor;
   
-  private Box box;
-  
   private int zpmCount;
+  
+  private Box box;
 
   
   /**
@@ -48,21 +48,21 @@ public class Player extends Character {
   }
   
   /**
+   * Changes the bullet color.
+   */
+  public void changeColor() {
+    Logger.log("Player Changecolor");
+    bulletColor = bulletColor.getOtherColor();
+    Logger.logout();
+  }
+  
+  /**
    * The character shoots a bullet in a direction with specified color.
    */
   public void shoot() {
     Logger.log("Player shoot");
     Bullet bullet = new Bullet(position, direction, bulletColor);
     bullet.fly();
-    Logger.logout();
-  }
-
-  /**
-   * Changes the bullet color.
-   */
-  public void changeColor() {
-    Logger.log("Player Changecolor");
-    bulletColor = bulletColor.getOtherColor();
     Logger.logout();
   }
   

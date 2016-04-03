@@ -83,9 +83,9 @@ public class Floor extends LevelObject {
   }
 
   @Override
-  public void getItem(Player character) {
+  public void getItem(Player player) {
     Logger.log("Floor getItem");
-    item.pickUp(character);
+    item.pickUp(player);
     item = null;
     Logger.logout();
   }

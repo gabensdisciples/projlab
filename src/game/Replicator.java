@@ -8,6 +8,7 @@ public class Replicator extends Character {
   public Replicator(LevelObject position) {
     super(position);
     Logger.log("Replicator konstruktor");
+    ReplicatorContainer.add(this);
     Logger.logout();
   }
   

@@ -10,6 +10,6 @@ import game.Player;
  */
 public abstract class Item {
 
-  public abstract void pickUp(Player character);
+  public abstract void pickUp(Player player);
 
 }

@@ -21,7 +21,7 @@ import logger.Logger;
  * 
  */
 public class Scale extends LevelObject {
-  private Stack<Box> box;
+  private Stack<Box> boxes;
   private Door door;
   private int limit;
 
@@ -40,7 +40,7 @@ public class Scale extends LevelObject {
    */
   public Scale(Door door, int limit) {
     super(true);
-    box = new Stack<Box>();
+    boxes = new Stack<Box>();
     walkable = true;
     this.door = door;
     this.limit = limit;
@@ -54,7 +54,7 @@ public class Scale extends LevelObject {
   public ItemState hasItem() {
     Logger.log("Scale hasItem");
     Logger.logout();
-    if (!box.isEmpty()) {
+    if (!boxes.isEmpty()) {
       return ItemState.GOTITEM;
     } else {
       return ItemState.NOITEM;
@@ -66,7 +66,7 @@ public class Scale extends LevelObject {
    */
   public void interactCharacter(Character character) {
     Logger.log("Scale interactCharacter");
-    if (box.size() + 1 >= limit) {
+    if (boxes.size() + 1 >= limit) {
       door.setWalkable(true);
     }
     character.setPosition(this);
@@ -93,7 +93,7 @@ public class Scale extends LevelObject {
   public LevelObject getNeighbour(Direction dir, boolean characterCalled) {
     Logger.log("Scale getNeighbour");
 
-    if (characterCalled && box.size() < limit) {
+    if (characterCalled && boxes.size() < limit) {
       Player dummy = new Player(this, null, dir);
       LevelObject neighbour = null;
       switch (dir) {
@@ -136,8 +136,8 @@ public class Scale extends LevelObject {
   @Override
   public void getItem(Player character) {
     Logger.log("Scale getItem");
-    box.pop().pickUp(character);
-    if (box.size() + 1 < limit) {
+    boxes.pop().pickUp(character);
+    if (boxes.size() + 1 < limit) {
       door.setWalkable(false);
     }
     Logger.logout();
@@ -146,8 +146,8 @@ public class Scale extends LevelObject {
   @Override
   public void placeItem(Item item) {
     Logger.log("Scale placeItem");
-    box.push((Box) item);
-    if (box.size() + 1 >= limit) {
+    boxes.push((Box) item);
+    if (boxes.size() + 1 >= limit) {
       door.setWalkable(true);
     }
     Logger.logout();
