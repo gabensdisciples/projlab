@@ -38,7 +38,6 @@ public class SpecWall extends LevelObject {
     return ItemState.FORBIDDENAREA;
   }
 
-  @Override
   public void interactCharacter(Character character) {
     Logger.log("SpecWall interactCharacter");
     if (gate != null) {
@@ -52,7 +51,6 @@ public class SpecWall extends LevelObject {
     Logger.logout();
   }
 
-  @Override
   public void interactBullet(Bullet bullet) {
     Logger.log("SpecWall interactBullet");
     if (gate == null) {

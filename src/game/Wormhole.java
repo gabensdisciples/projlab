@@ -14,9 +14,7 @@ import logger.Logger;
  */
 public final class Wormhole {
   private static Map <Color,SpecWall> specWalls = new HashMap<Color,SpecWall>();
-  /*private static SpecWall blueSpecWall = null;
-  private static SpecWall yellowSpecWall = null;*/
-
+  
   /**
    * Sets the SpecWall objects to the wormhole.
    * 

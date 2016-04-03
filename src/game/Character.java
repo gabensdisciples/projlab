@@ -36,7 +36,10 @@ public abstract class Character {
    */
   public void move(Direction dir) {
     Logger.log("Character move");
-    position.getNeighbour(dir, true).interactCharacter(this);
+    LevelObject target = position.getNeighbour(dir, true);
+    if(target != null) {
+      target.interactCharacter(this);
+    }
     Logger.logout();
   }
 

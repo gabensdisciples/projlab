@@ -41,7 +41,7 @@ public class Bullet {
    */
   public void fly() {
     Logger.log("Bullet fly");
-    while (!collision) {
+    while (!collision && position != null) {
       position.interactBullet(this);
       if (!collision) {
         position = position.getNeighbour(direction, false);
