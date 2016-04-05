@@ -11,9 +11,10 @@ BME-VIK Software Project Laboratory 2016
 </ul>
 
 #Módosítás
-*Ha az ezredes begyűjt 2 ZPM-et, akkor keletkezik egy új ZPM egy véletlenszerű helyen.
-*A labirintusban egy replikátor véletlenszerűen menetel, de csak olyan helyeken, ahol az ezredes is tud menni. Semmivel, az ezredessel sem konfrontálódik (egyszerre állhat ugyanazon a mezőn más elemekkel). Ha a replikátort golyó éri, akkor elpusztul és eltűnik. Ha a replikátor szakadékba esik, akkor a szakadék normál mezővé alakul át, és a replikátor eltűnik.
-*A játékban az ezredes, és ellenfele, egy Jaffa egyszerre keresi a ZPM-eket. A Jaffának piros és zöld lövedékei vannak, amik ugyanúgy párban működnek, mint az ezredes kék-sárga lövedékei. A Jaffa-t és az ezredest két játékos egymástól függetlenül irányítja.
-*A dobozoknak, az ezredesnek és a Jaffának van súlya. A mérlegeknek van súlyhatára, ami alatt nem nyitják az ajtót. Egy mérlegen több doboz is egymásra rakható, stack-szerűen pakolható (levehető, felrakható). Az ezredesnél illetve a Jaffánál maximum egy doboz lehet. Ha a mérlegen az összsúly eléri a kívánt értéket, az ajtó kinyílik, ha a határérték alá csökken, becsukódik.
+<ul>
+<li>Ha az ezredes begyűjt 2 ZPM-et, akkor keletkezik egy új ZPM egy véletlenszerű helyen.</li>
+<li>A labirintusban egy replikátor véletlenszerűen menetel, de csak olyan helyeken, ahol az ezredes is tud menni. Semmivel, az ezredessel sem konfrontálódik (egyszerre állhat ugyanazon a mezőn más elemekkel). Ha a replikátort golyó éri, akkor elpusztul és eltűnik. Ha a replikátor szakadékba esik, akkor a szakadék normál mezővé alakul át, és a replikátor eltűnik.</li>
+<li>A játékban az ezredes, és ellenfele, egy Jaffa egyszerre keresi a ZPM-eket. A Jaffának piros és zöld lövedékei vannak, amik ugyanúgy párban működnek, mint az ezredes kék-sárga lövedékei. A Jaffa-t és az ezredest két játékos egymástól függetlenül irányítja.</li>
+<li>A dobozoknak, az ezredesnek és a Jaffának van súlya. A mérlegeknek van súlyhatára, ami alatt nem nyitják az ajtót. Egy mérlegen több doboz is egymásra rakható, stack-szerűen pakolható (levehető, felrakható). Az ezredesnél illetve a Jaffánál maximum egy doboz lehet. Ha a mérlegen az összsúly eléri a kívánt értéket, az ajtó kinyílik, ha a határérték alá csökken, becsukódik.</li>
 
 Created by the team GabeN's disciples.
