@@ -23,6 +23,7 @@ import logger.Logger;
 public class Scale extends LevelObject {
   private Stack<Box> boxes;
   private Door door;
+  private int weight;
   private int limit;
 
   /**
@@ -42,6 +43,7 @@ public class Scale extends LevelObject {
     super(true);
     boxes = new Stack<Box>();
     walkable = true;
+    weight = 0;
     this.door = door;
     this.limit = limit;
     Logger.log("Scale konstruktor");
@@ -66,7 +68,8 @@ public class Scale extends LevelObject {
    */
   public void interactCharacter(Character character) {
     Logger.log("Scale interactCharacter");
-    if (boxes.size() + 1 >= limit) {
+    weight += 2;
+    if (weight >= limit) {
       door.setWalkable(true);
     }
     character.setPosition(this);
@@ -92,7 +95,7 @@ public class Scale extends LevelObject {
   public LevelObject getNeighbour(Direction dir, boolean characterCalled) {
     Logger.log("Scale getNeighbour");
 
-    if (characterCalled && boxes.size() < limit) {
+    if (characterCalled) {
       Player dummy = new Player(this, null, dir);
       LevelObject neighbour = null;
       switch (dir) {
@@ -113,7 +116,8 @@ public class Scale extends LevelObject {
       }
 
       neighbour.interactCharacter(dummy);
-      if (dummy.getPosition() != this) {
+      weight -= 2;
+      if (dummy.getPosition() != this && weight < limit) {
         door.setWalkable(false);
       }
     }
@@ -136,7 +140,8 @@ public class Scale extends LevelObject {
   public void getItem(Player player) {
     Logger.log("Scale getItem");
     boxes.pop().pickUp(player);
-    if (boxes.size() + 1 < limit) {
+    weight -= 1;
+    if (weight < limit) {
       door.setWalkable(false);
     }
     Logger.logout();
@@ -146,7 +151,8 @@ public class Scale extends LevelObject {
   public void placeItem(Item item) {
     Logger.log("Scale placeItem");
     boxes.push((Box) item);
-    if (boxes.size() + 1 >= limit) {
+    weight += 1;
+    if (weight >= limit) {
       door.setWalkable(true);
     }
     Logger.logout();
