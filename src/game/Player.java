@@ -117,6 +117,9 @@ public class Player extends Character {
         i = 0;
       }
     }
+    if(Zpm.zpmsRemaining == 0) {
+      //Vege a jateknak
+    }
     Logger.logout();
   }
 
