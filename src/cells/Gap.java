@@ -3,6 +3,7 @@ package cells;
 import enumerations.ItemState;
 import game.Bullet;
 import game.Character;
+import game.Player;
 import game.Replicator;
 import game.ReplicatorContainer;
 import items.Item;
@@ -75,6 +76,21 @@ public class Gap extends LevelObject {
     } else {
       bullet.setPosition(this);
     }
+    Logger.logout();
+  }
+  
+  @Override
+  public void getItem(Player player) {
+    Logger.log("Gap getItem");
+    item.pickUp(player);
+    item = null;
+    Logger.logout();
+  }
+
+  @Override
+  public void placeItem(Item item) {
+    Logger.log("Gap placeItem");
+    this.item = item;
     Logger.logout();
   }
 }

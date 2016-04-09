@@ -133,9 +133,9 @@ public class Scale extends LevelObject {
   }
 
   @Override
-  public void getItem(Player character) {
+  public void getItem(Player player) {
     Logger.log("Scale getItem");
-    boxes.pop().pickUp(character);
+    boxes.pop().pickUp(player);
     if (boxes.size() + 1 < limit) {
       door.setWalkable(false);
     }
