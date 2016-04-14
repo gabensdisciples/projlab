@@ -1,7 +1,7 @@
 # projlab
 BME-VIK Software Project Laboratory 2016
-#Current doc (TOP PRIORITY)
-<a href="https://docs.google.com/document/d/1ULkxwkdBdfCze0fYQW3dnzOlRUu_xly6g1kgEHUobxc/edit">8. Részletes tervek dokumentáció</a>
+#Current doc (CODING IS TOP PRIORITY)
+<a href="https://docs.google.com/document/d/1EMLIuczR6zJnjJQuZ6dFYp9tcNy7hhN3AEZQl5A39lI/edit">10. Prototípus beadása</a>
 
 #Useful links
 <ul>
