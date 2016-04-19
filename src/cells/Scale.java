@@ -96,44 +96,46 @@ public class Scale extends LevelObject {
     Logger.log("Scale getNeighbour");
 
     if (characterCalled) {
-      Player dummy = new Player(this, null, dir);
-      LevelObject neighbour = null;
+      // Player dummy = new Player(this, null, dir);
+      // LevelObject neighbour = null;
+      // switch (dir) {
+      // case NORTH:
+      // neighbour = neighbourNorth;
+      // break;
+      // case EAST:
+      // neighbour = neighbourEast;
+      // break;
+      // case SOUTH:
+      // neighbour = neighbourSouth;
+      // break;
+      // case WEST:
+      // neighbour = neighbourWest;
+      // break;
+      // default:
+      // break;
+      // }
+
+      // neighbour.interactCharacter(dummy);
+      // weight -= 2;
+      // if (dummy.getPosition() != this && weight < limit) {
+      // door.setWalkable(false);
+      // }
+      // }
+      Logger.logout();
       switch (dir) {
         case NORTH:
-          neighbour = neighbourNorth;
-          break;
+          return neighbourNorth;
         case EAST:
-          neighbour = neighbourEast;
-          break;
+          return neighbourEast;
         case SOUTH:
-          neighbour = neighbourSouth;
-          break;
+          return neighbourSouth;
         case WEST:
-          neighbour = neighbourWest;
-          break;
+          return neighbourWest;
         default:
-          break;
-      }
-
-      neighbour.interactCharacter(dummy);
-      weight -= 2;
-      if (dummy.getPosition() != this && weight < limit) {
-        door.setWalkable(false);
+          return null;
       }
     }
-    Logger.logout();
-    switch (dir) {
-      case NORTH:
-        return neighbourNorth;
-      case EAST:
-        return neighbourEast;
-      case SOUTH:
-        return neighbourSouth;
-      case WEST:
-        return neighbourWest;
-      default:
-        return null;
-    }
+    return null;
   }
 
   @Override
@@ -161,7 +163,7 @@ public class Scale extends LevelObject {
   public void setDoor(Door door) {
     this.door = door;
   }
-  
+
   public Door getDoor() {
     return this.door;
   }
