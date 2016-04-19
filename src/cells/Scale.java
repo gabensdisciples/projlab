@@ -161,4 +161,8 @@ public class Scale extends LevelObject {
   public void setDoor(Door door) {
     this.door = door;
   }
+  
+  public Door getDoor() {
+    return this.door;
+  }
 }

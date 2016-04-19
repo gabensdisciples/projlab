@@ -179,7 +179,8 @@ public class LevelBuilder {
       levelObject.setNeighbour(Direction.WEST, objectMatrix[columnIndex][rowIndex - 1]);
     }
   }
-
+  
+  // Lehet hibás
   /**
    * Iterates through the matrix, and sets the doors to their scales.
    */
@@ -192,24 +193,31 @@ public class LevelBuilder {
         // Check if it's a door
         if (currentString.substring(0, 1).equals("D")) {
           // If the key is already in the map, we found its scale.
+          currentString = currentString.substring(1);
           if (pairMap.get(currentString) != null) {
+
             if ((pairMap.get(currentString) instanceof Scale) == false) {
               throw new RuntimeException("Unique constraint violation in text file for doors");
             }
+            System.out.println("i = " + i + " j = " + j + " scale = " + currentString);
             Scale scale = (Scale) pairMap.get(currentString);
             scale.setDoor((Door) objectMatrix[i][j]);
           } else {
+
             pairMap.put(currentString, objectMatrix[i][j]);
           } // Check fif it's a scale
         } else if (currentString.length() >= 2 && currentString.substring(0, 2).equals("SC")) {
+          currentString = currentString.substring(2);
           // If the key is already in the map
           if (pairMap.get(currentString) != null) {
+
             if ((pairMap.get(currentString) instanceof Door) == false) {
               throw new RuntimeException("Unique constraint violation in text file for scales");
             }
             Scale scale = (Scale) objectMatrix[i][j];
             scale.setDoor((Door) pairMap.get(currentString));
           } else {
+
             pairMap.put(currentString, objectMatrix[i][j]);
           }
 
@@ -284,7 +292,39 @@ public class LevelBuilder {
     }
     return position;
   }
-
+  
+  public void printObjectPosition(LevelObject levelObject) {
+    for (int i = 0; i < SIZE; i++) {
+      for (int j = 0; j < SIZE; j++) {
+        if (levelObject.equals(objectMatrix[i][j])) {
+          System.out.println(levelObject.getClass().getSimpleName() + " i = " + i + " j = " + j);
+        }
+      }
+    }
+  }
+  
+  public void testScale() {
+    for (int i = 0; i < SIZE; i++) {
+      for (int j = 0; j < SIZE; j++) {
+        if (stringMatrix[i][j].length() >= 2 && stringMatrix[i][j].substring(0, 2).equals("SC")) {
+          System.out.println("Scale found " + i + " " + j);
+          objectMatrix[i][j].setNeighbour(Direction.EAST, objectMatrix[i][j+1]);
+          System.out.println(objectMatrix[i][j].getNeighbour(Direction.EAST, true));
+//          sc.setNeighbour(Direction.NORTH, objectMatrix[0][2]);
+//          LevelObject lo = sc.getNeighbour(Direction.NORTH, true);
+//          System.out.println(lo.getClass().getSimpleName());
+          
+        }
+      }
+    }
+    
+  }
+  
+  public void testNeighbor() {
+    LevelObject lv = objectMatrix[1][2];
+    System.out.println(lv.getNeighbour(Direction.EAST, true));
+  }
+  
   /**
    * Private constructor for the singleton class.
    */

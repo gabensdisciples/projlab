@@ -15,6 +15,7 @@ public class Test2 {
   
   public static void main(String[] args) {
     init();
+    levelBuilder.testScale();
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     String line;
     try {
