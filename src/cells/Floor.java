@@ -93,4 +93,13 @@ public class Floor extends LevelObject {
     this.item = item;
     Logger.logout();
   }
+
+  public Item getBox() {
+    return item;
+  }
+
+  public void setItem(Item item) {
+    this.item = item;
+  }
+  
 }

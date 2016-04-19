@@ -23,7 +23,7 @@ public class Menu {
     // TODO Auto-generated method stub
 
     LevelBuilder levelBuilder = LevelBuilder.getInstance();
-    levelBuilder.init(6);
+    levelBuilder.init();
     levelBuilder.printStringMatrix();
     
     /*A mukodes roviden:  
