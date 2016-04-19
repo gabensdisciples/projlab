@@ -11,6 +11,7 @@ import logger.Logger;
 public class Menu {
 
   private static MenuPoints points;
+  public static int[] randomZpmOffset = {0, 0, 0, 0};
 
   /**
    * Main method to start the game.
@@ -20,12 +21,18 @@ public class Menu {
    */
   public static void main(String[] args) {
     // TODO Auto-generated method stub
-    // Logger.log("Menu main");
-    // Logger.logout();
+
     LevelBuilder levelBuilder = LevelBuilder.getInstance();
     levelBuilder.init(6);
     levelBuilder.printStringMatrix();
-
+    
+    /*A mukodes roviden:  
+     *- levelbuilder es commandhandler init
+     *- commandhandler setautotest
+     *- while(true) : if(autotest) commandhandler.autotest(),
+     *                else commandhandler.getCommand(), commanhandler.executeCommand()
+     */
+    
   }
 
   public static void showHelp() {

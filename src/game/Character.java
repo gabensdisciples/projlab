@@ -14,8 +14,7 @@ import logger.Logger;
 public abstract class Character {
 
   protected LevelObject position;
-
-
+  
   /**
    * Character constructor.
    * 
@@ -33,6 +32,10 @@ public abstract class Character {
    * 
    * @param dir
    *          - the specified direction
+   */
+  
+  /*TODO Itt kimaradt a karakter direction-jenek allitasa.
+   * Ezt azonban itt mar nem tehetjuk meg, mert absztrakt ososztalyba kerult a move.
    */
   public void move(Direction dir) {
     Logger.log("Character move");
@@ -56,7 +59,7 @@ public abstract class Character {
   }
 
   /**
-   * Gets the character's postion.
+   * Gets the character's position.
    * 
    * @return the position as LevelObject
    */

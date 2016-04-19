@@ -324,7 +324,8 @@ public class Test {
     Box box = new Box();
     Floor position = new Floor(true, null);
     Player oneill = new Player(position, Color.YELLOW, Direction.WEST);
-    oneill.drop(box);
+    oneill.setBox(box);
+    oneill.drop();
   }
 
   /**
@@ -334,7 +335,8 @@ public class Test {
     Box box = new Box();
     Floor position = new Floor(true, box);
     Player oneill = new Player(position, Color.YELLOW, Direction.WEST);
-    oneill.drop(box);
+    oneill.setBox(box);
+    oneill.drop();
   }
 
   /**
@@ -395,7 +397,4 @@ public class Test {
   public static void openHelp() {
     Menu.showHelp();
   }
-  
-
-  
 }
