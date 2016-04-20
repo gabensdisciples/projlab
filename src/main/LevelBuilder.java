@@ -321,6 +321,9 @@ public class LevelBuilder {
    * values of characters, when they aren't in the level file.
    */
   public void printStringMatrix() {
+    
+    synchronizeStringMatrix();
+    
     int[] oneillPosition = getOneillPosition();
     int[] jaffaPosition = getJaffaPosition();
     int[] replicatorPosition = getReplicatorPosition();
