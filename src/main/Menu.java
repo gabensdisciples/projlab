@@ -22,18 +22,18 @@ public class Menu {
   public static void main(String[] args) {
     LevelBuilder levelBuilder = LevelBuilder.getInstance();
     levelBuilder.init();
-    CommandHandler commandHandler = new CommandHandler(levelBuilder);
-    commandHandler.setAutoTest();
+    CommandHandler.setLevelBuilder(levelBuilder);
+    CommandHandler.setAutoTest();
     
     while(true) {
-      if(commandHandler.autoTest) {
-        commandHandler.autoTest();
+      if(CommandHandler.autoTest) {
+        CommandHandler.autoTest();
       }
       
       else {
         try {
-          String command = commandHandler.getCommand();
-          commandHandler.executeCommand(command);
+          String command = CommandHandler.getCommand();
+          CommandHandler.executeCommand(command);
         }
         
         catch (Exception e) {
@@ -41,16 +41,6 @@ public class Menu {
         }
       }
     }
-    
-    /*A mukodes roviden:  
-     *- levelbuilder es commandhandler init
-     *- commandhandler setautotest
-     *- while(true) : if(autotest) commandhandler.autotest(),
-     *                else commandhandler.getCommand(), commanhandler.executeCommand()
-     */
-    
-    
-    
   }
 
   public static void showHelp() {
