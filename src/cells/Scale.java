@@ -31,6 +31,8 @@ public class Scale extends LevelObject {
    */
   public Scale() {
     super(true);
+    boxes = new Stack<Box>();
+    walkable = true;
   }
 
   /**
@@ -96,49 +98,33 @@ public class Scale extends LevelObject {
     Logger.log("Scale getNeighbour");
 
     if (characterCalled) {
-      // Player dummy = new Player(this, null, dir);
-      // LevelObject neighbour = null;
-      // switch (dir) {
-      // case NORTH:
-      // neighbour = neighbourNorth;
-      // break;
-      // case EAST:
-      // neighbour = neighbourEast;
-      // break;
-      // case SOUTH:
-      // neighbour = neighbourSouth;
-      // break;
-      // case WEST:
-      // neighbour = neighbourWest;
-      // break;
-      // default:
-      // break;
-      // }
-
-      // neighbour.interactCharacter(dummy);
-      // weight -= 2;
-      // if (dummy.getPosition() != this && weight < limit) {
-      // door.setWalkable(false);
-      // }
-      // }
-      Logger.logout();
+      Player dummy = new Player(this, null, dir);
+      LevelObject neighbour = null;
       switch (dir) {
         case NORTH:
-          door.setWalkable(false);
-          return neighbourNorth;
+          neighbour = neighbourNorth;
+          break;
         case EAST:
-          door.setWalkable(false);
-          return neighbourEast;
+          neighbour = neighbourEast;
+          break;
         case SOUTH:
-          door.setWalkable(false);
-          return neighbourSouth;
+          neighbour = neighbourSouth;
+          break;
         case WEST:
-          door.setWalkable(false);
-          return neighbourWest;
+          neighbour = neighbourWest;
+          break;
         default:
-          return null;
+          break;
+      }
+
+      neighbour.interactCharacter(dummy);
+      weight -= 2;
+      if (dummy.getPosition() != this && weight < limit) {
+        door.setWalkable(false);
       }
     }
+    Logger.logout();
+
     return null;
   }
 
@@ -171,4 +157,5 @@ public class Scale extends LevelObject {
   public Door getDoor() {
     return this.door;
   }
+
 }
