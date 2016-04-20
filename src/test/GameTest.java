@@ -65,7 +65,6 @@ public class GameTest {
         if (jaffa != null) {
           replicatorInteract();
         }
-        levelBuilder.synchronizeStringMatrix();
         levelBuilder.printStringMatrix();
       }
     } catch (IOException exception) {

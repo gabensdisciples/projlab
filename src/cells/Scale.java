@@ -146,6 +146,7 @@ public class Scale extends LevelObject {
   public void placeItem(Item item) {
     Logger.log("Scale placeItem");
     boxes.push((Box) item);
+    System.out.println("Scale placeitem :" +boxes.size());
     weight += 1;
     if (weight >= limit) {
       door.setWalkable(true);
