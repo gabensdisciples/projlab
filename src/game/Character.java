@@ -15,6 +15,8 @@ public abstract class Character {
 
   protected LevelObject position;
   
+  protected Direction direction;
+  
   /**
    * Character constructor.
    * 
@@ -39,6 +41,7 @@ public abstract class Character {
    */
   public void move(Direction dir) {
     Logger.log("Character move");
+    direction = dir;
     LevelObject target = position.getNeighbour(dir, true);
     if(target != null) {
       target.interactCharacter(this);

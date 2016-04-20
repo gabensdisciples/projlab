@@ -12,7 +12,6 @@ public enum Color {
 
   BLUE, YELLOW, GREEN, RED;
 
-  // TODO: Valtozott a szignatura, dokumentalni kell!
   /**
    * Gets the other different color form the actual one.
    * 
