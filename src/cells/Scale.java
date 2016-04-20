@@ -120,9 +120,9 @@ public class Scale extends LevelObject {
       }
 
       neighbour.interactCharacter(dummy);
-      weight -= 2;
-      if (dummy.getPosition() != this &&  weight < limit) {
+      if (dummy.getPosition() != this &&  weight - 2 < limit) {
         door.setWalkable(false);
+        weight -= 2;
       }
     }
     Logger.logout();
@@ -159,5 +159,4 @@ public class Scale extends LevelObject {
   public Door getDoor() {
     return this.door;
   }
-
 }
