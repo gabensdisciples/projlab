@@ -18,14 +18,14 @@ import main.LevelBuilder;
  *
  *   Oneill
  *   - movement      : a, s, d, w
- *   - shoot         : shoot 
+ *   - shoot         : shoot
  *   - take box      : take
  *   - drop box      : drop
  *   - change bullet : change
  *
  *   Jaffa
  *   -movement: 4, 6, 8, 2
- *   - shoot         : jshoot 
+ *   - shoot         : jshoot
  *   - take box      : jtake
  *   - drop box      : jdrop
  *   - change bullet : jchange
@@ -110,7 +110,7 @@ public class GameTest {
         oneill.take();
         break;
       case "drop":
-        oneill.drop(new Box());
+        oneill.drop();
         break;
       case "change":
         oneill.changeColor();
@@ -147,7 +147,7 @@ public class GameTest {
         oneill.take();
         break;
       case "jdrop":
-        oneill.drop(new Box());
+        oneill.drop();
         break;
       case "jchange":
         oneill.changeColor();
