@@ -19,8 +19,6 @@ import main.Menu;
  */
 public class Player extends Character {
 
-  private Direction direction;
-
   private Color bulletColor;
 
   private int zpmCount;
