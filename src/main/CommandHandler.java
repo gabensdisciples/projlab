@@ -347,4 +347,12 @@ public class CommandHandler {
     // If nothing was invalid, then execution was successful
     return true;
   }
+  
+  public void executeCommandLines(String commands) {
+    String[] commandsArray = commands.split("\n");
+    for (String command : commandsArray) {
+      executeCommand(command);
+    }
+  }
+ 
 }
