@@ -190,7 +190,7 @@ public class LevelBuilder {
         } else if (currentString.substring(0, 1).equals("D")) {
           objectMatrix[i][j] = new Door();
         } else if (currentString.length() >= 2 && currentString.substring(0, 2).equals("SC")) {
-          objectMatrix[i][j] = new Scale();
+          objectMatrix[i][j] = new Scale(2);
         } else {
           throw new RuntimeException("Wrong abbreviation in text file.");
         }

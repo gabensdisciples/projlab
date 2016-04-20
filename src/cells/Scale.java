@@ -29,10 +29,12 @@ public class Scale extends LevelObject {
   /**
    * Default constructor.
    */
-  public Scale() {
+  public Scale(int limit) {
     super(true);
     boxes = new Stack<Box>();
     walkable = true;
+    this.limit = limit;
+    this.weight = 0;
   }
 
   /**
@@ -96,10 +98,10 @@ public class Scale extends LevelObject {
   @Override
   public LevelObject getNeighbour(Direction dir, boolean characterCalled) {
     Logger.log("Scale getNeighbour");
-
+    LevelObject neighbour = null;
     if (characterCalled) {
       Player dummy = new Player(this, null, dir);
-      LevelObject neighbour = null;
+      
       switch (dir) {
         case NORTH:
           neighbour = neighbourNorth;
@@ -119,13 +121,13 @@ public class Scale extends LevelObject {
 
       neighbour.interactCharacter(dummy);
       weight -= 2;
-      if (dummy.getPosition() != this && weight < limit) {
+      if (dummy.getPosition() != this &&  weight < limit) {
         door.setWalkable(false);
       }
     }
     Logger.logout();
 
-    return null;
+    return neighbour;
   }
 
   @Override
