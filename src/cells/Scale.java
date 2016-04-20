@@ -124,12 +124,16 @@ public class Scale extends LevelObject {
       Logger.logout();
       switch (dir) {
         case NORTH:
+          door.setWalkable(false);
           return neighbourNorth;
         case EAST:
+          door.setWalkable(false);
           return neighbourEast;
         case SOUTH:
+          door.setWalkable(false);
           return neighbourSouth;
         case WEST:
+          door.setWalkable(false);
           return neighbourWest;
         default:
           return null;
