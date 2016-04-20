@@ -99,33 +99,32 @@ public class Scale extends LevelObject {
   public LevelObject getNeighbour(Direction dir, boolean characterCalled) {
     Logger.log("Scale getNeighbour");
     LevelObject neighbour = null;
+
+    switch (dir) {
+      case NORTH:
+        neighbour = neighbourNorth;
+        break;
+      case EAST:
+        neighbour = neighbourEast;
+        break;
+      case SOUTH:
+        neighbour = neighbourSouth;
+        break;
+      case WEST:
+        neighbour = neighbourWest;
+        break;
+    }
+
     if (characterCalled) {
       Player dummy = new Player(this, null, dir);
-      
-      switch (dir) {
-        case NORTH:
-          neighbour = neighbourNorth;
-          break;
-        case EAST:
-          neighbour = neighbourEast;
-          break;
-        case SOUTH:
-          neighbour = neighbourSouth;
-          break;
-        case WEST:
-          neighbour = neighbourWest;
-          break;
-        default:
-          break;
-      }
 
       neighbour.interactCharacter(dummy);
-      if (dummy.getPosition() != this &&  weight - 2 < limit) {
-        door.setWalkable(false);
+      if (dummy.getPosition() != this && weight - 2 < limit) {
         weight -= 2;
+        door.setWalkable(false);
       }
+      Logger.logout();
     }
-    Logger.logout();
 
     return neighbour;
   }
@@ -159,4 +158,9 @@ public class Scale extends LevelObject {
   public Door getDoor() {
     return this.door;
   }
+
+  public int getBoxNumber() {
+    return boxes.size();
+  }
+
 }
