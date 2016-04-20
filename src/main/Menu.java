@@ -33,10 +33,16 @@ public class Menu {
       else {
         try {
           String command = CommandHandler.getCommand();
-          CommandHandler.executeCommand(command);
+          boolean success = CommandHandler.executeCommand(command);
+          if(!success) {
+            System.out.println("Hibas parancs, add meg ujra!");
+          }
         }
         
         catch (Exception e) {
+          System.out.println("A parancs vegrehajtasa sikertelen volt.");
+          
+          //STACKTRACE NE MARADJON BENNE A VEGLEGES VERZIOBAN!
           e.printStackTrace();
         }
       }

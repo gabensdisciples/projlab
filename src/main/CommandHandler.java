@@ -48,9 +48,11 @@ public class CommandHandler {
     int mode = in.nextInt();
     if (mode == 1) {
       autoTest = true;
+      System.out.println("Automatikus teszteles kivalasztva.");
       return true;
     } else if (mode == 2) {
       autoTest = false;
+      System.out.println("Manualis teszteles kivalasztva. Kerlek, adj parancsokat!");
       return true;
     } else {
       System.out.println("Ervenytelen azonosito, add meg ujra!");
@@ -147,7 +149,7 @@ public class CommandHandler {
       // Try to execute command. If it was a failure, warn user.
       boolean success = executeCommand(command);
       if (!success) {
-        System.out.println("The following command was skipped due to incorrect syntax: " + command);
+        System.out.println("A kovetkezo parancs nem hajtodott vegre hibas szintaxis miatt: " + command);
       }
     }
 
