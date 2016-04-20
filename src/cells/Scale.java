@@ -61,7 +61,7 @@ public class Scale extends LevelObject {
     Logger.log("Scale hasItem");
     Logger.logout();
     if (!boxes.isEmpty()) {
-      return ItemState.GOTITEM;
+      return ItemState.NOITEM;
     } else {
       return ItemState.NOITEM;
     }
@@ -117,8 +117,9 @@ public class Scale extends LevelObject {
 
     if (characterCalled) {
       Player dummy = new Player(this, null, dir);
-
-      neighbour.interactCharacter(dummy);
+      if (neighbour != null) {
+        neighbour.interactCharacter(dummy);
+      }
       if (dummy.getPosition() != this && weight - 2 < limit) {
         weight -= 2;
         door.setWalkable(false);
