@@ -119,10 +119,11 @@ public class Scale extends LevelObject {
       Player dummy = new Player(this, null, dir);
       if (neighbour != null) {
         neighbour.interactCharacter(dummy);
-      }
-      if (dummy.getPosition() != this && weight - 2 < limit) {
-        weight -= 2;
-        door.setWalkable(false);
+        
+        if (dummy.getPosition() != this && weight - 2 < limit) {
+          weight -= 2;
+          door.setWalkable(false);
+        }
       }
       Logger.logout();
     }
