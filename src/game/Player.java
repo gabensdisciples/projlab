@@ -183,7 +183,7 @@ public class Player extends Character {
   public void drop() {
     Logger.log("Player drop");
 
-    if (position.hasItem() == ItemState.NOITEM && box != null) {
+    if (box != null && position.hasItem() == ItemState.NOITEM) {
         position.placeItem(box);
         box = null;
      }
