@@ -391,6 +391,14 @@ public class LevelBuilder {
           } else {
             stringMatrix[i][j] = "FW";
           }
+        } else if (currentObject instanceof Scale) {
+          StringBuilder sb = new StringBuilder();
+          System.out.println(((Scale) currentObject).getBoxNumber());
+          for (int box = 0; box < ((Scale) currentObject).getBoxNumber(); box++) {
+            sb.append("B");
+          }
+          String boxString = sb.toString();
+          stringMatrix[i][j] = (stringMatrix[i][j]).substring(0, 3) + boxString;
         }
       }
     }
