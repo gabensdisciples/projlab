@@ -76,7 +76,6 @@ public abstract class LevelObject {
         return neighbourWest;
       default:
         return null;
-      // TODO: Dobjunk Exception-t defaultn�l?
     }
   }
 

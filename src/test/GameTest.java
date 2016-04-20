@@ -110,7 +110,9 @@ public class GameTest {
         oneill.take();
         break;
       case "drop":
-        oneill.drop(new Box());
+        Box box = new Box();
+        oneill.setBox(box);
+        oneill.drop();
         break;
       case "change":
         oneill.changeColor();
@@ -144,10 +146,12 @@ public class GameTest {
         jaffa.move(Direction.SOUTH);
         break;
       case "jtake":
-        oneill.take();
+        jaffa.take();
         break;
       case "jdrop":
-        oneill.drop(new Box());
+        Box box = new Box();
+        jaffa.setBox(box);
+        jaffa.drop();
         break;
       case "jchange":
         oneill.changeColor();

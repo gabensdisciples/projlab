@@ -29,14 +29,11 @@ public class CommandHandler {
    * @param replicator
    *          - reference to the replicator
    */
-  public CommandHandler(Player oneill, Player jaffa, Replicator replicator, LevelBuilder levelBuilder) {
-    /*
-     * TODO Ha a levelbuilderbol kinyerheto ez a 3 referencia, akkor nem is kell
-     */
+  public CommandHandler(LevelBuilder levelBuilder) {
     this.levelBuilder = levelBuilder;
-    this.oneill = oneill;
-    this.jaffa = jaffa;
-    this.replicator = replicator;
+    oneill = levelBuilder.getOneill();
+    jaffa = levelBuilder.getJaffa();
+    replicator = levelBuilder.getReplicator();
   }
   
   /**
@@ -112,6 +109,9 @@ public class CommandHandler {
     switch (caseNumber) {
       case 1:
         break;
+      case 16:
+        System.exit(0);
+        break;
       default:
         System.out.println("Ervenytelen menupont");
     }
@@ -126,7 +126,6 @@ public class CommandHandler {
     InputStreamReader inputStreamReader = new InputStreamReader(System.in);
     BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
     String command = bufferedReader.readLine();
-    bufferedReader.close();
     return command;
   }
 
@@ -165,10 +164,6 @@ public class CommandHandler {
    * @return true, if execution was successful, else false
    */
   public boolean executeCommand(String command) {
-    /*
-     * TODO Megjegyzes: szokozon valo splitteles miatt fajl eleresi ut szokozt
-     * nem tartalmazhat!
-     */
     String[] commandParams = command.split(" ");
     if (commandParams[0].equals("loadmap")) {
       if (commandParams.length != 2) {

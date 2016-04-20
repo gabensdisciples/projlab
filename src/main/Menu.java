@@ -20,11 +20,27 @@ public class Menu {
    *          - init parameters
    */
   public static void main(String[] args) {
-    // TODO Auto-generated method stub
-
     LevelBuilder levelBuilder = LevelBuilder.getInstance();
     levelBuilder.init();
-    levelBuilder.printStringMatrix();
+    CommandHandler commandHandler = new CommandHandler(levelBuilder);
+    commandHandler.setAutoTest();
+    
+    while(true) {
+      if(commandHandler.autoTest) {
+        commandHandler.autoTest();
+      }
+      
+      else {
+        try {
+          String command = commandHandler.getCommand();
+          commandHandler.executeCommand(command);
+        }
+        
+        catch (Exception e) {
+          e.printStackTrace();
+        }
+      }
+    }
     
     /*A mukodes roviden:  
      *- levelbuilder es commandhandler init
@@ -32,6 +48,8 @@ public class Menu {
      *- while(true) : if(autotest) commandhandler.autotest(),
      *                else commandhandler.getCommand(), commanhandler.executeCommand()
      */
+    
+    
     
   }
 

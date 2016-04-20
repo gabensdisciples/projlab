@@ -35,10 +35,7 @@ public abstract class Character {
    * @param dir
    *          - the specified direction
    */
-  
-  /*TODO Itt kimaradt a karakter direction-jenek allitasa.
-   * Ezt azonban itt mar nem tehetjuk meg, mert absztrakt ososztalyba kerult a move.
-   */
+
   public void move(Direction dir) {
     Logger.log("Character move");
     direction = dir;
