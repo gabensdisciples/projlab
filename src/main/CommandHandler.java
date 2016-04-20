@@ -12,12 +12,12 @@ import game.Replicator;
 
 public class CommandHandler {
 
-  private Player oneill;
-  private Player jaffa;
-  private Replicator replicator;
-  private LevelBuilder levelBuilder;
-  public boolean autoTest;
-  private Scanner in = new Scanner(System.in);
+  private static Player oneill;
+  private static Player jaffa;
+  private static Replicator replicator;
+  private static LevelBuilder levelBuilder;
+  public static boolean autoTest;
+  private static Scanner in = new Scanner(System.in);
 
   /**
    * CommandHandler constructor.
@@ -29,8 +29,8 @@ public class CommandHandler {
    * @param replicator
    *          - reference to the replicator
    */
-  public CommandHandler(LevelBuilder levelBuilder) {
-    this.levelBuilder = levelBuilder;
+  public static void setLevelBuilder(LevelBuilder levelbuilder) {
+    levelBuilder = levelbuilder;
     oneill = levelBuilder.getOneill();
     jaffa = levelBuilder.getJaffa();
     replicator = levelBuilder.getReplicator();
@@ -41,7 +41,7 @@ public class CommandHandler {
    * @return true, if setting was successful, else false
    */
   
-  public boolean setAutoTest() {
+  public static boolean setAutoTest() {
     System.out.println("1. Automatikus teszteles");
     System.out.println("2. Manualis teszteles");
 
@@ -62,7 +62,7 @@ public class CommandHandler {
    * Shows menu and gets commands for automatic testing.
    */
   
-  public void autoTest() {
+  public static void autoTest() {
     int caseNumber = 1;
     System.out.println(caseNumber + ". " + "Toltenyt valt (changeBulletColor())");
     caseNumber++;
@@ -122,7 +122,7 @@ public class CommandHandler {
    * 
    * @return the command extracted from stdin.
    */
-  public String getCommand() throws IOException {
+  public static String getCommand() throws IOException {
     InputStreamReader inputStreamReader = new InputStreamReader(System.in);
     BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
     String command = bufferedReader.readLine();
@@ -137,7 +137,7 @@ public class CommandHandler {
    * @param path
    *          - path of the file to be opened
    */
-  public void processFile(String path) throws IOException {
+  public static void processFile(String path) throws IOException {
     FileReader fileReader = new FileReader(path);
     BufferedReader bufferedReader = new BufferedReader(fileReader);
     String command;
@@ -163,7 +163,7 @@ public class CommandHandler {
    * 
    * @return true, if execution was successful, else false
    */
-  public boolean executeCommand(String command) {
+  public static boolean executeCommand(String command) {
     String[] commandParams = command.split(" ");
     if (commandParams[0].equals("loadmap")) {
       if (commandParams.length != 2) {
@@ -348,11 +348,10 @@ public class CommandHandler {
     return true;
   }
   
-  public void executeCommandLines(String commands) {
+  public static void executeCommandLines(String commands) {
     String[] commandsArray = commands.split("\n");
     for (String command : commandsArray) {
       executeCommand(command);
     }
   }
- 
 }
