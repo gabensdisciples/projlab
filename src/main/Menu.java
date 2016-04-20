@@ -41,16 +41,6 @@ public class Menu {
         }
       }
     }
-    
-    /*A mukodes roviden:  
-     *- levelbuilder es commandhandler init
-     *- commandhandler setautotest
-     *- while(true) : if(autotest) commandhandler.autotest(),
-     *                else commandhandler.getCommand(), commanhandler.executeCommand()
-     */
-    
-    
-    
   }
 
   public static void showHelp() {
