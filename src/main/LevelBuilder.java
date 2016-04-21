@@ -59,9 +59,9 @@ public class LevelBuilder {
   /**
    * Constructs the level by calling the necessary method in order.
    */
-  public void init() {
-    measureLevelSize();
-    createStringMatrix();
+  public void init(String filename) {
+    measureLevelSize(filename);
+    createStringMatrix(filename);
     createObjectMatrix();
     initNeighborDiscovery();
     setScaleDoor();
@@ -80,9 +80,9 @@ public class LevelBuilder {
    * beginning we have already read one line - and set the HEIGHT member
    * variable to the value of the counted rows.
    */
-  public void measureLevelSize() {
+  public void measureLevelSize(String filename) {
     try {
-      InputStream stream = ClassLoader.getSystemResourceAsStream("level.txt");
+      InputStream stream = ClassLoader.getSystemResourceAsStream(filename);
       BufferedReader br = new BufferedReader(new InputStreamReader(stream));
       try {
         int row = 0;
@@ -117,9 +117,9 @@ public class LevelBuilder {
    * a string array splitted by any spaces and put the line at the appropriate
    * row in the string matrix by iterations.
    */
-  public void createStringMatrix() {
+  public void createStringMatrix(String filename) {
     try {
-      InputStream stream = ClassLoader.getSystemResourceAsStream("level.txt");
+      InputStream stream = ClassLoader.getSystemResourceAsStream(filename);
       BufferedReader br = new BufferedReader(new InputStreamReader(stream));
       try {
         String line;

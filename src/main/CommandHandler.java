@@ -171,6 +171,8 @@ public class CommandHandler {
       if (commandParams.length != 2) {
         return false;
       }
+      
+      levelBuilder.init(commandParams[1]);
 
       // TODO Levelbuilder jelenleg nem tamogatja ezt a funkciot
 

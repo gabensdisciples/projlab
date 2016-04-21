@@ -77,7 +77,7 @@ public class GameTest {
    */
   public static void init() {
     levelBuilder = LevelBuilder.getInstance();
-    levelBuilder.init();
+    levelBuilder.init("level.txt");
     levelBuilder.printStringMatrix();
     oneill = levelBuilder.getOneill();
     replicator = levelBuilder.getReplicator();
