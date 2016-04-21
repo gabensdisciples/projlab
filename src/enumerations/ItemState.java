@@ -8,5 +8,5 @@ package enumerations;
  */
 public enum ItemState {
 
-  GOTITEM, NOITEM, FORBIDDENAREA
+  GOTITEM, NOITEM, FORBIDDENAREA, STACKITEM
 }

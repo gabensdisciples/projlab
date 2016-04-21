@@ -187,7 +187,8 @@ public class Player extends Character {
   public void drop() {
     Logger.log("Player drop");
 
-    if (box != null && position.hasItem() == ItemState.NOITEM) {
+    if (box != null && 
+        (position.hasItem() == ItemState.NOITEM || position.hasItem() == ItemState.STACKITEM)) {
         position.placeItem(box);
         box = null;
      }
@@ -206,7 +207,7 @@ public class Player extends Character {
      *  Ugyanakkor nem vizsgalhatunk doboz megletere,
      *  mert ZPM-et is felvehetunk, amit akkor is lehet, ha nincs nalunk doboz.
      */
-    if (position.hasItem() == ItemState.GOTITEM) {
+    if (position.hasItem() == ItemState.GOTITEM || position.hasItem() == ItemState.STACKITEM) {
       position.getItem(this);
     }
 

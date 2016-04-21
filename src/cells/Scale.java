@@ -61,7 +61,7 @@ public class Scale extends LevelObject {
     Logger.log("Scale hasItem");
     Logger.logout();
     if (!boxes.isEmpty()) {
-      return ItemState.NOITEM;
+      return ItemState.STACKITEM;
     } else {
       return ItemState.NOITEM;
     }
