@@ -82,8 +82,9 @@ public class Gap extends LevelObject {
   @Override
   public void getItem(Player player) {
     Logger.log("Gap getItem");
-    item.pickUp(player);
+    Item tmp = item;
     item = null;
+    tmp.pickUp(player);
     Logger.logout();
   }
 
