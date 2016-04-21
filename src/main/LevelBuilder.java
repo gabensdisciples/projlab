@@ -53,6 +53,7 @@ public class LevelBuilder {
     if (instance == null) {
       instance = new LevelBuilder();
     }
+    
     return instance;
   }
 

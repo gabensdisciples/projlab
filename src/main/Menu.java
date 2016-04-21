@@ -21,7 +21,6 @@ public class Menu {
    */
   public static void main(String[] args) {
     LevelBuilder levelBuilder = LevelBuilder.getInstance();
-    levelBuilder.init("level.txt");
     CommandHandler.setLevelBuilder(levelBuilder);
     CommandHandler.setAutoTest();
     

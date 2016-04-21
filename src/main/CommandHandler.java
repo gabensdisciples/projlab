@@ -31,9 +31,6 @@ public class CommandHandler {
    */
   public static void setLevelBuilder(LevelBuilder levelbuilder) {
     levelBuilder = levelbuilder;
-    oneill = levelBuilder.getOneill();
-    jaffa = levelBuilder.getJaffa();
-    replicator = levelBuilder.getReplicator();
   }
   
   /**
@@ -167,15 +164,24 @@ public class CommandHandler {
    */
   public static boolean executeCommand(String command) {
     String[] commandParams = command.split(" ");
+    
     if (commandParams[0].equals("loadmap")) {
       if (commandParams.length != 2) {
         return false;
       }
-      
-      levelBuilder.init(commandParams[1]);
+      try {
+        levelBuilder.init(commandParams[1]);
+        oneill = levelBuilder.getOneill();
+        jaffa = levelBuilder.getJaffa();
+        replicator = levelBuilder.getReplicator();
+      }
 
-      // TODO Levelbuilder jelenleg nem tamogatja ezt a funkciot
-
+      catch (NullPointerException e) {
+        System.out.println("A parancs vegrehajtasa sikertelen volt.");
+        
+        //STACKTRACE NE MARADJON BENNE A VEGLEGES VERZIOBAN!
+        e.printStackTrace();
+      }
       // MOVE
     } else if (commandParams[0].equals("move")) {
       if (commandParams.length != 3) {
