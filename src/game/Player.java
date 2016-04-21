@@ -170,7 +170,11 @@ public class Player extends Character {
    */
   public void setBox(Box box) {
     Logger.log("Player setBox");
-    this.box = box;
+    if (this.box != null) {
+      position.placeItem(box);
+    } else {
+      this.box = box;
+    }
     Logger.logout();
   }
 
