@@ -1,6 +1,7 @@
 package main;
 
 import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -83,8 +84,8 @@ public class LevelBuilder {
    */
   public void measureLevelSize(String filename) {
     try {
-      InputStream stream = ClassLoader.getSystemResourceAsStream(filename);
-      BufferedReader br = new BufferedReader(new InputStreamReader(stream));
+      FileReader stream = new FileReader(filename);
+      BufferedReader br = new BufferedReader(stream);
       try {
         int row = 0;
         String startLine = br.readLine();
@@ -120,8 +121,8 @@ public class LevelBuilder {
    */
   public void createStringMatrix(String filename) {
     try {
-      InputStream stream = ClassLoader.getSystemResourceAsStream(filename);
-      BufferedReader br = new BufferedReader(new InputStreamReader(stream));
+      FileReader stream = new FileReader(filename);
+      BufferedReader br = new BufferedReader(stream);
       try {
         String line;
         int row = 0;
