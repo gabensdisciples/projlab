@@ -769,22 +769,29 @@ public class Test {
     CommandHandler.executeCommand("printmap");
   }
 
+  /**Súgó
+  * 
+  * Súgó megjelenitése Ellenőrzött funkcionalitás, várható hibahelyek
+  * Megjelenik-e parancs beadására a súgó. Bemenet help Elvárt kimenet loadmap
+  * <level file txt> move <character name: oneill, jaffa, replicator>
+  * <direction n, e, s, w> changebullet <character name: oneill, jaffa> shoot
+  * <character name: oneill, jaffa> pickup <character name: oneill, jaffa> drop
+  * <character name: oneill, jaffa> printmap help zpmcount <character name:
+  * oneill, jaffa> setrandomzpmposition <number of steps from oneill in each
+  * direction 0,0,0,0> 
+  */
+  
+  public static void testMethod30() throws IOException {
+    CommandHandler.executeCommand("help");
+  }
+  
   /**
-   * --------------------- SC1 | O | D1 | --------------------- Súgó
-   * 
-   * Súgó megjelenitése Ellenőrzött funkcionalitás, várható hibahelyek
-   * Megjelenik-e parancs beadására a súgó. Bemenet help Elvárt kimenet loadmap
-   * <level file txt> move <character name: oneill, jaffa, replicator>
-   * <direction n, e, s, w> changebullet <character name: oneill, jaffa> shoot
-   * <character name: oneill, jaffa> pickup <character name: oneill, jaffa> drop
-   * <character name: oneill, jaffa> printmap help zpmcount <character name:
-   * oneill, jaffa> setrandomzpmposition <number of steps from oneill in each
-   * direction 0,0,0,0> Pálya betöltés Leírás Ellenőrzött funkcionalitás,
+   * --------------------- SC1 | O | D1 | --------------------- Pálya betöltés Leírás Ellenőrzött funkcionalitás,
    * várható hibahelyek Teszteli, hogy az adott fájlból a várt pálya jött-e
    * létre.
    */
 
-  public static void testMethod30() throws IOException {
+  public static void testMethod31() throws IOException {
     File mapFile = new File("level_test31.txt");
     if (!mapFile.exists()) {
       mapFile.createNewFile();
@@ -808,7 +815,7 @@ public class Test {
    * pozicíón fog megjelenni. Várható hibák: ZPM nem jelenik meg.
    */
 
-  public static void testMethod31() throws IOException {
+  public static void testMethod32() throws IOException {
     File mapFile = new File("level_test32.txt");
     if (!mapFile.exists()) {
       mapFile.createNewFile();
@@ -835,7 +842,7 @@ public class Test {
    * folytatódik, miután elfogytak a ZMP-ek.
    */
 
-  public static void testMethod32() throws IOException {
+  public static void testMethod33() throws IOException {
     File mapFile = new File("level_test32.txt");
     if (!mapFile.exists()) {
       mapFile.createNewFile();
@@ -849,7 +856,6 @@ public class Test {
   }
 
   /**
-   * Játék vége
    * 
    * ZPM számláló növekedés
    * 
@@ -858,7 +864,7 @@ public class Test {
    * Várható hibák: A zpmCount nem növekszik
    */
 
-  public static void testMethod33() throws IOException {
+  public static void testMethod34() throws IOException {
     File mapFile = new File("level_test35.txt");
     if (!mapFile.exists()) {
       mapFile.createNewFile();
