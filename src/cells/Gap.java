@@ -1,7 +1,5 @@
 package cells;
 
-// + SetWalkable() változás
-
 import enumerations.ItemState;
 import game.Bullet;
 import game.Character;
@@ -52,10 +50,12 @@ public class Gap extends LevelObject {
   public void interactCharacter(Character character) {
     Logger.log("Gap interactCharacter");
     if (!walkable) {
+      System.out.println("!walkable");
+      character.setPosition(this);
       if (ReplicatorContainer.getReplicator(this) != null) {
+        System.out.println("walkable = true");
         walkable = true;
       }
-      character.setPosition(this);
       character.die();
     } else {
       character.setPosition(this);
@@ -97,17 +97,4 @@ public class Gap extends LevelObject {
     this.item = item;
     Logger.logout();
   }
-  
-  /**
-   * Set the gap object's walkable property.
-   * 
-   * @param walkable
-   *          - property
-   */
-  public void setWalkable(boolean walkable) {
-    this.walkable = walkable;
-    Logger.log("Gap setWalkable");
-    Logger.logout();
-  }
-  
 }

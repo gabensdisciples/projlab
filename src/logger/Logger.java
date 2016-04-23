@@ -39,7 +39,7 @@ public class Logger {
       string = "\t" + string;
     }
     current += string + "\n";
-//    System.out.println(string);
+    System.out.println(string);
     try {
       logFileStream = new FileOutputStream(logFile, true);
       BufferedWriter logBufferedWriter = new BufferedWriter(new OutputStreamWriter(logFileStream));

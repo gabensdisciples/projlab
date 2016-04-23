@@ -16,8 +16,6 @@ public class Replicator extends Character {
   public void die() {
     Logger.log("Replicator die");
     //GUI itt szedi le a replikatort
-    Gap gap = (Gap) this.getPosition();
-    gap.setWalkable(true);
     ReplicatorContainer.remove(this);
     Logger.logout();
   }
