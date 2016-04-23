@@ -28,7 +28,7 @@ public class Test {
    * SPy | FWO | SPb |
    */
 
-  public static void changeBulletColor() throws IOException {
+  public static boolean changeBulletColor() throws IOException {
     File mapFile = new File("level_test1.txt");
     if (!mapFile.exists()) {
       mapFile.createNewFile();
@@ -44,8 +44,9 @@ public class Test {
     CommandHandler.executeCommand("shoot oneill");
     CommandHandler.executeCommand("printmap");
     
-    System.out.println(CommandHandler.levelBuilder.getLevelAsString());
-    System.out.println(CommandHandler.levelBuilder.getLevelAsString2());
+    String expectedOutput = "[[SPy, FWO, SPb]]";
+    String printMapOutput = CommandHandler.levelBuilder.getLevelAsString();
+    return expectedOutput.equals(printMapOutput);
   }
 
   /**
@@ -62,7 +63,7 @@ public class Test {
    * FWO | SPb |
    */
 
-  public static void shootBullet() throws IOException {
+  public static boolean shootBullet() throws IOException {
     File mapFile = new File("level_test2.txt");
     if (!mapFile.exists()) {
       mapFile.createNewFile();
@@ -74,6 +75,11 @@ public class Test {
     CommandHandler.executeCommand("move oneill e");
     CommandHandler.executeCommand("shoot oneill");
     CommandHandler.executeCommand("printmap");
+    
+    //System.out.println("String expectedOutput = " + "\"" + CommandHandler.levelBuilder.getLevelAsString() + "\";");
+    String expectedOutput = "[[FWO, SPb]]";
+    String printMapOutput = CommandHandler.levelBuilder.getLevelAsString();
+    return expectedOutput.equals(printMapOutput);
   }
 
   /**

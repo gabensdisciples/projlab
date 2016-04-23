@@ -140,15 +140,15 @@ public class CommandHandler {
 
     caseNumber = in.nextInt();
     System.out.println(caseNumber);
-
+    boolean outputMatchesExpected = false;
     // TODO Kitolteni ha veglegesek a tesztek
     try {
       switch (caseNumber) {
         case 1:
-          Test.changeBulletColor();
+          outputMatchesExpected = Test.changeBulletColor();
           break;
         case 2:
-          Test.shootBullet();
+          outputMatchesExpected = Test.shootBullet();
           break;
         case 3:
           Test.bulletMeetsWall();
@@ -252,9 +252,11 @@ public class CommandHandler {
         default:
           System.out.println("Ervenytelen menupont");
       }
+      System.out.println(outputMatchesExpected);
     } catch (IOException e) {
       System.out.println("Palyafajl hiba");
     }
+
   }
 
   /**
