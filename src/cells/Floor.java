@@ -6,7 +6,9 @@ import game.Character;
 import game.Player;
 import game.Replicator;
 import game.ReplicatorContainer;
+import items.Box;
 import items.Item;
+import items.Zpm;
 import logger.Logger;
 
 /**
@@ -95,12 +97,22 @@ public class Floor extends LevelObject {
     Logger.logout();
   }
 
-  public Item getBox() {
-    return item;
-  }
-
   public void setItem(Item item) {
     this.item = item;
+  }
+  
+  public Box getBox() {
+    if (item instanceof Box) {
+      return (Box) item;
+    }
+    return null;
+  }
+  
+  public Zpm getZpm() {
+    if (item instanceof Zpm) {
+      return (Zpm) item;
+    }
+    return null;
   }
   
 }

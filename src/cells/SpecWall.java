@@ -81,4 +81,9 @@ public class SpecWall extends LevelObject {
     }
     Logger.logout();
   }
+  
+  public StarGate getStarGate() {
+    return this.gate;
+  }
+  
 }

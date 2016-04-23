@@ -44,7 +44,7 @@ public class LevelBuilder {
   public LevelObject[][] objectMatrix;
 
   public String[][] stringMatrix;
-
+  
   /**
    * Creates a single instance of the class.
    * 
@@ -54,7 +54,7 @@ public class LevelBuilder {
     if (instance == null) {
       instance = new LevelBuilder();
     }
-    
+
     return instance;
   }
 
@@ -152,7 +152,7 @@ public class LevelBuilder {
    * For example if at the 2, 4 indexes in the string matrix there's an FW it
    * makes a walkable floor in the object matrix at 2, 4.
    * 
-   * In case of scales and doors it cuts the indentifier from the end of the
+   * In case of scales and doors it cuts the identifier from the end of the
    * string. The scale door pairs will be set later in the setScaleDoor method.
    * 
    * If the method found a string that can't identify, throws an exception.
@@ -207,7 +207,7 @@ public class LevelBuilder {
    * Details:
    * 
    * The method iterates over the object matrix, and calls the setNeighbours()
-   * method on each levelobject.
+   * method on each level object.
    */
   public void initNeighborDiscovery() {
     for (int i = 0; i < HEIGHT; i++) {
@@ -263,7 +263,7 @@ public class LevelBuilder {
    * gets the map value belongs to the current door's unique identifier as a
    * key. If it finds a door throws an exception, if it finds a scale sets the
    * door to the scale If none of them was found it puts the door as value to
-   * the map. It's key is the identifer from the current object.
+   * the map. It's key is the identifier from the current object.
    * 
    * If it finds a scale as current object does the same, cut the identifer, and
    * checks what is in the map...
@@ -284,7 +284,6 @@ public class LevelBuilder {
             if ((pairMap.get(currentString) instanceof Scale) == false) {
               throw new RuntimeException("Unique constraint violation in text file for doors");
             }
-            System.out.println("i = " + i + " j = " + j + " scale = " + currentString);
             Scale scale = (Scale) pairMap.get(currentString);
             scale.setDoor((Door) objectMatrix[i][j]);
           } else {
@@ -323,12 +322,12 @@ public class LevelBuilder {
    * values of characters, when they aren't in the level file.
    */
   public void printStringMatrix() {
-    
+
     synchronizeStringMatrix();
-    
-    int[] oneillPosition = getOneillPosition();
-    int[] jaffaPosition = getJaffaPosition();
-    int[] replicatorPosition = getReplicatorPosition();
+
+    // int[] oneillPosition = getOneillPosition();
+    // int[] jaffaPosition = getJaffaPosition();
+    // int[] replicatorPosition = getReplicatorPosition();
     StringBuilder sb = new StringBuilder();
     sb.append(" ");
     for (int s = 0; s < (WIDTH) * 6; s++) {
@@ -337,73 +336,132 @@ public class LevelBuilder {
     System.out.println("\n" + sb.toString());
     for (int i = 0; i < HEIGHT; i++) {
       for (int j = 0; j < WIDTH; j++) {
-        Boolean oneillFound;
-        Boolean jaffaFound;
-        Boolean replicatorFound;
+        // Boolean oneillFound;
+        // Boolean jaffaFound;
+        // Boolean replicatorFound;
+        //
+        // if (oneillPosition == null) {
+        // oneillFound = false;
+        // } else {
+        // oneillFound = new Boolean(i == oneillPosition[0] && j ==
+        // oneillPosition[1]);
+        // }
+        // if (jaffaPosition == null) {
+        // jaffaFound = false;
+        // } else {
+        // jaffaFound = new Boolean(i == jaffaPosition[0] && j ==
+        // jaffaPosition[1]);
+        // }
+        // if (replicatorPosition == null) {
+        // replicatorFound = false;
+        // } else {
+        // replicatorFound = new Boolean(i == replicatorPosition[0] && j ==
+        // replicatorPosition[1]);
+        // }
 
-        if (oneillPosition == null) {
-          oneillFound = false;
-        } else {
-          oneillFound = new Boolean(i == oneillPosition[0] && j == oneillPosition[1]);
-        }
-        if (jaffaPosition == null) {
-          jaffaFound = false;
-        } else {
-          jaffaFound = new Boolean(i == jaffaPosition[0] && j == jaffaPosition[1]);
-        }
-        if (replicatorPosition == null) {
-          replicatorFound = false;
-        } else {
-          replicatorFound = new Boolean(i == replicatorPosition[0] && j == replicatorPosition[1]);
-        }
+        // Boolean anyFound = (oneillFound || jaffaFound || replicatorFound);
+        // String oneillString = "O";
+        // /*String.valueOf(Character.toChars(0x1F600));*/
+        // String jaffaString = "J";
+        // /*String.valueOf(Character.toChars(0x1F606));*/
+        // String replicatorString = "R";
+        // /*String.valueOf(Character.toChars(0x1F639));*/
+        // Boolean[] foundBoolean = { oneillFound, jaffaFound, replicatorFound
+        // };
+        // String[] foundString = { oneillString, jaffaString, replicatorString
+        // };
 
-        Boolean anyFound = (oneillFound || jaffaFound || replicatorFound);
-        String oneillString = String.valueOf(Character.toChars(0x1F600));
-        String jaffaString = String.valueOf(Character.toChars(0x1F606));
-        String replicatorString = String.valueOf(Character.toChars(0x1F639));
-        Boolean[] foundBoolean = { oneillFound, jaffaFound, replicatorFound };
-        String[] foundString = { oneillString, jaffaString, replicatorString };
-
-        if (anyFound) {
-          System.out.print(" |  ");
-          for (int k = 0; k < foundBoolean.length; k++) {
-            if (foundBoolean[k] == true) {
-              System.out.print(foundString[k]);
-            }
-          }
-          System.out.print("   ");
-        } else {
-          System.out.print(" | " + String.format("%3s", stringMatrix[i][j]));
-        }
+        // if (anyFound) {
+        // System.out.print(" | ");
+        // for (int k = 0; k < foundBoolean.length; k++) {
+        // if (foundBoolean[k] == true) {
+        // System.out.print(foundString[k]);
+        // }
+        // }
+        // System.out.print(" ");
+        // } else {
+        System.out.print(" | " + String.format("%3s", stringMatrix[i][j]));
+        // }
 
       }
       System.out.print(" | " + "\n" + sb.toString() + "\n");
     }
   }
 
+  
+  
   /**
    * If the player modify any level object, basically it doesn't appear in the
    * string matrix. This method iterates through the object matrix, checks
    * changes and makes the appropriate changes in the string matrix also.
    */
   public void synchronizeStringMatrix() {
+//    if (((Floor) objectMatrix[0][1]).getBox() != null) {
+//      System.out.println("Van box");
+//    } else {
+//      System.out.println("Nincs box");
+//    }
     for (int i = 0; i < HEIGHT; i++) {
       for (int j = 0; j < WIDTH; j++) {
+        
+        
         LevelObject currentObject = objectMatrix[i][j];
+        // Floor
         if (currentObject instanceof Floor) {
-          if (((Floor) currentObject).getBox() != null) {
-            stringMatrix[i][j] = "FB";
+          String floorName;
+          Floor floor = (Floor) currentObject;
+          if (floor.isWalkable()) {
+            floorName = "FW";
           } else {
-            stringMatrix[i][j] = "FW";
+            floorName = "FNW";
           }
-        } else if (currentObject instanceof Scale) {
+          if (floor.getBox() != null) {
+            floorName += "B";
+          }
+          if (floor.getZpm() != null) {
+            floorName += "Z";
+          }
+          stringMatrix[i][j] = floorName;
+        }
+        // Scale
+        if (currentObject instanceof Scale) {
+          Scale scale = (Scale) currentObject;
+          System.out.println("Scale: " + scale.getBoxNumber());
           StringBuilder sb = new StringBuilder();
-          System.out.println(((Scale) currentObject).getBoxNumber());
-          for (int box = 0; box < ((Scale) currentObject).getBoxNumber(); box++) {
+          for (int boxNumber = 0; boxNumber < scale.getBoxNumber(); boxNumber++) {
             sb.append("B");
           }
-          String boxString = sb.toString();
-          stringMatrix[i][j] = (stringMatrix[i][j]).substring(0, 3) + boxString;
+          String boxes = sb.toString();
+          stringMatrix[i][j] = stringMatrix[i][j].split("(?<=[0-9])(?=[a-zA-Z])")[0] + boxes;
+        }
+        // Door
+        if (currentObject instanceof Door) {
+          String doorName = stringMatrix[i][j].split("(?<=[0-9])(?=[a-zA-Z])")[0];
+          if (((Door) currentObject).isWalkable()) {
+            stringMatrix[i][j] = doorName + "W";
+          } else {
+            stringMatrix[i][j] = doorName + "NW";
+          }
+        }
+        // SpecWall
+        if (currentObject instanceof SpecWall) {
+          SpecWall specWall = (SpecWall) currentObject;
+          if (specWall.getStarGate() != null) {
+            String color = specWall.getStarGate().getColor().name();
+            stringMatrix[i][j] = stringMatrix[i][j].substring(0, 2) + color.substring(0, 1).toLowerCase();
+          }
+        }
+        // O'neill
+        if (oneill != null && currentObject.equals(oneill.getPosition())) {
+          stringMatrix[i][j] += "O";
+        }
+        // Jaffa
+        if (jaffa != null && currentObject.equals(jaffa.getPosition())) {
+          stringMatrix[i][j] += "J";
+        }
+        // Replicator
+        if (replicator != null && currentObject.equals(replicator.getPosition())) {
+          stringMatrix[i][j] += "R";
         }
       }
     }

@@ -53,7 +53,6 @@ public class GameTest {
     init();
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     String line;
-
     try {
       while ((line = br.readLine()) != null) {
         if (oneill != null) {
@@ -63,7 +62,7 @@ public class GameTest {
           replicatorInteract();
         }
         if (jaffa != null) {
-          replicatorInteract();
+          jaffaInteract(line);
         }
         levelBuilder.printStringMatrix();
       }
@@ -73,11 +72,11 @@ public class GameTest {
   }
 
   /**
-   * LevelBuilder initalization.
+   * LevelBuilder initialization.
    */
   public static void init() {
     levelBuilder = LevelBuilder.getInstance();
-    levelBuilder.init("level.txt");
+    levelBuilder.init("C:\\Users\\Mate\\Desktop\\projlab\\level\\level.txt");
     levelBuilder.printStringMatrix();
     oneill = levelBuilder.getOneill();
     replicator = levelBuilder.getReplicator();
@@ -153,10 +152,10 @@ public class GameTest {
         jaffa.drop();
         break;
       case "jchange":
-        oneill.changeColor();
+        jaffa.changeColor();
         break;
       case "jshoot":
-        oneill.shoot();
+        jaffa.shoot();
         break;
       default:
         break;
