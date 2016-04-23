@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -396,15 +397,8 @@ public class LevelBuilder {
    * changes and makes the appropriate changes in the string matrix also.
    */
   public void synchronizeStringMatrix() {
-//    if (((Floor) objectMatrix[0][1]).getBox() != null) {
-//      System.out.println("Van box");
-//    } else {
-//      System.out.println("Nincs box");
-//    }
     for (int i = 0; i < HEIGHT; i++) {
-      for (int j = 0; j < WIDTH; j++) {
-        
-        
+      for (int j = 0; j < WIDTH; j++) {        
         LevelObject currentObject = objectMatrix[i][j];
         // Floor
         if (currentObject instanceof Floor) {
@@ -432,6 +426,7 @@ public class LevelBuilder {
             sb.append("B");
           }
           String boxes = sb.toString();
+          System.out.println(stringMatrix[i][j].split("(?<=[0-9])(?=[a-zA-Z])")[0]);
           stringMatrix[i][j] = stringMatrix[i][j].split("(?<=[0-9])(?=[a-zA-Z])")[0] + boxes;
         }
         // Door
@@ -467,72 +462,22 @@ public class LevelBuilder {
     }
   }
 
-  /**
-   * Finds O'neill position in the objectMatrix.
-   * 
-   * @return the coordinates
-   */
-  public int[] getOneillPosition() {
-    int[] position = new int[2];
-    if (oneill == null) {
-      throw new NullPointerException("No oneill in level file!");
-    }
-    LevelObject oneillPositon = oneill.getPosition();
+  
+  public String getLevelAsString() {
+    String levelString = Arrays.deepToString(stringMatrix);
+    return levelString;
+  }
+  
+  public String getLevelAsString2() {
+    StringBuilder sb = new StringBuilder();
     for (int i = 0; i < HEIGHT; i++) {
-      for (int j = 0; j < WIDTH; j++) {
-        if (objectMatrix[i][j].equals(oneillPositon)) {
-          position[0] = i;
-          position[1] = j;
-        }
+      for (int j = 0; j < WIDTH; j++) {   
+        sb.append(stringMatrix[i][j]);
       }
     }
-    return position;
+    return sb.toString();
   }
-
-  /**
-   * Finds jaffa's position in the objectMatrix.
-   * 
-   * @return the coordinates
-   */
-  public int[] getJaffaPosition() {
-    int[] position = new int[2];
-    if (jaffa == null) {
-      return null;
-    }
-    LevelObject jaffaPositon = jaffa.getPosition();
-    for (int i = 0; i < HEIGHT; i++) {
-      for (int j = 0; j < WIDTH; j++) {
-        if (objectMatrix[i][j].equals(jaffaPositon)) {
-          position[0] = i;
-          position[1] = j;
-        }
-      }
-    }
-    return position;
-  }
-
-  /**
-   * Finds the replicator's position in the objectMatrix.
-   * 
-   * @return the coordinates
-   */
-  public int[] getReplicatorPosition() {
-    int[] position = new int[2];
-    if (replicator == null) {
-      return null;
-    }
-    LevelObject replicatorPositon = replicator.getPosition();
-    for (int i = 0; i < HEIGHT; i++) {
-      for (int j = 0; j < WIDTH; j++) {
-        if (objectMatrix[i][j].equals(replicatorPositon)) {
-          position[0] = i;
-          position[1] = j;
-        }
-      }
-    }
-    return position;
-  }
-
+  
   /**
    * Private constructor for the singleton class.
    */

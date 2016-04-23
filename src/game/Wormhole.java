@@ -13,8 +13,8 @@ import logger.Logger;
  * 
  */
 public final class Wormhole {
-  private static Map <Color,SpecWall> specWalls = new HashMap<Color,SpecWall>();
-  
+  private static Map<Color, SpecWall> specWalls = new HashMap<Color, SpecWall>();
+
   /**
    * Sets the SpecWall objects to the wormhole.
    * 
@@ -25,7 +25,7 @@ public final class Wormhole {
    */
   public static void setSpecWall(SpecWall specWall, Color color) {
     Logger.log("Wormhole setSpecWall");
-    if(specWalls.containsKey(color)){
+    if (specWalls.containsKey(color)) {
       specWalls.remove(color);
     }
     specWalls.put(color, specWall);
@@ -42,10 +42,9 @@ public final class Wormhole {
   public static SpecWall getSpecWall(Color color) {
     Logger.log("Wormhole getSpecWall");
     Logger.logout();
-    if(specWalls.containsKey(color)){
+    if (specWalls.containsKey(color)) {
       return specWalls.get(color);
-    }
-    else {
+    } else {
       return null;
     }
   }

@@ -8,7 +8,6 @@ import java.util.Random;
 import enumerations.Direction;
 import game.Player;
 import game.Replicator;
-import items.Box;
 import main.LevelBuilder;
 
 /**
@@ -55,6 +54,7 @@ public class GameTest {
     String line;
     try {
       while ((line = br.readLine()) != null) {
+        
         if (oneill != null) {
           oneillInteract(line);
         }
@@ -108,8 +108,6 @@ public class GameTest {
         oneill.take();
         break;
       case "drop":
-        Box box = new Box();
-        oneill.setBox(box);
         oneill.drop();
         break;
       case "change":
@@ -147,8 +145,6 @@ public class GameTest {
         jaffa.take();
         break;
       case "jdrop":
-        Box box = new Box();
-        jaffa.setBox(box);
         jaffa.drop();
         break;
       case "jchange":
