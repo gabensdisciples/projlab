@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Scanner;
 
+import test.Test;
 import enumerations.Direction;
 import game.Player;
 import game.Replicator;
@@ -32,12 +33,13 @@ public class CommandHandler {
   public static void setLevelBuilder(LevelBuilder levelbuilder) {
     levelBuilder = levelbuilder;
   }
-  
+
   /**
    * Sets autotest per user's choice.
+   * 
    * @return true, if setting was successful, else false
    */
-  
+
   public static boolean setAutoTest() {
     System.out.println("1. Automatikus teszteles");
     System.out.println("2. Manualis teszteles");
@@ -60,59 +62,198 @@ public class CommandHandler {
   /**
    * Shows menu and gets commands for automatic testing.
    */
-  
+
   public static void autoTest() {
+    System.out.println("Nyomj egy entert a menu megjelenitesehez");
+    in.nextLine();
+    in.nextLine();
     int caseNumber = 1;
     System.out.println(caseNumber + ". " + "Toltenyt valt (changeBulletColor())");
     caseNumber++;
-    System.out.println(caseNumber + ". " + "Sugo (openHelp())");
+    System.out.println(caseNumber + ". " + "Lő (shootBullet())");
     caseNumber++;
-    System.out.println("Felvesz tesztesetek:");
-    System.out.println("\t" + caseNumber + ". " + "Felvesz dobozt (pickupBox())");
+    System.out.println(caseNumber + ". " + "Lövedék falnak ütközik (bulletMeetsWall())");
     caseNumber++;
-    System.out.println("\t" + caseNumber + ". " + "Felvenne, de nincs mit (pickupForbidden())");
+    System.out.println(caseNumber + ". " + "Lövedék speciális falnak ütközik (bulletMeetsSpecWall())");
     caseNumber++;
-    System.out.println("\t" + caseNumber + ". " + "Felvesz ZPM-et (pickupZPM())");
+    System.out.println(caseNumber + ". " + "Lövedék replikátornak ütközik (bulletMeetsReplicator())");
     caseNumber++;
-    System.out.println("Letesz tesztesetek:");
-    System.out.println("\t" + caseNumber + ". " + "Letesz dobozt (placeBox())");
+    System.out.println(caseNumber + ". " + "Lövedék ajtóba ütközik (bulletMeetsDoor())");
     caseNumber++;
-    System.out.println("\t" + caseNumber + ". " + "Letenne, de nem tud (placeBoxForbidden())");
+    System.out.println(caseNumber + ". " + "Lövedék nem ütközik (bulletFly())");
     caseNumber++;
-    System.out.println("Loves tesztesetek:");
-    System.out.println("\t" + caseNumber + ". " + "Lo zart ajtora vagy falra (shootDoorOrWall())");
+    System.out.println(caseNumber + ". " + "Tárgyat sikeresen felvesz (pickupItemSuccessfully())");
     caseNumber++;
-    System.out.println("\t" + caseNumber + ". " + "Lo atjarható mezok felett (shootOverWalkable())");
+    System.out.println(caseNumber + ". " + "Tárgyat felvesz tiltott mezőről (pickupItemFromForbiddenArea())");
     caseNumber++;
-    System.out.println("\t" + caseNumber + ". " + "Lo Spec Fal (shootSpecWall())");
+    System.out.println(caseNumber + ". " + "Tárgyat felvesz tárgyat nem tartalmazó mezőről (pickupItemNoItem())");
     caseNumber++;
-    System.out.println("Lepes tesztesetek:");
-    System.out.println("\t" + caseNumber + ". " + "Ajtora lep (walkDoor())");
+    System.out.println(caseNumber + ". " + "Dobozt felvesz, de már van (pickupSecondBox())");
     caseNumber++;
-    System.out.println("\t" + caseNumber + ". " + "Lep (walkFloorOrWall())");
+    System.out.println(caseNumber + ". " + "Dobozt felvesz mérlegről (pickupBoxFromScale())");
     caseNumber++;
-    System.out.println("\t" + caseNumber + ". " + "Szakadekba lep (walkGap())");
+    System.out.println(caseNumber + ". " + "Dobozt sikeresen letesz (dropBoxSuccesfully())");
     caseNumber++;
-    System.out.println("\t" + caseNumber + ". " + "Merlegre lep (walkScale())");
+    System.out.println(caseNumber + ". " + "Dobozt letesz tiltott mezőre (dropBoxForbiddenArea())");
     caseNumber++;
-    System.out.println("\t" + caseNumber + ". " + "Feregjaratba lep (walkSpecWallStarGate())");
+    System.out.println(caseNumber + ". " + "Dobozt letesz tárgyat tartalmazó mezőre (dropBoxGotItem())");
     caseNumber++;
-    System.out.println(caseNumber + ". " + "Kilepes a programbol");
+    System.out.println(caseNumber + ". " + "Dobozt letesz, de még nincs (dropBoxNoBox())");
+    caseNumber++;
+    System.out.println(caseNumber + ". " + "Dobozt letesz mérlegre (dropBoxOnScale())");
+    caseNumber++;
+    System.out.println(caseNumber + ". " + "Karakter átjárható mezőre lép (stepOnWalkable())");
+    caseNumber++;
+    System.out.println(caseNumber + ". " + "Karakter falnak ütközik (playerHitWall())");
+    caseNumber++;
+    System.out.println(caseNumber + ". " + "Karakter szakadékba lép (stepOnGap())");
+    caseNumber++;
+    System.out.println(caseNumber + ". " + "Replikátor szakadékba lép (replicatorStepOnGap())");
+    caseNumber++;
+    System.out.println(caseNumber + ". " + "Karakter csillagkapuba lép (stepOnStarGate())");
+    caseNumber++;
+    System.out.println(caseNumber + ". " + "Karakter féregjáratba lép (stepInWormHole())");
+    caseNumber++;
+    System.out.println(caseNumber + ". " + "Karakter ajtóba ütközik (stepOnDoorNonWalkable())");
+    caseNumber++;
+    System.out.println(caseNumber + ". " + "Karakter nyílt ajtóra lép (stepOnDoorWalkable())");
+    caseNumber++;
+    System.out.println(caseNumber + ". " + "Karakter mérlegre lép (stepOnScale())");
+    caseNumber++;
+    System.out.println(caseNumber + ". " + "Karakter mérlegről lelép (stepOffScale())");
+    caseNumber++;
+    System.out.println(caseNumber + ". " + "Mérleg aktiválása (activateScale())");
+    caseNumber++;
+    System.out.println(caseNumber + ". " + "Mérleg deaktiválása (deActivateScale())");
+    caseNumber++;
+    System.out.println(caseNumber + ". " + "Súgó (helpTest())");
+    caseNumber++;
+    System.out.println(caseNumber + ". " + "Pálya betöltés (loadMapTest())");
+    caseNumber++;
+    System.out.println(caseNumber + ". " + "Harmadik ZPM megjelenése (thirdZpmAppear())");
+    caseNumber++;
+    System.out.println(caseNumber + ". " + "Játék befejezése (gameOver())");
+    caseNumber++;
+    System.out.println(caseNumber + ". " + "ZPM számláló növekedés (zpmCountIncrement())");
 
     System.out.println("\nKerlek valaszd ki a teszteset kodjat: ");
 
     caseNumber = in.nextInt();
     System.out.println(caseNumber);
-    
-    //TODO Kitolteni ha veglegesek a tesztek
-    switch (caseNumber) {
-      case 1:
-        break;
-      case 16:
-        System.exit(0);
-        break;
-      default:
-        System.out.println("Ervenytelen menupont");
+
+    // TODO Kitolteni ha veglegesek a tesztek
+    try {
+      switch (caseNumber) {
+        case 1:
+          Test.changeBulletColor();
+          break;
+        case 2:
+          Test.shootBullet();
+          break;
+        case 3:
+          Test.bulletMeetsWall();
+          break;
+        case 4:
+          Test.bulletMeetsSpecWall();
+          break;
+        case 5:
+          Test.bulletMeetsReplicator();
+          break;
+        case 6:
+          Test.bulletMeetsDoor();
+          break;
+        case 7:
+          Test.bulletFly();
+          break;
+        case 8:
+          Test.pickupItemSuccessfully();
+          break;
+        case 9:
+          Test.pickupItemFromForbiddenArea();
+          break;
+        case 10:
+          Test.pickupItemNoItem();
+          break;
+        case 11:
+          Test.pickupSecondBox();
+          break;
+        case 12:
+          Test.pickupBoxFromScale();
+          break;
+        case 13:
+          Test.dropBoxSuccesfully();
+          break;
+        case 14:
+          Test.dropBoxForbiddenArea();
+          break;
+        case 15:
+          Test.dropBoxGotItem();
+          break;
+        case 16:
+          Test.dropBoxNoBox();
+          break;
+        case 17:
+          Test.dropBoxOnScale();
+          break;
+        case 18:
+          Test.stepOnWalkable();
+          break;
+        case 19:
+          Test.playerHitWall();
+          break;
+        case 20:
+          Test.stepOnGap();
+          break;
+        case 21:
+          Test.replicatorStepOnGap();
+          break;
+        case 22:
+          Test.stepOnStarGate();
+          break;
+        case 23:
+          Test.stepInWormHole();
+          break;
+        case 24:
+          Test.stepOnDoorNonWalkable();
+          break;
+        case 25:
+          Test.stepOnDoorWalkable();
+          break;
+        case 26:
+          Test.stepOnScale();
+          break;
+        case 27:
+          Test.stepOffScale();
+          break;
+        case 28:
+          Test.activateScale();
+          break;
+        case 29:
+          Test.deActivateScale();
+          break;
+        case 30:
+          Test.helpTest();
+          break;
+        case 31:
+          Test.loadMapTest();
+          break;
+        case 32:
+          Test.thirdZpmAppear();
+          break;
+        case 33:
+          Test.gameOver();
+          break;
+        case 34:
+          Test.zpmCountIncrement();
+          break;
+        case 35:
+          System.exit(0);
+          break;
+        default:
+          System.out.println("Ervenytelen menupont");
+      }
+    } catch (IOException e) {
+      System.out.println("Palyafajl hiba");
     }
   }
 
@@ -164,7 +305,7 @@ public class CommandHandler {
    */
   public static boolean executeCommand(String command) {
     String[] commandParams = command.split(" ");
-    
+
     if (commandParams[0].equals("loadmap")) {
       if (commandParams.length != 2) {
         return false;
@@ -178,8 +319,8 @@ public class CommandHandler {
 
       catch (NullPointerException e) {
         System.out.println("A parancs vegrehajtasa sikertelen volt.");
-        
-        //STACKTRACE NE MARADJON BENNE A VEGLEGES VERZIOBAN!
+
+        // STACKTRACE NE MARADJON BENNE A VEGLEGES VERZIOBAN!
         e.printStackTrace();
       }
       // MOVE
@@ -357,7 +498,7 @@ public class CommandHandler {
     // If nothing was invalid, then execution was successful
     return true;
   }
-  
+
   public static void executeCommandLines(String commands) {
     String[] commandsArray = commands.split("\n");
     for (String command : commandsArray) {
