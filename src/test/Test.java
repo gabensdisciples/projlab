@@ -332,7 +332,6 @@ public class Test {
     CommandHandler.executeCommand("move oneill w");
     CommandHandler.executeCommand("printmap");
     
-    //System.out.println("String expectedOutput = " + "\"" + CommandHandler.levelBuilder.getLevelAsString() + "\";\n" + "String printMapOutput = CommandHandler.levelBuilder.getLevelAsString();\n" + "return expectedOutput.equals(printMapOutput);");
     String expectedOutput = "[[FWO, FW, FW]]";
     String printMapOutput = CommandHandler.levelBuilder.getLevelAsString();
     return expectedOutput.equals(printMapOutput);
@@ -349,7 +348,7 @@ public class Test {
    *   FW |  FW | FWBO |
    */
 
-  public static void pickupSecondBox() throws IOException {
+  public static boolean pickupSecondBox() throws IOException {
     File mapFile = new File("level_test11.txt");
     if (!mapFile.exists()) {
       mapFile.createNewFile();
@@ -363,6 +362,10 @@ public class Test {
     CommandHandler.executeCommand("move oneill e");
     CommandHandler.executeCommand("pickup oneill");
     CommandHandler.executeCommand("printmap");
+
+    String expectedOutput = "[[FW, FW, FWBO]]";
+    String printMapOutput = CommandHandler.levelBuilder.getLevelAsString();
+    return expectedOutput.equals(printMapOutput);
   }
 
   /**
@@ -376,7 +379,7 @@ public class Test {
    * FW | FWBO | SC1 | D1NW |
    */
 
-  public static void pickupBoxFromScale() throws IOException {
+  public static boolean pickupBoxFromScale() throws IOException {
     File mapFile = new File("level_test12.txt");
     if (!mapFile.exists()) {
       mapFile.createNewFile();
@@ -393,6 +396,10 @@ public class Test {
     CommandHandler.executeCommand("move oneill w");
     CommandHandler.executeCommand("drop oneill");
     CommandHandler.executeCommand("printmap");
+    
+    String expectedOutput = "[[FW, FWBO, SC1, D1NW]]";
+    String printMapOutput = CommandHandler.levelBuilder.getLevelAsString();
+    return expectedOutput.equals(printMapOutput);
   }
 
   /**
@@ -406,7 +413,7 @@ public class Test {
    * FW |  FW | FWBO |
    */
 
-  public static void dropBoxSuccesfully() throws IOException {
+  public static boolean dropBoxSuccesfully() throws IOException {
     File mapFile = new File("level_test13.txt");
     if (!mapFile.exists()) {
       mapFile.createNewFile();
@@ -420,6 +427,10 @@ public class Test {
     CommandHandler.executeCommand("move oneill e");
     CommandHandler.executeCommand("drop oneill");
     CommandHandler.executeCommand("printmap");
+    
+    String expectedOutput = "[[FW, FW, FWBO]]";
+    String printMapOutput = CommandHandler.levelBuilder.getLevelAsString();
+    return expectedOutput.equals(printMapOutput);
   }
 
   /**
@@ -433,7 +444,7 @@ public class Test {
    * FW |  FW | SPbO |
    */
 
-  public static void dropBoxForbiddenArea() throws IOException {
+  public static boolean dropBoxForbiddenArea() throws IOException {
     File mapFile = new File("level_test14.txt");
     if (!mapFile.exists()) {
       mapFile.createNewFile();
@@ -448,6 +459,10 @@ public class Test {
     CommandHandler.executeCommand("move oneill e");
     CommandHandler.executeCommand("drop oneill");
     CommandHandler.executeCommand("printmap");
+    
+    String expectedOutput = "[[FW, FW, SPbO]]";
+    String printMapOutput = CommandHandler.levelBuilder.getLevelAsString();
+    return expectedOutput.equals(printMapOutput);
   }
 
   /**
@@ -462,7 +477,7 @@ public class Test {
    * FWO | FW | FWZ | FWB |
    */
 
-  public static void dropBoxGotItem() throws IOException {
+  public static boolean dropBoxGotItem() throws IOException {
     File mapFile = new File("level_test15.txt");
     if (!mapFile.exists()) {
       mapFile.createNewFile();
@@ -481,6 +496,10 @@ public class Test {
     CommandHandler.executeCommand("move oneill w");
     CommandHandler.executeCommand("move oneill w");
     CommandHandler.executeCommand("printmap");
+    
+    String expectedOutput = "[[FWO, FW, FWZ, FWB]]";
+    String printMapOutput = CommandHandler.levelBuilder.getLevelAsString();
+    return expectedOutput.equals(printMapOutput);
   }
 
   /**
@@ -494,7 +513,7 @@ public class Test {
    * FWO | FW |
    */
 
-  public static void dropBoxNoBox() throws IOException {
+  public static boolean dropBoxNoBox() throws IOException {
     File mapFile = new File("level_test16.txt");
     if (!mapFile.exists()) {
       mapFile.createNewFile();
@@ -507,6 +526,10 @@ public class Test {
     CommandHandler.executeCommand("drop oneill");
     CommandHandler.executeCommand("move oneill w");
     CommandHandler.executeCommand("printmap");
+    
+    String expectedOutput = "[[FWO, FW]]";
+    String printMapOutput = CommandHandler.levelBuilder.getLevelAsString();
+    return expectedOutput.equals(printMapOutput);
   }
 
   /**
@@ -521,7 +544,7 @@ public class Test {
    * FW | FW | SC1BO | D1W |
    */
 
-  public static void dropBoxOnScale() throws IOException {
+  public static boolean dropBoxOnScale() throws IOException {
     File mapFile = new File("level_test17.txt");
     if (!mapFile.exists()) {
       mapFile.createNewFile();
@@ -535,6 +558,10 @@ public class Test {
     CommandHandler.executeCommand("move oneill e");
     CommandHandler.executeCommand("drop oneill");
     CommandHandler.executeCommand("printmap");
+    
+    String expectedOutput = "[[FW, FW, SC1BO, D1W]]";
+    String printMapOutput = CommandHandler.levelBuilder.getLevelAsString();
+    return expectedOutput.equals(printMapOutput);
   }
 
   /**
@@ -547,7 +574,7 @@ public class Test {
    * FW | FWO |
    */
 
-  public static void stepOnWalkable() throws IOException {
+  public static boolean stepOnWalkable() throws IOException {
     File mapFile = new File("level_test18.txt");
     if (!mapFile.exists()) {
       mapFile.createNewFile();
@@ -558,6 +585,10 @@ public class Test {
     CommandHandler.executeCommand("loadmap level_test18.txt");
     CommandHandler.executeCommand("move oneill e");
     CommandHandler.executeCommand("printmap");
+    
+    String expectedOutput = "[[FW, FWO]]";
+    String printMapOutput = CommandHandler.levelBuilder.getLevelAsString();
+    return expectedOutput.equals(printMapOutput);
   }
 
   /**
@@ -572,7 +603,7 @@ public class Test {
    * FW | FWO | FNW |
    */
 
-  public static void playerHitWall() throws IOException {
+  public static boolean playerHitWall() throws IOException {
     File mapFile = new File("level_test19.txt");
     if (!mapFile.exists()) {
       mapFile.createNewFile();
@@ -584,6 +615,10 @@ public class Test {
     CommandHandler.executeCommand("move oneill e");
     CommandHandler.executeCommand("move oneill e");
     CommandHandler.executeCommand("printmap");
+    
+    String expectedOutput = "[[FW, FWO, FNW]]";
+    String printMapOutput = CommandHandler.levelBuilder.getLevelAsString();
+    return expectedOutput.equals(printMapOutput);
   }
 
   /**
@@ -598,7 +633,7 @@ public class Test {
    * FW | FW | G |
    */
 
-  public static void stepOnGap() throws IOException {
+  public static boolean stepOnGap() throws IOException {
     File mapFile = new File("level_test20.txt");
     if (!mapFile.exists()) {
       mapFile.createNewFile();
@@ -610,7 +645,10 @@ public class Test {
     CommandHandler.executeCommand("move oneill e");
     CommandHandler.executeCommand("move oneill e");
     CommandHandler.executeCommand("printmap");
-    
+
+    String expectedOutput = "[[FW, FW, G]]";
+    String printMapOutput = CommandHandler.levelBuilder.getLevelAsString();
+    return expectedOutput.equals(printMapOutput);
   }
 
   /**
@@ -627,7 +665,7 @@ public class Test {
    * Szakadék walkable == true 
    */
 
-  public static void replicatorStepOnGap() throws IOException {
+  public static boolean replicatorStepOnGap() throws IOException {
     File mapFile = new File("level_test21.txt");
     if (!mapFile.exists()) {
       mapFile.createNewFile();
@@ -638,6 +676,10 @@ public class Test {
     CommandHandler.executeCommand("loadmap level_test21.txt");
     CommandHandler.executeCommand("move replicator e");
     CommandHandler.executeCommand("printmap");
+    //TODO ha akarunk extra ellenőrzst (replikátor halál, szakadék walkable, az jöhet ide)
+    String expectedOutput = "[[FW, GW]]";
+    String printMapOutput = CommandHandler.levelBuilder.getLevelAsString();
+    return expectedOutput.equals(printMapOutput);
   }
 
   /**
@@ -651,7 +693,7 @@ public class Test {
    * | FW | FW | SPbO |
    */
 
-  public static void stepOnStarGate() throws IOException {
+  public static boolean stepOnStarGate() throws IOException {
     File mapFile = new File("level_test22.txt");
     if (!mapFile.exists()) {
       mapFile.createNewFile();
@@ -664,6 +706,10 @@ public class Test {
     CommandHandler.executeCommand("shoot oneill");
     CommandHandler.executeCommand("move oneill e");
     CommandHandler.executeCommand("printmap");
+    
+    String expectedOutput = "[[FW, FW, SPbO]]";
+    String printMapOutput = CommandHandler.levelBuilder.getLevelAsString();
+    return expectedOutput.equals(printMapOutput);
   }
 
   /**
@@ -677,7 +723,7 @@ public class Test {
    * SPy | FW | FW | SPbO |
    */
 
-  public static void stepInWormHole() throws IOException {
+  public static boolean stepInWormHole() throws IOException {
     File mapFile = new File("level_test23.txt");
     if (!mapFile.exists()) {
       mapFile.createNewFile();
@@ -695,6 +741,9 @@ public class Test {
     CommandHandler.executeCommand("printmap");
     
     //TODO féregjárat nem helyez át, lőhető két ugyanolyan színű stargate két különböző specwallra
+    String expectedOutput = "[[SPy, FW, FW, SPbO]]";
+    String printMapOutput = CommandHandler.levelBuilder.getLevelAsString();
+    return expectedOutput.equals(printMapOutput);
   }
 
   /**
@@ -707,7 +756,7 @@ public class Test {
    * SC1 | FWO | D1NW|
    */
 
-  public static void stepOnDoorNonWalkable() throws IOException {
+  public static boolean stepOnDoorNonWalkable() throws IOException {
     File mapFile = new File("level_test24.txt");
     if (!mapFile.exists()) {
       mapFile.createNewFile();
@@ -718,6 +767,10 @@ public class Test {
     CommandHandler.executeCommand("loadmap level_test24.txt");
     CommandHandler.executeCommand("move oneill e");
     CommandHandler.executeCommand("printmap");
+    
+    String expectedOutput = "[[SC1, FWO, D1NW]]";
+    String printMapOutput = CommandHandler.levelBuilder.getLevelAsString();
+    return expectedOutput.equals(printMapOutput);
   }
 
   /**
@@ -728,10 +781,10 @@ public class Test {
    * hibák: Ajtó nincs nyitva, miután a mérleg aktíválta. Karakter nem tudd
    * rálépni a nyilt ajtóra.
    * 
-   * FW | FW | FW | SC1B | D1WO |
+   * FW | FW | FW | SC1BB | D1WO |
    */
 
-  public static void stepOnDoorWalkable() throws IOException {
+  public static boolean stepOnDoorWalkable() throws IOException {
     File mapFile = new File("level_test25.txt");
     if (!mapFile.exists()) {
       mapFile.createNewFile();
@@ -751,6 +804,10 @@ public class Test {
     CommandHandler.executeCommand("drop oneill");
     CommandHandler.executeCommand("move oneill e");
     CommandHandler.executeCommand("printmap");
+    
+    String expectedOutput = "[[FW, FW, FW, SC1BB, D1WO]]";
+    String printMapOutput = CommandHandler.levelBuilder.getLevelAsString();
+    return expectedOutput.equals(printMapOutput);
   }
 
   /** 
@@ -763,7 +820,7 @@ public class Test {
    * FW | SC1O | D1W |
    */
 
-  public static void stepOnScale() throws IOException {
+  public static boolean stepOnScale() throws IOException {
     File mapFile = new File("level_test26.txt");
     if (!mapFile.exists()) {
       mapFile.createNewFile();
@@ -774,6 +831,10 @@ public class Test {
     CommandHandler.executeCommand("loadmap level_test26.txt");
     CommandHandler.executeCommand("move oneill e");
     CommandHandler.executeCommand("printmap");
+    
+    String expectedOutput = "[[FW, SC1O, D1W]]";
+    String printMapOutput = CommandHandler.levelBuilder.getLevelAsString();
+    return expectedOutput.equals(printMapOutput);
   }
 
   /**
@@ -786,7 +847,7 @@ public class Test {
    * FW | SC1 | FWO | D1NW |
    */
 
-  public static void stepOffScale() throws IOException {
+  public static boolean stepOffScale() throws IOException {
     File mapFile = new File("level_test27.txt");
     if (!mapFile.exists()) {
       mapFile.createNewFile();
@@ -798,6 +859,10 @@ public class Test {
     CommandHandler.executeCommand("move oneill e");
     CommandHandler.executeCommand("move oneill e");
     CommandHandler.executeCommand("printmap");
+    
+    String expectedOutput = "[[FW, SC1, FWO, D1NW]]";
+    String printMapOutput = CommandHandler.levelBuilder.getLevelAsString();
+    return expectedOutput.equals(printMapOutput);
   }
 
   /**
@@ -811,7 +876,7 @@ public class Test {
    * FW | SC1O | D1W |
    */
 
-  public static void activateScale() throws IOException {
+  public static boolean activateScale() throws IOException {
     File mapFile = new File("level_test28.txt");
     if (!mapFile.exists()) {
       mapFile.createNewFile();
@@ -822,6 +887,10 @@ public class Test {
     CommandHandler.executeCommand("loadmap level_test28.txt");
     CommandHandler.executeCommand("move oneill e");
     CommandHandler.executeCommand("printmap");
+    
+    String expectedOutput = "[[FW, SC1O, D1W]]";
+    String printMapOutput = CommandHandler.levelBuilder.getLevelAsString();
+    return expectedOutput.equals(printMapOutput);
   }
 
   /**
@@ -835,7 +904,7 @@ public class Test {
    * SC1 | FWO | D1NW |
    */
 
-  public static void deActivateScale() throws IOException {
+  public static boolean deActivateScale() throws IOException {
     File mapFile = new File("level_test29.txt");
     if (!mapFile.exists()) {
       mapFile.createNewFile();
@@ -847,6 +916,10 @@ public class Test {
     CommandHandler.executeCommand("move oneill w");
     CommandHandler.executeCommand("move oneill e");
     CommandHandler.executeCommand("printmap");
+
+    String expectedOutput = "[[SC1, FWO, D1NW]]";
+    String printMapOutput = CommandHandler.levelBuilder.getLevelAsString();
+    return expectedOutput.equals(printMapOutput);
   }
 
   /**
@@ -864,6 +937,15 @@ public class Test {
   
   public static void helpTest() throws IOException {
     CommandHandler.executeCommand("help");
+    
+    String expectedOutput = "loadmap <level file txt>\n"
+        + "move <character name: oneill, jaffa, replicator> <direction n, e, s, w>\n"
+        + "changebullet <character name: oneill, jaffa>\n" + "shoot <character name: oneill, jaffa>\n"
+        + "pickup <character name: oneill, jaffa>\n" + "drop <character name: oneill, jaffa>\n" + "printmap\n"
+        + "help\n" + "zpmcount <character name: oneill, jaffa>\n"
+        + "setrandomzpmposition <number of steps from oneill in each direction 0,0,0,0>\n";
+  
+  //TODO hogyan kéne ezt elkapni
   }
   
   /**
@@ -877,7 +959,7 @@ public class Test {
    * FWZ |  SP |   G |   G | 
    */
 
-  public static void loadMapTest() throws IOException {
+  public static boolean loadMapTest() throws IOException {
     File mapFile = new File("level_test31.txt");
     if (!mapFile.exists()) {
       mapFile.createNewFile();
@@ -890,7 +972,9 @@ public class Test {
     System.out.println(CommandHandler.levelBuilder.getLevelAsString2());
     CommandHandler.executeCommand("printmap");
     
-    
+    String expectedOutput = "[[FW, FNW, SC1, D1NW], [FWO, FWJ, FWR, FWB], [FWZ, SP, G, G]]";
+    String printMapOutput = CommandHandler.levelBuilder.getLevelAsString();
+    return expectedOutput.equals(printMapOutput);    
   }
 
   /**
@@ -904,7 +988,7 @@ public class Test {
    * FW | FW | FWO | FW | FZ |
    */
 
-  public static void thirdZpmAppear() throws IOException {
+  public static boolean thirdZpmAppear() throws IOException {
     File mapFile = new File("level_test32.txt");
     if (!mapFile.exists()) {
       mapFile.createNewFile();
@@ -919,6 +1003,10 @@ public class Test {
     CommandHandler.executeCommand("move oneill e");
     CommandHandler.executeCommand("pickup oneill ");
     CommandHandler.executeCommand("printmap");
+    
+    String expectedOutput = "[[FW, FW, FWO, FW, FWZ]]";
+    String printMapOutput = CommandHandler.levelBuilder.getLevelAsString();
+    return expectedOutput.equals(printMapOutput);
   }
 
   /**
@@ -942,6 +1030,9 @@ public class Test {
     CommandHandler.executeCommand("move oneill e");
     CommandHandler.executeCommand("pickup oneill");
     
+    //Alább az elvárt kimenet megíró, aktuális kimenet lekérés megíró, return megírü sor
+    //System.out.println("String expectedOutput = " + "\"" + CommandHandler.levelBuilder.getLevelAsString() + "\";\n" + "String printMapOutput = CommandHandler.levelBuilder.getLevelAsString();\n" + "return expectedOutput.equals(printMapOutput);");
+
     //TODO Játék fejeződjön be?
   }
 

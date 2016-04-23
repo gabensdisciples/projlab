@@ -175,70 +175,70 @@ public class CommandHandler {
           outputMatchesExpected = Test.pickupItemNoItem();
           break;
         case 11:
-          Test.pickupSecondBox();
+          outputMatchesExpected = Test.pickupSecondBox();
           break;
         case 12:
-          Test.pickupBoxFromScale();
+          outputMatchesExpected = Test.pickupBoxFromScale();
           break;
         case 13:
-          Test.dropBoxSuccesfully();
+          outputMatchesExpected = Test.dropBoxSuccesfully();
           break;
         case 14:
-          Test.dropBoxForbiddenArea();
+          outputMatchesExpected = Test.dropBoxForbiddenArea();
           break;
         case 15:
-          Test.dropBoxGotItem();
+          outputMatchesExpected = Test.dropBoxGotItem();
           break;
         case 16:
-          Test.dropBoxNoBox();
+          outputMatchesExpected = Test.dropBoxNoBox();
           break;
         case 17:
-          Test.dropBoxOnScale();
+          outputMatchesExpected = Test.dropBoxOnScale();
           break;
         case 18:
-          Test.stepOnWalkable();
+          outputMatchesExpected = Test.stepOnWalkable();
           break;
         case 19:
-          Test.playerHitWall();
+          outputMatchesExpected = Test.playerHitWall();
           break;
         case 20:
-          Test.stepOnGap();
+          outputMatchesExpected = Test.stepOnGap();
           break;
         case 21:
-          Test.replicatorStepOnGap();
+          outputMatchesExpected = Test.replicatorStepOnGap();
           break;
         case 22:
-          Test.stepOnStarGate();
+          outputMatchesExpected = Test.stepOnStarGate();
           break;
         case 23:
-          Test.stepInWormHole();
+          outputMatchesExpected = Test.stepInWormHole();
           break;
         case 24:
-          Test.stepOnDoorNonWalkable();
+          outputMatchesExpected = Test.stepOnDoorNonWalkable();
           break;
         case 25:
-          Test.stepOnDoorWalkable();
+          outputMatchesExpected = Test.stepOnDoorWalkable();
           break;
         case 26:
-          Test.stepOnScale();
+          outputMatchesExpected = Test.stepOnScale();
           break;
         case 27:
-          Test.stepOffScale();
+          outputMatchesExpected = Test.stepOffScale();
           break;
         case 28:
-          Test.activateScale();
+          outputMatchesExpected = Test.activateScale();
           break;
         case 29:
-          Test.deActivateScale();
+          outputMatchesExpected = Test.deActivateScale();
           break;
         case 30:
           Test.helpTest();
           break;
         case 31:
-          Test.loadMapTest();
+          outputMatchesExpected = Test.loadMapTest();
           break;
         case 32:
-          Test.thirdZpmAppear();
+          outputMatchesExpected = Test.thirdZpmAppear();
           break;
         case 33:
           Test.gameOver();
