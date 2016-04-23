@@ -670,7 +670,7 @@ public class Test {
    * Teszteli, hogy a karakter a helyén marad-e, ha zárt ajtónak ütközik.
    * Várható hibák: Karaktár átlép az ajtóra, úgy hogy az zárva van.
    * 
-   * SC1 | O | D1 |
+   * SC1 | FWO | D1NW|
    */
 
   public static void stepOnDoorNonWalkable() throws IOException {
@@ -749,7 +749,7 @@ public class Test {
    * Teszteli, hogy a karakter a tömegével leszáll-e a mérlegről. Várható hibák:
    * Karakter mérlegen marad, walkable-re lépés után.
    * 
-   * FW | SC1 | O | D1 |
+   * FW | SC1 | FWO | D1NW |
    */
 
   public static void stepOffScale() throws IOException {
@@ -798,7 +798,7 @@ public class Test {
    * átlépésekor inaktívra vált-e. Várható hibák: Mérleg aktív marad, miután a
    * rajta lévő súly a limitje alá esik.
    * 
-   * SC1 | O | D1 |
+   * SC1 | FWO | D1NW |
    */
 
   public static void deActivateScale() throws IOException {
@@ -838,9 +838,9 @@ public class Test {
    * várható hibahelyek Teszteli, hogy az adott fájlból a várt pálya jött-e
    * létre.
    * 
-   * FW | FNW | SC1 | D1 |
-   * FWO | FWJ | FWR | FWB |
-   * FWZ | SP | G | G |
+   * FW | FNW | SC1 | D1NW | 
+   * FWO | FWJ | FWR | FWB | 
+   * FWZ |  SP |   G |   G | 
    */
 
   public static void loadMapTest() throws IOException {
@@ -852,6 +852,11 @@ public class Test {
     mapFileWriter.print("FW FNW SC1 D1\nO J R FB\nFZ SP G G");
     mapFileWriter.close();
     CommandHandler.executeCommand("loadmap level_test31.txt");
+    System.out.println(CommandHandler.levelBuilder.getLevelAsString());
+    System.out.println(CommandHandler.levelBuilder.getLevelAsString2());
+    CommandHandler.executeCommand("printmap");
+    
+    
   }
 
   /**
@@ -902,6 +907,8 @@ public class Test {
     CommandHandler.executeCommand("loadmap level_test32.txt");
     CommandHandler.executeCommand("move oneill e");
     CommandHandler.executeCommand("pickup oneill");
+    
+    //TODO Játék fejeződjön be?
   }
 
   /**
@@ -926,10 +933,12 @@ public class Test {
     mapFileWriter.print("FZ O FZ");
     mapFileWriter.close();
     CommandHandler.executeCommand("zpmcount oneill");
-    CommandHandler.executeCommand("loadmap level_test35.txt");
+    CommandHandler.executeCommand("loadmap level_test34.txt");
     CommandHandler.executeCommand("move oneill e");
     CommandHandler.executeCommand("pickup oneill");
     CommandHandler.executeCommand("printmap");
     CommandHandler.executeCommand("zpmcount oneill");
+    
+    //TODO nincs zpmcount-ja playernek
   }
 }

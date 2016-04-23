@@ -465,11 +465,13 @@ public class LevelBuilder {
 
   
   public String getLevelAsString() {
+    synchronizeStringMatrix();
     String levelString = Arrays.deepToString(stringMatrix);
     return levelString;
   }
   
   public String getLevelAsString2() {
+    synchronizeStringMatrix();
     StringBuilder sb = new StringBuilder();
     for (int i = 0; i < HEIGHT; i++) {
       for (int j = 0; j < WIDTH; j++) {   
