@@ -214,6 +214,7 @@ public class Player extends Character {
 
   public void die() {
     Logger.log("Player die");
+    this.position = null;
     //TODO Game Reset
     Logger.logout();
   }
