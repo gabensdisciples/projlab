@@ -186,9 +186,11 @@ public class Player extends Character {
   //TODO nincs parametere, vissza kell vezetni!
   public void drop() {
     Logger.log("Player drop");
-
+    
+    ItemState state = position.hasItem();
+    
     if (box != null && 
-        (position.hasItem() == ItemState.NOITEM || position.hasItem() == ItemState.STACKITEM)) {
+        (state == ItemState.NOITEM || state == ItemState.STACKITEM)) {
         position.placeItem(box);
         box = null;
      }
@@ -200,14 +202,10 @@ public class Player extends Character {
    * Takes a box.
    */
   public void take() {
-    Logger.log("Player take");
+    Logger.log("Player take");    
     
-    /* TODO Ez igy hibas. Ugyanis ha van a playernel doboz,
-     *  akkor azt felulirja az ujjal, es igy eltunt egy doboz az eterben.
-     *  Ugyanakkor nem vizsgalhatunk doboz megletere,
-     *  mert ZPM-et is felvehetunk, amit akkor is lehet, ha nincs nalunk doboz.
-     */
-    if (position.hasItem() == ItemState.GOTITEM || position.hasItem() == ItemState.STACKITEM) {
+    ItemState state = position.hasItem();
+    if (state == ItemState.GOTITEM || state == ItemState.STACKITEM) {
       position.getItem(this);
     }
 
