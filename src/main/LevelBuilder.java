@@ -19,6 +19,7 @@ import enumerations.Color;
 import enumerations.Direction;
 import game.Player;
 import game.Replicator;
+import game.ReplicatorContainer;
 import items.Box;
 import items.Zpm;
 
@@ -455,7 +456,7 @@ public class LevelBuilder {
           stringMatrix[i][j] += "J";
         }
         // Replicator
-        if (replicator != null && currentObject.equals(replicator.getPosition())) {
+        if (replicator != null && ReplicatorContainer.getReplicator(currentObject) != null) {
           stringMatrix[i][j] += "R";
         }
       }
