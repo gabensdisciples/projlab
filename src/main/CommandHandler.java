@@ -151,28 +151,28 @@ public class CommandHandler {
           outputMatchesExpected = Test.shootBullet();
           break;
         case 3:
-          Test.bulletMeetsWall();
+          outputMatchesExpected = Test.bulletMeetsWall();
           break;
         case 4:
-          Test.bulletMeetsSpecWall();
+          outputMatchesExpected = Test.bulletMeetsSpecWall();
           break;
         case 5:
-          Test.bulletMeetsReplicator();
+          outputMatchesExpected = Test.bulletMeetsReplicator();
           break;
         case 6:
-          Test.bulletMeetsDoor();
+          outputMatchesExpected = Test.bulletMeetsDoor();
           break;
         case 7:
-          Test.bulletFly();
+          outputMatchesExpected = Test.bulletFly();
           break;
         case 8:
-          Test.pickupItemSuccessfully();
+          outputMatchesExpected = Test.pickupItemSuccessfully();
           break;
         case 9:
           Test.pickupItemFromForbiddenArea();
           break;
         case 10:
-          Test.pickupItemNoItem();
+          outputMatchesExpected = Test.pickupItemNoItem();
           break;
         case 11:
           Test.pickupSecondBox();

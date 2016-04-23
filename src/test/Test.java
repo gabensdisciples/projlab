@@ -76,7 +76,6 @@ public class Test {
     CommandHandler.executeCommand("shoot oneill");
     CommandHandler.executeCommand("printmap");
     
-    //System.out.println("String expectedOutput = " + "\"" + CommandHandler.levelBuilder.getLevelAsString() + "\";");
     String expectedOutput = "[[FWO, SPb]]";
     String printMapOutput = CommandHandler.levelBuilder.getLevelAsString();
     return expectedOutput.equals(printMapOutput);
@@ -94,7 +93,7 @@ public class Test {
    * FWO | FNW | SP |
    */
 
-  public static void bulletMeetsWall() throws IOException {
+  public static boolean bulletMeetsWall() throws IOException {
     File mapFile = new File("level_test3.txt");
     if (!mapFile.exists()) {
       mapFile.createNewFile();
@@ -106,6 +105,10 @@ public class Test {
     CommandHandler.executeCommand("move oneill e");
     CommandHandler.executeCommand("shoot oneill");
     CommandHandler.executeCommand("printmap");
+    
+    String expectedOutput = "[[FWO, FNW, SP]]";
+    String printMapOutput = CommandHandler.levelBuilder.getLevelAsString();
+    return expectedOutput.equals(printMapOutput);
   }
 
   /**
@@ -122,7 +125,7 @@ public class Test {
    * FWO | SPb | SP |
    */
 
-  public static void bulletMeetsSpecWall() throws IOException {
+  public static boolean bulletMeetsSpecWall() throws IOException {
     File mapFile = new File("level_test4.txt");
     if (!mapFile.exists()) {
       mapFile.createNewFile();
@@ -134,6 +137,10 @@ public class Test {
     CommandHandler.executeCommand("move oneill e");
     CommandHandler.executeCommand("shoot oneill");
     CommandHandler.executeCommand("printmap");
+    
+    String expectedOutput = "[[FWO, SPb, SP]]";
+    String printMapOutput = CommandHandler.levelBuilder.getLevelAsString();
+    return expectedOutput.equals(printMapOutput);
   }
 
   /**
@@ -150,7 +157,7 @@ public class Test {
    * FW | FWO | FW | SP |
    */
 
-  public static void bulletMeetsReplicator() throws IOException {
+  public static boolean bulletMeetsReplicator() throws IOException {
     File mapFile = new File("level_test5.txt");
     if (!mapFile.exists()) {
       mapFile.createNewFile();
@@ -162,6 +169,10 @@ public class Test {
     CommandHandler.executeCommand("move oneill e");
     CommandHandler.executeCommand("shoot oneill");
     CommandHandler.executeCommand("printmap");
+    
+    String expectedOutput = "[[FW, FWO, FW, SP]]";
+    String printMapOutput = CommandHandler.levelBuilder.getLevelAsString();
+    return expectedOutput.equals(printMapOutput);
   }
 
   /**
@@ -176,7 +187,7 @@ public class Test {
    * FW | FWO | D1NW| SP | SC1 |
    */
 
-  public static void bulletMeetsDoor() throws IOException {
+  public static boolean bulletMeetsDoor() throws IOException {
     File mapFile = new File("level_test6.txt");
     if (!mapFile.exists()) {
       mapFile.createNewFile();
@@ -188,6 +199,10 @@ public class Test {
     CommandHandler.executeCommand("move oneill e");
     CommandHandler.executeCommand("shoot oneill");
     CommandHandler.executeCommand("printmap");
+    
+    String expectedOutput = "[[FW, FWO, D1NW, SP, SC1]]";
+    String printMapOutput = CommandHandler.levelBuilder.getLevelAsString();
+    return expectedOutput.equals(printMapOutput);
   }
 
   /**
@@ -204,7 +219,7 @@ public class Test {
    * FW | FW | FWO | G | SPy |
    */
 
-  public static void bulletFly() throws IOException {
+  public static boolean bulletFly() throws IOException {
     File mapFile = new File("level_test7.txt");
     if (!mapFile.exists()) {
       mapFile.createNewFile();
@@ -220,6 +235,10 @@ public class Test {
     CommandHandler.executeCommand("changebullet oneill");
     CommandHandler.executeCommand("shoot oneill");
     CommandHandler.executeCommand("printmap");
+    
+    String expectedOutput = "[[FW, SC1, G, D1NW, SPb], [FW, FW, FWO, G, SPy]]";
+    String printMapOutput = CommandHandler.levelBuilder.getLevelAsString();
+    return expectedOutput.equals(printMapOutput);
   }
 
   /**
@@ -233,7 +252,7 @@ public class Test {
    * FW | FW | FWO |
    */
 
-  public static void pickupItemSuccessfully() throws IOException {
+  public static boolean pickupItemSuccessfully() throws IOException {
     File mapFile = new File("level_test8.txt");
     if (!mapFile.exists()) {
       mapFile.createNewFile();
@@ -247,6 +266,10 @@ public class Test {
     CommandHandler.executeCommand("move oneill e");
     CommandHandler.executeCommand("pickup oneill");
     CommandHandler.executeCommand("printmap");
+    
+    String expectedOutput = "[[FW, FW, FWO]]";
+    String printMapOutput = CommandHandler.levelBuilder.getLevelAsString();
+    return expectedOutput.equals(printMapOutput);
   }
 
   /**
@@ -292,7 +315,7 @@ public class Test {
    * FWO | FW | FW |
    */
 
-  public static void pickupItemNoItem() throws IOException {
+  public static boolean pickupItemNoItem() throws IOException {
     File mapFile = new File("level_test10.txt");
     if (!mapFile.exists()) {
       mapFile.createNewFile();
@@ -308,6 +331,11 @@ public class Test {
     CommandHandler.executeCommand("move oneill w");
     CommandHandler.executeCommand("move oneill w");
     CommandHandler.executeCommand("printmap");
+    
+    //System.out.println("String expectedOutput = " + "\"" + CommandHandler.levelBuilder.getLevelAsString() + "\";\n" + "String printMapOutput = CommandHandler.levelBuilder.getLevelAsString();\n" + "return expectedOutput.equals(printMapOutput);");
+    String expectedOutput = "[[FWO, FW, FW]]";
+    String printMapOutput = CommandHandler.levelBuilder.getLevelAsString();
+    return expectedOutput.equals(printMapOutput);
   }
 
   /**
