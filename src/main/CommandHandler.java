@@ -252,7 +252,11 @@ public class CommandHandler {
         default:
           System.out.println("Ervenytelen menupont");
       }
-      System.out.println(outputMatchesExpected);
+      if (outputMatchesExpected){
+        System.out.println("A kimenet megegyezik az elvárttal");
+      } else {
+        System.out.println("A kimenet nem egyezik meg az elvárttal");
+      }
     } catch (IOException e) {
       System.out.println("Palyafajl hiba");
     }
