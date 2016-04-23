@@ -53,15 +53,25 @@ public class SpecWall extends LevelObject {
 
   public void interactBullet(Bullet bullet) {
     Logger.log("SpecWall interactBullet");
-    if (gate == null) {
-      gate = bullet.createStarGate();
-      Wormhole.setSpecWall(this, gate.getColor());
-    } else {
+
+    if (gate != null) {
       Replicator replicator = ReplicatorContainer.getReplicator(this);
       if (replicator != null) {
         replicator.die();
       }
+      
+      else {
+        gate = bullet.createStarGate();
+        Wormhole.setSpecWall(this, gate.getColor());
+      }
     }
+    
+    else {
+      gate = bullet.createStarGate();
+      Wormhole.setSpecWall(this, gate.getColor());
+    }
+    
+
     bullet.die();
     walkable = true;
     Logger.logout();
@@ -81,9 +91,9 @@ public class SpecWall extends LevelObject {
     }
     Logger.logout();
   }
-  
+
   public StarGate getStarGate() {
     return this.gate;
   }
-  
+
 }
