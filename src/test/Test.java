@@ -602,7 +602,7 @@ public class Test {
     mapFileWriter.print("R G");
     mapFileWriter.close();
     CommandHandler.executeCommand("loadmap level_test21.txt");
-    CommandHandler.executeCommand("move Replicator e");
+    CommandHandler.executeCommand("move replicator e");
     CommandHandler.executeCommand("printmap");
   }
 
@@ -659,6 +659,8 @@ public class Test {
     CommandHandler.executeCommand("shoot oneill");
     CommandHandler.executeCommand("move oneil w");
     CommandHandler.executeCommand("printmap");
+    
+    //TODO féregjárat nem helyez át, lőhető két ugyanolyan színű stargate két különböző specwallra
   }
 
   /**

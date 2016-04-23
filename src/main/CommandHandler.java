@@ -16,7 +16,7 @@ public class CommandHandler {
   private static Player oneill;
   private static Player jaffa;
   private static Replicator replicator;
-  private static LevelBuilder levelBuilder;
+  public static LevelBuilder levelBuilder;
   public static boolean autoTest;
   private static Scanner in = new Scanner(System.in);
 
