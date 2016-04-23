@@ -15,7 +15,7 @@ import main.CommandHandler;
 public class Test {
 
   /**
-   * Töltényt vált
+   * 1. Töltényt vált
    * 
    * A kiválasztott karakter töltényének színe az ellenkezőjére vált.
    * Ellenőrzött funkcionalitás, várható hibahelyek Teszteli, hogy a kilőhető
@@ -46,7 +46,7 @@ public class Test {
   }
 
   /**
-   * Lő
+   * 2. Lő
    * 
    * A karakter lő egyet arra, amerre néz.
    * Ellenőrzött funkcionalitás, várható hibahelyek
@@ -74,7 +74,7 @@ public class Test {
   }
 
   /**
-   * Lövedék falnak ütközik
+   * 3. Lövedék falnak ütközik
    * 
    * A lövedék ütközését teszteli. Ellenőrzött funkcionalitás, várható hibahelyek
    * Teszteli, hogy a lövedék megsemmisül-e falba ütközéskor. Ezt úgy
@@ -100,8 +100,7 @@ public class Test {
   }
 
   /**
-   * Lövedék
-   * speciális falnak ütközik
+   * 4. Lövedék speciális falnak ütközik
    * 
    * A lövedék ütközését teszteli. Ellenőrzött funkcionalitás, várható
    * hibahelyek Teszteli, hogy a lövedék megsemmisül-e a speciális falba
@@ -129,8 +128,7 @@ public class Test {
   }
 
   /**
-   * Lövedék
-   * replikátornak ütközik
+   * 5. Lövedék replikátornak ütközik
    * 
    * A lövedék ütközését teszteli. Ellenőrzött funkcionalitás, várható
    * hibahelyek Teszteli, hogy a lövedék és a replikátor megsemmisül-e, ha a
@@ -158,7 +156,7 @@ public class Test {
   }
 
   /**
-   * Lövedék ajtóba ütközik
+   * 6. Lövedék ajtóba ütközik
    * 
    * A lövedék ütközését teszteli. Ellenőrzött funkcionalitás, várható
    * hibahelyek Teszteli, hogy a lövedék megsemmisül-e zárt ajtóval való ütközés
@@ -184,7 +182,7 @@ public class Test {
   }
 
   /**
-   * Lövedék nem ütközik
+   * 7. Lövedék nem ütközik
    * 
    * A lövedék haladását teszteli átjárható mezők felett. Ellenőrzött
    * funkcionalitás, várható hibahelyek Teszteli, hogy a lövedék át tud-e
@@ -216,7 +214,7 @@ public class Test {
   }
 
   /**
-   * Tárgyat sikeresen felvesz
+   * 8. Tárgyat sikeresen felvesz
    * 
    * A karakter felvesz egy tárgyat egy olyan mezőről, melyen van. Ellenőrzött
    * funkcionalitás, várható hibahelyek Teszteli, hogy a tárgyat sikeresen
@@ -243,8 +241,7 @@ public class Test {
   }
 
   /**
-   * Tárgyat felvesz
-   * tiltott mezőről
+   * 9. Tárgyat felvesz tiltott mezőről
    * 
    * A karakter megkísérel felvenni egy tárgyat egy olyan mezőről, melyre nem
    * lehet tárgyat helyezni. Ellenőrzött funkcionalitás, várható hibahelyek
@@ -272,8 +269,7 @@ public class Test {
   }
 
   /**
-   * Tárgyat felvesz
-   * tárgyat nem tartalmazó mezőről
+   * 10. Tárgyat felvesz tárgyat nem tartalmazó mezőről
    * 
    * A karakter megkísérel felvenni egy tárgyat egy olyan mezőről, melyen
    * nincsen tárgy (de lehetne). Ellenőrzött funkcionalitás, várható hibahelyek
@@ -303,8 +299,7 @@ public class Test {
   }
 
   /**
-   * Dobozt felvesz,
-   * de már van
+   * 11. Dobozt felvesz, de már van
    * 
    * A karakter megkísérel felvenni egy dobozt, miközben már van nála.
    * Ellenőrzött funkcionalitás, várható hibahelyek A teszt ellenőrzi, hogy a
@@ -330,7 +325,7 @@ public class Test {
   }
 
   /**
-   * Dobozt felvesz mérlegről
+   * 12. Dobozt felvesz mérlegről
    * 
    * A karakter felvesz egy dobozt egy mérlegről. Ellenőrzött funkcionalitás,
    * várható hibahelyek A teszt ellenőrzi, hogy a doboz felvétele után a
@@ -357,7 +352,7 @@ public class Test {
   }
 
   /**
-   * Dobozt sikeresen letesz
+   * 13. Dobozt sikeresen letesz
    * 
    * A karakter leteszi a néla lévő dobozt egy olyan mezőre, melyen nincs tárgy
    * (de lehetne). Ellenőrzött funkcionalitás, várható hibahelyek A teszt
@@ -383,7 +378,7 @@ public class Test {
   }
 
   /**
-   * Dobozt letesz tiltott mezőre
+   * 14. Dobozt letesz tiltott mezőre
    * 
    * A karakter megkísérel letenni egy dobozt egy olyan mezőre, melyre nem lehet
    * tárgyat helyezni. Ellenőrzött funkcionalitás, várható hibahelyek A teszt
@@ -409,8 +404,7 @@ public class Test {
   }
 
   /**
-   * Dobozt letesz tárgyat tartalmazó
-   * mezőre
+   * 15. Dobozt letesz tárgyat tartalmazó mezőre
    * 
    * A karakter megkísérel letenni egy dobozt egy olyan mezőre, melyen már van
    * tárgy. Ellenőrzött funkcionalitás, várható hibahelyek A teszt ellenőrzi,
@@ -443,7 +437,7 @@ public class Test {
   }
 
   /**
-   * Dobozt letesz, de még nincs
+   * 16. Dobozt letesz, de még nincs
    * 
    * A karakter megkísérel letenni egy dobozt, miközben még nincs nála.
    * Ellenőrzött funkcionalitás, várható hibahelyek A teszt ellenőrzi, hogy a
@@ -469,7 +463,7 @@ public class Test {
   }
 
   /**
-   * Dobozt letesz mérlegre
+   * 17. Dobozt letesz mérlegre
    * 
    * A karakter dobozt helyez egy mérlegre. Ellenőrzött funkcionalitás, várható
    * hibahelyek Teszteli, hogy a lehelyezett mérleg tömege ránehezedik-e a
@@ -497,7 +491,7 @@ public class Test {
   }
 
   /**
-   * Karakter átjárható mezőre lép
+   * 18. Karakter átjárható mezőre lép
    * 
    * A karakter lépését teszteli. Ellenőrzött funkcionalitás, várható hibahelyek
    * Teszteli, hogy a karakter át tud-e lépni átjárható mezőre. Várható hibák:
@@ -520,7 +514,7 @@ public class Test {
   }
 
   /**
-   * Karakter falnak ütközik
+   * 19. Karakter falnak ütközik
    * 
    * A karakter lépését teszteli. Ellenőrzött funkcionalitás, várható hibahelyek
    * Teszteli, hogy a karakter miként viselkedik, ha Falként kezelt mezőre akar
@@ -546,7 +540,7 @@ public class Test {
   }
 
   /**
-   * Karakter szakadékba lép
+   * 20. Karakter szakadékba lép
    * 
    * A karakter lépését teszteli. Ellenőrzött funkcionalitás, várható hibahelyek
    * Teszteli, hogy a karakter miként viselkedik, ha Szakadékként kezelt mezőre
@@ -572,7 +566,7 @@ public class Test {
   }
 
   /**
-   * Replikátor szakadékba lép
+   * 21. Replikátor szakadékba lép
    * 
    * A replikátor lépését teszteli. Ellenőrzött funkcionalitás, várható
    * hibahelyek Teszteli, hogy a replikátor szakadékba lépésekor betölti-e a
@@ -599,7 +593,7 @@ public class Test {
   }
 
   /**
-   * Karakter csillagkapuba lép
+   * 22. Karakter csillagkapuba lép
    * 
    * A karakter lépését teszteli. Ellenőrzött funkcionalitás, várható hibahelyek
    * Teszteli, hogy a karakter át tudd-e lépni a csillagkapura. Várható hibák:
@@ -625,7 +619,7 @@ public class Test {
   }
 
   /**
-   * Karakter féregjáratba lép
+   * 23. Karakter féregjáratba lép
    * 
    * A karakter lépését teszteli. Ellenőrzött funkcionalitás, várható hibahelyek
    * Teszteli, hogy a karakter csillagkapuba lépésekor át kerül-e a csillagkapu
@@ -654,7 +648,7 @@ public class Test {
   }
 
   /**
-   * Karakter ajtóba ütközik
+   * 24. Karakter ajtóba ütközik
    * 
    * A karakter lépését teszteli. Ellenőrzött funkcionalitás, várható hibahelyek
    * Teszteli, hogy a karakter a helyén marad-e, ha zárt ajtónak ütközik.
@@ -677,8 +671,7 @@ public class Test {
   }
 
   /**
-   * Karakter nyílt
-   * ajtóra lép
+   * 25. Karakter nyílt ajtóra lép
    * 
    * A karakter lépését teszteli. Ellenőrzött funkcionalitás, várható hibahelyek
    * Teszteli, hogy a karakter át tud-e lépni nyitott ajtó mezejére. Várható
@@ -711,7 +704,7 @@ public class Test {
   }
 
   /** 
-   * Karakter mérlegre lép
+   * 26. Karakter mérlegre lép
    * 
    * A karakter lépését teszteli. Ellenőrzött funkcionalitás, várható hibahelyek
    * Teszteli, hogy a karakter át tud-e lépni nyitott ajtó mezejére. Várható
@@ -734,8 +727,7 @@ public class Test {
   }
 
   /**
-   * Karakter
-   * mérlegről lelép
+   * 27. Karakter mérlegről lelép
    * 
    * A karakter lépését teszteli. Ellenőrzött funkcionalitás, várható hibahelyek
    * Teszteli, hogy a karakter a tömegével leszáll-e a mérlegről. Várható hibák:
@@ -759,7 +751,7 @@ public class Test {
   }
 
   /**
-   * Mérleg aktiválása
+   * 28. Mérleg aktiválása
    * 
    * Mérleg aktívra váltását teszteli. Ellenőrzött funkcionalitás, várható
    * hibahelyek Teszteli, hogy a mérleg a hozzá megszabott súlyhatár alulról
@@ -783,8 +775,7 @@ public class Test {
   }
 
   /**
-   * Mérleg
-   * deaktiválása
+   * 29. Mérleg deaktiválása
    * 
    * Mérleg inaktívra váltását teszteli. Ellenőrzött funkcionalitás, várható
    * hibahelyek Teszteli, hogy a méleg a hozzá megszabott súlyhatár felülről
@@ -808,7 +799,8 @@ public class Test {
     CommandHandler.executeCommand("printmap");
   }
 
-  /**Súgó
+  /**
+   * 30. Súgó
   * 
   * Súgó megjelenitése Ellenőrzött funkcionalitás, várható hibahelyek
   * Megjelenik-e parancs beadására a súgó. Bemenet help Elvárt kimenet loadmap
@@ -825,7 +817,7 @@ public class Test {
   }
   
   /**
-   * Pálya betöltés
+   * 31. Pálya betöltés
    * Leírás Ellenőrzött funkcionalitás,
    * várható hibahelyek Teszteli, hogy az adott fájlból a várt pálya jött-e
    * létre.
@@ -847,7 +839,7 @@ public class Test {
   }
 
   /**
-   * Harmadik ZPM megjelenése
+   * 32. Harmadik ZPM megjelenése
    * 
    * Két ZPM felvétele után megjelenik-e egy új. Ellenőrzött funkcionalitás,
    * várható hibahelyek Teszteli, hogy a következő ZPM létrejön-e. A játékban ez
@@ -875,7 +867,7 @@ public class Test {
   }
 
   /**
-   * Játék befejezése
+   * 33. Játék befejezése
    * 
    * Játék befejezése, ha elfogytak a ZPM-ek elfogytak. Ellenőrzött
    * funkcionalitás, várható hibahelyek Teszteli, hogy a játék befejeződik-e,
@@ -884,7 +876,7 @@ public class Test {
    */
 
   public static void gameOver() throws IOException {
-    File mapFile = new File("level_test32.txt");
+    File mapFile = new File("level_test33.txt");
     if (!mapFile.exists()) {
       mapFile.createNewFile();
     }
@@ -898,7 +890,7 @@ public class Test {
 
   /**
    * 
-   * ZPM számláló növekedés
+   * 34. ZPM számláló növekedés
    * 
    * Az egyik játékos felvesz egy ZPM-et. Növekszik-e a zpmcount? Ellenőrzött
    * funkcionalitás, várható hibahelyek Teszteli, hogy a zpmCount nő-e egyel.
@@ -910,7 +902,7 @@ public class Test {
    */
 
   public static void zpmCountIncrement() throws IOException {
-    File mapFile = new File("level_test35.txt");
+    File mapFile = new File("level_test34.txt");
     if (!mapFile.exists()) {
       mapFile.createNewFile();
     }
