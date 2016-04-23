@@ -59,7 +59,7 @@ public class GameTest {
           oneillInteract(line);
         }
         if (replicator != null) {
-          replicatorInteract();
+          replicatorInteract(line);
         }
         if (jaffa != null) {
           jaffaInteract(line);
@@ -120,6 +120,27 @@ public class GameTest {
         break;
     }
   }
+  
+  public static void replicatorInteract(String command) {
+
+    switch (command) {
+      case "j":
+        replicator.move(Direction.WEST);
+        break;
+      case "l":
+        replicator.move(Direction.EAST);
+        break;
+      case "i":
+        replicator.move(Direction.NORTH);
+        break;
+      case "k":
+        replicator.move(Direction.SOUTH);
+        break;
+      default:
+        break;
+    }
+  }
+  
 
   /**
    * Jaffa interactions.

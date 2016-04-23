@@ -46,7 +46,7 @@ public class LevelBuilder {
   public LevelObject[][] objectMatrix;
 
   public String[][] stringMatrix;
-  
+
   /**
    * Creates a single instance of the class.
    * 
@@ -324,12 +324,7 @@ public class LevelBuilder {
    * values of characters, when they aren't in the level file.
    */
   public void printStringMatrix() {
-
     synchronizeStringMatrix();
-
-    // int[] oneillPosition = getOneillPosition();
-    // int[] jaffaPosition = getJaffaPosition();
-    // int[] replicatorPosition = getReplicatorPosition();
     StringBuilder sb = new StringBuilder();
     sb.append(" ");
     for (int s = 0; s < (WIDTH) * 6; s++) {
@@ -338,60 +333,12 @@ public class LevelBuilder {
     System.out.println("\n" + sb.toString());
     for (int i = 0; i < HEIGHT; i++) {
       for (int j = 0; j < WIDTH; j++) {
-        // Boolean oneillFound;
-        // Boolean jaffaFound;
-        // Boolean replicatorFound;
-        //
-        // if (oneillPosition == null) {
-        // oneillFound = false;
-        // } else {
-        // oneillFound = new Boolean(i == oneillPosition[0] && j ==
-        // oneillPosition[1]);
-        // }
-        // if (jaffaPosition == null) {
-        // jaffaFound = false;
-        // } else {
-        // jaffaFound = new Boolean(i == jaffaPosition[0] && j ==
-        // jaffaPosition[1]);
-        // }
-        // if (replicatorPosition == null) {
-        // replicatorFound = false;
-        // } else {
-        // replicatorFound = new Boolean(i == replicatorPosition[0] && j ==
-        // replicatorPosition[1]);
-        // }
-
-        // Boolean anyFound = (oneillFound || jaffaFound || replicatorFound);
-        // String oneillString = "O";
-        // /*String.valueOf(Character.toChars(0x1F600));*/
-        // String jaffaString = "J";
-        // /*String.valueOf(Character.toChars(0x1F606));*/
-        // String replicatorString = "R";
-        // /*String.valueOf(Character.toChars(0x1F639));*/
-        // Boolean[] foundBoolean = { oneillFound, jaffaFound, replicatorFound
-        // };
-        // String[] foundString = { oneillString, jaffaString, replicatorString
-        // };
-
-        // if (anyFound) {
-        // System.out.print(" | ");
-        // for (int k = 0; k < foundBoolean.length; k++) {
-        // if (foundBoolean[k] == true) {
-        // System.out.print(foundString[k]);
-        // }
-        // }
-        // System.out.print(" ");
-        // } else {
         System.out.print(" | " + String.format("%3s", stringMatrix[i][j]));
-        // }
-
       }
       System.out.print(" | " + "\n" + sb.toString() + "\n");
     }
   }
 
-  
-  
   /**
    * If the player modify any level object, basically it doesn't appear in the
    * string matrix. This method iterates through the object matrix, checks
@@ -399,7 +346,7 @@ public class LevelBuilder {
    */
   public void synchronizeStringMatrix() {
     for (int i = 0; i < HEIGHT; i++) {
-      for (int j = 0; j < WIDTH; j++) {        
+      for (int j = 0; j < WIDTH; j++) {
         LevelObject currentObject = objectMatrix[i][j];
         // Floor
         if (currentObject instanceof Floor) {
@@ -447,6 +394,16 @@ public class LevelBuilder {
             stringMatrix[i][j] = stringMatrix[i][j].substring(0, 2) + color.substring(0, 1).toLowerCase();
           }
         }
+        // Gap
+        if (currentObject instanceof Gap) {
+          Gap gap = (Gap) currentObject;
+          if (gap.isWalkable() == true) {
+            stringMatrix[i][j] = "GW";
+          } else {
+            stringMatrix[i][j] = "G";
+          }
+        }
+        
         // O'neill
         if (oneill != null && currentObject.equals(oneill.getPosition())) {
           stringMatrix[i][j] += "O";
@@ -463,22 +420,21 @@ public class LevelBuilder {
     }
   }
 
-  
   public String getLevelAsString() {
     String levelString = Arrays.deepToString(stringMatrix);
     return levelString;
   }
-  
+
   public String getLevelAsString2() {
     StringBuilder sb = new StringBuilder();
     for (int i = 0; i < HEIGHT; i++) {
-      for (int j = 0; j < WIDTH; j++) {   
+      for (int j = 0; j < WIDTH; j++) {
         sb.append(stringMatrix[i][j]);
       }
     }
     return sb.toString();
   }
-  
+
   /**
    * Private constructor for the singleton class.
    */
