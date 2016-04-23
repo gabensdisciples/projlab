@@ -43,6 +43,9 @@ public class Test {
     CommandHandler.executeCommand("move oneill w");
     CommandHandler.executeCommand("shoot oneill");
     CommandHandler.executeCommand("printmap");
+    
+    System.out.println(CommandHandler.levelBuilder.getLevelAsString());
+    System.out.println(CommandHandler.levelBuilder.getLevelAsString2());
   }
 
   /**
@@ -257,15 +260,18 @@ public class Test {
       mapFile.createNewFile();
     }
     PrintWriter mapFileWriter = new PrintWriter(mapFile, "UTF-8");
-    mapFileWriter.print("FWO SP FW");
+    mapFileWriter.print("O SP FW");
     mapFileWriter.close();
-    CommandHandler.executeCommand("loadmap level_test11.txt");
+    CommandHandler.executeCommand("loadmap level_test9.txt");
     CommandHandler.executeCommand("move oneill e");
     CommandHandler.executeCommand("pickup oneill");
     CommandHandler.executeCommand("move oneill e");
     CommandHandler.executeCommand("drop oneill");
     CommandHandler.executeCommand("move oneill w");
     CommandHandler.executeCommand("move oneill w");
+    CommandHandler.executeCommand("printmap");
+    
+    //TODO itt mi volt az elképzelés?
   }
 
   /**
@@ -286,7 +292,7 @@ public class Test {
       mapFile.createNewFile();
     }
     PrintWriter mapFileWriter = new PrintWriter(mapFile, "UTF-8");
-    mapFileWriter.print("FWO FW FW");
+    mapFileWriter.print("O FW FW");
     mapFileWriter.close();
     CommandHandler.executeCommand("loadmap level_test10.txt");
     CommandHandler.executeCommand("move oneill e");
@@ -306,7 +312,7 @@ public class Test {
    * karakter fel tud-e venni dobozt, ha már van egy nála. Hibás ha a doboz
    * eltűnik a mezőről ill. a karakterhez kerül.
    * 
-   * FWO | FWB |
+   *   FW |  FW | FWBO |
    */
 
   public static void pickupSecondBox() throws IOException {
@@ -315,12 +321,13 @@ public class Test {
       mapFile.createNewFile();
     }
     PrintWriter mapFileWriter = new PrintWriter(mapFile, "UTF-8");
-    mapFileWriter.print("FWO FWB");
+    mapFileWriter.print("O FB FB");
     mapFileWriter.close();
     CommandHandler.executeCommand("loadmap level_test11.txt");
     CommandHandler.executeCommand("move oneill e");
     CommandHandler.executeCommand("pickup oneill");
-    CommandHandler.executeCommand("move oneill w");
+    CommandHandler.executeCommand("move oneill e");
+    CommandHandler.executeCommand("pickup oneill");
     CommandHandler.executeCommand("printmap");
   }
 
@@ -332,7 +339,7 @@ public class Test {
    * mérlegről valóban eltűnt-e a doboz. Hibás ha a doboz a helyén marad, nem
    * kerül a karakterhez, vagy megsemmisül.
    * 
-   * FWO | SC1 |
+   * FW | FWBO | SC1 | D1NW |
    */
 
   public static void pickupBoxFromScale() throws IOException {
@@ -341,13 +348,16 @@ public class Test {
       mapFile.createNewFile();
     }
     PrintWriter mapFileWriter = new PrintWriter(mapFile, "UTF-8");
-    mapFileWriter.print("FWO SC1");
+    mapFileWriter.print("O FB SC1 D1");
     mapFileWriter.close();
     CommandHandler.executeCommand("loadmap level_test12.txt");
+    CommandHandler.executeCommand("move oneill e");
+    CommandHandler.executeCommand("pickup oneill");
     CommandHandler.executeCommand("move oneill e");
     CommandHandler.executeCommand("drop oneill");
     CommandHandler.executeCommand("pickup oneill");
     CommandHandler.executeCommand("move oneill w");
+    CommandHandler.executeCommand("drop oneill");
     CommandHandler.executeCommand("printmap");
   }
 
@@ -359,7 +369,7 @@ public class Test {
    * ellenőrzi, hogy a doboz valóban a megfelelő cellára került. Hibás, ha a
    * doboz a karakternél marad vagy eltűnik, azaz nem kerül a mezőre.
    * 
-   * FWO | FWB |
+   * FW |  FW | FWBO |
    */
 
   public static void dropBoxSuccesfully() throws IOException {
@@ -368,12 +378,13 @@ public class Test {
       mapFile.createNewFile();
     }
     PrintWriter mapFileWriter = new PrintWriter(mapFile, "UTF-8");
-    mapFileWriter.print("FWO FW");
+    mapFileWriter.print("O FB FW");
     mapFileWriter.close();
     CommandHandler.executeCommand("loadmap level_test13.txt");
     CommandHandler.executeCommand("move oneill e");
     CommandHandler.executeCommand("pickup oneill");
-    CommandHandler.executeCommand("move oneill w");
+    CommandHandler.executeCommand("move oneill e");
+    CommandHandler.executeCommand("drop oneill");
     CommandHandler.executeCommand("printmap");
   }
 
@@ -385,7 +396,7 @@ public class Test {
    * ellenőrzi, hogy a karakter le tud-e tenni olyan mezőre dobozt, amire nem
    * lehet. Hibás ha a mezőre rákerül a doboz.
    * 
-   * FWO | SP |
+   * FW |  FW | SPbO |
    */
 
   public static void dropBoxForbiddenArea() throws IOException {
@@ -394,12 +405,14 @@ public class Test {
       mapFile.createNewFile();
     }
     PrintWriter mapFileWriter = new PrintWriter(mapFile, "UTF-8");
-    mapFileWriter.print("FWO SP");
+    mapFileWriter.print("O FB SP");
     mapFileWriter.close();
     CommandHandler.executeCommand("loadmap level_test14.txt");
     CommandHandler.executeCommand("move oneill e");
+    CommandHandler.executeCommand("pickup oneill");
+    CommandHandler.executeCommand("shoot oneill");
+    CommandHandler.executeCommand("move oneill e");
     CommandHandler.executeCommand("drop oneill");
-    CommandHandler.executeCommand("move oneill w");
     CommandHandler.executeCommand("printmap");
   }
 
@@ -412,7 +425,7 @@ public class Test {
    * felvesz egy dobozt, majd megpróbálja lerakni az előbbi mezőkre. Hibás ha
    * sikerül neki, azaz a doboz nem kerül vissza az eredeti helyére.
    * 
-   * FWO | FWB | FWZ | FWB |
+   * FWO | FW | FWZ | FWB |
    */
 
   public static void dropBoxGotItem() throws IOException {
@@ -421,7 +434,7 @@ public class Test {
       mapFile.createNewFile();
     }
     PrintWriter mapFileWriter = new PrintWriter(mapFile, "UTF-8");
-    mapFileWriter.print("FWO FWB FWZ FWB");
+    mapFileWriter.print("O FB FZ FB");
     mapFileWriter.close();
     CommandHandler.executeCommand("loadmap level_test15.txt");
     CommandHandler.executeCommand("move oneill e");
@@ -453,7 +466,7 @@ public class Test {
       mapFile.createNewFile();
     }
     PrintWriter mapFileWriter = new PrintWriter(mapFile, "UTF-8");
-    mapFileWriter.print("FWO FW");
+    mapFileWriter.print("O FW");
     mapFileWriter.close();
     CommandHandler.executeCommand("loadmap level_test16.txt");
     CommandHandler.executeCommand("move oneill e");
@@ -497,7 +510,7 @@ public class Test {
    * Teszteli, hogy a karakter át tud-e lépni átjárható mezőre. Várható hibák:
    * Karakter nem változtat pozicíót.
    * 
-   * FW | O |
+   * FW | FWO |
    */
 
   public static void stepOnWalkable() throws IOException {
@@ -522,7 +535,7 @@ public class Test {
    * neki. A karakter nem arra a mezőre kerül vissza, amiről megpróbált
    * “rálépni” a falra.
    * 
-   * FW | O | FNW |
+   * FW | FWO | FNW |
    */
 
   public static void playerHitWall() throws IOException {
@@ -563,6 +576,7 @@ public class Test {
     CommandHandler.executeCommand("move oneill e");
     CommandHandler.executeCommand("move oneill e");
     CommandHandler.executeCommand("printmap");
+    
   }
 
   /**
