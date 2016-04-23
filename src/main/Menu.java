@@ -11,7 +11,7 @@ import logger.Logger;
 public class Menu {
 
   private static MenuPoints points;
-  public static int[] randomZpmOffset = {0, 0, 0, 0};
+  public static int[] randomZpmOffset = { 0, 0, 0, 0 };
 
   /**
    * Main method to start the game.
@@ -23,25 +23,25 @@ public class Menu {
     LevelBuilder levelBuilder = LevelBuilder.getInstance();
     CommandHandler.setLevelBuilder(levelBuilder);
     CommandHandler.setAutoTest();
-    
-    while(true) {
-      if(CommandHandler.autoTest) {
+
+    while (true) {
+      if (CommandHandler.autoTest) {
         CommandHandler.autoTest();
       }
-      
+
       else {
         try {
           String command = CommandHandler.getCommand();
           boolean success = CommandHandler.executeCommand(command);
-          if(!success) {
+          if (!success) {
             System.out.println("Hibas parancs, add meg ujra!");
           }
         }
-        
+
         catch (Exception e) {
           System.out.println("A parancs vegrehajtasa sikertelen volt.");
-          
-          //STACKTRACE NE MARADJON BENNE A VEGLEGES VERZIOBAN!
+
+          // STACKTRACE NE MARADJON BENNE A VEGLEGES VERZIOBAN!
           e.printStackTrace();
         }
       }
@@ -50,6 +50,12 @@ public class Menu {
 
   public static void showHelp() {
     Logger.log("Menu showHelp");
+    System.out.println("loadmap <level file txt>\n"
+        + "move <character name: oneill, jaffa, replicator> <direction n, e, s, w>\n"
+        + "changebullet <character name: oneill, jaffa>\n" + "shoot <character name: oneill, jaffa>\n"
+        + "pickup <character name: oneill, jaffa>\n" + "drop <character name: oneill, jaffa>\n" + "printmap\n"
+        + "help\n" + "zpmcount <character name: oneill, jaffa>\n"
+        + "setrandomzpmposition <number of steps from oneill in each direction 0,0,0,0>\n");
     Logger.logout();
   }
 }
