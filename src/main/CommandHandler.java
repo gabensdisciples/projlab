@@ -134,7 +134,10 @@ public class CommandHandler {
     System.out.println(caseNumber + ". " + "Játék befejezése (gameOver())");
     caseNumber++;
     System.out.println(caseNumber + ". " + "ZPM számláló növekedés (zpmCountIncrement())");
+    caseNumber++;
+    System.out.println(caseNumber + ". " + "Kilépés");
 
+    
     System.out.println("\nKerlek valaszd ki a teszteset kodjat: ");
 
     caseNumber = in.nextInt();
