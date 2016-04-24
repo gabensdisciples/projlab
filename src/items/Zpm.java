@@ -27,7 +27,9 @@ public class Zpm extends Item {
     Logger.log("ZPM pickUp");
     zpmsRemaining--;
     player.incrementZpmCount();
-    Menu.gameOver(player, zpmsMax);
+    if(zpmsRemaining == 0){
+      Menu.gameOver(player, zpmsMax);
+    }
     Logger.logout();
   }
 }
