@@ -18,6 +18,7 @@ import enumerations.Direction;
 import game.Player;
 import game.Replicator;
 import game.ReplicatorContainer;
+import game.Wormhole;
 import items.Box;
 import items.Zpm;
 
@@ -62,6 +63,7 @@ public class LevelBuilder {
    * Constructs the level by calling the necessary method in order.
    */
   public void init(String filename) {
+    Wormhole.Clear();
     measureLevelSize(filename);
     createStringMatrix(filename);
     createObjectMatrix();
