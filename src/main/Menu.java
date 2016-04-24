@@ -115,14 +115,7 @@ public class Menu {
             + (zpmsMax - player.getZpmCount()));
       }
     }
-    try {
-      CommandHandler.setAutoTest();
-    }
-
-    catch (Exception e) {
-      System.out.println("Ervenytelen azonosito.");
-      System.exit(0);
-    }
+    //Exit?
   }
 
   public static String getHelpText() {
