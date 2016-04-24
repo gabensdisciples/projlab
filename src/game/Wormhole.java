@@ -29,14 +29,6 @@ public final class Wormhole {
       specWalls.get(color).setStarGate(null);
       specWalls.remove(color);
     }
-    if (specWalls.containsValue(specWall)){
-      for (Map.Entry<Color, SpecWall> entry : specWalls.entrySet())
-      {
-          if(specWall == entry.getValue()){
-            specWalls.remove(entry.getKey());
-          }
-      }
-    }
     specWalls.put(color, specWall);
     Logger.logout();
   }
