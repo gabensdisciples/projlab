@@ -98,13 +98,13 @@ public class Menu {
       if (player.getColor() == Color.BLUE || player.getColor() == Color.YELLOW) {
         System.out.println("O'Neill nyert!\nO'Neill zpm(s):"+player.getZpmCount()+"\nJaffa zmp(s):"+(zpmsMax - player.getZpmCount()));
       } else {
-        System.out.println("Jaffa nyert!\nO'Neill zpm(s):"+player.getZpmCount()+"\nJaffa zmp(s):"+(zpmsMax - player.getZpmCount()));
+        System.out.println("Jaffa nyert!\nJaffa zpm(s):"+player.getZpmCount()+"\nO'Neill zmp(s):"+(zpmsMax - player.getZpmCount()));
       }
-    } else if (player.getZpmCount() != zpmsMax - player.getZpmCount()) {
+    } else if (player.getZpmCount() == zpmsMax - player.getZpmCount()) {
       System.out.println("Döntetlen\nO'Neill zpm(s):"+player.getZpmCount()+"\nJaffa zmp(s):"+(zpmsMax - player.getZpmCount()));
     } else {
       if (player.getColor() != Color.BLUE && player.getColor() != Color.YELLOW) {
-        System.out.println("O'Neill nyert!\nO'Neill zpm(s):"+player.getZpmCount()+"\nJaffa zmp(s):"+(zpmsMax - player.getZpmCount()));
+        System.out.println("O'Neill nyert!\nJaffa zpm(s):"+player.getZpmCount()+"\nO'Neill zmp(s):"+(zpmsMax - player.getZpmCount()));
       } else {
         System.out.println("Jaffa nyert!\nO'Neill zpm(s):"+player.getZpmCount()+"\nJaffa zmp(s):"+(zpmsMax - player.getZpmCount()));
       }
