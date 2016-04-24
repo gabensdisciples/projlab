@@ -371,7 +371,6 @@ public class LevelBuilder {
             sb.append("B");
           }
           String boxes = sb.toString();
-          System.out.println(stringMatrix[i][j].split("(?<=[0-9])(?=[a-zA-Z])")[0]);
           stringMatrix[i][j] = stringMatrix[i][j].split("(?<=[0-9])(?=[a-zA-Z])")[0] + boxes;
         }
         // Door

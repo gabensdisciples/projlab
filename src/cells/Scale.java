@@ -119,7 +119,7 @@ public class Scale extends LevelObject {
       Player dummy = new Player(this, null, dir);
       if (neighbour != null) {
         neighbour.interactCharacter(dummy);
-        
+
         if (dummy.getPosition() != this && weight - 2 < limit) {
           weight -= 2;
           door.setWalkable(false);
@@ -146,7 +146,6 @@ public class Scale extends LevelObject {
   public void placeItem(Item item) {
     Logger.log("Scale placeItem");
     boxes.push((Box) item);
-    System.out.println("Scale placeitem :" +boxes.size());
     weight += 1;
     if (weight >= limit) {
       door.setWalkable(true);
