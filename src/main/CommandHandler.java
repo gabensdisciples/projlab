@@ -40,10 +40,9 @@ public class CommandHandler {
    * @return true, if setting was successful, else false
    */
 
-  public static boolean setAutoTest() {
+  public static boolean setAutoTest() throws Exception {
     System.out.println("1. Automatikus teszteles");
     System.out.println("2. Manualis teszteles");
-
     int mode = in.nextInt();
     if (mode == 1) {
       autoTest = true;
@@ -54,7 +53,7 @@ public class CommandHandler {
       System.out.println("Manualis teszteles kivalasztva. Kerlek, adj parancsokat!");
       return true;
     } else {
-      System.out.println("Ervenytelen azonosito, add meg ujra!");
+      System.out.println("Ervenytelen azonosito.");
       return false;
     }
   }
@@ -169,7 +168,7 @@ public class CommandHandler {
           outputMatchesExpected = Test.pickupItemSuccessfully();
           break;
         case 9:
-          Test.pickupItemFromForbiddenArea();
+          outputMatchesExpected = Test.pickupItemFromForbiddenArea();
           break;
         case 10:
           outputMatchesExpected = Test.pickupItemNoItem();
@@ -252,7 +251,7 @@ public class CommandHandler {
         default:
           System.out.println("Ervenytelen menupont");
       }
-      if (outputMatchesExpected){
+      if (outputMatchesExpected) {
         System.out.println("A kimenet megegyezik az elvárttal");
       } else {
         System.out.println("A kimenet nem egyezik meg az elvárttal");
@@ -260,7 +259,6 @@ public class CommandHandler {
     } catch (IOException e) {
       System.out.println("Palyafajl hiba");
     }
-
   }
 
   /**
@@ -323,11 +321,8 @@ public class CommandHandler {
         replicator = levelBuilder.getReplicator();
       }
 
-      catch (NullPointerException e) {
+      catch (Exception e) {
         System.out.println("A parancs vegrehajtasa sikertelen volt.");
-
-        // STACKTRACE NE MARADJON BENNE A VEGLEGES VERZIOBAN!
-        e.printStackTrace();
       }
       // MOVE
     } else if (commandParams[0].equals("move")) {
@@ -477,19 +472,7 @@ public class CommandHandler {
         return false;
       }
 
-      // LOADFILE
-    } else if (commandParams[0].equals("loadfile")) {
-      if (commandParams.length != 2) {
-        return false;
-      }
-
-      try {
-        processFile(commandParams[1]);
-      }
-
-      catch (IOException e) {
-        return false;
-      }
+      // EXIT
     } else if (commandParams[0].equals("exit")) {
       if (commandParams.length != 1) {
         return false;
