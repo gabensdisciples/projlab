@@ -109,5 +109,6 @@ public class Menu {
         System.out.println("Jaffa nyert!\nO'Neill zpm(s):"+player.getZpmCount()+"\nJaffa zmp(s):"+(zpmsMax - player.getZpmCount()));
       }
     }
+    System.exit(0);
   }
 }
