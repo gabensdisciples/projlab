@@ -105,7 +105,7 @@ public class LevelBuilder {
     } catch (ArrayIndexOutOfBoundsException exception) {
       throw new ArrayIndexOutOfBoundsException("Set the correct size of the text file matrix!");
     } catch (IOException exception) {
-      exception.printStackTrace();
+      System.out.println("Nem talaltam a megadott fajlt.");
     }
   }
 
@@ -139,7 +139,7 @@ public class LevelBuilder {
     } catch (ArrayIndexOutOfBoundsException exception) {
       throw new ArrayIndexOutOfBoundsException("Set the correct size of the text file matrix!");
     } catch (IOException exception) {
-      exception.printStackTrace();
+      
     }
   }
 

@@ -278,14 +278,18 @@ public class Test {
    * 9. Tárgyat felvesz tiltott mezőről
    * 
    * A karakter megkísérel felvenni egy tárgyat egy olyan mezőről, melyre nem
-   * lehet tárgyat helyezni. Ellenőrzött funkcionalitás, várható hibahelyek
+   * lehet tárgyat helyezni.
+   * Ellenőrzött funkcionalitás, várható hibahelyek
    * Teszteli, hogy a karakter tud-e felvenni tárgyat olyan mezőről, amin nem
-   * lehet tárgy.
+   * lehet tárgy. A speciális fal, amin csaillagkapu van az egy olyan mező, amire 
+   * leehet lépni, de tárgy nem helyezhető rá. Az ezredes kilő a speciális falra
+   * egy csillagkapu, rálő, rálép, megkísérel felvenni valamit, majd a szomszédos
+   * mezőre lerakja. Helyes működés esetén nem rak le semmit.
    * 
-   * FWO | SP | FW |
+   * FW | SPb | FWO |
    */
 
-  public static void pickupItemFromForbiddenArea() throws IOException {
+  public static boolean pickupItemFromForbiddenArea() throws IOException {
     File mapFile = new File("level_test9.txt");
     if (!mapFile.exists()) {
       mapFile.createNewFile();
@@ -295,14 +299,16 @@ public class Test {
     mapFileWriter.close();
     CommandHandler.executeCommand("loadmap level_test9.txt");
     CommandHandler.executeCommand("move oneill e");
+    CommandHandler.executeCommand("shoot oneill");
+    CommandHandler.executeCommand("move oneill e");
     CommandHandler.executeCommand("pickup oneill");
     CommandHandler.executeCommand("move oneill e");
     CommandHandler.executeCommand("drop oneill");
-    CommandHandler.executeCommand("move oneill w");
-    CommandHandler.executeCommand("move oneill w");
     CommandHandler.executeCommand("printmap");
     
-    //TODO itt mi volt az elképzelés?
+    String expectedOutput = "[[FW, SPb, FWO]]";
+    String printMapOutput = CommandHandler.levelBuilder.getLevelAsString();
+    return expectedOutput.equals(printMapOutput);
   }
 
   /**
