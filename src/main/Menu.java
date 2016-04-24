@@ -55,7 +55,7 @@ public class Menu {
         + "changebullet <character name: oneill, jaffa>\n" + "shoot <character name: oneill, jaffa>\n"
         + "pickup <character name: oneill, jaffa>\n" + "drop <character name: oneill, jaffa>\n" + "printmap\n"
         + "help\n" + "zpmcount <character name: oneill, jaffa>\n"
-        + "setrandomzpmposition <number of steps from oneill in each direction 0,0,0,0>\n");
+        + "setrandomzpmposition <number of steps from oneill in each direction 0 0 0 0>\n");
     Logger.logout();
   }
 }

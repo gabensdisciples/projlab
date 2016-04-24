@@ -934,7 +934,7 @@ public class Test {
   * <character name: oneill, jaffa> pickup <character name: oneill, jaffa> drop
   * <character name: oneill, jaffa> printmap help zpmcount <character name:
   * oneill, jaffa> setrandomzpmposition <number of steps from oneill in each
-  * direction 0,0,0,0> 
+  * direction 0 0 0 0> 
   */
   
   public static void helpTest() throws IOException {
@@ -945,7 +945,7 @@ public class Test {
         + "changebullet <character name: oneill, jaffa>\n" + "shoot <character name: oneill, jaffa>\n"
         + "pickup <character name: oneill, jaffa>\n" + "drop <character name: oneill, jaffa>\n" + "printmap\n"
         + "help\n" + "zpmcount <character name: oneill, jaffa>\n"
-        + "setrandomzpmposition <number of steps from oneill in each direction 0,0,0,0>\n";
+        + "setrandomzpmposition <number of steps from oneill in each direction 0 0 0 0>\n";
   
   //TODO hogyan kéne ezt elkapni
   }
