@@ -366,7 +366,6 @@ public class LevelBuilder {
         // Scale
         if (currentObject instanceof Scale) {
           Scale scale = (Scale) currentObject;
-          System.out.println("Scale: " + scale.getBoxNumber());
           StringBuilder sb = new StringBuilder();
           for (int boxNumber = 0; boxNumber < scale.getBoxNumber(); boxNumber++) {
             sb.append("B");

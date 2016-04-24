@@ -50,7 +50,6 @@ public class Gap extends LevelObject {
   public void interactCharacter(Character character) {
     Logger.log("Gap interactCharacter");
     if (!walkable) {
-      System.out.println("!walkable");
       character.setPosition(this);
       if (ReplicatorContainer.getReplicator(this) != null) {
         System.out.println("walkable = true");
