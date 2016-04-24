@@ -39,7 +39,19 @@ public class Menu {
       }
     }
     
-    CommandHandler.setAutoTest();
+    boolean success = false;
+    try {
+        success = CommandHandler.setAutoTest();
+    }
+    
+    catch (Exception e) {
+      System.out.println("Ervenytelen azonosito.");
+      System.exit(0);
+    }
+    
+    if (!success) {
+      System.exit(0);
+    }
 
     while (true) {
       if (CommandHandler.autoTest) {
@@ -49,7 +61,7 @@ public class Menu {
       else {
         try {
           String command = CommandHandler.getCommand();
-          boolean success = CommandHandler.executeCommand(command);
+          success = CommandHandler.executeCommand(command);
           if (!success) {
             System.out.println("Hibas parancs, add meg ujra!");
           }
@@ -57,9 +69,6 @@ public class Menu {
 
         catch (Exception e) {
           System.out.println("A parancs vegrehajtasa sikertelen volt.");
-
-          // STACKTRACE NE MARADJON BENNE A VEGLEGES VERZIOBAN!
-          e.printStackTrace();
         }
       }
     }
