@@ -24,7 +24,6 @@ public class Menu {
   public static void main(String[] args) {
     LevelBuilder levelBuilder = LevelBuilder.getInstance();
     CommandHandler.setLevelBuilder(levelBuilder);
-    CommandHandler.setAutoTest();
     
     if (args.length != 0) {
       try {
@@ -39,6 +38,8 @@ public class Menu {
         System.exit(0);
       }
     }
+    
+    CommandHandler.setAutoTest();
 
     while (true) {
       if (CommandHandler.autoTest) {
