@@ -59,7 +59,6 @@ public class SpecWall extends LevelObject {
       if (replicator != null) {
         replicator.die();
       } else {
-
         Wormhole.setSpecWall(this, gate.getColor());
         gate = bullet.createStarGate();
       }
@@ -67,7 +66,6 @@ public class SpecWall extends LevelObject {
       gate = bullet.createStarGate();
       Wormhole.setSpecWall(this, gate.getColor());
     }
-
     bullet.die();
     walkable = true;
     Logger.logout();

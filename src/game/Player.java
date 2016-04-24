@@ -212,10 +212,15 @@ public class Player extends Character {
 
     Logger.logout();
   }
+  
+  public Color getColor(){
+    return bulletColor;
+  }
 
   public void die() {
     Logger.log("Player die");
     this.position = null;
+    Menu.gameOver(this, zpmCount);
     //TODO Game Reset
     Logger.logout();
   }

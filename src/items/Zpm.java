@@ -2,6 +2,7 @@ package items;
 
 import game.Player;
 import logger.Logger;
+import main.Menu;
 
 /**
  * Defines the ZPM.
@@ -11,10 +12,12 @@ import logger.Logger;
  */
 public class Zpm extends Item {
   
+  public static int zpmsMax = 0;
   public static int zpmsRemaining = 0;
   
   public Zpm() {
     zpmsRemaining++;
+    zpmsMax++;
   }
 
   /**
@@ -24,6 +27,7 @@ public class Zpm extends Item {
     Logger.log("ZPM pickUp");
     zpmsRemaining--;
     player.incrementZpmCount();
+    Menu.gameOver(player, zpmsMax);
     Logger.logout();
   }
 }
