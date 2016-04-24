@@ -40,6 +40,7 @@ public class Player extends Character {
     Logger.log("Player konstruktor");
     bulletColor = color;
     this.direction = direction;
+    this.zpmCount = 0;
     Logger.logout();
   }
 
@@ -217,5 +218,9 @@ public class Player extends Character {
     this.position = null;
     //TODO Game Reset
     Logger.logout();
+  }
+
+  public int getZpmCount() {
+    return zpmCount;
   }
 }

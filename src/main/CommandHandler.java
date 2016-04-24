@@ -244,7 +244,7 @@ public class CommandHandler {
           Test.gameOver();
           break;
         case 34:
-          Test.zpmCountIncrement();
+          outputMatchesExpected = Test.zpmCountIncrement();
           break;
         case 35:
           System.exit(0);
@@ -452,9 +452,9 @@ public class CommandHandler {
       }
 
       if (commandParams[1].equals("oneill")) {
-        // TODO Player jelenleg nem tamogatja ezt a funkciot
+        System.out.println(oneill.getZpmCount());
       } else if (commandParams[1].equals("jaffa")) {
-
+        System.out.println(jaffa.getZpmCount());
         // If there was no match, then character parameter was invalid
       } else {
         return false;

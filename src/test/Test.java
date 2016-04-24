@@ -1045,11 +1045,11 @@ public class Test {
    * Várható hibák: A zpmCount nem növekszik
    * 
    * 0
-   * FZ  |  FW  |  FWO  |
+   * FWZ  |  FW  |  FWO  |
    * 1
    */
 
-  public static void zpmCountIncrement() throws IOException {
+  public static boolean zpmCountIncrement() throws IOException {
     File mapFile = new File("level_test34.txt");
     if (!mapFile.exists()) {
       mapFile.createNewFile();
@@ -1057,13 +1057,18 @@ public class Test {
     PrintWriter mapFileWriter = new PrintWriter(mapFile, "UTF-8");
     mapFileWriter.print("FZ O FZ");
     mapFileWriter.close();
-    CommandHandler.executeCommand("zpmcount oneill");
     CommandHandler.executeCommand("loadmap level_test34.txt");
+    CommandHandler.executeCommand("zpmcount oneill");
+    int zpmCount1 = CommandHandler.levelBuilder.getOneill().getZpmCount();
     CommandHandler.executeCommand("move oneill e");
     CommandHandler.executeCommand("pickup oneill");
     CommandHandler.executeCommand("printmap");
     CommandHandler.executeCommand("zpmcount oneill");
+    int zpmCount2 = CommandHandler.levelBuilder.getOneill().getZpmCount();
     
-    //TODO nincs zpmcount-ja playernek
+    String expectedOutput = "[[FWZ, FW, FWO]]";
+    String printMapOutput = CommandHandler.levelBuilder.getLevelAsString();
+    
+    return expectedOutput.equals(printMapOutput) && (zpmCount1 == 0) && (zpmCount2 == 1);
   }
 }
