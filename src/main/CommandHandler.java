@@ -477,19 +477,7 @@ public class CommandHandler {
         return false;
       }
 
-      // LOADFILE
-    } else if (commandParams[0].equals("loadfile")) {
-      if (commandParams.length != 2) {
-        return false;
-      }
-
-      try {
-        processFile(commandParams[1]);
-      }
-
-      catch (IOException e) {
-        return false;
-      }
+      // EXIT
     } else if (commandParams[0].equals("exit")) {
       if (commandParams.length != 1) {
         return false;
