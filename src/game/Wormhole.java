@@ -49,4 +49,8 @@ public final class Wormhole {
       return null;
     }
   }
+  
+  public static void Clear(){
+      specWalls.clear();
+  }
 }
