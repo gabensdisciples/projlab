@@ -137,13 +137,12 @@ public class CommandHandler {
     caseNumber++;
     System.out.println(caseNumber + ". " + "Kilépés");
 
-    
     System.out.println("\nKerlek valaszd ki a teszteset kodjat: ");
 
     caseNumber = in.nextInt();
     System.out.println(caseNumber);
     boolean outputMatchesExpected = false;
-    // TODO Kitolteni ha veglegesek a tesztek
+    boolean checkOutput = true;
     try {
       switch (caseNumber) {
         case 1:
@@ -244,6 +243,7 @@ public class CommandHandler {
           break;
         case 33:
           Test.gameOver();
+          checkOutput = false;
           break;
         case 34:
           outputMatchesExpected = Test.zpmCountIncrement();
@@ -254,10 +254,12 @@ public class CommandHandler {
         default:
           System.out.println("Ervenytelen menupont");
       }
-      if (outputMatchesExpected) {
-        System.out.println("A kimenet megegyezik az elvárttal");
-      } else {
-        System.out.println("A kimenet nem egyezik meg az elvárttal");
+      if (checkOutput) {
+        if (outputMatchesExpected) {
+          System.out.println("A kimenet megegyezik az elvárttal");
+        } else {
+          System.out.println("A kimenet nem egyezik meg az elvárttal");
+        }
       }
     } catch (IOException e) {
       System.out.println("Palyafajl hiba");

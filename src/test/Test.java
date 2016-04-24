@@ -976,8 +976,6 @@ public class Test {
     mapFileWriter.print("FW FNW SC1 D1\nO J R FB\nFZ SP G G");
     mapFileWriter.close();
     CommandHandler.executeCommand("loadmap level_test31.txt");
-    System.out.println(CommandHandler.levelBuilder.getLevelAsString());
-    System.out.println(CommandHandler.levelBuilder.getLevelAsString2());
     CommandHandler.executeCommand("printmap");
     
     String expectedOutput = "[[FW, FNW, SC1, D1NW], [FWO, FWJ, FWR, FWB], [FWZ, SP, G, G]]";
@@ -1024,6 +1022,10 @@ public class Test {
    * funkcionalitás, várható hibahelyek Teszteli, hogy a játék befejeződik-e,
    * hogyha minden ZPM-et felvettek a játékosok. Várható hibák: Játék
    * folytatódik, miután elfogytak a ZMP-ek.
+   * 
+   * O'Neill nyert!
+   * O'Neill zpm(s):1
+   * Jaffa zmp(s):0
    */
 
   public static void gameOver() throws IOException {

@@ -159,7 +159,7 @@ public class Player extends Character {
     
     //If no more zpms remain, end of game
     if (Zpm.zpmsRemaining == 0) {
-      // TODO Vege a jateknak
+      // Vege a jateknak
     }
     Logger.logout();
   }
@@ -184,7 +184,6 @@ public class Player extends Character {
    * If that cell is not a valid target or the player has no box, nothing happens.
    */
   
-  //TODO nincs parametere, vissza kell vezetni!
   public void drop() {
     Logger.log("Player drop");
     
