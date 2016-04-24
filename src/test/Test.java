@@ -18,13 +18,15 @@ public class Test {
    * 1. Töltényt vált
    * 
    * A kiválasztott karakter töltényének színe az ellenkezőjére vált.
-   * Ellenőrzött funkcionalitás, várható hibahelyek Teszteli, hogy a kilőhető
+   * Ellenőrzött funkcionalitás, várható hibahelyek
+   * Teszteli, hogy a kilőhető
    * töltény színe megváltoztatható-e. A karaktert mozgatjuk keletre, hogy
    * biztosan a fal felé nézzen. Lövünk egy töltényt, ennek kék csillagkaput
    * kell létrehozni a speciális falon, majd töltényt váltunk, újra lövünk,
    * ebben esetben sárga csillagkapunak kell létrejönnie. Várható hibák második
    * lövésnél nem változik a csillagkapu színe
    * 
+   * Elvárt kimenet
    * SPy | FWO | SPb |
    */
 
@@ -737,7 +739,7 @@ public class Test {
     CommandHandler.executeCommand("changebullet oneill");
     CommandHandler.executeCommand("move oneill w");
     CommandHandler.executeCommand("shoot oneill");
-    CommandHandler.executeCommand("move oneil w");
+    CommandHandler.executeCommand("move oneill w");
     CommandHandler.executeCommand("printmap");
     
     //TODO féregjárat nem helyez át, lőhető két ugyanolyan színű stargate két különböző specwallra
