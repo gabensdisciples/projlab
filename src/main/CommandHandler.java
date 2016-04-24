@@ -169,7 +169,7 @@ public class CommandHandler {
           outputMatchesExpected = Test.pickupItemSuccessfully();
           break;
         case 9:
-          Test.pickupItemFromForbiddenArea();
+          outputMatchesExpected = Test.pickupItemFromForbiddenArea();
           break;
         case 10:
           outputMatchesExpected = Test.pickupItemNoItem();
