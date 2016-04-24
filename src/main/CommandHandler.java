@@ -234,7 +234,7 @@ public class CommandHandler {
           outputMatchesExpected = Test.deActivateScale();
           break;
         case 30:
-          Test.helpTest();
+          outputMatchesExpected = Test.helpTest();
           break;
         case 31:
           outputMatchesExpected = Test.loadMapTest();

@@ -15,6 +15,12 @@ public class Menu {
 
   private static MenuPoints points;
   public static int[] randomZpmOffset = { 0, 0, 0, 0 };
+  private static String helpText = "loadmap <level file txt>\n"
+      + "move <character name: oneill, jaffa, replicator> <direction n, e, s, w>\n"
+      + "changebullet <character name: oneill, jaffa>\n" + "shoot <character name: oneill, jaffa>\n"
+      + "pickup <character name: oneill, jaffa>\n" + "drop <character name: oneill, jaffa>\n" + "printmap\n" + "help\n"
+      + "zpmcount <character name: oneill, jaffa>\n"
+      + "setrandomzpmposition <number of steps from oneill in each direction 0 0 0 0>\n";
 
   /**
    * Main method to start the game.
@@ -25,31 +31,31 @@ public class Menu {
   public static void main(String[] args) {
     LevelBuilder levelBuilder = LevelBuilder.getInstance();
     CommandHandler.setLevelBuilder(levelBuilder);
-    
+
     if (args.length != 0) {
       try {
         CommandHandler.processFile(args[0]);
       }
-      
+
       catch (IOException e) {
         System.out.println("A megadott fajlt nem talaltam.");
       }
-      
+
       finally {
         System.exit(0);
       }
     }
-    
+
     boolean success = false;
     try {
-        success = CommandHandler.setAutoTest();
+      success = CommandHandler.setAutoTest();
     }
-    
+
     catch (Exception e) {
       System.out.println("Ervenytelen azonosito.");
       System.exit(0);
     }
-    
+
     if (!success) {
       System.exit(0);
     }
@@ -77,12 +83,7 @@ public class Menu {
 
   public static void showHelp() {
     Logger.log("Menu showHelp");
-    System.out.println("loadmap <level file txt>\n"
-        + "move <character name: oneill, jaffa, replicator> <direction n, e, s, w>\n"
-        + "changebullet <character name: oneill, jaffa>\n" + "shoot <character name: oneill, jaffa>\n"
-        + "pickup <character name: oneill, jaffa>\n" + "drop <character name: oneill, jaffa>\n" + "printmap\n"
-        + "help\n" + "zpmcount <character name: oneill, jaffa>\n"
-        + "setrandomzpmposition <number of steps from oneill in each direction 0 0 0 0>\n");
+    System.out.println(helpText);
     Logger.logout();
   }
 
@@ -96,19 +97,28 @@ public class Menu {
 
     } else if (player.getZpmCount() > zpmsMax - player.getZpmCount()) {
       if (player.getColor() == Color.BLUE || player.getColor() == Color.YELLOW) {
-        System.out.println("O'Neill nyert!\nO'Neill zpm(s):"+player.getZpmCount()+"\nJaffa zmp(s):"+(zpmsMax - player.getZpmCount()));
+        System.out.println("O'Neill nyert!\nO'Neill zpm(s):" + player.getZpmCount() + "\nJaffa zmp(s):"
+            + (zpmsMax - player.getZpmCount()));
       } else {
-        System.out.println("Jaffa nyert!\nJaffa zpm(s):"+player.getZpmCount()+"\nO'Neill zmp(s):"+(zpmsMax - player.getZpmCount()));
+        System.out.println("Jaffa nyert!\nJaffa zpm(s):" + player.getZpmCount() + "\nO'Neill zmp(s):"
+            + (zpmsMax - player.getZpmCount()));
       }
     } else if (player.getZpmCount() == zpmsMax - player.getZpmCount()) {
-      System.out.println("Döntetlen\nO'Neill zpm(s):"+player.getZpmCount()+"\nJaffa zmp(s):"+(zpmsMax - player.getZpmCount()));
+      System.out.println("Döntetlen\nO'Neill zpm(s):" + player.getZpmCount() + "\nJaffa zmp(s):"
+          + (zpmsMax - player.getZpmCount()));
     } else {
       if (player.getColor() != Color.BLUE && player.getColor() != Color.YELLOW) {
-        System.out.println("O'Neill nyert!\nJaffa zpm(s):"+player.getZpmCount()+"\nO'Neill zmp(s):"+(zpmsMax - player.getZpmCount()));
+        System.out.println("O'Neill nyert!\nJaffa zpm(s):" + player.getZpmCount() + "\nO'Neill zmp(s):"
+            + (zpmsMax - player.getZpmCount()));
       } else {
-        System.out.println("Jaffa nyert!\nO'Neill zpm(s):"+player.getZpmCount()+"\nJaffa zmp(s):"+(zpmsMax - player.getZpmCount()));
+        System.out.println("Jaffa nyert!\nO'Neill zpm(s):" + player.getZpmCount() + "\nJaffa zmp(s):"
+            + (zpmsMax - player.getZpmCount()));
       }
     }
     System.exit(0);
+  }
+
+  public static String getHelpText() {
+    return helpText;
   }
 }

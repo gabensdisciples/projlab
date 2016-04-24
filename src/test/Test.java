@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 import main.CommandHandler;
+import main.Menu;
 
 /**
  * Test class.
@@ -684,7 +685,7 @@ public class Test {
     CommandHandler.executeCommand("loadmap level_test21.txt");
     CommandHandler.executeCommand("move replicator e");
     CommandHandler.executeCommand("printmap");
-    //TODO ha akarunk extra ellenőrzst (replikátor halál, szakadék walkable, az jöhet ide)
+    
     String expectedOutput = "[[FW, GW]]";
     String printMapOutput = CommandHandler.levelBuilder.getLevelAsString();
     return expectedOutput.equals(printMapOutput);
@@ -748,7 +749,6 @@ public class Test {
     CommandHandler.executeCommand("move oneill w");
     CommandHandler.executeCommand("printmap");
     
-    //TODO féregjárat nem helyez át, lőhető két ugyanolyan színű stargate két különböző specwallra
     String expectedOutput = "[[SPy, FW, FW, SPbO]]";
     String printMapOutput = CommandHandler.levelBuilder.getLevelAsString();
     return expectedOutput.equals(printMapOutput);
@@ -943,7 +943,7 @@ public class Test {
   * direction 0 0 0 0> 
   */
   
-  public static void helpTest() throws IOException {
+  public static boolean helpTest() throws IOException {
     CommandHandler.executeCommand("help");
     
     String expectedOutput = "loadmap <level file txt>\n"
@@ -953,7 +953,7 @@ public class Test {
         + "help\n" + "zpmcount <character name: oneill, jaffa>\n"
         + "setrandomzpmposition <number of steps from oneill in each direction 0 0 0 0>\n";
   
-  //TODO hogyan kéne ezt elkapni
+    return expectedOutput.equals(Menu.getHelpText());
   }
   
   /**
@@ -1034,14 +1034,11 @@ public class Test {
     PrintWriter mapFileWriter = new PrintWriter(mapFile, "UTF-8");
     mapFileWriter.print("O FZ");
     mapFileWriter.close();
-    CommandHandler.executeCommand("loadmap level_test32.txt");
+    CommandHandler.executeCommand("loadmap level_test33.txt");
     CommandHandler.executeCommand("move oneill e");
     CommandHandler.executeCommand("pickup oneill");
     
-    //Alább az elvárt kimenet megíró, aktuális kimenet lekérés megíró, return megírü sor
-    //System.out.println("String expectedOutput = " + "\"" + CommandHandler.levelBuilder.getLevelAsString() + "\";\n" + "String printMapOutput = CommandHandler.levelBuilder.getLevelAsString();\n" + "return expectedOutput.equals(printMapOutput);");
-
-    //TODO Játék fejeződjön be?
+    //Játék befejeződött és kilépett, nincs mire hasonlítani
   }
 
   /**
@@ -1079,4 +1076,7 @@ public class Test {
     
     return expectedOutput.equals(printMapOutput) && (zpmCount1 == 0) && (zpmCount2 == 1);
   }
+  
+  //System.out.println("String expectedOutput = " + "\"" + CommandHandler.levelBuilder.getLevelAsString() + "\";\n" + "String printMapOutput = CommandHandler.levelBuilder.getLevelAsString();\n" + "return expectedOutput.equals(printMapOutput);");
+
 }

@@ -221,7 +221,6 @@ public class Player extends Character {
     Logger.log("Player die");
     this.position = null;
     Menu.gameOver(this, zpmCount);
-    //TODO Game Reset
     Logger.logout();
   }
 
