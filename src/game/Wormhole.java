@@ -26,6 +26,7 @@ public final class Wormhole {
   public static void setSpecWall(SpecWall specWall, Color color) {
     Logger.log("Wormhole setSpecWall");
     if (specWalls.containsKey(color)) {
+      specWalls.get(color).setStarGate(null);
       specWalls.remove(color);
     }
     specWalls.put(color, specWall);
