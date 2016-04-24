@@ -3,8 +3,6 @@ package main;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -392,6 +390,8 @@ public class LevelBuilder {
           if (specWall.getStarGate() != null) {
             String color = specWall.getStarGate().getColor().name();
             stringMatrix[i][j] = stringMatrix[i][j].substring(0, 2) + color.substring(0, 1).toLowerCase();
+          } else {
+            stringMatrix[i][j] = stringMatrix[i][j].substring(0, 2);
           }
         }
         // Gap
@@ -403,7 +403,7 @@ public class LevelBuilder {
             stringMatrix[i][j] = "G";
           }
         }
-        
+
         // O'neill
         if (oneill != null && currentObject.equals(oneill.getPosition())) {
           stringMatrix[i][j] += "O";
