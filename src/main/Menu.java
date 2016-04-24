@@ -1,5 +1,7 @@
 package main;
 
+import java.io.IOException;
+
 import logger.Logger;
 
 /**
@@ -23,6 +25,20 @@ public class Menu {
     LevelBuilder levelBuilder = LevelBuilder.getInstance();
     CommandHandler.setLevelBuilder(levelBuilder);
     CommandHandler.setAutoTest();
+    
+    if (args.length != 0) {
+      try {
+        CommandHandler.processFile(args[0]);
+      }
+      
+      catch (IOException e) {
+        System.out.println("A megadott fajlt nem talaltam.");
+      }
+      
+      finally {
+        System.exit(0);
+      }
+    }
 
     while (true) {
       if (CommandHandler.autoTest) {
