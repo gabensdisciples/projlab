@@ -1,6 +1,5 @@
 package main;
 
-import java.io.IOException;
 import game.Player;
 import enumerations.Color;
 import logger.Logger;
@@ -29,56 +28,7 @@ public class Menu {
    *          - init parameters
    */
   public static void main(String[] args) {
-    LevelBuilder levelBuilder = LevelBuilder.getInstance();
-    CommandHandler.setLevelBuilder(levelBuilder);
 
-    if (args.length != 0) {
-      try {
-        CommandHandler.processFile(args[0]);
-      }
-
-      catch (IOException e) {
-        System.out.println("A megadott fajlt nem talaltam.");
-      }
-
-      finally {
-        System.exit(0);
-      }
-    }
-
-    boolean success = false;
-    try {
-      success = CommandHandler.setAutoTest();
-    }
-
-    catch (Exception e) {
-      System.out.println("Ervenytelen azonosito.");
-      System.exit(0);
-    }
-
-    if (!success) {
-      System.exit(0);
-    }
-
-    while (true) {
-      if (CommandHandler.autoTest) {
-        CommandHandler.autoTest();
-      }
-
-      else {
-        try {
-          String command = CommandHandler.getCommand();
-          success = CommandHandler.executeCommand(command);
-          if (!success) {
-            System.out.println("Hibas parancs, add meg ujra!");
-          }
-        }
-
-        catch (Exception e) {
-          System.out.println("A parancs vegrehajtasa sikertelen volt.");
-        }
-      }
-    }
   }
 
   public static void showHelp() {

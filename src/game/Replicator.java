@@ -1,6 +1,5 @@
 package game;
 
-import cells.Gap;
 import cells.LevelObject;
 import logger.Logger;
 

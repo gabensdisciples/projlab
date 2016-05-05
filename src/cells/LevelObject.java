@@ -4,6 +4,7 @@ import enumerations.Direction;
 import enumerations.ItemState;
 import game.Bullet;
 import game.Character;
+import game.IdentifiedObject;
 import game.Player;
 import items.Item;
 import logger.Logger;
@@ -14,7 +15,7 @@ import logger.Logger;
  * @author Gaben's Disciples
  * 
  */
-public abstract class LevelObject {
+public abstract class LevelObject extends IdentifiedObject{
   protected LevelObject neighbourNorth;
 
   protected LevelObject neighbourEast;

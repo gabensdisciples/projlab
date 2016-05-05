@@ -11,7 +11,7 @@ import logger.Logger;
  * @author Gaben's Disciples
  * 
  */
-public class Bullet {
+public class Bullet extends IdentifiedObject{
   private Direction direction;
   private Color color;
   private LevelObject position;

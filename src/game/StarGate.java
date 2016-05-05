@@ -9,7 +9,7 @@ import logger.Logger;
  * @author Gaben's Disciples
  * 
  */
-public class StarGate {
+public class StarGate extends IdentifiedObject{
 
   private Color color;
 

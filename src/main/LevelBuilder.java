@@ -93,8 +93,7 @@ public class LevelBuilder {
         String startLine = br.readLine();
         String[] startLineSplit = startLine.split("\\s+");
         WIDTH = startLineSplit.length;
-        String line;
-        while ((line = br.readLine()) != null) {
+        while (br.readLine() != null) {
           row++;
         }
         row = row + 1;

@@ -1,5 +1,6 @@
 package items;
 
+import game.IdentifiedObject;
 import game.Player;
 
 /**
@@ -8,8 +9,7 @@ import game.Player;
  * @author Gaben's Disciples
  * 
  */
-public abstract class Item {
+public abstract class Item extends IdentifiedObject{
 
   public abstract void pickUp(Player player);
-
 }

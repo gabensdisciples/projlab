@@ -11,7 +11,7 @@ import logger.Logger;
  * @author Gaben's Disciples
  * 
  */
-public abstract class Character {
+public abstract class Character extends IdentifiedObject{
 
   protected LevelObject position;
   
