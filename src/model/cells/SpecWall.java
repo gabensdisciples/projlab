@@ -1,6 +1,5 @@
 package model.cells;
 
-import model.enumerations.Color;
 import model.enumerations.ItemState;
 import model.game.Bullet;
 import model.game.Character;
@@ -8,7 +7,6 @@ import model.game.Replicator;
 import model.game.ReplicatorContainer;
 import model.game.StarGate;
 import model.game.Wormhole;
-import view.View;
 
 /**
  * LevelObject class.
