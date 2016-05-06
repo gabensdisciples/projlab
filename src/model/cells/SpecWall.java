@@ -1,5 +1,6 @@
 package model.cells;
 
+import model.enumerations.Color;
 import model.enumerations.ItemState;
 import model.game.Bullet;
 import model.game.Character;
@@ -7,6 +8,7 @@ import model.game.Replicator;
 import model.game.ReplicatorContainer;
 import model.game.StarGate;
 import model.game.Wormhole;
+import view.View;
 
 /**
  * LevelObject class.
@@ -49,14 +51,20 @@ public class SpecWall extends LevelObject {
       Replicator replicator = ReplicatorContainer.getReplicator(this);
       if (replicator != null) {
         replicator.die();
-      } else {
+      }
+      
+      else {
         Wormhole.setSpecWall(this, gate.getColor());
         gate = bullet.createStarGate();
+        
       }
-    } else {
+    } 
+    
+    else {
       gate = bullet.createStarGate();
       Wormhole.setSpecWall(this, gate.getColor());
     }
+    
     bullet.die();
     walkable = true;
   }

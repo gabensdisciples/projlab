@@ -82,15 +82,15 @@ public class View extends Application {
     View.launch();
   }
 
-  public void remove(int ID) {
+  public static void remove(int ID) {
 
   }
 
-  public void move(int fromID, int toID) {
+  public static void move(int fromID, int toID) {
 
   }
 
-  public void create(int ID, int positionID, String imagename) {
+  public static void create(int ID, int positionID, String imagename) {
 
   }
 }

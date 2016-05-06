@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import model.cells.SpecWall;
 import model.enumerations.Color;
+import view.View;
 
 /**
  * Defines the wormhole.
@@ -25,9 +26,23 @@ public final class Wormhole {
   public static void setSpecWall(SpecWall specWall, Color color) {
     if (specWalls.containsKey(color)) {
       specWalls.get(color).setStarGate(null);
+      View.remove(specWalls.get(color).getStarGate().ID);
       specWalls.remove(color);
     }
+    
+    String imagename = null;
+    if (color == Color.RED) {
+      imagename = "red_stargate.png";
+    } else if (color == Color.YELLOW) {
+      imagename = "yellow_stargate.png";
+    } else if (color == Color.BLUE) {
+      imagename = "blue_stargate.png";
+    } else if (color == Color.GREEN) {
+      imagename = "green_stargate.png";
+    }
+    
     specWalls.put(color, specWall);
+    View.create(specWalls.get(color).getStarGate().ID, specWalls.get(color).ID, imagename);
   }
 
   /**

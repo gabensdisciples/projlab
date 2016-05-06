@@ -9,6 +9,7 @@ import model.game.ReplicatorContainer;
 import model.items.Box;
 import model.items.Item;
 import model.items.Zpm;
+import view.View;
 
 /**
  * LevelObject class.
@@ -73,14 +74,15 @@ public class Floor extends LevelObject {
 
   @Override
   public void getItem(Player player) {
-    Item tmp = item;
+    Item temp = item;
     item = null;
-    tmp.pickUp(player);
+    temp.pickUp(player);
   }
 
   @Override
   public void placeItem(Item item) {
     this.item = item;
+    View.create(item.ID, this.ID, "box.png");
   }
 
   public void setItem(Item item) {

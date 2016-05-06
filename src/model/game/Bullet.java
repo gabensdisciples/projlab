@@ -3,6 +3,7 @@ package model.game;
 import model.cells.LevelObject;
 import model.enumerations.Color;
 import model.enumerations.Direction;
+import view.View;
 
 /**
  * Defines the bullet.
@@ -53,6 +54,7 @@ public class Bullet extends IdentifiedObject{
    */
   public void setPosition(LevelObject position) {
     this.position = position;
+    View.move(this.ID, position.ID);
   }
 
   /**
@@ -60,6 +62,7 @@ public class Bullet extends IdentifiedObject{
    */
   public void die() {
     collision = true;
+    View.remove(this.ID);
   }
 
   /**
