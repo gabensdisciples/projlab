@@ -1,0 +1,73 @@
+package model.game;
+
+import model.cells.LevelObject;
+import model.enumerations.Direction;
+
+import model.logger.Logger;
+
+/**
+ * Defines the character.
+ * 
+ * @author Gaben's Disciples
+ * 
+ */
+public abstract class Character extends IdentifiedObject{
+
+  protected LevelObject position;
+  
+  protected Direction direction;
+  
+  /**
+   * Character constructor.
+   * 
+   * @param position
+   *          - where the character stands
+   */
+  public Character(LevelObject position) {
+    Logger.log("Character konstruktor");
+    this.position = position;
+    Logger.logout();
+  }
+
+  /**
+   * Makes the character move to a cell.
+   * 
+   * @param dir
+   *          - the specified direction
+   */
+
+  public void move(Direction dir) {
+    Logger.log("Character move");
+    direction = dir;
+    LevelObject target = position.getNeighbour(dir, true);
+    if(target != null) {
+      target.interactCharacter(this);
+    }
+    Logger.logout();
+  }
+
+  /**
+   * Sets the character's position to the given cell.
+   * 
+   * @param position
+   *          - LevelObject, cell
+   */
+  public void setPosition(LevelObject position) {
+    Logger.log("Character setPosition");
+    this.position = position;
+    Logger.logout();
+  }
+
+  /**
+   * Gets the character's position.
+   * 
+   * @return the position as LevelObject
+   */
+  public LevelObject getPosition() {
+    Logger.log("Character getPosition");
+    Logger.logout();
+    return position;
+  }
+  
+  public abstract void die();
+}
