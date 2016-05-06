@@ -46,9 +46,9 @@ public class LevelBuilder {
 
   public String[][] stringMatrix;
   
-  public static int[][] idMatrix;
+  public  int[][] idMatrix;
   
-  public String[] imageNameMatrix;
+  public String[][] imageNameMatrix;
 
   /**
    * Creates a single instance of the class.
@@ -104,6 +104,8 @@ public class LevelBuilder {
         HEIGHT = row;
         stringMatrix = new String[HEIGHT][WIDTH];
         objectMatrix = new LevelObject[HEIGHT][WIDTH];
+        idMatrix = new int[HEIGHT][WIDTH];
+        imageNameMatrix = new String[HEIGHT][WIDTH];
       } finally {
         br.close();
       }
@@ -171,6 +173,7 @@ public class LevelBuilder {
         if (currentString.equals("O")) {
           objectMatrix[i][j] = new Floor(true, null);
           oneill = new Player(objectMatrix[i][j], Color.BLUE, Direction.NORTH);
+          System.out.println(oneill.ID);
           idMatrix[i][j] = oneill.ID;
           stringMatrix[i][j] = "FW";
         } else if (currentString.equals("R")) {
