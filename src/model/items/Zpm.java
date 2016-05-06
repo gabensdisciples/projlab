@@ -2,6 +2,7 @@ package model.items;
 
 import model.game.Player;
 import model.menu.Menu;
+import view.View;
 
 /**
  * Defines the ZPM.
@@ -25,7 +26,8 @@ public class Zpm extends Item {
   public void pickUp(Player player) {
     zpmsRemaining--;
     player.incrementZpmCount();
-    if(zpmsRemaining == 0){
+    View.remove(this.ID);
+    if(zpmsRemaining == 0) {
       Menu.gameOver(player, zpmsMax);
     }
   }

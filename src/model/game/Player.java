@@ -9,6 +9,7 @@ import model.enumerations.ItemState;
 import model.items.Box;
 import model.items.Zpm;
 import model.menu.Menu;
+import view.View;
 
 /**
  * Defines the player.
@@ -198,6 +199,7 @@ public class Player extends Character {
 
   public void die() {
     this.position = null;
+    View.remove(this.ID);
     Menu.gameOver(this, zpmCount);
   }
 

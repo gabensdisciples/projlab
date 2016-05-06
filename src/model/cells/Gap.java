@@ -7,6 +7,7 @@ import model.game.Player;
 import model.game.Replicator;
 import model.game.ReplicatorContainer;
 import model.items.Item;
+import view.View;
 
 /**
  * LevelObject class.
@@ -45,8 +46,9 @@ public class Gap extends LevelObject {
     if (!walkable) {
       character.setPosition(this);
       if (ReplicatorContainer.getReplicator(this) != null) {
-        System.out.println("walkable = true");
         walkable = true;
+        View.remove(this.ID);
+        View.create(this.ID, this.ID, "floor.png");
       }
       character.die();
     } else {
@@ -81,5 +83,6 @@ public class Gap extends LevelObject {
   @Override
   public void placeItem(Item item) {
     this.item = item;
+    View.create(item.ID, this.ID, "box.png");
   }
 }

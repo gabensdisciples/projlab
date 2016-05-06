@@ -1,5 +1,6 @@
 package model.items;
 import model.game.Player;
+import view.View;
 
 /**
  * Defines the box.
@@ -15,6 +16,6 @@ public class Box extends Item {
   public void pickUp(Player player) {
     
     player.setBox(this);
-    
+    View.remove(this.ID);
   }
 }

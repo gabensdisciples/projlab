@@ -2,6 +2,7 @@ package model.game;
 
 import model.cells.LevelObject;
 import model.enumerations.Direction;
+import view.View;
 
 /**
  * Defines the character.
@@ -48,6 +49,7 @@ public abstract class Character extends IdentifiedObject{
    */
   public void setPosition(LevelObject position) {
     this.position = position;
+    View.move(this.ID, position.ID);
   }
 
   /**

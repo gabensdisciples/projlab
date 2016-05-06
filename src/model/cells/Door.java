@@ -6,7 +6,6 @@ import model.game.Character;
 import model.game.Replicator;
 import model.game.ReplicatorContainer;
 
-
 /**
  * LevelObject class.
  * 

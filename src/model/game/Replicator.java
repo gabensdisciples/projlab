@@ -1,6 +1,7 @@
 package model.game;
 
 import model.cells.LevelObject;
+import view.View;
 
 public class Replicator extends Character {
 
@@ -10,7 +11,7 @@ public class Replicator extends Character {
   }
   
   public void die() {
-    //GUI itt szedi le a replikatort
+    View.remove(this.ID);
     ReplicatorContainer.remove(this);
   }
 }
