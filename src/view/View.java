@@ -2,10 +2,8 @@ package view;
 
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
-import model.levelbuilder.LevelBuilder;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -14,7 +12,6 @@ import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -24,30 +21,36 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import model.game.IdentifiedObject;
+import model.levelbuilder.LevelBuilder;
 
 public class View extends Application {
 
   private static Map<Integer, ImageView> map;
   private Stage stage;
-  Scene gameScene;
+  private static Scene gameScene;
   private static final int CELLSIZE = 128;
+  private static Pane mapPane;
+
   // TODO GameController controller;
 
   public void init() {
     LevelBuilder levelBuilder = LevelBuilder.getInstance();
     levelBuilder.init("level/level.txt");
-    
+
     map = new HashMap<Integer, ImageView>();
-    
-    int[][] idArray = {{1,2,3}, {4,5,6}, {7,8,9}};
-    String[][] imageNameArray = {{"oneill.png", "jaffa.png", "floor.png"}, {"floor.png", "floor.png", "specwall.png"}, {"gap.png", "floor.png", "specwall.png"}};
-  
+
+    //int[][] idArray = { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } };
+    //String[][] imageNameArray = { { "oneill.png", "jaffa.png", "floor.png" },
+    //    { "floor.png", "floor.png", "specwall.png" }, { "gap.png", "floor.png", "specwall.png" } };
+    int[][] idArray = levelBuilder.getIdMatrix();
+    String[][] imageNameArray = levelBuilder.getImageNameMatrix();
     int posX = 0;
     int posY = 0;
-    for (int i=0; i<idArray.length; i++) {
-      posX = i*CELLSIZE;
-      for (int j=0; j<idArray.length; j++) {
-        posY = j*CELLSIZE;
+    for (int i = 0; i < idArray.length; i++) {
+      posY = i * CELLSIZE;
+      for (int j = 0; j < idArray[i].length; j++) {
+        posX = j * CELLSIZE;
         Image img = new Image(imageNameArray[i][j], CELLSIZE, CELLSIZE, true, false);
         ImageView imgView = new ImageView(img);
         imgView.setX(posX);
@@ -62,6 +65,7 @@ public class View extends Application {
     this.stage = stage;
     Scene menuScene = setupMenuScene();
     gameScene = setupGameScene();
+
     
     stage.setScene(menuScene);
     stage.setTitle("GabeN's Disicples Project Laboratory Application");
@@ -74,6 +78,9 @@ public class View extends Application {
       public void handle(final KeyEvent keyEvent) {
         // TODO controller.addPressedKey(keyEvent.getCode());
         System.out.println(keyEvent.getCode());
+        //move(4,5);
+        //create(11,3, "replicator.png");
+        //remove(1);
         keyEvent.consume();
       }
     };
@@ -94,7 +101,7 @@ public class View extends Application {
     start.setOnAction(new EventHandler<ActionEvent>() {
       @Override
       public void handle(ActionEvent e) {
-        stage.setScene(setupGameScene());
+        stage.setScene(gameScene);
       }
     });
 
@@ -119,7 +126,7 @@ public class View extends Application {
         Platform.exit();
       }
     });
-    
+
     // Menu container and centering
     VBox menu = new VBox(10);
     menu.getChildren().addAll(start, help, exit);
@@ -134,31 +141,25 @@ public class View extends Application {
     root.getChildren().add(menuBgView);
     root.getChildren().add(menu);
 
-    final EventHandler<KeyEvent> keyEventHandler = new EventHandler<KeyEvent>() {
-      public void handle(final KeyEvent keyEvent) {
-        KeyCode[] keys = { KeyCode.UP, KeyCode.DOWN, KeyCode.ENTER };
-        if (Arrays.asList(keys).contains(keyEvent.getCode())) {
-          System.out.println(keyEvent.getCode());
-          menu.getChildren().iterator().next().setStyle("-fx-border-color: #fff;");
-        }
-        keyEvent.consume();
-      }
-    };
-    scene.setOnKeyPressed(keyEventHandler);
-
     return scene;
   }
-  
+
   private Scene setupGameScene() {
-    // TODO Auto-generated method stub
     Group root = new Group();
     Scene scene = new Scene(root, stage.getWidth(), stage.getHeight(), Color.BEIGE);
-    Pane pane = new Pane();
+    mapPane = new Pane();
     for (ImageView imgView : map.values()) {
-      pane.getChildren().add(imgView);
+//      String[] needsFloor = {"oneill.png", "replicator.png", "gap.png", "jaffa.png", "scale.png", "door.png", "box.png", "zpm.png"};
+//      if (Arrays.asList(needsFloor).contains(imgView.getImage().toString())) {
+//        Image floor = new Image("floor.png", CELLSIZE, CELLSIZE, true, false);
+//        ImageView floorView = new ImageView(floor);
+//        floorView.setX(imgView.getX());
+//        floorView.setY(imgView.getY());
+//      }
+      mapPane.getChildren().add(imgView);
     }
-    root.getChildren().add(pane);
-    
+    root.getChildren().add(mapPane);
+
     installEventHandler(scene);
     return scene;
   }
@@ -168,6 +169,8 @@ public class View extends Application {
   }
 
   public static void remove(int ID) {
+    ImageView toRemove = map.get(ID);
+    mapPane.getChildren().remove(toRemove);
     map.remove(ID);
   }
 
@@ -179,11 +182,14 @@ public class View extends Application {
   }
 
   public static void create(int ID, int positionID, String imagename) {
-    Image img = new Image(imagename);
+    Image img = new Image(imagename, CELLSIZE, CELLSIZE, true, false);
     ImageView created = new ImageView(img);
     ImageView position = map.get(positionID);
     created.setX(position.getX());
     created.setY(position.getY());
+    map.put(IdentifiedObject.maxID+1, created);
+    mapPane.getChildren().add(created);
+    created.toFront();
   }
- 
+
 }
