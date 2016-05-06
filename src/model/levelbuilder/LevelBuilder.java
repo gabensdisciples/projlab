@@ -173,54 +173,78 @@ public class LevelBuilder {
         if (currentString.equals("O")) {
           objectMatrix[i][j] = new Floor(true, null);
           oneill = new Player(objectMatrix[i][j], Color.BLUE, Direction.NORTH);
-          System.out.println(oneill.ID);
+          
           idMatrix[i][j] = oneill.ID;
+          imageNameMatrix[i][j] = "oneill.png";
+          
           stringMatrix[i][j] = "FW";
         } else if (currentString.equals("R")) {
           objectMatrix[i][j] = new Floor(true, null);
           replicator = new Replicator(objectMatrix[i][j]);
+          
           idMatrix[i][j] = replicator.ID;
+          imageNameMatrix[i][j] = "replicator.png";
+          
           stringMatrix[i][j] = "FW";
         } else if (currentString.equals("J")) {
           objectMatrix[i][j] = new Floor(true, null);
           jaffa = new Player(objectMatrix[i][j], Color.GREEN, Direction.NORTH);
+          
           idMatrix[i][j] = jaffa.ID;
+          imageNameMatrix[i][j] = "jaffa.png";
+          
           stringMatrix[i][j] = "FW";
         } else if (currentString.equals("FW")) {
           Floor floor = new Floor(true, null);
           objectMatrix[i][j] = floor;
+          
           idMatrix[i][j] = floor.ID;
+          imageNameMatrix[i][j] = "floor.png";
         } else if (currentString.equals("FNW")) {
           Floor wall = new Floor(false, null);
           objectMatrix[i][j] = wall;
+          
           idMatrix[i][j] = wall.ID;
+          imageNameMatrix[i][j] = "wall.png";
         } else if (currentString.equals("FB")) {
           Box box = new Box();
           objectMatrix[i][j] = new Floor(true, box);
+          
           idMatrix[i][j] = box.ID;
+          imageNameMatrix[i][j] = "box.png";
         } else if (currentString.equals("FZ")) {
           Zpm zpm = new Zpm();
           objectMatrix[i][j] = new Floor(true, zpm);
+          
           idMatrix[i][j] = zpm.ID;
+          imageNameMatrix[i][j] = "zpm.png";
         } else if (currentString.equals("G")) {
           Gap gap = new Gap();
           objectMatrix[i][j] = gap;
+          
           idMatrix[i][j] = gap.ID;
+          imageNameMatrix[i][j] = "gap.png";
         } else if (currentString.equals("SP")) {
           SpecWall specWall = new SpecWall();
           objectMatrix[i][j] = specWall;
+          
           idMatrix[i][j] = specWall.ID;
+          imageNameMatrix[i][j] = "specwall.png";
         } else if (currentString.equals("E")) {
           objectMatrix[i][j] = null;
           idMatrix[i][j] = 0;
         } else if (currentString.substring(0, 1).equals("D")) {
           Door door = new Door();
           objectMatrix[i][j] = door;
+          
           idMatrix[i][j] = door.ID;
+          imageNameMatrix[i][j] = "door.png";
         } else if (currentString.length() >= 2 && currentString.substring(0, 2).equals("SC")) {
           Scale scale = new Scale(2);
           objectMatrix[i][j] = scale;
+          
           idMatrix[i][j] = scale.ID;
+          imageNameMatrix[i][j] = "scale.png";
         } else {
           throw new RuntimeException("Wrong abbreviation in text file.");
         }
@@ -507,5 +531,13 @@ public class LevelBuilder {
 
   public void setJaffa(Player jaffa) {
     this.jaffa = jaffa;
+  }
+  
+  public int[][] getIdMatrix() {
+    return idMatrix;
+  }
+  
+  public String[][] getImageNameMatrix() {
+    return imageNameMatrix;
   }
 }
