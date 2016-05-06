@@ -27,9 +27,10 @@ import javafx.stage.Stage;
 
 public class View extends Application {
 
-  Map<Integer, ImageView> map;
+  private static Map<Integer, ImageView> map;
   private Stage stage;
   Scene gameScene;
+  private static final int CELLSIZE = 128;
   // TODO GameController controller;
 
   public void init() {
@@ -44,10 +45,10 @@ public class View extends Application {
     int posX = 0;
     int posY = 0;
     for (int i=0; i<idArray.length; i++) {
-      posX = i*128;
+      posX = i*CELLSIZE;
       for (int j=0; j<idArray.length; j++) {
-        posY = j*128;
-        Image img = new Image(imageNameArray[i][j], 128, 128, true, false);
+        posY = j*CELLSIZE;
+        Image img = new Image(imageNameArray[i][j], CELLSIZE, CELLSIZE, true, false);
         ImageView imgView = new ImageView(img);
         imgView.setX(posX);
         imgView.setY(posY);
@@ -151,16 +152,12 @@ public class View extends Application {
   private Scene setupGameScene() {
     // TODO Auto-generated method stub
     Group root = new Group();
-    Scene scene = new Scene(root, 800, 400, Color.BEIGE);
+    Scene scene = new Scene(root, stage.getWidth(), stage.getHeight(), Color.BEIGE);
     Pane pane = new Pane();
     for (ImageView imgView : map.values()) {
       pane.getChildren().add(imgView);
     }
-    
-
     root.getChildren().add(pane);
-
-
     
     installEventHandler(scene);
     return scene;
@@ -171,14 +168,22 @@ public class View extends Application {
   }
 
   public static void remove(int ID) {
-
+    map.remove(ID);
   }
 
   public static void move(int fromID, int toID) {
-
+    ImageView toCell = map.get(toID);
+    ImageView toMove = map.get(fromID);
+    toMove.setX(toCell.getX());
+    toMove.setY(toCell.getY());
   }
 
   public static void create(int ID, int positionID, String imagename) {
-
+    Image img = new Image(imagename);
+    ImageView created = new ImageView(img);
+    ImageView position = map.get(positionID);
+    created.setX(position.getX());
+    created.setY(position.getY());
   }
+ 
 }
