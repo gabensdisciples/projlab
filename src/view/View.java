@@ -19,6 +19,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -43,10 +44,10 @@ public class View extends Application {
     int posX = 0;
     int posY = 0;
     for (int i=0; i<idArray.length; i++) {
-      posX = i*32;
+      posX = i*128;
       for (int j=0; j<idArray.length; j++) {
-        posY = j*32;
-        Image img = new Image(imageNameArray[i][j]);
+        posY = j*128;
+        Image img = new Image(imageNameArray[i][j], 128, 128, true, false);
         ImageView imgView = new ImageView(img);
         imgView.setX(posX);
         imgView.setY(posY);
@@ -151,10 +152,15 @@ public class View extends Application {
     // TODO Auto-generated method stub
     Group root = new Group();
     Scene scene = new Scene(root, 800, 400, Color.BEIGE);
-    
+    Pane pane = new Pane();
     for (ImageView imgView : map.values()) {
-      root.getChildren().add(imgView);
+      pane.getChildren().add(imgView);
     }
+    
+
+    root.getChildren().add(pane);
+
+
     
     installEventHandler(scene);
     return scene;
