@@ -45,6 +45,10 @@ public class LevelBuilder {
   public LevelObject[][] objectMatrix;
 
   public String[][] stringMatrix;
+  
+  public static int[][] idMatrix;
+  
+  public String[] imageNameMatrix;
 
   /**
    * Creates a single instance of the class.
@@ -167,33 +171,53 @@ public class LevelBuilder {
         if (currentString.equals("O")) {
           objectMatrix[i][j] = new Floor(true, null);
           oneill = new Player(objectMatrix[i][j], Color.BLUE, Direction.NORTH);
+          idMatrix[i][j] = oneill.ID;
           stringMatrix[i][j] = "FW";
         } else if (currentString.equals("R")) {
           objectMatrix[i][j] = new Floor(true, null);
           replicator = new Replicator(objectMatrix[i][j]);
+          idMatrix[i][j] = replicator.ID;
           stringMatrix[i][j] = "FW";
         } else if (currentString.equals("J")) {
           objectMatrix[i][j] = new Floor(true, null);
           jaffa = new Player(objectMatrix[i][j], Color.GREEN, Direction.NORTH);
+          idMatrix[i][j] = jaffa.ID;
           stringMatrix[i][j] = "FW";
         } else if (currentString.equals("FW")) {
-          objectMatrix[i][j] = new Floor(true, null);
+          Floor floor = new Floor(true, null);
+          objectMatrix[i][j] = floor;
+          idMatrix[i][j] = floor.ID;
         } else if (currentString.equals("FNW")) {
-          objectMatrix[i][j] = new Floor(false, null);
+          Floor wall = new Floor(false, null);
+          objectMatrix[i][j] = wall;
+          idMatrix[i][j] = wall.ID;
         } else if (currentString.equals("FB")) {
-          objectMatrix[i][j] = new Floor(true, new Box());
+          Box box = new Box();
+          objectMatrix[i][j] = new Floor(true, box);
+          idMatrix[i][j] = box.ID;
         } else if (currentString.equals("FZ")) {
-          objectMatrix[i][j] = new Floor(true, new Zpm());
+          Zpm zpm = new Zpm();
+          objectMatrix[i][j] = new Floor(true, zpm);
+          idMatrix[i][j] = zpm.ID;
         } else if (currentString.equals("G")) {
-          objectMatrix[i][j] = new Gap();
+          Gap gap = new Gap();
+          objectMatrix[i][j] = gap;
+          idMatrix[i][j] = gap.ID;
         } else if (currentString.equals("SP")) {
-          objectMatrix[i][j] = new SpecWall();
+          SpecWall specWall = new SpecWall();
+          objectMatrix[i][j] = specWall;
+          idMatrix[i][j] = specWall.ID;
         } else if (currentString.equals("E")) {
           objectMatrix[i][j] = null;
+          idMatrix[i][j] = 0;
         } else if (currentString.substring(0, 1).equals("D")) {
-          objectMatrix[i][j] = new Door();
+          Door door = new Door();
+          objectMatrix[i][j] = door;
+          idMatrix[i][j] = door.ID;
         } else if (currentString.length() >= 2 && currentString.substring(0, 2).equals("SC")) {
-          objectMatrix[i][j] = new Scale(2);
+          Scale scale = new Scale(2);
+          objectMatrix[i][j] = scale;
+          idMatrix[i][j] = scale.ID;
         } else {
           throw new RuntimeException("Wrong abbreviation in text file.");
         }
