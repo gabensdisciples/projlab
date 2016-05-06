@@ -1,7 +1,6 @@
 package model.game;
 
 import model.enumerations.Color;
-import model.logger.Logger;
 
 /**
  * Defines the stargate.
@@ -20,9 +19,7 @@ public class StarGate extends IdentifiedObject{
    *          - color to set
    */
   public StarGate(Color color) {
-    Logger.log("StarGate konstruktor");
     this.color = color;
-    Logger.logout();
   }
 
   public Color getColor() {

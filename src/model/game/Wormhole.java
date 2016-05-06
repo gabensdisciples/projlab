@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 import model.cells.SpecWall;
 import model.enumerations.Color;
-import model.logger.Logger;
 
 /**
  * Defines the wormhole.
@@ -24,13 +23,11 @@ public final class Wormhole {
    *          - the SpecWall's color
    */
   public static void setSpecWall(SpecWall specWall, Color color) {
-    Logger.log("Wormhole setSpecWall");
     if (specWalls.containsKey(color)) {
       specWalls.get(color).setStarGate(null);
       specWalls.remove(color);
     }
     specWalls.put(color, specWall);
-    Logger.logout();
   }
 
   /**
@@ -41,8 +38,6 @@ public final class Wormhole {
    * @return the SpecWall object
    */
   public static SpecWall getSpecWall(Color color) {
-    Logger.log("Wormhole getSpecWall");
-    Logger.logout();
     if (specWalls.containsKey(color)) {
       return specWalls.get(color);
     } else {
