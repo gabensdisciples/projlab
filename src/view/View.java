@@ -1,4 +1,4 @@
-package main;
+package view;
 
 import java.util.Map;
 
@@ -93,5 +93,4 @@ public class View extends Application {
   public void create(int ID, int positionID, String imagename) {
 
   }
-
 }

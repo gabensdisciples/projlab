@@ -11,7 +11,7 @@ import model.game.Replicator;
 import model.game.ReplicatorContainer;
 import model.items.Box;
 import model.items.Item;
-import model.logger.Logger;
+
 //változott: default konstruktor, setDoor!
 
 /**
@@ -50,16 +50,12 @@ public class Scale extends LevelObject {
     weight = 0;
     this.door = door;
     this.limit = limit;
-    Logger.log("Scale konstruktor");
-    Logger.logout();
   }
 
   /**
    * Cell's property.
    */
   public ItemState hasItem() {
-    Logger.log("Scale hasItem");
-    Logger.logout();
     if (!boxes.isEmpty()) {
       return ItemState.STACKITEM;
     } else {
@@ -71,20 +67,17 @@ public class Scale extends LevelObject {
    * Creates interaction between the character and level objects.
    */
   public void interactCharacter(Character character) {
-    Logger.log("Scale interactCharacter");
     weight += 2;
     if (weight >= limit) {
       door.setWalkable(true);
     }
     character.setPosition(this);
-    Logger.logout();
   }
 
   /**
    * Creates interaction between the bullet and level objects.
    */
   public void interactBullet(Bullet bullet) {
-    Logger.log("Scale interactBullet");
     Replicator replicator = ReplicatorContainer.getReplicator(this);
     if (replicator != null) {
       replicator.die();
@@ -92,12 +85,10 @@ public class Scale extends LevelObject {
     } else {
       bullet.setPosition(this);
     }
-    Logger.logout();
   }
 
   @Override
   public LevelObject getNeighbour(Direction dir, boolean characterCalled) {
-    Logger.log("Scale getNeighbour");
     LevelObject neighbour = null;
 
     switch (dir) {
@@ -119,13 +110,11 @@ public class Scale extends LevelObject {
       Player dummy = new Player(this, null, dir);
       if (neighbour != null) {
         neighbour.interactCharacter(dummy);
-
         if (dummy.getPosition() != this && weight - 2 < limit) {
           weight -= 2;
           door.setWalkable(false);
         }
       }
-      Logger.logout();
     }
 
     return neighbour;
@@ -133,24 +122,20 @@ public class Scale extends LevelObject {
 
   @Override
   public void getItem(Player player) {
-    Logger.log("Scale getItem");
     boxes.pop().pickUp(player);
     weight -= 1;
     if (weight < limit) {
       door.setWalkable(false);
     }
-    Logger.logout();
   }
 
   @Override
   public void placeItem(Item item) {
-    Logger.log("Scale placeItem");
     boxes.push((Box) item);
     weight += 1;
     if (weight >= limit) {
       door.setWalkable(true);
     }
-    Logger.logout();
   }
 
   public void setDoor(Door door) {
@@ -164,5 +149,4 @@ public class Scale extends LevelObject {
   public int getBoxNumber() {
     return boxes.size();
   }
-
 }

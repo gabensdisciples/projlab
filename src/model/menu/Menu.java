@@ -1,8 +1,7 @@
-package model.main;
+package model.menu;
 
 import model.game.Player;
 import model.enumerations.Color;
-import model.logger.Logger;
 
 /**
  * Defines the menu.
@@ -27,14 +26,9 @@ public class Menu {
    * @param args
    *          - init parameters
    */
-  public static void main(String[] args) {
-
-  }
 
   public static void showHelp() {
-    Logger.log("Menu showHelp");
     System.out.println(helpText);
-    Logger.logout();
   }
 
   public static void gameOver(Player player, int zpmsMax) {

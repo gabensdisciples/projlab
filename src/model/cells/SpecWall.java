@@ -7,7 +7,6 @@ import model.game.Replicator;
 import model.game.ReplicatorContainer;
 import model.game.StarGate;
 import model.game.Wormhole;
-import model.logger.Logger;
 
 /**
  * LevelObject class.
@@ -25,21 +24,16 @@ public class SpecWall extends LevelObject {
   public SpecWall() {
     super(false);
     gate = null;
-    Logger.log("SpecWall konstruktor");
-    Logger.logout();
   }
 
   /**
    * Cell's property.
    */
   public ItemState hasItem() {
-    Logger.log("SpecWall hasItem");
-    Logger.logout();
     return ItemState.FORBIDDENAREA;
   }
 
   public void interactCharacter(Character character) {
-    Logger.log("SpecWall interactCharacter");
     if (gate != null) {
       LevelObject pair = Wormhole.getSpecWall(gate.getColor().getOtherColor());
       if (pair != null) {
@@ -48,12 +42,9 @@ public class SpecWall extends LevelObject {
         character.setPosition(this);
       }
     }
-    Logger.logout();
   }
 
   public void interactBullet(Bullet bullet) {
-    Logger.log("SpecWall interactBullet");
-
     if (gate != null) {
       Replicator replicator = ReplicatorContainer.getReplicator(this);
       if (replicator != null) {
@@ -68,7 +59,6 @@ public class SpecWall extends LevelObject {
     }
     bullet.die();
     walkable = true;
-    Logger.logout();
   }
 
   /**
@@ -78,16 +68,13 @@ public class SpecWall extends LevelObject {
    *          the startgate object
    */
   public void setStarGate(StarGate gate) {
-    Logger.log("SpecWall setStarGate");
     this.gate = gate;
     if (gate == null) {
       walkable = false;
     }
-    Logger.logout();
   }
 
   public StarGate getStarGate() {
     return this.gate;
   }
-
 }

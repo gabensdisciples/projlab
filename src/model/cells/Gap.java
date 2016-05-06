@@ -7,7 +7,6 @@ import model.game.Player;
 import model.game.Replicator;
 import model.game.ReplicatorContainer;
 import model.items.Item;
-import model.logger.Logger;
 
 /**
  * LevelObject class.
@@ -16,7 +15,6 @@ import model.logger.Logger;
  * 
  */
 public class Gap extends LevelObject {
-
   private Item item;
 
   /**
@@ -24,17 +22,13 @@ public class Gap extends LevelObject {
    */
   public Gap() {
     super(false);
-    Logger.log("Gap konstruktor");
     item = null;
-    Logger.logout();
   }
 
   /**
    * Checks if the cell has any item.
    */
   public ItemState hasItem() {
-    Logger.log("Gap hasItem");
-    Logger.logout();
     if (!walkable) {
       return ItemState.FORBIDDENAREA;
     } else if (item != null) {
@@ -48,7 +42,6 @@ public class Gap extends LevelObject {
    * Makes interaction between the character and level objects.
    */
   public void interactCharacter(Character character) {
-    Logger.log("Gap interactCharacter");
     if (!walkable) {
       character.setPosition(this);
       if (ReplicatorContainer.getReplicator(this) != null) {
@@ -59,14 +52,12 @@ public class Gap extends LevelObject {
     } else {
       character.setPosition(this);
     }
-    Logger.logout();
   }
 
   /**
    * Makes interaction between the bullet and level objects.
    */
   public void interactBullet(Bullet bullet) {
-    Logger.log("Gap interactBullet");
     if (walkable) {
       Replicator replicator = ReplicatorContainer.getReplicator(this);
       if (replicator != null) {
@@ -78,22 +69,17 @@ public class Gap extends LevelObject {
     } else {
       bullet.setPosition(this);
     }
-    Logger.logout();
   }
 
   @Override
   public void getItem(Player player) {
-    Logger.log("Gap getItem");
-    Item tmp = item;
+    Item temp = item;
     item = null;
-    tmp.pickUp(player);
-    Logger.logout();
+    temp.pickUp(player);
   }
 
   @Override
   public void placeItem(Item item) {
-    Logger.log("Gap placeItem");
     this.item = item;
-    Logger.logout();
   }
 }

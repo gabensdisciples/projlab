@@ -3,7 +3,6 @@ package model.game;
 import model.cells.LevelObject;
 import model.enumerations.Color;
 import model.enumerations.Direction;
-import model.logger.Logger;
 
 /**
  * Defines the bullet.
@@ -28,26 +27,22 @@ public class Bullet extends IdentifiedObject{
    *          - the bullet's color
    */
   public Bullet(LevelObject position, Direction direction, Color color) {
-    Logger.log("Bullet konstruktor");
     this.position = position;
     this.direction = direction;
     this.color = color;
     collision = false;
-    Logger.logout();
   }
 
   /**
    * Creates interaction among the bullet and cells. Makes the bullet move.
    */
   public void fly() {
-    Logger.log("Bullet fly");
     while (!collision && position != null) {
       position.interactBullet(this);
       if (!collision) {
         position = position.getNeighbour(direction, false);
       }
     }
-    Logger.logout();
   }
 
   /**
@@ -57,26 +52,20 @@ public class Bullet extends IdentifiedObject{
    *          - the cell where the bullet is
    */
   public void setPosition(LevelObject position) {
-    Logger.log("Bullet setPosition");
     this.position = position;
-    Logger.logout();
   }
 
   /**
    * Destroy bullet.
    */
   public void die() {
-    Logger.log("Bullet die");
     collision = true;
-    Logger.logout();
   }
 
   /**
    * Creates a stargate.
    */
   public StarGate createStarGate() {
-    Logger.log("Bullet createStarGate");
-    Logger.logout();
     return new StarGate(color);
   }
 }

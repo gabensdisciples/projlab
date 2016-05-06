@@ -1,7 +1,5 @@
 package model.enumerations;
 
-import model.logger.Logger;
-
 /**
  * Enum class.
  * 
@@ -18,8 +16,6 @@ public enum Color {
    * @return the color enum value
    */
   public Color getOtherColor() {
-    Logger.log("Color getOtherColor");
-    Logger.logout();
     switch (this) {
       case BLUE:
         return Color.YELLOW;

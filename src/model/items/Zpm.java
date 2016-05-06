@@ -1,8 +1,7 @@
 package model.items;
 
 import model.game.Player;
-import model.logger.Logger;
-import model.main.Menu;
+import model.menu.Menu;
 
 /**
  * Defines the ZPM.
@@ -24,12 +23,10 @@ public class Zpm extends Item {
    * Increase the character's ZpmCount property when he picks up one.
    */
   public void pickUp(Player player) {
-    Logger.log("ZPM pickUp");
     zpmsRemaining--;
     player.incrementZpmCount();
     if(zpmsRemaining == 0){
       Menu.gameOver(player, zpmsMax);
     }
-    Logger.logout();
   }
 }

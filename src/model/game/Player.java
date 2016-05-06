@@ -8,8 +8,7 @@ import model.enumerations.Direction;
 import model.enumerations.ItemState;
 import model.items.Box;
 import model.items.Zpm;
-import model.logger.Logger;
-import model.main.Menu;
+import model.menu.Menu;
 
 /**
  * Defines the player.
@@ -37,37 +36,30 @@ public class Player extends Character {
    */
   public Player(LevelObject position, Color color, Direction direction) {
     super(position);
-    Logger.log("Player konstruktor");
     bulletColor = color;
     this.direction = direction;
     this.zpmCount = 0;
-    Logger.logout();
   }
 
   /**
    * Changes the bullet color.
    */
   public void changeColor() {
-    Logger.log("Player Changecolor");
     bulletColor = bulletColor.getOtherColor();
-    Logger.logout();
   }
 
   /**
    * The character shoots a bullet in a direction with specified color.
    */
   public void shoot() {
-    Logger.log("Player shoot");
     Bullet bullet = new Bullet(position, direction, bulletColor);
     bullet.fly();
-    Logger.logout();
   }
 
   /**
    * Increments zpmCount attribute. Called after picking up a ZPM.
    */
   public void incrementZpmCount() {
-    Logger.log("Player incrementZpmCount");
     zpmCount++;
 
     if (zpmCount == 2) {
@@ -161,7 +153,6 @@ public class Player extends Character {
     if (Zpm.zpmsRemaining == 0) {
       // Vege a jateknak
     }
-    Logger.logout();
   }
 
   /**
@@ -170,13 +161,11 @@ public class Player extends Character {
    *          - the box to be set
    */
   public void setBox(Box box) {
-    Logger.log("Player setBox");
     if (this.box != null) {
       position.placeItem(box);
     } else {
       this.box = box;
     }
-    Logger.logout();
   }
 
   /**
@@ -185,31 +174,22 @@ public class Player extends Character {
    */
   
   public void drop() {
-    Logger.log("Player drop");
-    
     ItemState state = position.hasItem();
-    
     if (box != null && 
         (state == ItemState.NOITEM || state == ItemState.STACKITEM)) {
         position.placeItem(box);
         box = null;
      }
-
-    Logger.logout();
   }
 
   /**
    * Takes a box.
    */
   public void take() {
-    Logger.log("Player take");    
-    
     ItemState state = position.hasItem();
     if (state == ItemState.GOTITEM || state == ItemState.STACKITEM) {
       position.getItem(this);
     }
-
-    Logger.logout();
   }
   
   public Color getColor(){
@@ -217,10 +197,8 @@ public class Player extends Character {
   }
 
   public void die() {
-    Logger.log("Player die");
     this.position = null;
     Menu.gameOver(this, zpmCount);
-    Logger.logout();
   }
 
   public int getZpmCount() {

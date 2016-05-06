@@ -3,8 +3,6 @@ package model.game;
 import model.cells.LevelObject;
 import model.enumerations.Direction;
 
-import model.logger.Logger;
-
 /**
  * Defines the character.
  * 
@@ -24,9 +22,7 @@ public abstract class Character extends IdentifiedObject{
    *          - where the character stands
    */
   public Character(LevelObject position) {
-    Logger.log("Character konstruktor");
     this.position = position;
-    Logger.logout();
   }
 
   /**
@@ -37,13 +33,11 @@ public abstract class Character extends IdentifiedObject{
    */
 
   public void move(Direction dir) {
-    Logger.log("Character move");
     direction = dir;
     LevelObject target = position.getNeighbour(dir, true);
     if(target != null) {
       target.interactCharacter(this);
     }
-    Logger.logout();
   }
 
   /**
@@ -53,9 +47,7 @@ public abstract class Character extends IdentifiedObject{
    *          - LevelObject, cell
    */
   public void setPosition(LevelObject position) {
-    Logger.log("Character setPosition");
     this.position = position;
-    Logger.logout();
   }
 
   /**
@@ -64,8 +56,6 @@ public abstract class Character extends IdentifiedObject{
    * @return the position as LevelObject
    */
   public LevelObject getPosition() {
-    Logger.log("Character getPosition");
-    Logger.logout();
     return position;
   }
   

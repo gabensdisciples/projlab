@@ -7,7 +7,6 @@ import model.game.Character;
 import model.game.IdentifiedObject;
 import model.game.Player;
 import model.items.Item;
-import model.logger.Logger;
 
 /**
  * LevelObject class.
@@ -34,8 +33,6 @@ public abstract class LevelObject extends IdentifiedObject{
    */
   public LevelObject(boolean walkable) {
     this.walkable = walkable;
-    Logger.log("LevelObject konstruktor");
-    Logger.logout();
   }
 
   /**
@@ -44,12 +41,9 @@ public abstract class LevelObject extends IdentifiedObject{
    * @return the walkable value
    */
   public boolean isWalkable() {
-    Logger.log("LevelObject isWalkable");
-    Logger.logout();
     return walkable;
-
   }
-
+  
   public abstract void interactCharacter(Character character);
 
   public abstract void interactBullet(Bullet bullet);
@@ -64,8 +58,6 @@ public abstract class LevelObject extends IdentifiedObject{
    * @return the neighbor cell
    */
   public LevelObject getNeighbour(Direction dir, boolean characterCalled) {
-    Logger.log("LevelObject getNeighbour");
-    Logger.logout();
     switch (dir) {
       case NORTH:
         return neighbourNorth;
@@ -79,7 +71,6 @@ public abstract class LevelObject extends IdentifiedObject{
         return null;
     }
   }
-
   /**
    * Gets the neighbor of a cell in the given direction.
    * 
@@ -89,8 +80,6 @@ public abstract class LevelObject extends IdentifiedObject{
    *          - LevelObject
    */
   public void setNeighbour(Direction dir, LevelObject levelObject) {
-    Logger.log("LevelObject setNeighbour");
-
     switch (dir) {
       case NORTH:
         neighbourNorth = levelObject;
@@ -107,18 +96,11 @@ public abstract class LevelObject extends IdentifiedObject{
       default:
         break;
     }
-    Logger.logout();
   }
-
+  
   public abstract ItemState hasItem();
 
-  public void getItem(Player character) {
-    Logger.log("LevelObject getItem");
-    Logger.logout();
-  }
+  public void getItem(Player character) {}
 
-  public void placeItem(Item item) {
-    Logger.log("LevelObject placeItem");
-    Logger.logout();
-  }
+  public void placeItem(Item item) {}
 }
