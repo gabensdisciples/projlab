@@ -222,11 +222,15 @@ public class View extends Application {
  * @param toID
  */
   public static void move(int fromID, int toID) {
+    System.out.println(fromID);
+    System.out.println(toID);  
     ImageView toCell = map.get(toID);
     ImageView toMove = map.get(fromID);
-    toMove.setX(toCell.getX());
-    toMove.setY(toCell.getY());
-    toMove.toFront();
+    if (toMove != null && toMove != null) {
+      toMove.setX(toCell.getX());
+      toMove.setY(toCell.getY());
+      toMove.toFront();
+    }
   }
 /**
  * creates an element
