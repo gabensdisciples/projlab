@@ -29,11 +29,17 @@ public class View extends Application {
   private static Map<Integer, ImageView> map;
   private Stage stage;
   private static Scene gameScene;
-  private static final int CELLSIZE = 128;
+  private static final int CELLSIZE = 96;
   private static Pane mapPane;
 
   // TODO GameController controller;
 
+/**
+ * Initializes the level and its elements. Creates an ImageView for every element with its correct
+ * coordinates and puts it into the map. 
+ * 
+ * @author 
+ */
   public void init() {
     LevelBuilder levelBuilder = LevelBuilder.getInstance();
     levelBuilder.init("level/level.txt");
@@ -43,23 +49,31 @@ public class View extends Application {
     //int[][] idArray = { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } };
     //String[][] imageNameArray = { { "oneill.png", "jaffa.png", "floor.png" },
     //    { "floor.png", "floor.png", "specwall.png" }, { "gap.png", "floor.png", "specwall.png" } };
-    int[][] idArray = levelBuilder.getIdMatrix();
-    String[][] imageNameArray = levelBuilder.getImageNameMatrix();
+    int[][][] idArray = levelBuilder.getIdMatrix();
+    String[][][] imageNameArray = levelBuilder.getImageNameMatrix();
     int posX = 0;
     int posY = 0;
     for (int i = 0; i < idArray.length; i++) {
       posY = i * CELLSIZE;
       for (int j = 0; j < idArray[i].length; j++) {
         posX = j * CELLSIZE;
-        Image img = new Image(imageNameArray[i][j], CELLSIZE, CELLSIZE, true, false);
-        ImageView imgView = new ImageView(img);
-        imgView.setX(posX);
-        imgView.setY(posY);
-        map.put(idArray[i][j], imgView);
+        for (int z = 0; z < idArray[i][j].length; z++) {
+          if (imageNameArray[i][j][z] != null && idArray[i][j][z] != 0) {
+            Image img = new Image(imageNameArray[i][j][z], CELLSIZE, CELLSIZE, true, false);
+            ImageView imgView = new ImageView(img);
+            imgView.setX(posX);
+            imgView.setY(posY);
+            map.put(idArray[i][j][z], imgView);
+          }
+        }
       }
     }
   }
 
+  
+  /**
+   * Starts the JavaFX app and sets the scene.
+   */
   @Override
   public void start(Stage stage) throws Exception {
     this.stage = stage;
@@ -72,7 +86,13 @@ public class View extends Application {
     stage.show();
 
   }
-
+/**
+ * Installs the event handler on the given scene.
+ * The event handler gives the keyCodes to the GameController.
+ * 
+ * @param the scene which gets the eventhandler
+ */
+  
   private void installEventHandler(final Scene keyNode) {
     final EventHandler<KeyEvent> keyEventHandler = new EventHandler<KeyEvent>() {
       public void handle(final KeyEvent keyEvent) {
@@ -86,7 +106,10 @@ public class View extends Application {
     };
     keyNode.setOnKeyPressed(keyEventHandler);
   }
-
+/**
+ * Sets up the menu scene with the menu buttons with a vbox and the background.
+ * @return the complete scene
+ */
   private Scene setupMenuScene() {
     // Background Image and view
     Image menuBg = new Image("menu_bg.png");
@@ -144,18 +167,16 @@ public class View extends Application {
     return scene;
   }
 
+  /**
+   * Creates the game scene, iterates through the map, and adds the ImageViews to the scene.
+   * @return the complete game scene
+   */
+  
   private Scene setupGameScene() {
     Group root = new Group();
     Scene scene = new Scene(root, stage.getWidth(), stage.getHeight(), Color.BEIGE);
     mapPane = new Pane();
     for (ImageView imgView : map.values()) {
-//      String[] needsFloor = {"oneill.png", "replicator.png", "gap.png", "jaffa.png", "scale.png", "door.png", "box.png", "zpm.png"};
-//      if (Arrays.asList(needsFloor).contains(imgView.getImage().toString())) {
-//        Image floor = new Image("floor.png", CELLSIZE, CELLSIZE, true, false);
-//        ImageView floorView = new ImageView(floor);
-//        floorView.setX(imgView.getX());
-//        floorView.setY(imgView.getY());
-//      }
       mapPane.getChildren().add(imgView);
     }
     root.getChildren().add(mapPane);
