@@ -226,6 +226,7 @@ public class View extends Application {
     ImageView toMove = map.get(fromID);
     toMove.setX(toCell.getX());
     toMove.setY(toCell.getY());
+    toMove.toFront();
   }
 /**
  * creates an element
