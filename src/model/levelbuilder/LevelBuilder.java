@@ -46,9 +46,9 @@ public class LevelBuilder {
 
   public String[][] stringMatrix;
   
-  public  int[][] idMatrix;
+  public  int[][][] idMatrix;
   
-  public String[][] imageNameMatrix;
+  public String[][][] imageNameMatrix;
 
   /**
    * Creates a single instance of the class.
@@ -104,8 +104,8 @@ public class LevelBuilder {
         HEIGHT = row;
         stringMatrix = new String[HEIGHT][WIDTH];
         objectMatrix = new LevelObject[HEIGHT][WIDTH];
-        idMatrix = new int[HEIGHT][WIDTH];
-        imageNameMatrix = new String[HEIGHT][WIDTH];
+        idMatrix = new int[HEIGHT][WIDTH][2];
+        imageNameMatrix = new String[HEIGHT][WIDTH][2];
       } finally {
         br.close();
       }
@@ -171,80 +171,111 @@ public class LevelBuilder {
       for (int j = 0; j < WIDTH; j++) {
         String currentString = stringMatrix[i][j];
         if (currentString.equals("O")) {
-          objectMatrix[i][j] = new Floor(true, null);
+          Floor floor = new Floor(true, null);
+          objectMatrix[i][j] = floor;
           oneill = new Player(objectMatrix[i][j], Color.BLUE, Direction.NORTH);
           
-          idMatrix[i][j] = oneill.ID;
-          imageNameMatrix[i][j] = "oneill.png";
+          idMatrix[i][j][0] = floor.ID;
+          idMatrix[i][j][1] = oneill.ID;
+          imageNameMatrix[i][j][0] = "floor.png";
+          imageNameMatrix[i][j][1] = "oneill.png";
           
           stringMatrix[i][j] = "FW";
         } else if (currentString.equals("R")) {
-          objectMatrix[i][j] = new Floor(true, null);
+          Floor floor = new Floor(true, null);
+          objectMatrix[i][j] = floor;
           replicator = new Replicator(objectMatrix[i][j]);
           
-          idMatrix[i][j] = replicator.ID;
-          imageNameMatrix[i][j] = "replicator.png";
+          idMatrix[i][j][0] = floor.ID;
+          idMatrix[i][j][1] = replicator.ID;
+          imageNameMatrix[i][j][0] = "floor.png";
+          imageNameMatrix[i][j][1] = "replicator.png";
           
           stringMatrix[i][j] = "FW";
         } else if (currentString.equals("J")) {
-          objectMatrix[i][j] = new Floor(true, null);
+          Floor floor = new Floor(true, null);
+          objectMatrix[i][j] = floor;
           jaffa = new Player(objectMatrix[i][j], Color.GREEN, Direction.NORTH);
           
-          idMatrix[i][j] = jaffa.ID;
-          imageNameMatrix[i][j] = "jaffa.png";
+          idMatrix[i][j][0] = floor.ID;
+          idMatrix[i][j][1] = jaffa.ID;
+          imageNameMatrix[i][j][0] = "floor.png";
+          imageNameMatrix[i][j][1] = "jaffa.png";
           
           stringMatrix[i][j] = "FW";
         } else if (currentString.equals("FW")) {
           Floor floor = new Floor(true, null);
           objectMatrix[i][j] = floor;
           
-          idMatrix[i][j] = floor.ID;
-          imageNameMatrix[i][j] = "floor.png";
+          idMatrix[i][j][0] = floor.ID;
+          idMatrix[i][j][1] = 0;
+          imageNameMatrix[i][j][0] = "floor.png";
+          imageNameMatrix[i][j][1] = null;
         } else if (currentString.equals("FNW")) {
           Floor wall = new Floor(false, null);
           objectMatrix[i][j] = wall;
           
-          idMatrix[i][j] = wall.ID;
-          imageNameMatrix[i][j] = "wall.png";
+          idMatrix[i][j][0] = wall.ID;
+          idMatrix[i][j][1] = 0;
+          imageNameMatrix[i][j][0] = "wall.png";
+          imageNameMatrix[i][j][1] = null;
         } else if (currentString.equals("FB")) {
           Box box = new Box();
-          objectMatrix[i][j] = new Floor(true, box);
+          Floor floor = new Floor(true, box);
+          objectMatrix[i][j] = floor;
           
-          idMatrix[i][j] = box.ID;
-          imageNameMatrix[i][j] = "box.png";
+          idMatrix[i][j][0] = floor.ID;
+          idMatrix[i][j][1] = box.ID;
+          imageNameMatrix[i][j][0] = "floor.png";
+          imageNameMatrix[i][j][1] = "box.png";
         } else if (currentString.equals("FZ")) {
           Zpm zpm = new Zpm();
-          objectMatrix[i][j] = new Floor(true, zpm);
+          Floor floor = new Floor(true, zpm);
+          objectMatrix[i][j] = floor;
           
-          idMatrix[i][j] = zpm.ID;
-          imageNameMatrix[i][j] = "zpm.png";
+          idMatrix[i][j][0] = floor.ID;
+          idMatrix[i][j][1] = zpm.ID;
+          imageNameMatrix[i][j][0] = "floor.png";
+          imageNameMatrix[i][j][1] = "zpm.png";
         } else if (currentString.equals("G")) {
           Gap gap = new Gap();
           objectMatrix[i][j] = gap;
           
-          idMatrix[i][j] = gap.ID;
-          imageNameMatrix[i][j] = "gap.png";
+          idMatrix[i][j][0] = gap.ID;
+          idMatrix[i][j][1] = 0;
+          imageNameMatrix[i][j][0] = "gap.png";
+          imageNameMatrix[i][j][1] = null;
         } else if (currentString.equals("SP")) {
           SpecWall specWall = new SpecWall();
           objectMatrix[i][j] = specWall;
           
-          idMatrix[i][j] = specWall.ID;
-          imageNameMatrix[i][j] = "specwall.png";
+          idMatrix[i][j][0] = specWall.ID;
+          idMatrix[i][j][1] = 0;
+          imageNameMatrix[i][j][0] = "specwall.png";
+          imageNameMatrix[i][j][1] = null;
         } else if (currentString.equals("E")) {
           objectMatrix[i][j] = null;
-          idMatrix[i][j] = 0;
+          idMatrix[i][j][0] = 0;
+          idMatrix[i][j][1] = 0;
+          imageNameMatrix[i][j][0] = null;
+          imageNameMatrix[i][j][1] = null;
         } else if (currentString.substring(0, 1).equals("D")) {
           Door door = new Door();
           objectMatrix[i][j] = door;
           
-          idMatrix[i][j] = door.ID;
-          imageNameMatrix[i][j] = "door.png";
+          idMatrix[i][j][0] = door.ID;
+          idMatrix[i][j][1] = 0;
+          imageNameMatrix[i][j][0] = "door.png";
+          imageNameMatrix[i][j][1] = null;
         } else if (currentString.length() >= 2 && currentString.substring(0, 2).equals("SC")) {
+          Floor floor = new Floor(true, null);
           Scale scale = new Scale(2);
           objectMatrix[i][j] = scale;
           
-          idMatrix[i][j] = scale.ID;
-          imageNameMatrix[i][j] = "scale.png";
+          idMatrix[i][j][0] = floor.ID;
+          idMatrix[i][j][1] = scale.ID;
+          imageNameMatrix[i][j][0] = "floor.png";
+          imageNameMatrix[i][j][1] = "scale.png";
         } else {
           throw new RuntimeException("Wrong abbreviation in text file.");
         }
@@ -533,11 +564,11 @@ public class LevelBuilder {
     this.jaffa = jaffa;
   }
   
-  public int[][] getIdMatrix() {
+  public int[][][] getIdMatrix() {
     return idMatrix;
   }
   
-  public String[][] getImageNameMatrix() {
+  public String[][][] getImageNameMatrix() {
     return imageNameMatrix;
   }
 }
