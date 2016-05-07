@@ -238,13 +238,14 @@ public class LevelBuilder {
           imageNameMatrix[i][j][0] = "floor.png";
           imageNameMatrix[i][j][1] = "zpm.png";
         } else if (currentString.equals("G")) {
+          Floor floor = new Floor(true, null);
           Gap gap = new Gap();
           objectMatrix[i][j] = gap;
           
-          idMatrix[i][j][0] = gap.ID;
-          idMatrix[i][j][1] = 0;
-          imageNameMatrix[i][j][0] = "gap.png";
-          imageNameMatrix[i][j][1] = null;
+          idMatrix[i][j][0] = floor.ID;
+          idMatrix[i][j][1] = gap.ID;
+          imageNameMatrix[i][j][0] = "floor.png";
+          imageNameMatrix[i][j][1] = "gap.png";
         } else if (currentString.equals("SP")) {
           SpecWall specWall = new SpecWall();
           objectMatrix[i][j] = specWall;
@@ -260,13 +261,14 @@ public class LevelBuilder {
           imageNameMatrix[i][j][0] = null;
           imageNameMatrix[i][j][1] = null;
         } else if (currentString.substring(0, 1).equals("D")) {
+          Floor floor = new Floor(true, null);
           Door door = new Door();
           objectMatrix[i][j] = door;
           
-          idMatrix[i][j][0] = door.ID;
-          idMatrix[i][j][1] = 0;
-          imageNameMatrix[i][j][0] = "door.png";
-          imageNameMatrix[i][j][1] = null;
+          idMatrix[i][j][0] = floor.ID;
+          idMatrix[i][j][1] = door.ID;
+          imageNameMatrix[i][j][0] = "floor.png";
+          imageNameMatrix[i][j][1] = "door.png";
         } else if (currentString.length() >= 2 && currentString.substring(0, 2).equals("SC")) {
           Floor floor = new Floor(true, null);
           Scale scale = new Scale(2);
