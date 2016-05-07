@@ -220,8 +220,9 @@ public class LevelBuilder {
           imageNameMatrix[i][j][0] = "wall.png";
           imageNameMatrix[i][j][1] = null;
         } else if (currentString.equals("FB")) {
+          Floor floor = new Floor(true, null);
           Box box = new Box();
-          Floor floor = new Floor(true, box);
+          floor.setItem(box);
           objectMatrix[i][j] = floor;
           
           idMatrix[i][j][0] = floor.ID;
@@ -229,8 +230,9 @@ public class LevelBuilder {
           imageNameMatrix[i][j][0] = "floor.png";
           imageNameMatrix[i][j][1] = "box.png";
         } else if (currentString.equals("FZ")) {
+          Floor floor = new Floor(true, null);
           Zpm zpm = new Zpm();
-          Floor floor = new Floor(true, zpm);
+          floor.setItem(zpm);
           objectMatrix[i][j] = floor;
           
           idMatrix[i][j][0] = floor.ID;

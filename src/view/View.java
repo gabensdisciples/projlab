@@ -212,5 +212,4 @@ public class View extends Application {
     mapPane.getChildren().add(created);
     created.toFront();
   }
-
 }
