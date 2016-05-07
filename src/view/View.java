@@ -66,13 +66,7 @@ public class View extends Application {
             ImageView imgView = new ImageView(img);
             imgView.setX(posX);
             imgView.setY(posY);
-
-            //get object name from image filename and add it as CSS class
-            Pattern objNamePattern = Pattern.compile("(.*).png");
-            Matcher objNameMatcher = objNamePattern.matcher(imageNameArray[i][j][z]);
-            if (objNameMatcher.matches()) {
-              imgView.getStyleClass().add(objNameMatcher.group(1));
-            }
+            imgView.getStyleClass().add(getObjectNameFromImage(imageNameArray[i][j][z]));
             
             map.put(idArray[i][j][z], imgView);
           }
@@ -203,17 +197,28 @@ public class View extends Application {
     return scene;
   }
 
+  private static String getObjectNameFromImage(String imageName) {
+    //get object name from image filename
+    Pattern objNamePattern = Pattern.compile("(.*).png");
+    Matcher objNameMatcher = objNamePattern.matcher(imageName);
+    if (objNameMatcher.matches()) {
+     return objNameMatcher.group(1);
+    }
+    return "";
+  }
   public static void main(String[] args) {
     View.launch();
   }
-
+  
   /**
    * Removes an element from the game scene and map
    * @param ID the element to remove
    */
   public static void remove(int ID) {
     ImageView toRemove = map.get(ID);
-    mapPane.getChildren().remove(toRemove);
+    System.out.println("Removing this: " + ID + " ");
+
+    mapPane.getChildren().removeAll(toRemove);
     map.remove(ID);
   }
 /**
@@ -222,8 +227,8 @@ public class View extends Application {
  * @param toID
  */
   public static void move(int fromID, int toID) {
-    System.out.println(fromID);
-    System.out.println(toID);  
+    System.out.println("Moving this: " + fromID);
+    System.out.println("Moving to here: " + toID);  
     ImageView toCell = map.get(toID);
     ImageView toMove = map.get(fromID);
     if (toMove != null && toMove != null) {
@@ -244,7 +249,9 @@ public class View extends Application {
     ImageView position = map.get(positionID);
     created.setX(position.getX());
     created.setY(position.getY());
-    map.put(IdentifiedObject.maxID + 1, created);
+    created.getStyleClass().add(getObjectNameFromImage(imagename));
+    System.out.println("Creating this: " + ID + " "  + " here: " + positionID);
+    map.put(ID, created);
     mapPane.getChildren().add(created);
     created.toFront();
   }

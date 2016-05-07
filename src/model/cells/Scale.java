@@ -137,6 +137,7 @@ public class Scale extends LevelObject {
     View.create(item.ID, this.ID, "box.png");
     if (weight >= limit) {
       door.setWalkable(true);
+      //TODO ajtó nyitásának/zárásának kirajzolása
     }
   }
 
