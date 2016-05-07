@@ -3,6 +3,8 @@ package view;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -34,21 +36,22 @@ public class View extends Application {
 
   // TODO GameController controller;
 
-/**
- * Initializes the level and its elements. Creates an ImageView for every element with its correct
- * coordinates and puts it into the map. 
- * 
- * @author 
- */
+  /**
+   * Initializes the level and its elements. Creates an ImageView for every
+   * element with its correct coordinates and puts it into the map.
+   * 
+   * @author
+   */
   public void init() {
     LevelBuilder levelBuilder = LevelBuilder.getInstance();
     levelBuilder.init("level/level.txt");
 
     map = new HashMap<Integer, ImageView>();
 
-    //int[][] idArray = { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } };
-    //String[][] imageNameArray = { { "oneill.png", "jaffa.png", "floor.png" },
-    //    { "floor.png", "floor.png", "specwall.png" }, { "gap.png", "floor.png", "specwall.png" } };
+    // int[][] idArray = { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } };
+    // String[][] imageNameArray = { { "oneill.png", "jaffa.png", "floor.png" },
+    // { "floor.png", "floor.png", "specwall.png" }, { "gap.png", "floor.png",
+    // "specwall.png" } };
     int[][][] idArray = levelBuilder.getIdMatrix();
     String[][][] imageNameArray = levelBuilder.getImageNameMatrix();
     int posX = 0;
@@ -63,6 +66,14 @@ public class View extends Application {
             ImageView imgView = new ImageView(img);
             imgView.setX(posX);
             imgView.setY(posY);
+
+            //get object name from image filename and add it as CSS class
+            Pattern objNamePattern = Pattern.compile("(.*).png");
+            Matcher objNameMatcher = objNamePattern.matcher(imageNameArray[i][j][z]);
+            if (objNameMatcher.matches()) {
+              imgView.getStyleClass().add(objNameMatcher.group(1));
+            }
+            
             map.put(idArray[i][j][z], imgView);
           }
         }
@@ -70,7 +81,6 @@ public class View extends Application {
     }
   }
 
-  
   /**
    * Starts the JavaFX app and sets the scene.
    */
@@ -80,36 +90,40 @@ public class View extends Application {
     Scene menuScene = setupMenuScene();
     gameScene = setupGameScene();
 
-    
     stage.setScene(menuScene);
     stage.setTitle("GabeN's Disicples Project Laboratory Application");
     stage.show();
 
   }
-/**
- * Installs the event handler on the given scene.
- * The event handler gives the keyCodes to the GameController.
- * 
- * @param the scene which gets the eventhandler
- */
-  
+
+  /**
+   * Installs the event handler on the given scene. The event handler gives the
+   * keyCodes to the GameController.
+   * 
+   * @param the
+   *          scene which gets the eventhandler
+   */
+
   private void installEventHandler(final Scene keyNode) {
     final EventHandler<KeyEvent> keyEventHandler = new EventHandler<KeyEvent>() {
       public void handle(final KeyEvent keyEvent) {
         // TODO controller.addPressedKey(keyEvent.getCode());
         System.out.println(keyEvent.getCode());
-        //move(4,5);
-        //create(11,3, "replicator.png");
-        //remove(1);
+        //move(4,15);
+        // create(11,3, "replicator.png");
+        // remove(1);
         keyEvent.consume();
       }
     };
     keyNode.setOnKeyPressed(keyEventHandler);
   }
-/**
- * Sets up the menu scene with the menu buttons with a vbox and the background.
- * @return the complete scene
- */
+
+  /**
+   * Sets up the menu scene with the menu buttons with a vbox and the
+   * background.
+   * 
+   * @return the complete scene
+   */
   private Scene setupMenuScene() {
     // Background Image and view
     Image menuBg = new Image("menu_bg.png");
@@ -168,10 +182,12 @@ public class View extends Application {
   }
 
   /**
-   * Creates the game scene, iterates through the map, and adds the ImageViews to the scene.
+   * Creates the game scene, iterates through the map, and adds the ImageViews
+   * to the scene.
+   * 
    * @return the complete game scene
    */
-  
+
   private Scene setupGameScene() {
     Group root = new Group();
     Scene scene = new Scene(root, stage.getWidth(), stage.getHeight(), Color.BEIGE);
@@ -189,26 +205,39 @@ public class View extends Application {
     View.launch();
   }
 
+  /**
+   * Removes an element from the game scene and map
+   * @param ID the element to remove
+   */
   public static void remove(int ID) {
     ImageView toRemove = map.get(ID);
     mapPane.getChildren().remove(toRemove);
     map.remove(ID);
   }
-
+/**
+ * Moves an element.
+ * @param fromID
+ * @param toID
+ */
   public static void move(int fromID, int toID) {
     ImageView toCell = map.get(toID);
     ImageView toMove = map.get(fromID);
     toMove.setX(toCell.getX());
     toMove.setY(toCell.getY());
   }
-
+/**
+ * creates an element
+ * @param ID of new element
+ * @param positionID position of its position
+ * @param imagename 
+ */
   public static void create(int ID, int positionID, String imagename) {
     Image img = new Image(imagename, CELLSIZE, CELLSIZE, true, false);
     ImageView created = new ImageView(img);
     ImageView position = map.get(positionID);
     created.setX(position.getX());
     created.setY(position.getY());
-    map.put(IdentifiedObject.maxID+1, created);
+    map.put(IdentifiedObject.maxID + 1, created);
     mapPane.getChildren().add(created);
     created.toFront();
   }
