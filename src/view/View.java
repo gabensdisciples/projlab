@@ -25,6 +25,7 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import model.game.IdentifiedObject;
 import model.levelbuilder.LevelBuilder;
+import controller.GameController;
 
 public class View extends Application {
 
@@ -33,8 +34,7 @@ public class View extends Application {
   private static Scene gameScene;
   private static final int CELLSIZE = 96;
   private static Pane mapPane;
-
-  // TODO GameController controller;
+  private GameController controller;
 
   /**
    * Initializes the level and its elements. Creates an ImageView for every
@@ -79,6 +79,8 @@ public class View extends Application {
         }
       }
     }
+    controller = new GameController();
+    controller.startWorkerThread(levelBuilder.getOneill(), levelBuilder.getJaffa(), levelBuilder.getReplicator());
   }
 
   /**
@@ -107,7 +109,7 @@ public class View extends Application {
   private void installEventHandler(final Scene keyNode) {
     final EventHandler<KeyEvent> keyEventHandler = new EventHandler<KeyEvent>() {
       public void handle(final KeyEvent keyEvent) {
-        // TODO controller.addPressedKey(keyEvent.getCode());
+        controller.addPressedKey(keyEvent.getCode().toString());
         System.out.println(keyEvent.getCode());
         //move(4,15);
         // create(11,3, "replicator.png");
