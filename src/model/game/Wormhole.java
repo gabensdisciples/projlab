@@ -23,13 +23,8 @@ public final class Wormhole {
    * @param color
    *          - the SpecWall's color
    */
-  public static void setSpecWall(SpecWall specWall, Color color) {
-    if (specWalls.containsKey(color)) {
-      specWalls.get(color).setStarGate(null);
-      View.remove(specWalls.get(color).getStarGate().ID);
-      specWalls.remove(color);
-    }
-    
+  public static void setSpecWall(SpecWall specWall, Color color) {    
+    //Determine the name of the image to be used based on the gate's color.
     String imagename = null;
     if (color == Color.RED) {
       imagename = "red_stargate.png";
@@ -41,8 +36,42 @@ public final class Wormhole {
       imagename = "green_stargate.png";
     }
     
-    specWalls.put(color, specWall);
-    View.create(specWalls.get(color).getStarGate().ID, specWalls.get(color).ID, imagename);
+    //If a gate of the given color already exists, but not on the given specwall
+    if (specWalls.containsKey(color) && specWalls.get(color) != specWall) {
+      View.remove(specWalls.get(color).getStarGate().ID);
+      specWalls.get(color).setStarGate(null);
+      specWalls.remove(color);
+      specWalls.put(color, specWall);
+      View.create(specWall.getStarGate().ID, specWall.ID, imagename);
+    }
+    
+    //If a gate of the given color doesnt exist yet
+    else if (!specWalls.containsKey(color)){
+      specWalls.put(color, specWall);
+      View.create(specWall.getStarGate().ID, specWall.ID, imagename);
+    }
+    
+    //If the gate of the given color exists on the given specwall
+    else {
+      return;
+    }
+   /*
+    if (specWalls.containsKey(color)) {
+      View.remove(specWalls.get(color).getStarGate().ID);
+      specWalls.get(color).setStarGate(null);
+      specWalls.remove(color);
+    }
+    
+      specWalls.put(color, specWall);
+
+      if (specWalls.get(color).getStarGate() == null)
+        System.out.println("A gate null");
+      if (specWalls.get(color) == null)
+        System.out.println("A specwall null");
+      if (imagename == null)
+        System.out.println("Az imagename null");
+
+      View.create(specWall.getStarGate().ID, specWall.ID, imagename);*/
   }
 
   /**
@@ -59,8 +88,8 @@ public final class Wormhole {
       return null;
     }
   }
-  
-  public static void Clear(){
-      specWalls.clear();
+
+  public static void Clear() {
+    specWalls.clear();
   }
 }

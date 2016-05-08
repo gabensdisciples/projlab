@@ -9,7 +9,6 @@ import model.game.ReplicatorContainer;
 import model.items.Box;
 import model.items.Item;
 import model.items.Zpm;
-import view.View;
 
 /**
  * LevelObject class.
@@ -83,7 +82,6 @@ public class Floor extends LevelObject {
   public void placeItem(Item item) {
     this.item = item;
     //TODO akkor is box kerül rajzolásra, amikor incrementzpmcount rak le ZPM-et
-    View.create(item.ID, this.ID, "box.png");
   }
 
   public void setItem(Item item) {

@@ -11,7 +11,6 @@ import model.game.Replicator;
 import model.game.ReplicatorContainer;
 import model.items.Box;
 import model.items.Item;
-import view.View;
 
 //változott: default konstruktor, setDoor!
 
@@ -140,7 +139,6 @@ public class Scale extends LevelObject {
   public void placeItem(Item item) {
     boxes.push((Box) item);
     weight += 1;
-    View.create(item.ID, this.ID, "box.png");
     if (weight >= limit) {
       door.setWalkable(true);
       //TODO ajtó nyitásának/zárásának kirajzolása

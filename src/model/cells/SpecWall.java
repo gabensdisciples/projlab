@@ -45,26 +45,44 @@ public class SpecWall extends LevelObject {
   }
 
   public void interactBullet(Bullet bullet) {
-    if (gate != null) {
+    //Check for replicator. If one is present on the specwall, destroy it.
+    Replicator replicator = ReplicatorContainer.getReplicator(this);
+    if (replicator != null) {
+      replicator.die();
+    }
+    
+    //If no replicator is present, replace gate with a new one.
+    else {
+      gate = bullet.createStarGate();
+      Wormhole.setSpecWall(this, gate.getColor());
+    }
+    //Destroy bullet
+    bullet.die();
+    if (!walkable) {
+      walkable = true;
+    }
+
+    /*if (gate != null) {
       Replicator replicator = ReplicatorContainer.getReplicator(this);
       if (replicator != null) {
         replicator.die();
       }
       
       else {
-        Wormhole.setSpecWall(this, gate.getColor());
-        gate = bullet.createStarGate();
-        
+        StarGate newGate = bullet.createStarGate();
+        if (newGate.getColor() != gate.getColor()) {
+          gate = newGate;
+          Wormhole.setSpecWall(this, gate.getColor());
+        }
       }
     } 
     
     else {
       gate = bullet.createStarGate();
       Wormhole.setSpecWall(this, gate.getColor());
-    }
+    }*/
     
-    bullet.die();
-    walkable = true;
+
   }
 
   /**

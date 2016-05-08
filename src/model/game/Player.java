@@ -142,7 +142,9 @@ public class Player extends Character {
            *and set iterate flag false
            */
           if (current.hasItem() == ItemState.NOITEM) {
-            current.placeItem(new Zpm());
+            Zpm zpm = new Zpm();
+            current.placeItem(zpm);
+            View.create(zpm.ID, current.ID, "zpm.png");
             iterate = false;
           }
           i = 0;
@@ -179,6 +181,7 @@ public class Player extends Character {
     if (box != null && 
         (state == ItemState.NOITEM || state == ItemState.STACKITEM)) {
         position.placeItem(box);
+        View.create(box.ID, position.ID, "box.png");
         box = null;
      }
   }

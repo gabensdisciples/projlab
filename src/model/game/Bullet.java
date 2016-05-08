@@ -38,8 +38,20 @@ public class Bullet extends IdentifiedObject{
    * Creates interaction among the bullet and cells. Makes the bullet move.
    */
   public void fly() {
+    /*String imagename = null;
+    if (color == Color.RED) {
+      imagename = "red_bullet.png";
+    } else if (color == Color.YELLOW) {
+      imagename = "yellow_bullet.png";
+    } else if (color == Color.BLUE) {
+      imagename = "blue_bullet.png";
+    } else if (color == Color.GREEN) {
+      imagename = "green_bullet.png";
+    }*/
+    
     while (!collision && position != null) {
       position.interactBullet(this);
+      //TODO Bullet repulesenek kirajzolasa
       if (!collision) {
         position = position.getNeighbour(direction, false);
       }
