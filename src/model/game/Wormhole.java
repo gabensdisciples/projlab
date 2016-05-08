@@ -55,23 +55,6 @@ public final class Wormhole {
     else {
       return;
     }
-   /*
-    if (specWalls.containsKey(color)) {
-      View.remove(specWalls.get(color).getStarGate().ID);
-      specWalls.get(color).setStarGate(null);
-      specWalls.remove(color);
-    }
-    
-      specWalls.put(color, specWall);
-
-      if (specWalls.get(color).getStarGate() == null)
-        System.out.println("A gate null");
-      if (specWalls.get(color) == null)
-        System.out.println("A specwall null");
-      if (imagename == null)
-        System.out.println("Az imagename null");
-
-      View.create(specWall.getStarGate().ID, specWall.ID, imagename);*/
   }
 
   /**
