@@ -104,7 +104,7 @@ public class View extends Application {
     final EventHandler<KeyEvent> keyEventHandler = new EventHandler<KeyEvent>() {
       public void handle(final KeyEvent keyEvent) {
         controller.addPressedKey(keyEvent.getCode().toString());
-        System.out.println(keyEvent.getCode());
+        //System.out.println(keyEvent.getCode());
         //move(4,15);
         // create(11,3, "replicator.png");
         // remove(1);
@@ -216,7 +216,7 @@ public class View extends Application {
    */
   public static void remove(int ID) {
     ImageView toRemove = map.get(ID);
-    System.out.println("Removing this: " + ID + " ");
+    //System.out.println("Removing this: " + ID + " ");
 
     mapPane.getChildren().removeAll(toRemove);
     map.remove(ID);
@@ -227,8 +227,8 @@ public class View extends Application {
  * @param toID
  */
   public static void move(int fromID, int toID) {
-    System.out.println("Moving this: " + fromID);
-    System.out.println("Moving to here: " + toID);  
+    //System.out.println("Moving this: " + fromID);
+   //System.out.println("Moving to here: " + toID);  
     ImageView toCell = map.get(toID);
     ImageView toMove = map.get(fromID);
     if (toMove != null && toMove != null) {
@@ -250,7 +250,7 @@ public class View extends Application {
     created.setX(position.getX());
     created.setY(position.getY());
     created.getStyleClass().add(getObjectNameFromImage(imagename));
-    System.out.println("Creating this: " + ID + " "  + " here: " + positionID);
+    //System.out.println("Creating this: " + ID + " "  + " here: " + positionID);
     map.put(ID, created);
     mapPane.getChildren().add(created);
     created.toFront();
