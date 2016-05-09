@@ -151,11 +151,6 @@ public class Player extends Character {
         }
       }
     }
-    
-    //If no more zpms remain, end of game
-    if (Zpm.zpmsRemaining == 0) {
-      // Vege a jateknak
-    }
   }
 
   /**
@@ -168,6 +163,7 @@ public class Player extends Character {
       position.placeItem(box);
     } else {
       this.box = box;
+      View.remove(box.ID);
     }
   }
 

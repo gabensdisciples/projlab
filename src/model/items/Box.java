@@ -15,6 +15,5 @@ public class Box extends Item {
    */
   public void pickUp(Player player) {
     player.setBox(this);
-    View.remove(this.ID);
   }
 }

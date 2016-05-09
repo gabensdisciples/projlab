@@ -5,6 +5,7 @@ import model.game.Bullet;
 import model.game.Character;
 import model.game.Replicator;
 import model.game.ReplicatorContainer;
+import view.View;
 
 /**
  * LevelObject class.
