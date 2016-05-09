@@ -21,12 +21,14 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import model.cells.Floor;
 import model.levelbuilder.LevelBuilder;
 import controller.GameController;
 
 public class View extends Application {
 
   private static Map<Integer, ImageView> map;
+  private static Map<Integer, Floor> coveringFloors = new HashMap<Integer, Floor>();
   private Stage stage;
   private static Scene gameScene;
   private static final int CELLSIZE = 96;
@@ -228,7 +230,7 @@ public class View extends Application {
    // System.out.println("Moving to here: " + toID);  
     ImageView toCell = map.get(toID);
     ImageView toMove = map.get(fromID);
-    if (toMove != null && toMove != null) {
+    if (toMove != null && toCell != null) {
       toMove.setX(toCell.getX());
       toMove.setY(toCell.getY());
       toMove.toFront();
@@ -251,5 +253,21 @@ public class View extends Application {
     map.put(ID, created);
     mapPane.getChildren().add(created);
     created.toFront();
+  }
+  
+  //TODO Uj metodusok, dokumentalni kell
+  public static void addCover(int doorID, Floor floor) {
+    //If the door is already covered, remove the cover and add a new one
+    removeCover(doorID);
+    coveringFloors.put(doorID, floor);
+    create(floor.ID, doorID, "floor.png");
+  }
+  
+  public static void removeCover(int doorID) {
+    //If the door is already covered, remove the cover
+    if (coveringFloors.containsKey(doorID)) {
+      remove(coveringFloors.get(doorID).ID);
+      coveringFloors.remove(doorID);
+    }
   }
 }

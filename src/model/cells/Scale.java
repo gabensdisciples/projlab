@@ -141,7 +141,6 @@ public class Scale extends LevelObject {
     weight += 1;
     if (weight >= limit) {
       door.setWalkable(true);
-      //TODO ajtó nyitásának/zárásának kirajzolása
     }
   }
 

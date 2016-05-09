@@ -81,7 +81,6 @@ public class Floor extends LevelObject {
   @Override
   public void placeItem(Item item) {
     this.item = item;
-    //TODO akkor is box kerül rajzolásra, amikor incrementzpmcount rak le ZPM-et
   }
 
   public void setItem(Item item) {
