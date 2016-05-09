@@ -50,8 +50,6 @@ public final class Wormhole {
       specWalls.put(color, specWall);
       View.create(specWall.getStarGate().ID, specWall.ID, imagename);
     }
-    
-    //If the gate of the given color exists on the given specwall, do nothing
   }
 
   /**

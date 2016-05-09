@@ -51,11 +51,13 @@ public class SpecWall extends LevelObject {
       replicator.die();
     }
     
-    //If no replicator is present, replace gate with a new one.
-    else {
+    //If no replicator is present, and gate is still null, create a new gate
+    //Note that a present gate will not be replaced by a new shot reaching it
+    else if (gate == null) {
       gate = bullet.createStarGate();
       Wormhole.setSpecWall(this, gate.getColor());
     }
+   
     //Destroy bullet
     bullet.die();
     if (!walkable) {
