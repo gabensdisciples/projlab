@@ -5,6 +5,10 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javafx.animation.FadeTransition;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -21,6 +25,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import model.cells.Floor;
 import model.levelbuilder.LevelBuilder;
 import controller.GameController;
@@ -66,7 +71,7 @@ public class View extends Application {
             imgView.setX(posX);
             imgView.setY(posY);
             imgView.getStyleClass().add(getObjectNameFromImage(imageNameArray[i][j][z]));
-            
+
             map.put(idArray[i][j][z], imgView);
           }
         }
@@ -103,8 +108,8 @@ public class View extends Application {
     final EventHandler<KeyEvent> keyEventHandler = new EventHandler<KeyEvent>() {
       public void handle(final KeyEvent keyEvent) {
         controller.addPressedKey(keyEvent.getCode().toString());
-        //System.out.println(keyEvent.getCode());
-        //move(4,15);
+        // System.out.println(keyEvent.getCode());
+        // move(4,15);
         // create(11,3, "replicator.png");
         // remove(1);
         keyEvent.consume();
@@ -196,75 +201,142 @@ public class View extends Application {
     return scene;
   }
 
+  /**
+   * Returns the name of the entity without the image file extension
+   * 
+   * @param imageName
+   *          entity image name to remove file extension from
+   * 
+   * @return entity name, if file extension was found
+   */
   private static String getObjectNameFromImage(String imageName) {
-    //get object name from image filename
+    // get object name from image filename
     Pattern objNamePattern = Pattern.compile("(.*).png");
     Matcher objNameMatcher = objNamePattern.matcher(imageName);
     if (objNameMatcher.matches()) {
-     return objNameMatcher.group(1);
+      return objNameMatcher.group(1);
     }
     return "";
   }
+
   public static void main(String[] args) {
     View.launch();
   }
-  
+
   /**
    * Removes an element from the game scene and map
-   * @param ID the element to remove
+   * 
+   * @param ID
+   *          the element to remove
    */
   public static void remove(int ID) {
     ImageView toRemove = map.get(ID);
     System.out.println("Removing this: " + ID + " ");
-
+    if (toRemove != null && !toRemove.getStyleClass().isEmpty()) {
+      System.out.println(toRemove.getStyleClass().get(0));
+    }
     mapPane.getChildren().removeAll(toRemove);
     map.remove(ID);
   }
-/**
- * Moves an element.
- * @param fromID
- * @param toID
- */
+
+  /**
+   * Moves an element.
+   * 
+   * @param fromID
+   * @param toID
+   */
   public static void move(int fromID, int toID) {
-    //System.out.println("Moving this: " + fromID);
-   // System.out.println("Moving to here: " + toID);  
+    System.out.println("Moving this: " + fromID);
+    System.out.println("Moving to here: " + toID);
     ImageView toCell = map.get(toID);
     ImageView toMove = map.get(fromID);
     if (toMove != null && toCell != null) {
-      toMove.setX(toCell.getX());
-      toMove.setY(toCell.getY());
       toMove.toFront();
+      int duration = 100;
+      //If bullet, rotate to correct direction
+      if (!(toMove.getStyleClass().isEmpty()) && toMove.getStyleClass().get(0).endsWith("bullet")) {
+        duration = 500;
+        double rotation = 0;
+        if (toCell.getY() < toMove.getY()) {
+          // Face north
+          rotation = -90;
+        } else if (toCell.getY() > toMove.getY()) {
+          // Face south
+          rotation = 90;
+        } else if (toCell.getX() < toMove.getX()) {
+          // Face west
+          rotation = -180;
+        } else if (toCell.getX() > toMove.getX()) {
+          // Face east
+          rotation = 0;
+        }
+        toMove.setRotate(rotation);
+      }
+      // Animation
+      final Timeline timeline = new Timeline();
+      timeline.setCycleCount(1);
+      timeline.setAutoReverse(false);
+      // Animate from current position to next position
+      final KeyValue kv = new KeyValue(toMove.xProperty(), toCell.getX());
+      final KeyValue kv2 = new KeyValue(toMove.yProperty(), toCell.getY());
+      final KeyFrame kf = new KeyFrame(Duration.millis(duration), kv, kv2);
+      timeline.getKeyFrames().add(kf);
+      // Remove bullet when animation finished
+      timeline.setOnFinished(new EventHandler<ActionEvent>() {
+        public void handle(ActionEvent e) {
+          if (!(toMove.getStyleClass().isEmpty()) && toMove.getStyleClass().get(0).endsWith("bullet")) {
+            remove(fromID);
+          }
+        }
+      });
+      timeline.play();
     }
   }
-/**
- * creates an element
- * @param ID of new element
- * @param positionID position of its position
- * @param imagename 
- */
+
+  /**
+   * creates an element
+   * 
+   * @param ID
+   *          of new element
+   * @param positionID
+   *          position of its position
+   * @param imagename
+   */
   public static void create(int ID, int positionID, String imagename) {
     Image img = new Image(imagename, CELLSIZE, CELLSIZE, true, false);
     ImageView created = new ImageView(img);
     ImageView position = map.get(positionID);
     created.setX(position.getX());
     created.setY(position.getY());
+    // Store entity name as CSS class
     created.getStyleClass().add(getObjectNameFromImage(imagename));
-    System.out.println("Creating this: " + ID + " "  + " here: " + positionID);
+    // System.out.println("Creating this: " + ID + " " + " here: " + positionID);
     map.put(ID, created);
     mapPane.getChildren().add(created);
     created.toFront();
+
+    // Breathing effect for stargates
+    // TODO ne készüljön el a stargate, míg a bullet animálódik
+    if (!(created.getStyleClass().isEmpty()) && created.getStyleClass().get(0).endsWith("stargate")) {
+      FadeTransition ft = new FadeTransition(Duration.millis(1000), created);
+      ft.setFromValue(1.0);
+      ft.setToValue(0.7);
+      ft.setCycleCount(Timeline.INDEFINITE);
+      ft.setAutoReverse(true);
+      ft.play();
+    }
   }
-  
-  //TODO Uj metodusok, dokumentalni kell
+
+  // TODO Uj metodusok, dokumentalni kell
   public static void addCover(int doorID, Floor floor) {
-    //If the door is already covered, remove the cover and add a new one
+    // If the door is already covered, remove the cover and add a new one
     removeCover(doorID);
     coveringFloors.put(doorID, floor);
     create(floor.ID, doorID, "floor.png");
   }
-  
+
   public static void removeCover(int doorID) {
-    //If the door is already covered, remove the cover
+    // If the door is already covered, remove the cover
     if (coveringFloors.containsKey(doorID)) {
       remove(coveringFloors.get(doorID).ID);
       coveringFloors.remove(doorID);

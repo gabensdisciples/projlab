@@ -32,13 +32,8 @@ public class Bullet extends IdentifiedObject{
     this.direction = direction;
     this.color = color;
     collision = false;
-  }
-
-  /**
-   * Creates interaction among the bullet and cells. Makes the bullet move.
-   */
-  public void fly() {
-    /*String imagename = null;
+    
+    String imagename = null;
     if (color == Color.RED) {
       imagename = "red_bullet.png";
     } else if (color == Color.YELLOW) {
@@ -47,15 +42,24 @@ public class Bullet extends IdentifiedObject{
       imagename = "blue_bullet.png";
     } else if (color == Color.GREEN) {
       imagename = "green_bullet.png";
-    }*/
+    }
+    View.create(this.ID, position.ID, imagename);
+  }
+
+  /**
+   * Creates interaction among the bullet and cells. Makes the bullet move.
+   */
+  public void fly() {
+
     
     while (!collision && position != null) {
       position.interactBullet(this);
-      //TODO Bullet repulesenek kirajzolasa
+
       if (!collision) {
         position = position.getNeighbour(direction, false);
       }
     }
+    //View.remove(this.ID);
   }
 
   /**
@@ -74,7 +78,6 @@ public class Bullet extends IdentifiedObject{
    */
   public void die() {
     collision = true;
-    View.remove(this.ID);
   }
 
   /**
