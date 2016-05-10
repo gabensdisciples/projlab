@@ -252,9 +252,9 @@ public class View extends Application {
     ImageView toMove = map.get(fromID);
     if (toMove != null && toCell != null) {
       toMove.toFront();
-      int duration = 100;
+      int duration = 500;
       //If bullet, rotate to correct direction
-      if (!(toMove.getStyleClass().isEmpty()) && toMove.getStyleClass().get(0).endsWith("bullet")) {
+      if (!(toMove.getStyleClass().isEmpty()) && toMove.getStyleClass().get(1).endsWith("bullet")) {
         duration = 500;
         double rotation = 0;
         if (toCell.getY() < toMove.getY()) {
@@ -284,7 +284,7 @@ public class View extends Application {
       // Remove bullet when animation finished
       timeline.setOnFinished(new EventHandler<ActionEvent>() {
         public void handle(ActionEvent e) {
-          if (!(toMove.getStyleClass().isEmpty()) && toMove.getStyleClass().get(0).endsWith("bullet")) {
+          if (!(toMove.getStyleClass().isEmpty()) && toMove.getStyleClass().get(1).endsWith("bullet")) {
             remove(fromID);
           }
         }
