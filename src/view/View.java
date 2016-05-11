@@ -1,9 +1,8 @@
 package view;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
@@ -52,10 +51,6 @@ public class View extends Application {
 
     map = new HashMap<Integer, ImageView>();
 
-    // int[][] idArray = { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } };
-    // String[][] imageNameArray = { { "oneill.png", "jaffa.png", "floor.png" },
-    // { "floor.png", "floor.png", "specwall.png" }, { "gap.png", "floor.png",
-    // "specwall.png" } };
     int[][][] idArray = levelBuilder.getIdMatrix();
     String[][][] imageNameArray = levelBuilder.getImageNameMatrix();
     int posX = 0;
@@ -70,8 +65,7 @@ public class View extends Application {
             ImageView imgView = new ImageView(img);
             imgView.setX(posX);
             imgView.setY(posY);
-            imgView.getStyleClass().add(getObjectNameFromImage(imageNameArray[i][j][z]));
-
+            imgView.getStyleClass().addAll(getObjectNameFromImage(imageNameArray[i][j][z]));
             map.put(idArray[i][j][z], imgView);
           }
         }
@@ -209,14 +203,22 @@ public class View extends Application {
    * 
    * @return entity name, if file extension was found
    */
-  private static String getObjectNameFromImage(String imageName) {
+  private static ArrayList<String> getObjectNameFromImage(String imageName) {
     // get object name from image filename
-    Pattern objNamePattern = Pattern.compile("(.*).png");
-    Matcher objNameMatcher = objNamePattern.matcher(imageName);
-    if (objNameMatcher.matches()) {
-      return objNameMatcher.group(1);
+    ArrayList<String> names = new ArrayList<String>();
+    String[] splitName = imageName.split("\\.");
+    if (splitName.length > 0) {
+      System.out.println(splitName[0]);
+      names.add(splitName[0]);
+
+      if (splitName[0].endsWith("bullet")) {
+        names.add("bullet");
+      } else if (splitName[0].endsWith("stargate")) {
+        names.add("stargate");
+      }
     }
-    return "";
+
+    return names;
   }
 
   public static void main(String[] args) {
@@ -232,11 +234,10 @@ public class View extends Application {
   public static void remove(int ID) {
     ImageView toRemove = map.get(ID);
     System.out.println("Removing this: " + ID + " ");
-    if (toRemove != null && !toRemove.getStyleClass().isEmpty()) {
-      System.out.println(toRemove.getStyleClass().get(0));
+    if (!toRemove.getStyleClass().contains("flying")){
+      mapPane.getChildren().removeAll(toRemove);
+      map.remove(ID);
     }
-    mapPane.getChildren().removeAll(toRemove);
-    map.remove(ID);
   }
 
   /**
@@ -253,8 +254,9 @@ public class View extends Application {
     if (toMove != null && toCell != null) {
       toMove.toFront();
       int duration = 500;
-      //If bullet, rotate to correct direction
-      if (!(toMove.getStyleClass().isEmpty()) && toMove.getStyleClass().get(1).endsWith("bullet")) {
+      // If bullet, rotate to correct direction
+      if (toMove.getStyleClass().contains("bullet")) {
+        toMove.getStyleClass().add("flying");
         duration = 500;
         double rotation = 0;
         if (toCell.getY() < toMove.getY()) {
@@ -284,7 +286,8 @@ public class View extends Application {
       // Remove bullet when animation finished
       timeline.setOnFinished(new EventHandler<ActionEvent>() {
         public void handle(ActionEvent e) {
-          if (!(toMove.getStyleClass().isEmpty()) && toMove.getStyleClass().get(1).endsWith("bullet")) {
+          if (toMove.getStyleClass().contains("bullet")) {
+            toMove.getStyleClass().remove("flying");
             remove(fromID);
           }
         }
@@ -309,15 +312,16 @@ public class View extends Application {
     created.setX(position.getX());
     created.setY(position.getY());
     // Store entity name as CSS class
-    created.getStyleClass().add(getObjectNameFromImage(imagename));
-    // System.out.println("Creating this: " + ID + " " + " here: " + positionID);
+    created.getStyleClass().addAll(getObjectNameFromImage(imagename));
+    // System.out.println("Creating this: " + ID + " " + " here: " +
+    // positionID);
     map.put(ID, created);
     mapPane.getChildren().add(created);
     created.toFront();
 
     // Breathing effect for stargates
     // TODO ne készüljön el a stargate, míg a bullet animálódik
-    if (!(created.getStyleClass().isEmpty()) && created.getStyleClass().get(0).endsWith("stargate")) {
+    if (created.getStyleClass().contains("stargate")) {
       FadeTransition ft = new FadeTransition(Duration.millis(1000), created);
       ft.setFromValue(1.0);
       ft.setToValue(0.7);

@@ -78,6 +78,7 @@ public class Bullet extends IdentifiedObject{
    */
   public void die() {
     collision = true;
+    View.remove(this.ID);
   }
 
   /**
