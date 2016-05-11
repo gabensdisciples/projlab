@@ -178,7 +178,7 @@ public class LevelBuilder {
           idMatrix[i][j][0] = floor.ID;
           idMatrix[i][j][1] = oneill.ID;
           imageNameMatrix[i][j][0] = "floor.png";
-          imageNameMatrix[i][j][1] = "oneill.png";
+          imageNameMatrix[i][j][1] = "oneill_sprites.png";
           
           stringMatrix[i][j] = "FW";
         } else if (currentString.equals("R")) {

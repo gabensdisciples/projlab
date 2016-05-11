@@ -13,6 +13,7 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -61,8 +62,15 @@ public class View extends Application {
         posX = j * CELLSIZE;
         for (int z = 0; z < idArray[i][j].length; z++) {
           if (imageNameArray[i][j][z] != null && idArray[i][j][z] != 0) {
-            Image img = new Image(imageNameArray[i][j][z], CELLSIZE, CELLSIZE, true, false);
-            ImageView imgView = new ImageView(img);
+            ImageView imgView;
+            if (imageNameArray[i][j][z].equals("oneill_sprites.png")) {
+              Image img = new Image(imageNameArray[i][j][z], CELLSIZE*10, CELLSIZE, true, false);
+              imgView = new ImageView(img);
+              imgView.setViewport(new Rectangle2D(posX, posY, CELLSIZE, CELLSIZE));
+            } else {
+              Image img = new Image(imageNameArray[i][j][z], CELLSIZE, CELLSIZE, true, false);
+              imgView = new ImageView(img);
+            }
             imgView.setX(posX);
             imgView.setY(posY);
             imgView.getStyleClass().addAll(getObjectNameFromImage(imageNameArray[i][j][z]));
@@ -234,7 +242,7 @@ public class View extends Application {
   public static void remove(int ID) {
     ImageView toRemove = map.get(ID);
     System.out.println("Removing this: " + ID + " ");
-    if (!toRemove.getStyleClass().contains("flying")){
+    if (!toRemove.getStyleClass().contains("flying")) {
       mapPane.getChildren().removeAll(toRemove);
       map.remove(ID);
     }
@@ -274,6 +282,33 @@ public class View extends Application {
         }
         toMove.setRotate(rotation);
       }
+      if (toMove.getStyleClass().contains("oneill_sprites")) {
+        duration = 500;
+        int sprite = 0;
+        if (toCell.getY() < toMove.getY()) {
+          // Face north
+          // 2nd sprite
+          // 9th 10th sprite walking
+          sprite = 1;
+        } else if (toCell.getY() > toMove.getY()) {
+          // Face south
+          // 1st sprite standing
+          // 7th 8th sprite walking
+          sprite = 0;
+        } else if (toCell.getX() < toMove.getX()) {
+          // Face west
+          // 6th sprite standing
+          // 5th sprite walking
+          sprite = 5;
+        } else if (toCell.getX() > toMove.getX()) {
+          // Face east
+          // 3rd sprite standing
+          // 4th sprite walking
+          sprite = 2;
+        }
+        toMove.setViewport(new Rectangle2D(CELLSIZE*sprite, 0, CELLSIZE, CELLSIZE));
+      }
+      
       // Animation
       final Timeline timeline = new Timeline();
       timeline.setCycleCount(1);
