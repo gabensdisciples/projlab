@@ -7,9 +7,11 @@ import java.util.Map;
 import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
+import javafx.animation.ScaleTransition;
 import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -39,6 +41,7 @@ public class View extends Application {
   private static final int CELLSIZE = 96;
   private static Pane mapPane;
   private GameController controller;
+  private static Map<String, ImageView> queuedStarGates = new HashMap<String, ImageView>();
 
   /**
    * Initializes the level and its elements. Creates an ImageView for every
@@ -64,7 +67,7 @@ public class View extends Application {
           if (imageNameArray[i][j][z] != null && idArray[i][j][z] != 0) {
             ImageView imgView;
             if (imageNameArray[i][j][z].equals("oneill_sprites.png")) {
-              Image img = new Image(imageNameArray[i][j][z], CELLSIZE*10, CELLSIZE, true, false);
+              Image img = new Image(imageNameArray[i][j][z], CELLSIZE * 10, CELLSIZE, true, false);
               imgView = new ImageView(img);
               imgView.setViewport(new Rectangle2D(posX, posY, CELLSIZE, CELLSIZE));
             } else {
@@ -203,32 +206,6 @@ public class View extends Application {
     return scene;
   }
 
-  /**
-   * Returns the name of the entity without the image file extension
-   * 
-   * @param imageName
-   *          entity image name to remove file extension from
-   * 
-   * @return entity name, if file extension was found
-   */
-  private static ArrayList<String> getObjectNameFromImage(String imageName) {
-    // get object name from image filename
-    ArrayList<String> names = new ArrayList<String>();
-    String[] splitName = imageName.split("\\.");
-    if (splitName.length > 0) {
-      System.out.println(splitName[0]);
-      names.add(splitName[0]);
-
-      if (splitName[0].endsWith("bullet")) {
-        names.add("bullet");
-      } else if (splitName[0].endsWith("stargate")) {
-        names.add("stargate");
-      }
-    }
-
-    return names;
-  }
-
   public static void main(String[] args) {
     View.launch();
   }
@@ -242,10 +219,28 @@ public class View extends Application {
   public static void remove(int ID) {
     ImageView toRemove = map.get(ID);
     System.out.println("Removing this: " + ID + " ");
-    if (!toRemove.getStyleClass().contains("flying")) {
-      mapPane.getChildren().removeAll(toRemove);
-      map.remove(ID);
+    if (toRemove != null && toRemove.getStyleClass().contains("stargate")) {
+      ScaleTransition shrinksTransition = new ScaleTransition(Duration.millis(1000), toRemove);
+      shrinksTransition.setFromX(1.0);
+      shrinksTransition.setFromY(1.0);
+      shrinksTransition.setToX(0);
+      shrinksTransition.setToY(0);
+      shrinksTransition.play();
+
+      shrinksTransition.setOnFinished(new EventHandler<ActionEvent>() {
+        public void handle(ActionEvent e) {
+          mapPane.getChildren().removeAll(toRemove);
+          map.remove(ID);
+        }
+      });
+
+    } else {
+      if (toRemove != null && !toRemove.getStyleClass().contains("flying")) {
+        mapPane.getChildren().removeAll(toRemove);
+        map.remove(ID);
+      }
     }
+
   }
 
   /**
@@ -306,9 +301,9 @@ public class View extends Application {
           // 4th sprite walking
           sprite = 2;
         }
-        toMove.setViewport(new Rectangle2D(CELLSIZE*sprite, 0, CELLSIZE, CELLSIZE));
+        toMove.setViewport(new Rectangle2D(CELLSIZE * sprite, 0, CELLSIZE, CELLSIZE));
       }
-      
+
       // Animation
       final Timeline timeline = new Timeline();
       timeline.setCycleCount(1);
@@ -323,6 +318,10 @@ public class View extends Application {
         public void handle(ActionEvent e) {
           if (toMove.getStyleClass().contains("bullet")) {
             toMove.getStyleClass().remove("flying");
+            ImageView stargate = queuedStarGates.remove(getColorFromClasses(toMove.getStyleClass()));
+            if (stargate != null) {
+              mapPane.getChildren().add(stargate);
+            }
             remove(fromID);
           }
         }
@@ -350,20 +349,29 @@ public class View extends Application {
     created.getStyleClass().addAll(getObjectNameFromImage(imagename));
     // System.out.println("Creating this: " + ID + " " + " here: " +
     // positionID);
-    map.put(ID, created);
-    mapPane.getChildren().add(created);
-    created.toFront();
 
     // Breathing effect for stargates
     // TODO ne készüljön el a stargate, míg a bullet animálódik
     if (created.getStyleClass().contains("stargate")) {
+      ScaleTransition expandsTransition = new ScaleTransition(Duration.millis(1000), created);
+      expandsTransition.setFromX(0);
+      expandsTransition.setFromY(0);
+      expandsTransition.setToX(1.0);
+      expandsTransition.setToY(1.0);
+      expandsTransition.play();
+
       FadeTransition ft = new FadeTransition(Duration.millis(1000), created);
       ft.setFromValue(1.0);
       ft.setToValue(0.7);
       ft.setCycleCount(Timeline.INDEFINITE);
       ft.setAutoReverse(true);
       ft.play();
+      queuedStarGates.put(getColorFromClasses(created.getStyleClass()), created);
+    } else {
+      mapPane.getChildren().add(created);
+      created.toFront();
     }
+    map.put(ID, created);
   }
 
   // TODO Uj metodusok, dokumentalni kell
@@ -381,4 +389,52 @@ public class View extends Application {
       coveringFloors.remove(doorID);
     }
   }
+
+  /**
+   * Returns the name of the entity without the image file extension
+   * 
+   * @param imageName
+   *          entity image name to remove file extension from
+   * 
+   * @return entity name, if file extension was found
+   */
+  private static ArrayList<String> getObjectNameFromImage(String imageName) {
+    // get object name from image filename
+    ArrayList<String> names = new ArrayList<String>();
+    String[] splitName = imageName.split("\\.");
+    if (splitName.length > 0) {
+      names.add(splitName[0]);
+
+      if (splitName[0].endsWith("bullet")) {
+        names.add("bullet");
+        String[] colorSplit = splitName[0].split("_");
+        names.add(colorSplit[0]);
+      } else if (splitName[0].endsWith("stargate")) {
+        names.add("stargate");
+        String[] colorSplit = splitName[0].split("_");
+        names.add(colorSplit[0]);
+      }
+    }
+    return names;
+  }
+
+  /**
+   * gets color class from classes list
+   * 
+   * @param styleClasses
+   * @return
+   */
+  private static String getColorFromClasses(ObservableList<String> styleClasses) {
+    String[] colors = { "blue", "yellow", "green", "red" };
+    String color = null;
+    for (String styleClass : styleClasses) {
+      for (int i = 0; i < colors.length; i++) {
+        if (styleClass.equals(colors[i])) {
+          color = colors[i];
+        }
+      }
+    }
+    return color;
+  }
+
 }
