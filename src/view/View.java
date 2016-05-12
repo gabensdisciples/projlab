@@ -66,7 +66,7 @@ public class View extends Application {
         for (int z = 0; z < idArray[i][j].length; z++) {
           if (imageNameArray[i][j][z] != null && idArray[i][j][z] != 0) {
             ImageView imgView;
-            if (imageNameArray[i][j][z].equals("oneill_sprites.png")) {
+            if (imageNameArray[i][j][z].equals("oneill_sprites.png") || imageNameArray[i][j][z].equals("jaffa_sprites.png")) {
               Image img = new Image(imageNameArray[i][j][z], CELLSIZE * 10, CELLSIZE, true, false);
               imgView = new ImageView(img);
               imgView.setViewport(new Rectangle2D(posX, posY, CELLSIZE, CELLSIZE));
@@ -220,13 +220,14 @@ public class View extends Application {
     ImageView toRemove = map.get(ID);
     System.out.println("Removing this: " + ID + " ");
     if (toRemove != null && toRemove.getStyleClass().contains("stargate")) {
+      //Shrinking animation for dissappearing stargate
       ScaleTransition shrinksTransition = new ScaleTransition(Duration.millis(1000), toRemove);
       shrinksTransition.setFromX(1.0);
       shrinksTransition.setFromY(1.0);
       shrinksTransition.setToX(0);
       shrinksTransition.setToY(0);
       shrinksTransition.play();
-
+      //Remove stargate only when animation finished
       shrinksTransition.setOnFinished(new EventHandler<ActionEvent>() {
         public void handle(ActionEvent e) {
           mapPane.getChildren().removeAll(toRemove);
@@ -277,43 +278,68 @@ public class View extends Application {
         }
         toMove.setRotate(rotation);
       }
-      if (toMove.getStyleClass().contains("oneill_sprites")) {
+      
+      //Rotate players using sprites
+      int spriteWalking = 0;
+      int spriteWalking2 = 0;
+      int sprite = 0;
+      if (toMove.getStyleClass().contains("oneill_sprites") || toMove.getStyleClass().contains("jaffa_sprites")) {
         duration = 500;
-        int sprite = 0;
+        //Have to subtract one from sprite's number
         if (toCell.getY() < toMove.getY()) {
           // Face north
           // 2nd sprite
           // 9th 10th sprite walking
           sprite = 1;
+          spriteWalking = 8;
+          spriteWalking2 = 9;
         } else if (toCell.getY() > toMove.getY()) {
           // Face south
           // 1st sprite standing
           // 7th 8th sprite walking
           sprite = 0;
+          spriteWalking = 6;
+          spriteWalking2 = 7;
         } else if (toCell.getX() < toMove.getX()) {
           // Face west
           // 6th sprite standing
           // 5th sprite walking
           sprite = 5;
+          spriteWalking = 4;
+          spriteWalking2 = 5;
         } else if (toCell.getX() > toMove.getX()) {
           // Face east
           // 3rd sprite standing
           // 4th sprite walking
           sprite = 2;
+          spriteWalking = 3;
+          spriteWalking2 = 2;
         }
         toMove.setViewport(new Rectangle2D(CELLSIZE * sprite, 0, CELLSIZE, CELLSIZE));
       }
+      final KeyValue kvStand = new KeyValue(toMove.viewportProperty(), new Rectangle2D(CELLSIZE * sprite, 0, CELLSIZE, CELLSIZE));
+      final KeyValue kvStep = new KeyValue(toMove.viewportProperty(), new Rectangle2D(CELLSIZE * spriteWalking, 0, CELLSIZE, CELLSIZE));
+      final KeyValue kvStep2 = new KeyValue(toMove.viewportProperty(), new Rectangle2D(CELLSIZE * spriteWalking2, 0, CELLSIZE, CELLSIZE));
 
       // Animation
       final Timeline timeline = new Timeline();
-      timeline.setCycleCount(1);
-      timeline.setAutoReverse(false);
       // Animate from current position to next position
       final KeyValue kv = new KeyValue(toMove.xProperty(), toCell.getX());
       final KeyValue kv2 = new KeyValue(toMove.yProperty(), toCell.getY());
-      final KeyFrame kf = new KeyFrame(Duration.millis(duration), kv, kv2);
-      timeline.getKeyFrames().add(kf);
-      // Remove bullet when animation finished
+      final KeyFrame kfStanding = new KeyFrame(Duration.millis(duration), kvStand);
+
+      final KeyFrame kfMove = new KeyFrame(Duration.millis(duration), kv, kv2);
+      //Add walking sprites 6 times while walking
+      for (int i = 0; i < 6; i+=2) {
+        timeline.getKeyFrames().add(new KeyFrame(Duration.millis((duration/6)*i), kvStep));
+        timeline.getKeyFrames().add(new KeyFrame(Duration.millis((duration/6)*(i+1)), kvStep2));     
+      }
+      //Add standing frame before stopping movement
+      timeline.getKeyFrames().add(kfStanding);
+      //Add movement
+      timeline.getKeyFrames().add(kfMove);
+      
+      // Remove bullet when animation finished and create queued stargate
       timeline.setOnFinished(new EventHandler<ActionEvent>() {
         public void handle(ActionEvent e) {
           if (toMove.getStyleClass().contains("bullet")) {
@@ -326,7 +352,7 @@ public class View extends Application {
           }
         }
       });
-      timeline.play();
+      timeline.playFromStart();
     }
   }
 
@@ -350,22 +376,23 @@ public class View extends Application {
     // System.out.println("Creating this: " + ID + " " + " here: " +
     // positionID);
 
-    // Breathing effect for stargates
-    // TODO ne készüljön el a stargate, míg a bullet animálódik
+
     if (created.getStyleClass().contains("stargate")) {
+      //Expanding effect for stargate
       ScaleTransition expandsTransition = new ScaleTransition(Duration.millis(1000), created);
       expandsTransition.setFromX(0);
       expandsTransition.setFromY(0);
       expandsTransition.setToX(1.0);
       expandsTransition.setToY(1.0);
       expandsTransition.play();
-
+      // Breathing effect for stargates
       FadeTransition ft = new FadeTransition(Duration.millis(1000), created);
       ft.setFromValue(1.0);
       ft.setToValue(0.7);
       ft.setCycleCount(Timeline.INDEFINITE);
       ft.setAutoReverse(true);
       ft.play();
+      //Queue stargate for creation when bullet finished animation
       queuedStarGates.put(getColorFromClasses(created.getStyleClass()), created);
     } else {
       mapPane.getChildren().add(created);
@@ -419,10 +446,10 @@ public class View extends Application {
   }
 
   /**
-   * gets color class from classes list
+   * Gets color class from classes list
    * 
    * @param styleClasses
-   * @return
+   * @return color of bullet or stargate
    */
   private static String getColorFromClasses(ObservableList<String> styleClasses) {
     String[] colors = { "blue", "yellow", "green", "red" };

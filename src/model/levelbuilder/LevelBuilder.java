@@ -200,7 +200,7 @@ public class LevelBuilder {
           idMatrix[i][j][0] = floor.ID;
           idMatrix[i][j][1] = jaffa.ID;
           imageNameMatrix[i][j][0] = "floor.png";
-          imageNameMatrix[i][j][1] = "jaffa.png";
+          imageNameMatrix[i][j][1] = "jaffa_sprites.png";
           
           stringMatrix[i][j] = "FW";
         } else if (currentString.equals("FW")) {
