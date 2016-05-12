@@ -234,7 +234,10 @@ public class View extends Application {
           map.remove(ID);
         }
       });
-
+      
+    } else if (toRemove.getStyleClass().contains("replicator")) {
+      // Queue replicator for removal when bullet gets to it
+      queuedStarGates.put("replicator", toRemove);
     } else {
       if (toRemove != null && !toRemove.getStyleClass().contains("flying")) {
         mapPane.getChildren().removeAll(toRemove);
@@ -349,6 +352,12 @@ public class View extends Application {
               mapPane.getChildren().add(stargate);
             }
             remove(fromID);
+            if (queuedStarGates.containsKey("replicator")) {
+              // If we got here, a proper remove call already queued the replicator for removal, therefore a bullet killed it
+              ImageView replicator = queuedStarGates.get("replicator");
+              mapPane.getChildren().remove(replicator);
+              map.remove(replicator);
+            }
           }
         }
       });
