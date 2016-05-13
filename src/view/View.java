@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javafx.animation.FadeTransition;
+import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.ScaleTransition;
@@ -41,7 +42,7 @@ public class View extends Application {
   private static final int CELLSIZE = 96;
   private static Pane mapPane;
   private GameController controller;
-  private static Map<String, ImageView> queuedStarGates = new HashMap<String, ImageView>();
+  private static Map<String, ImageView> queuedImageViews = new HashMap<String, ImageView>();
 
   /**
    * Initializes the level and its elements. Creates an ImageView for every
@@ -66,7 +67,8 @@ public class View extends Application {
         for (int z = 0; z < idArray[i][j].length; z++) {
           if (imageNameArray[i][j][z] != null && idArray[i][j][z] != 0) {
             ImageView imgView;
-            if (imageNameArray[i][j][z].equals("oneill_sprites.png") || imageNameArray[i][j][z].equals("jaffa_sprites.png")) {
+            if (imageNameArray[i][j][z].equals("oneill_sprites.png")
+                || imageNameArray[i][j][z].equals("jaffa_sprites.png")) {
               Image img = new Image(imageNameArray[i][j][z], CELLSIZE * 10, CELLSIZE, true, false);
               imgView = new ImageView(img);
               imgView.setViewport(new Rectangle2D(posX, posY, CELLSIZE, CELLSIZE));
@@ -114,9 +116,6 @@ public class View extends Application {
       public void handle(final KeyEvent keyEvent) {
         controller.addPressedKey(keyEvent.getCode().toString());
         // System.out.println(keyEvent.getCode());
-        // move(4,15);
-        // create(11,3, "replicator.png");
-        // remove(1);
         keyEvent.consume();
       }
     };
@@ -221,23 +220,12 @@ public class View extends Application {
     System.out.println("Removing this: " + ID + " ");
     if (toRemove != null && toRemove.getStyleClass().contains("stargate")) {
       //Shrinking animation for dissappearing stargate
-      ScaleTransition shrinksTransition = new ScaleTransition(Duration.millis(1000), toRemove);
-      shrinksTransition.setFromX(1.0);
-      shrinksTransition.setFromY(1.0);
-      shrinksTransition.setToX(0);
-      shrinksTransition.setToY(0);
-      shrinksTransition.play();
-      //Remove stargate only when animation finished
-      shrinksTransition.setOnFinished(new EventHandler<ActionEvent>() {
-        public void handle(ActionEvent e) {
-          mapPane.getChildren().removeAll(toRemove);
-          map.remove(ID);
-        }
-      });
-      
+      addShrinkingAnimation(toRemove);      
     } else if (toRemove.getStyleClass().contains("replicator")) {
       // Queue replicator for removal when bullet gets to it
-      queuedStarGates.put("replicator", toRemove);
+      queuedImageViews.put("replicator", toRemove);
+    } else if (toRemove.getStyleClass().contains("oneill_sprites") || toRemove.getStyleClass().contains("jaffa_sprites")) {
+      addShrinkingAnimation(toRemove);
     } else {
       if (toRemove != null && !toRemove.getStyleClass().contains("flying")) {
         mapPane.getChildren().removeAll(toRemove);
@@ -281,14 +269,14 @@ public class View extends Application {
         }
         toMove.setRotate(rotation);
       }
-      
-      //Rotate players using sprites
+
+      // Rotate players using sprites
       int spriteWalking = 0;
       int spriteWalking2 = 0;
       int sprite = 0;
       if (toMove.getStyleClass().contains("oneill_sprites") || toMove.getStyleClass().contains("jaffa_sprites")) {
         duration = 500;
-        //Have to subtract one from sprite's number
+        // Have to subtract one from sprite's number
         if (toCell.getY() < toMove.getY()) {
           // Face north
           // 2nd sprite
@@ -320,9 +308,12 @@ public class View extends Application {
         }
         toMove.setViewport(new Rectangle2D(CELLSIZE * sprite, 0, CELLSIZE, CELLSIZE));
       }
-      final KeyValue kvStand = new KeyValue(toMove.viewportProperty(), new Rectangle2D(CELLSIZE * sprite, 0, CELLSIZE, CELLSIZE));
-      final KeyValue kvStep = new KeyValue(toMove.viewportProperty(), new Rectangle2D(CELLSIZE * spriteWalking, 0, CELLSIZE, CELLSIZE));
-      final KeyValue kvStep2 = new KeyValue(toMove.viewportProperty(), new Rectangle2D(CELLSIZE * spriteWalking2, 0, CELLSIZE, CELLSIZE));
+      final KeyValue kvStand = new KeyValue(toMove.viewportProperty(), new Rectangle2D(CELLSIZE * sprite, 0, CELLSIZE,
+          CELLSIZE));
+      final KeyValue kvStep = new KeyValue(toMove.viewportProperty(), new Rectangle2D(CELLSIZE * spriteWalking, 0,
+          CELLSIZE, CELLSIZE));
+      final KeyValue kvStep2 = new KeyValue(toMove.viewportProperty(), new Rectangle2D(CELLSIZE * spriteWalking2, 0,
+          CELLSIZE, CELLSIZE));
 
       // Animation
       final Timeline timeline = new Timeline();
@@ -332,31 +323,32 @@ public class View extends Application {
       final KeyFrame kfStanding = new KeyFrame(Duration.millis(duration), kvStand);
 
       final KeyFrame kfMove = new KeyFrame(Duration.millis(duration), kv, kv2);
-      //Add walking sprites 6 times while walking
-      for (int i = 0; i < 6; i+=2) {
-        timeline.getKeyFrames().add(new KeyFrame(Duration.millis((duration/6)*i), kvStep));
-        timeline.getKeyFrames().add(new KeyFrame(Duration.millis((duration/6)*(i+1)), kvStep2));     
+      // Add walking sprites 6 times while walking
+      for (int i = 0; i < 6; i += 2) {
+        timeline.getKeyFrames().add(new KeyFrame(Duration.millis((duration / 6) * i), kvStep));
+        timeline.getKeyFrames().add(new KeyFrame(Duration.millis((duration / 6) * (i + 1)), kvStep2));
       }
-      //Add standing frame before stopping movement
+      // Add standing frame before stopping movement
       timeline.getKeyFrames().add(kfStanding);
-      //Add movement
+      // Add movement
       timeline.getKeyFrames().add(kfMove);
-      
+
       // Remove bullet when animation finished and create queued stargate
       timeline.setOnFinished(new EventHandler<ActionEvent>() {
         public void handle(ActionEvent e) {
           if (toMove.getStyleClass().contains("bullet")) {
             toMove.getStyleClass().remove("flying");
-            ImageView stargate = queuedStarGates.remove(getColorFromClasses(toMove.getStyleClass()));
+            ImageView stargate = queuedImageViews.remove(getColorFromClasses(toMove.getStyleClass()));
             if (stargate != null) {
               mapPane.getChildren().add(stargate);
             }
             remove(fromID);
-            if (queuedStarGates.containsKey("replicator")) {
-              // If we got here, a proper remove call already queued the replicator for removal, therefore a bullet killed it
-              ImageView replicator = queuedStarGates.get("replicator");
-              mapPane.getChildren().remove(replicator);
-              map.remove(replicator);
+            if (queuedImageViews.containsKey("replicator")) {
+              // If we got here, a proper remove call already queued the
+              // replicator for removal, therefore a bullet killed it
+              ImageView replicator = queuedImageViews.get("replicator");
+           // Animate replicator death, remove when finished
+              addShrinkingAnimation(replicator);
             }
           }
         }
@@ -385,9 +377,8 @@ public class View extends Application {
     // System.out.println("Creating this: " + ID + " " + " here: " +
     // positionID);
 
-
     if (created.getStyleClass().contains("stargate")) {
-      //Expanding effect for stargate
+      // Expanding effect for stargate
       ScaleTransition expandsTransition = new ScaleTransition(Duration.millis(1000), created);
       expandsTransition.setFromX(0);
       expandsTransition.setFromY(0);
@@ -401,8 +392,8 @@ public class View extends Application {
       ft.setCycleCount(Timeline.INDEFINITE);
       ft.setAutoReverse(true);
       ft.play();
-      //Queue stargate for creation when bullet finished animation
-      queuedStarGates.put(getColorFromClasses(created.getStyleClass()), created);
+      // Queue stargate for creation when bullet finished animation
+      queuedImageViews.put(getColorFromClasses(created.getStyleClass()), created);
     } else {
       mapPane.getChildren().add(created);
       created.toFront();
@@ -472,5 +463,23 @@ public class View extends Application {
     }
     return color;
   }
-
+  
+  /**
+   * Adds a shrinking animation to an ImageView, and deletes it when finished
+   * @param toAnimate
+   */
+  private static void addShrinkingAnimation(ImageView toAnimate) {
+    ScaleTransition shrinksTransition = new ScaleTransition(Duration.millis(1000), toAnimate);
+    shrinksTransition.setFromX(1.0);
+    shrinksTransition.setFromY(1.0);
+    shrinksTransition.setToX(0);
+    shrinksTransition.setToY(0);
+    shrinksTransition.play();
+    shrinksTransition.setOnFinished(new EventHandler<ActionEvent>() {
+      public void handle(ActionEvent e) {
+        mapPane.getChildren().remove(toAnimate);
+        map.remove(toAnimate);
+      }
+    });
+  }
 }
