@@ -52,30 +52,13 @@ public class View extends Application {
   private static Text jaffaZpmCount;
   private static ImageView oneillCurrentBullet;
   private static ImageView jaffaCurrentBullet;
+  private static Replicator replicator;
 
   /**
    * JavaFX method, calls loadLevel()
    */
   public void init() {
     loadLevel();
-    LevelBuilder levelBuilder = LevelBuilder.getInstance();
-    Replicator replicator = levelBuilder.getReplicator();
-    
-    //Run replicator on a different thread using javagx Task and Platform.runLater
-    Task task = new Task<Void>() {
-      @Override
-      public Void call() throws Exception {
-        while (replicator.running) {
-          Platform.runLater(replicator);
-          Thread.sleep(1000);
-        }
-        return null;
-      }
-    };
-    Thread replicatorThread = new Thread(task);
-    replicatorThread.setDaemon(true);
-    replicatorThread.start();
-    new Thread(task).start();
   }
 
   /**
@@ -177,6 +160,24 @@ public class View extends Application {
       public void handle(ActionEvent e) {
         gameScene = setupGameScene();
         stage.setScene(gameScene);
+        
+        LevelBuilder levelBuilder = LevelBuilder.getInstance();
+        replicator = levelBuilder.getReplicator();
+        //Run replicator on a different thread using javagx Task and Platform.runLater
+        Task task = new Task<Void>() {
+          @Override
+          public Void call() throws Exception {
+            while (replicator.running) {
+              Platform.runLater(replicator);
+              Thread.sleep(1000);
+            }
+            return null;
+          }
+        };
+        Thread replicatorThread = new Thread(task);
+        replicatorThread.setDaemon(true);
+        replicatorThread.start();
+        new Thread(task).start();
       }
     });
 
@@ -497,6 +498,8 @@ public class View extends Application {
    * @param why
    */
   public static void gameOver(String why) {
+    replicator.running = false;
+    
     BorderPane bg = new BorderPane();
     bg.setMinWidth(mapPane.getWidth());
     bg.setMinHeight(mapPane.getHeight());
