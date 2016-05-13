@@ -489,7 +489,7 @@ public class View extends Application {
     text.setFill(Color.WHITE);
     bg.setCenter(text);
 
-    Text pressAnyText = new Text("Nyomj entert a menübe ugráshoz");
+    Text pressAnyText = new Text("Press enter to show the menu");
     pressAnyText.setFont(new Font(35));
     pressAnyText.setFill(Color.WHITE);
     bg.setBottom(pressAnyText);
