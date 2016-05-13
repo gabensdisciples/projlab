@@ -35,28 +35,28 @@ public class Menu {
   public static void gameOver(Player player, int zpmsMax) {
     if (player.getPosition() == null) {
       if (player.getColor() == Color.BLUE || player.getColor() == Color.YELLOW) {
-        View.gameOver("O'Neill meghalt Jaffa nyert!");
+        View.gameOver("O'Neill died, Jaffa won!");
       } else {
-        View.gameOver("Jaffa meghalt O'Neill nyert!");
+        View.gameOver("Jaffa died, O'Neill won!");
       }
 
     } else if (player.getZpmCount() > zpmsMax - player.getZpmCount()) {
       if (player.getColor() == Color.BLUE || player.getColor() == Color.YELLOW) {
-        View.gameOver("O'Neill nyert!\nO'Neill zpm(s):" + player.getZpmCount() + "\nJaffa zpm(s):"
+        View.gameOver("O'Neill won!\nO'Neill zpm(s): " + player.getZpmCount() + "\nJaffa zpm(s):"
             + (zpmsMax - player.getZpmCount()));
       } else {
-        View.gameOver("Jaffa nyert!\nJaffa zpm(s):" + player.getZpmCount() + "\nO'Neill zpm(s):"
+        View.gameOver("Jaffa won!\nJaffa zpm(s): " + player.getZpmCount() + "\nO'Neill zpm(s):"
             + (zpmsMax - player.getZpmCount()));
       }
     } else if (player.getZpmCount() == zpmsMax - player.getZpmCount()) {
-      View.gameOver("Döntetlen\nO'Neill zpm(s):" + player.getZpmCount() + "\nJaffa zpm(s):"
+      View.gameOver("The game ended in a tie.\nO'Neill zpm(s): " + player.getZpmCount() + "\nJaffa zpm(s):"
           + (zpmsMax - player.getZpmCount()));
     } else {
       if (player.getColor() != Color.BLUE && player.getColor() != Color.YELLOW) {
-        View.gameOver("O'Neill nyert!\nJaffa zpm(s):" + player.getZpmCount() + "\nO'Neill zpm(s):"
+        View.gameOver("O'Neill won!\nJaffa zpm(s): " + player.getZpmCount() + "\nO'Neill zpm(s):"
             + (zpmsMax - player.getZpmCount()));
       } else {
-        View.gameOver("Jaffa nyert!\nO'Neill zpm(s):" + player.getZpmCount() + "\nJaffa zpm(s):"
+        View.gameOver("Jaffa won\nO'Neill zpm(s): " + player.getZpmCount() + "\nJaffa zpm(s):"
             + (zpmsMax - player.getZpmCount()));
       }
     }
