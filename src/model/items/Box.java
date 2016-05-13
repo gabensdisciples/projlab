@@ -1,6 +1,5 @@
 package model.items;
 import model.game.Player;
-import view.View;
 
 /**
  * Defines the box.

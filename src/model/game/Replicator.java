@@ -7,6 +7,7 @@ import model.enumerations.Direction;
 import view.View;
 
 public class Replicator extends Character implements Runnable {
+  public volatile boolean running = true;
 
   public Replicator(LevelObject position) {
     super(position);
@@ -14,6 +15,7 @@ public class Replicator extends Character implements Runnable {
   }
   
   public void die() {
+    running = false;
     View.remove(this.ID);
     ReplicatorContainer.remove(this);
   }

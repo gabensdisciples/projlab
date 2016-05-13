@@ -61,18 +61,20 @@ public class View extends Application {
     LevelBuilder levelBuilder = LevelBuilder.getInstance();
     Replicator replicator = levelBuilder.getReplicator();
     
+    //Run replicator on a different thread using javagx Task and Platform.runLater
     Task task = new Task<Void>() {
       @Override
       public Void call() throws Exception {
-        while (true) {
+        while (replicator.running) {
           Platform.runLater(replicator);
           Thread.sleep(1000);
         }
+        return null;
       }
     };
-    Thread th = new Thread(task);
-    th.setDaemon(true);
-    th.start();
+    Thread replicatorThread = new Thread(task);
+    replicatorThread.setDaemon(true);
+    replicatorThread.start();
     new Thread(task).start();
   }
 
