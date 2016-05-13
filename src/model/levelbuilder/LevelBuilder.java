@@ -68,6 +68,8 @@ public class LevelBuilder {
    */
   public void init(String filename) {
     Wormhole.Clear();
+    Zpm.zpmsMax = 0;
+    Zpm.zpmsRemaining = 0;
     measureLevelSize(filename);
     createStringMatrix(filename);
     createObjectMatrix();
