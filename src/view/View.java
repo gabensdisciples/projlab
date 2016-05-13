@@ -12,6 +12,7 @@ import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -33,6 +34,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import model.cells.Floor;
+import model.game.Replicator;
 import model.levelbuilder.LevelBuilder;
 import controller.GameController;
 
@@ -56,7 +58,24 @@ public class View extends Application {
    */
   public void init() {
     loadLevel();
+    LevelBuilder levelBuilder = LevelBuilder.getInstance();
+    Replicator replicator = levelBuilder.getReplicator();
+    
+    Task task = new Task<Void>() {
+      @Override
+      public Void call() throws Exception {
+        while (true) {
+          Platform.runLater(replicator);
+          Thread.sleep(1000);
+        }
+      }
+    };
+    Thread th = new Thread(task);
+    th.setDaemon(true);
+    th.start();
+    new Thread(task).start();
   }
+
   /**
    * Initializes the level and its elements. Creates an ImageView for every
    * element with its correct coordinates and puts it into the map.
@@ -99,7 +118,6 @@ public class View extends Application {
     }
     controller = new GameController();
     controller.startWorkerThread(levelBuilder.getOneill(), levelBuilder.getJaffa(), levelBuilder.getReplicator());
-
   }
 
   /**
@@ -251,8 +269,8 @@ public class View extends Application {
     } else if (toRemove.getStyleClass().contains("replicator")) {
       // Queue replicator for removal when bullet gets to it
       queuedImageViews.put("replicator", toRemove);
-    } else if (toRemove.getStyleClass().contains("oneill_sprites")
-        || toRemove.getStyleClass().contains("jaffa_sprites")) {
+    } else
+      if (toRemove.getStyleClass().contains("oneill_sprites") || toRemove.getStyleClass().contains("jaffa_sprites")) {
       addShrinkingAnimation(toRemove);
     } else {
       if (toRemove != null && !toRemove.getStyleClass().contains("flying")) {
@@ -336,12 +354,12 @@ public class View extends Application {
         }
         toMove.setViewport(new Rectangle2D(CELLSIZE * sprite, 0, CELLSIZE, CELLSIZE));
       }
-      final KeyValue kvStand = new KeyValue(toMove.viewportProperty(), new Rectangle2D(CELLSIZE * sprite, 0, CELLSIZE,
-          CELLSIZE));
-      final KeyValue kvStep = new KeyValue(toMove.viewportProperty(), new Rectangle2D(CELLSIZE * spriteWalking, 0,
-          CELLSIZE, CELLSIZE));
-      final KeyValue kvStep2 = new KeyValue(toMove.viewportProperty(), new Rectangle2D(CELLSIZE * spriteWalking2, 0,
-          CELLSIZE, CELLSIZE));
+      final KeyValue kvStand = new KeyValue(toMove.viewportProperty(),
+          new Rectangle2D(CELLSIZE * sprite, 0, CELLSIZE, CELLSIZE));
+      final KeyValue kvStep = new KeyValue(toMove.viewportProperty(),
+          new Rectangle2D(CELLSIZE * spriteWalking, 0, CELLSIZE, CELLSIZE));
+      final KeyValue kvStep2 = new KeyValue(toMove.viewportProperty(),
+          new Rectangle2D(CELLSIZE * spriteWalking2, 0, CELLSIZE, CELLSIZE));
 
       // Animation
       final Timeline timeline = new Timeline();
@@ -433,43 +451,41 @@ public class View extends Application {
   public static void addCover(int doorID, Floor floor) {
     // If the door is already covered, remove the cover and add a new one
     ImageView doorView = map.get(doorID);
-    doorView.setImage(new Image("door_sprites.png", CELLSIZE*4, CELLSIZE, true, false));
+    doorView.setImage(new Image("door_sprites.png", CELLSIZE * 4, CELLSIZE, true, false));
     doorView.setViewport(new Rectangle2D(0, 0, CELLSIZE, CELLSIZE));
     KeyValue[] kvs = new KeyValue[4];
     KeyFrame[] kfs = new KeyFrame[4];
     Timeline timeline = new Timeline();
     for (int i = 0; i < kvs.length; i++) {
-      kvs[i] = new KeyValue(doorView.viewportProperty(), new Rectangle2D(CELLSIZE * i, 0, CELLSIZE,
-          CELLSIZE));
-      kfs[i] = new KeyFrame(Duration.millis(200*(i+1)), kvs[i]);
+      kvs[i] = new KeyValue(doorView.viewportProperty(), new Rectangle2D(CELLSIZE * i, 0, CELLSIZE, CELLSIZE));
+      kfs[i] = new KeyFrame(Duration.millis(200 * (i + 1)), kvs[i]);
       timeline.getKeyFrames().add(kfs[i]);
     }
     timeline.play();
-    //removeCover(doorID);
-    //coveringFloors.put(doorIDd, floor);
-    //create(floor.ID, doorID, "floor.png");
+    // removeCover(doorID);
+    // coveringFloors.put(doorIDd, floor);
+    // create(floor.ID, doorID, "floor.png");
   }
 
   public static void removeCover(int doorID) {
     ImageView doorView = map.get(doorID);
-    doorView.setImage(new Image("door_sprites.png", CELLSIZE*4, CELLSIZE, true, false));
+    doorView.setImage(new Image("door_sprites.png", CELLSIZE * 4, CELLSIZE, true, false));
     doorView.setViewport(new Rectangle2D(0, 0, CELLSIZE, CELLSIZE));
     KeyValue[] kvs = new KeyValue[4];
     KeyFrame[] kfs = new KeyFrame[4];
     Timeline timeline = new Timeline();
-    for (int i = kvs.length-1; i >= 0; i--) {
-      kvs[i] = new KeyValue(doorView.viewportProperty(), new Rectangle2D(CELLSIZE * i, 0, CELLSIZE,
-          CELLSIZE));
-      kfs[i] = new KeyFrame(Duration.millis(200*(kvs.length-i-1)), kvs[i]);
+    for (int i = kvs.length - 1; i >= 0; i--) {
+      kvs[i] = new KeyValue(doorView.viewportProperty(), new Rectangle2D(CELLSIZE * i, 0, CELLSIZE, CELLSIZE));
+      kfs[i] = new KeyFrame(Duration.millis(200 * (kvs.length - i - 1)), kvs[i]);
       timeline.getKeyFrames().add(kfs[i]);
     }
-    //timeline.setRate(-1.0);
+    // timeline.setRate(-1.0);
     timeline.play();
     // If the door is already covered, remove the cover
-   // if (coveringFloors.containsKey(doorID)) {
-      //remove(coveringFloors.get(doorID).ID);
-      //coveringFloors.remove(doorID);
-    //}
+    // if (coveringFloors.containsKey(doorID)) {
+    // remove(coveringFloors.get(doorID).ID);
+    // coveringFloors.remove(doorID);
+    // }
   }
 
   /**
@@ -526,11 +542,11 @@ public class View extends Application {
   public static void refreshBulletColor(String color) {
     System.out.println(color);
     if (color.equals("BLUE") || color.equals("YELLOW")) {
-      oneillCurrentBullet.setImage(new Image(color.toLowerCase() + "_bullet.png", CELLSIZE / 2, CELLSIZE / 2, true,
-          false));
+      oneillCurrentBullet
+          .setImage(new Image(color.toLowerCase() + "_bullet.png", CELLSIZE / 2, CELLSIZE / 2, true, false));
     } else if (color.equals("GREEN") || color.equals("RED")) {
-      jaffaCurrentBullet.setImage(new Image(color.toLowerCase() + "_bullet.png", CELLSIZE / 2, CELLSIZE / 2, true,
-          false));
+      jaffaCurrentBullet
+          .setImage(new Image(color.toLowerCase() + "_bullet.png", CELLSIZE / 2, CELLSIZE / 2, true, false));
     }
 
   }
@@ -538,6 +554,7 @@ public class View extends Application {
   /**
    * Key event handler for game over screen. Reloads the level, jumps to menu.
    * Pushes game over pane to background.
+   * 
    * @param keyNode
    * @param gameOverBg
    */
@@ -622,6 +639,5 @@ public class View extends Application {
       }
     });
   }
-  
 
 }

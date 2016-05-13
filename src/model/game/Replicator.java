@@ -1,9 +1,12 @@
 package model.game;
 
+import java.util.Random;
+
 import model.cells.LevelObject;
+import model.enumerations.Direction;
 import view.View;
 
-public class Replicator extends Character {
+public class Replicator extends Character implements Runnable {
 
   public Replicator(LevelObject position) {
     super(position);
@@ -13,5 +16,27 @@ public class Replicator extends Character {
   public void die() {
     View.remove(this.ID);
     ReplicatorContainer.remove(this);
+  }
+  
+  public void run() {
+    Random rand = new Random();
+    int randValue;
+    Direction nextDir = Direction.NORTH;
+      randValue = rand.nextInt(4);
+      switch (randValue) {
+        case 0:
+          nextDir = Direction.NORTH;
+          break;
+        case 1:
+          nextDir = Direction.EAST;
+          break;
+        case 2:
+          nextDir = Direction.SOUTH;
+          break;
+        case 3:
+          nextDir = Direction.WEST;
+          break;
+      }
+      this.move(nextDir);
   }
 }

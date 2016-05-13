@@ -42,21 +42,21 @@ public class Menu {
 
     } else if (player.getZpmCount() > zpmsMax - player.getZpmCount()) {
       if (player.getColor() == Color.BLUE || player.getColor() == Color.YELLOW) {
-        View.gameOver("O'Neill won!\nO'Neill zpm(s): " + player.getZpmCount() + "\nJaffa zpm(s):"
+        View.gameOver("O'Neill won!\nO'Neill zpm(s): " + player.getZpmCount() + "\nJaffa zpm(s): "
             + (zpmsMax - player.getZpmCount()));
       } else {
-        View.gameOver("Jaffa won!\nJaffa zpm(s): " + player.getZpmCount() + "\nO'Neill zpm(s):"
+        View.gameOver("Jaffa won!\nJaffa zpm(s): " + player.getZpmCount() + "\nO'Neill zpm(s): "
             + (zpmsMax - player.getZpmCount()));
       }
     } else if (player.getZpmCount() == zpmsMax - player.getZpmCount()) {
-      View.gameOver("The game ended in a tie.\nO'Neill zpm(s): " + player.getZpmCount() + "\nJaffa zpm(s):"
+      View.gameOver("The game ended in a tie.\nO'Neill zpm(s): " + player.getZpmCount() + "\nJaffa zpm(s): "
           + (zpmsMax - player.getZpmCount()));
     } else {
       if (player.getColor() != Color.BLUE && player.getColor() != Color.YELLOW) {
-        View.gameOver("O'Neill won!\nJaffa zpm(s): " + player.getZpmCount() + "\nO'Neill zpm(s):"
+        View.gameOver("O'Neill won!\nJaffa zpm(s): " + player.getZpmCount() + "\nO'Neill zpm(s): "
             + (zpmsMax - player.getZpmCount()));
       } else {
-        View.gameOver("Jaffa won\nO'Neill zpm(s): " + player.getZpmCount() + "\nJaffa zpm(s):"
+        View.gameOver("Jaffa won\nO'Neill zpm(s): " + player.getZpmCount() + "\nJaffa zpm(s): "
             + (zpmsMax - player.getZpmCount()));
       }
     }
