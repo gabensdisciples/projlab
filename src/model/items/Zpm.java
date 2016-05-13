@@ -1,5 +1,6 @@
 package model.items;
 
+import model.enumerations.Color;
 import model.game.Player;
 import model.menu.Menu;
 import view.View;
@@ -11,10 +12,10 @@ import view.View;
  * 
  */
 public class Zpm extends Item {
-  
+
   public static int zpmsMax = 0;
   public static int zpmsRemaining = 0;
-  
+
   public Zpm() {
     zpmsRemaining++;
     zpmsMax++;
@@ -27,7 +28,12 @@ public class Zpm extends Item {
     zpmsRemaining--;
     player.incrementZpmCount();
     View.remove(this.ID);
-    if(zpmsRemaining == 0) {
+    if (player.getColor() == Color.BLUE || player.getColor() == Color.YELLOW) {
+      View.refreshZpmCount("oneill", player.getZpmCount());
+    } else if (player.getColor() == Color.GREEN || player.getColor() == Color.RED) {
+      View.refreshZpmCount("jaffa", player.getZpmCount());
+    }
+    if (zpmsRemaining == 0) {
       Menu.gameOver(player, zpmsMax);
     }
   }

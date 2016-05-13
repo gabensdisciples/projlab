@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javafx.animation.FadeTransition;
-import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.ScaleTransition;
@@ -22,11 +21,15 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import model.cells.Floor;
@@ -37,20 +40,30 @@ public class View extends Application {
 
   private static Map<Integer, ImageView> map;
   private static Map<Integer, Floor> coveringFloors = new HashMap<Integer, Floor>();
-  private Stage stage;
+  private static Stage stage;
   private static Scene gameScene;
   private static final int CELLSIZE = 96;
   private static Pane mapPane;
-  private GameController controller;
+  private static GameController controller;
   private static Map<String, ImageView> queuedImageViews = new HashMap<String, ImageView>();
+  private static Text oneillZpmCount;
+  private static Text jaffaZpmCount;
+  private static ImageView oneillCurrentBullet;
+  private static ImageView jaffaCurrentBullet;
 
+  /**
+   * JavaFX method, calls loadLevel()
+   */
+  public void init() {
+    loadLevel();
+  }
   /**
    * Initializes the level and its elements. Creates an ImageView for every
    * element with its correct coordinates and puts it into the map.
    * 
    * @author
    */
-  public void init() {
+  private static void loadLevel() {
     LevelBuilder levelBuilder = LevelBuilder.getInstance();
     levelBuilder.init("level/level.txt");
 
@@ -86,6 +99,7 @@ public class View extends Application {
     }
     controller = new GameController();
     controller.startWorkerThread(levelBuilder.getOneill(), levelBuilder.getJaffa(), levelBuilder.getReplicator());
+
   }
 
   /**
@@ -93,9 +107,8 @@ public class View extends Application {
    */
   @Override
   public void start(Stage stage) throws Exception {
-    this.stage = stage;
+    View.stage = stage;
     Scene menuScene = setupMenuScene();
-    gameScene = setupGameScene();
 
     stage.setScene(menuScene);
     stage.setTitle("GabeN's Disicples Project Laboratory Application");
@@ -111,7 +124,7 @@ public class View extends Application {
    *          scene which gets the eventhandler
    */
 
-  private void installEventHandler(final Scene keyNode) {
+  private static void installEventHandler(final Scene keyNode) {
     final EventHandler<KeyEvent> keyEventHandler = new EventHandler<KeyEvent>() {
       public void handle(final KeyEvent keyEvent) {
         controller.addPressedKey(keyEvent.getCode().toString());
@@ -128,7 +141,7 @@ public class View extends Application {
    * 
    * @return the complete scene
    */
-  private Scene setupMenuScene() {
+  private static Scene setupMenuScene() {
     // Background Image and view
     Image menuBg = new Image("menu_bg.png");
     ImageView menuBgView = new ImageView();
@@ -142,6 +155,7 @@ public class View extends Application {
     start.setOnAction(new EventHandler<ActionEvent>() {
       @Override
       public void handle(ActionEvent e) {
+        gameScene = setupGameScene();
         stage.setScene(gameScene);
       }
     });
@@ -192,15 +206,28 @@ public class View extends Application {
    * @return the complete game scene
    */
 
-  private Scene setupGameScene() {
-    Group root = new Group();
-    Scene scene = new Scene(root, stage.getWidth(), stage.getHeight(), Color.BEIGE);
+  private static Scene setupGameScene() {
+    BorderPane root = new BorderPane();
+    Scene scene = new Scene(root);
     mapPane = new Pane();
     for (ImageView imgView : map.values()) {
       mapPane.getChildren().add(imgView);
     }
-    root.getChildren().add(mapPane);
 
+    HBox gameBar = new HBox();
+    gameBar.getChildren().addAll(new ImageView(new Image("oneill.png", CELLSIZE / 2, CELLSIZE / 2, true, false)),
+        oneillCurrentBullet = new ImageView(new Image("blue_bullet.png", CELLSIZE / 2, CELLSIZE / 2, true, false)),
+        new ImageView(new Image("zpm.png", CELLSIZE / 2, CELLSIZE / 2, true, false)), oneillZpmCount = new Text("0"),
+        new ImageView(new Image("jaffa.png", CELLSIZE / 2, CELLSIZE / 2, true, false)),
+        jaffaCurrentBullet = new ImageView(new Image("green_bullet.png", CELLSIZE / 2, CELLSIZE / 2, true, false)),
+        new ImageView(new Image("zpm.png", CELLSIZE / 2, CELLSIZE / 2, true, false)), jaffaZpmCount = new Text("0"));
+    oneillZpmCount.setFont(new Font(CELLSIZE / 2));
+    jaffaZpmCount.setFont(new Font(CELLSIZE / 2));
+    gameBar.setStyle("-fx-background-color: #999;");
+    root.setTop(gameBar);
+    root.setCenter(mapPane);
+    // root.getChildren().add(mapPane);
+    scene.setOnKeyPressed(null);
     installEventHandler(scene);
     return scene;
   }
@@ -219,12 +246,13 @@ public class View extends Application {
     ImageView toRemove = map.get(ID);
     System.out.println("Removing this: " + ID + " ");
     if (toRemove != null && toRemove.getStyleClass().contains("stargate")) {
-      //Shrinking animation for dissappearing stargate
-      addShrinkingAnimation(toRemove);      
+      // Shrinking animation for dissappearing stargate
+      addShrinkingAnimation(toRemove);
     } else if (toRemove.getStyleClass().contains("replicator")) {
       // Queue replicator for removal when bullet gets to it
       queuedImageViews.put("replicator", toRemove);
-    } else if (toRemove.getStyleClass().contains("oneill_sprites") || toRemove.getStyleClass().contains("jaffa_sprites")) {
+    } else if (toRemove.getStyleClass().contains("oneill_sprites")
+        || toRemove.getStyleClass().contains("jaffa_sprites")) {
       addShrinkingAnimation(toRemove);
     } else {
       if (toRemove != null && !toRemove.getStyleClass().contains("flying")) {
@@ -347,7 +375,7 @@ public class View extends Application {
               // If we got here, a proper remove call already queued the
               // replicator for removal, therefore a bullet killed it
               ImageView replicator = queuedImageViews.get("replicator");
-           // Animate replicator death, remove when finished
+              // Animate replicator death, remove when finished
               addShrinkingAnimation(replicator);
             }
           }
@@ -418,6 +446,90 @@ public class View extends Application {
   }
 
   /**
+   * Displays a game over text, with explanation why the game ended. Sets the
+   * keyEventHandler, so you can jump back to the menu with pressing Enter.
+   * 
+   * @param why
+   */
+  public static void gameOver(String why) {
+    BorderPane bg = new BorderPane();
+    bg.setMinWidth(mapPane.getWidth());
+    bg.setMinHeight(mapPane.getHeight());
+    bg.setStyle("-fx-background-color: #000;");
+    stage.getScene().setFill(Color.BLACK);
+    Text text = new Text(why);
+    text.setFont(new Font(60));
+    text.setFill(Color.WHITE);
+    bg.setCenter(text);
+
+    Text pressAnyText = new Text("Nyomj entert a menübe ugráshoz");
+    pressAnyText.setFont(new Font(35));
+    pressAnyText.setFill(Color.WHITE);
+    bg.setBottom(pressAnyText);
+    BorderPane.setAlignment(pressAnyText, Pos.BOTTOM_CENTER);
+    mapPane.getChildren().add(bg);
+    FadeTransition ft = new FadeTransition(Duration.millis(2000), bg);
+    ft.setFromValue(0);
+    ft.setToValue(1.0);
+    ft.play();
+    gameScene.setOnKeyPressed(null);
+    installAnyKeyEventHandler(gameScene, bg);
+    // stage.setScene(gameOver);
+  }
+
+  /**
+   * Changes the Player's Zpm count in the gameBar
+   * 
+   * @param player
+   * @param count
+   */
+  public static void refreshZpmCount(String player, int count) {
+    if (player.equals("oneill")) {
+      oneillZpmCount.setText(((Integer) count).toString());
+    } else if (player.equals("jaffa")) {
+      jaffaZpmCount.setText(((Integer) count).toString());
+    }
+  }
+
+  /**
+   * Changes the player's current bulletcolor in the gamebar
+   * 
+   * @param color
+   */
+  public static void refreshBulletColor(String color) {
+    System.out.println(color);
+    if (color.equals("BLUE") || color.equals("YELLOW")) {
+      oneillCurrentBullet.setImage(new Image(color.toLowerCase() + "_bullet.png", CELLSIZE / 2, CELLSIZE / 2, true,
+          false));
+    } else if (color.equals("GREEN") || color.equals("RED")) {
+      jaffaCurrentBullet.setImage(new Image(color.toLowerCase() + "_bullet.png", CELLSIZE / 2, CELLSIZE / 2, true,
+          false));
+    }
+
+  }
+
+  /**
+   * Key event handler for game over screen. Reloads the level, jumps to menu.
+   * Pushes game over pane to background.
+   * @param keyNode
+   * @param gameOverBg
+   */
+  private static void installAnyKeyEventHandler(final Scene keyNode, BorderPane gameOverBg) {
+    final EventHandler<KeyEvent> keyEventHandler = new EventHandler<KeyEvent>() {
+      public void handle(final KeyEvent keyEvent) {
+        if (keyEvent.getCode() == KeyCode.ENTER) {
+          loadLevel();
+          stage.setScene(setupMenuScene());
+          gameOverBg.toBack();
+          // System.out.println(keyEvent.getCode());
+        }
+        keyEvent.consume();
+      }
+    };
+    keyNode.setOnKeyPressed(keyEventHandler);
+  }
+
+  /**
    * Returns the name of the entity without the image file extension
    * 
    * @param imageName
@@ -463,9 +575,10 @@ public class View extends Application {
     }
     return color;
   }
-  
+
   /**
    * Adds a shrinking animation to an ImageView, and deletes it when finished
+   * 
    * @param toAnimate
    */
   private static void addShrinkingAnimation(ImageView toAnimate) {

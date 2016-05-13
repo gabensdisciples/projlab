@@ -47,6 +47,7 @@ public class Player extends Character {
    */
   public void changeColor() {
     bulletColor = bulletColor.getOtherColor();
+    View.refreshBulletColor(bulletColor.name());
   }
 
   /**

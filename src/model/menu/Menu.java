@@ -1,5 +1,6 @@
 package model.menu;
 
+import view.View;
 import model.game.Player;
 import model.enumerations.Color;
 
@@ -34,28 +35,28 @@ public class Menu {
   public static void gameOver(Player player, int zpmsMax) {
     if (player.getPosition() == null) {
       if (player.getColor() == Color.BLUE || player.getColor() == Color.YELLOW) {
-        System.out.println("O'Neill meghalt Jaffa nyert!");
+        View.gameOver("O'Neill meghalt Jaffa nyert!");
       } else {
-        System.out.println("Jaffa meghalt O'Neill nyert!");
+        View.gameOver("Jaffa meghalt O'Neill nyert!");
       }
 
     } else if (player.getZpmCount() > zpmsMax - player.getZpmCount()) {
       if (player.getColor() == Color.BLUE || player.getColor() == Color.YELLOW) {
-        System.out.println("O'Neill nyert!\nO'Neill zpm(s):" + player.getZpmCount() + "\nJaffa zmp(s):"
+        View.gameOver("O'Neill nyert!\nO'Neill zpm(s):" + player.getZpmCount() + "\nJaffa zpm(s):"
             + (zpmsMax - player.getZpmCount()));
       } else {
-        System.out.println("Jaffa nyert!\nJaffa zpm(s):" + player.getZpmCount() + "\nO'Neill zmp(s):"
+        View.gameOver("Jaffa nyert!\nJaffa zpm(s):" + player.getZpmCount() + "\nO'Neill zpm(s):"
             + (zpmsMax - player.getZpmCount()));
       }
     } else if (player.getZpmCount() == zpmsMax - player.getZpmCount()) {
-      System.out.println("Döntetlen\nO'Neill zpm(s):" + player.getZpmCount() + "\nJaffa zmp(s):"
+      View.gameOver("Döntetlen\nO'Neill zpm(s):" + player.getZpmCount() + "\nJaffa zpm(s):"
           + (zpmsMax - player.getZpmCount()));
     } else {
       if (player.getColor() != Color.BLUE && player.getColor() != Color.YELLOW) {
-        System.out.println("O'Neill nyert!\nJaffa zpm(s):" + player.getZpmCount() + "\nO'Neill zmp(s):"
+        View.gameOver("O'Neill nyert!\nJaffa zpm(s):" + player.getZpmCount() + "\nO'Neill zpm(s):"
             + (zpmsMax - player.getZpmCount()));
       } else {
-        System.out.println("Jaffa nyert!\nO'Neill zpm(s):" + player.getZpmCount() + "\nJaffa zmp(s):"
+        View.gameOver("Jaffa nyert!\nO'Neill zpm(s):" + player.getZpmCount() + "\nJaffa zpm(s):"
             + (zpmsMax - player.getZpmCount()));
       }
     }
