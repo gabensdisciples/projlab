@@ -432,17 +432,44 @@ public class View extends Application {
   // TODO Uj metodusok, dokumentalni kell
   public static void addCover(int doorID, Floor floor) {
     // If the door is already covered, remove the cover and add a new one
-    removeCover(doorID);
-    coveringFloors.put(doorID, floor);
-    create(floor.ID, doorID, "floor.png");
+    ImageView doorView = map.get(doorID);
+    doorView.setImage(new Image("door_sprites.png", CELLSIZE*4, CELLSIZE, true, false));
+    doorView.setViewport(new Rectangle2D(0, 0, CELLSIZE, CELLSIZE));
+    KeyValue[] kvs = new KeyValue[4];
+    KeyFrame[] kfs = new KeyFrame[4];
+    Timeline timeline = new Timeline();
+    for (int i = 0; i < kvs.length; i++) {
+      kvs[i] = new KeyValue(doorView.viewportProperty(), new Rectangle2D(CELLSIZE * i, 0, CELLSIZE,
+          CELLSIZE));
+      kfs[i] = new KeyFrame(Duration.millis(200*(i+1)), kvs[i]);
+      timeline.getKeyFrames().add(kfs[i]);
+    }
+    timeline.play();
+    //removeCover(doorID);
+    //coveringFloors.put(doorIDd, floor);
+    //create(floor.ID, doorID, "floor.png");
   }
 
   public static void removeCover(int doorID) {
-    // If the door is already covered, remove the cover
-    if (coveringFloors.containsKey(doorID)) {
-      remove(coveringFloors.get(doorID).ID);
-      coveringFloors.remove(doorID);
+    ImageView doorView = map.get(doorID);
+    doorView.setImage(new Image("door_sprites.png", CELLSIZE*4, CELLSIZE, true, false));
+    doorView.setViewport(new Rectangle2D(0, 0, CELLSIZE, CELLSIZE));
+    KeyValue[] kvs = new KeyValue[4];
+    KeyFrame[] kfs = new KeyFrame[4];
+    Timeline timeline = new Timeline();
+    for (int i = kvs.length-1; i >= 0; i--) {
+      kvs[i] = new KeyValue(doorView.viewportProperty(), new Rectangle2D(CELLSIZE * i, 0, CELLSIZE,
+          CELLSIZE));
+      kfs[i] = new KeyFrame(Duration.millis(200*(kvs.length-i-1)), kvs[i]);
+      timeline.getKeyFrames().add(kfs[i]);
     }
+    //timeline.setRate(-1.0);
+    timeline.play();
+    // If the door is already covered, remove the cover
+   // if (coveringFloors.containsKey(doorID)) {
+      //remove(coveringFloors.get(doorID).ID);
+      //coveringFloors.remove(doorID);
+    //}
   }
 
   /**
@@ -595,4 +622,6 @@ public class View extends Application {
       }
     });
   }
+  
+
 }
