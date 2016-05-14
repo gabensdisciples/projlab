@@ -68,7 +68,7 @@ public class Scale extends LevelObject {
    */
   public void interactCharacter(Character character) {
     weight += 2;
-    if (weight >= limit) {
+    if (weight >= limit && !door.walkable) {
       door.setWalkable(true);
     }
     character.setPosition(this);
@@ -139,7 +139,7 @@ public class Scale extends LevelObject {
   public void placeItem(Item item) {
     boxes.push((Box) item);
     weight += 1;
-    if (weight >= limit) {
+    if (weight >= limit && !door.walkable) {
       door.setWalkable(true);
     }
   }
