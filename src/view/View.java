@@ -270,7 +270,7 @@ public class View extends Application {
       // Shrinking animation for dissappearing stargate
       addShrinkingAnimation(toRemove);
     } else if (toRemove.getStyleClass().contains("replicator")) {
-      // Queue replicator for removal when bullet gets to it
+      // Queue replicator for removal when bullet gets to it or it steps in gap
       queuedImageViews.put("replicator", toRemove);
     } else
       if (toRemove.getStyleClass().contains("oneill_sprites") || toRemove.getStyleClass().contains("jaffa_sprites")) {
@@ -319,6 +319,9 @@ public class View extends Application {
         toMove.setRotate(rotation);
       }
 
+      // Animation
+      final Timeline timeline = new Timeline();
+      
       // Rotate players using sprites
       int spriteWalking = 0;
       int spriteWalking2 = 0;
@@ -356,29 +359,36 @@ public class View extends Application {
           spriteWalking2 = 2;
         }
         toMove.setViewport(new Rectangle2D(CELLSIZE * sprite, 0, CELLSIZE, CELLSIZE));
-      }
-      final KeyValue kvStand = new KeyValue(toMove.viewportProperty(),
-          new Rectangle2D(CELLSIZE * sprite, 0, CELLSIZE, CELLSIZE));
-      final KeyValue kvStep = new KeyValue(toMove.viewportProperty(),
-          new Rectangle2D(CELLSIZE * spriteWalking, 0, CELLSIZE, CELLSIZE));
-      final KeyValue kvStep2 = new KeyValue(toMove.viewportProperty(),
-          new Rectangle2D(CELLSIZE * spriteWalking2, 0, CELLSIZE, CELLSIZE));
+        final KeyValue kvStand = new KeyValue(toMove.viewportProperty(),
+            new Rectangle2D(CELLSIZE * sprite, 0, CELLSIZE, CELLSIZE));
+        final KeyValue kvStep = new KeyValue(toMove.viewportProperty(),
+            new Rectangle2D(CELLSIZE * spriteWalking, 0, CELLSIZE, CELLSIZE));
+        final KeyValue kvStep2 = new KeyValue(toMove.viewportProperty(),
+            new Rectangle2D(CELLSIZE * spriteWalking2, 0, CELLSIZE, CELLSIZE));
+        final KeyFrame kfStanding = new KeyFrame(Duration.millis(duration), kvStand);
+        // Add walking sprites 6 times while walking
+        for (int i = 0; i < 6; i += 2) {
+          timeline.getKeyFrames().add(new KeyFrame(Duration.millis((duration / 6) * i), kvStep));
+          timeline.getKeyFrames().add(new KeyFrame(Duration.millis((duration / 6) * (i + 1)), kvStep2));
+        }
 
-      // Animation
-      final Timeline timeline = new Timeline();
+        // Add standing frame before stopping movement
+        timeline.getKeyFrames().add(kfStanding);
+      }
+      
+      if (toMove.getStyleClass().contains("replicator") && toCell.getStyleClass().contains("gap")) {
+        System.out.println("Replicator stepped in gap");
+        addShrinkingAnimation(toMove);
+        queuedImageViews.remove(toMove);
+        toMove.getStyleClass().add("ingap");
+      }
+
       // Animate from current position to next position
       final KeyValue kv = new KeyValue(toMove.xProperty(), toCell.getX());
       final KeyValue kv2 = new KeyValue(toMove.yProperty(), toCell.getY());
-      final KeyFrame kfStanding = new KeyFrame(Duration.millis(duration), kvStand);
 
       final KeyFrame kfMove = new KeyFrame(Duration.millis(duration), kv, kv2);
-      // Add walking sprites 6 times while walking
-      for (int i = 0; i < 6; i += 2) {
-        timeline.getKeyFrames().add(new KeyFrame(Duration.millis((duration / 6) * i), kvStep));
-        timeline.getKeyFrames().add(new KeyFrame(Duration.millis((duration / 6) * (i + 1)), kvStep2));
-      }
-      // Add standing frame before stopping movement
-      timeline.getKeyFrames().add(kfStanding);
+
       // Add movement
       timeline.getKeyFrames().add(kfMove);
 
@@ -444,6 +454,14 @@ public class View extends Application {
       // Queue stargate for creation when bullet finished animation
       queuedImageViews.put(getColorFromClasses(created.getStyleClass()), created);
     } else {
+      if (created.getStyleClass().contains("floor")) {
+        ScaleTransition expandsTransition = new ScaleTransition(Duration.millis(1000), created);
+        expandsTransition.setFromX(0);
+        expandsTransition.setFromY(0);
+        expandsTransition.setToX(1.0);
+        expandsTransition.setToY(1.0);
+        expandsTransition.play();
+      }
       mapPane.getChildren().add(created);
       created.toFront();
     }
@@ -451,6 +469,7 @@ public class View extends Application {
   }
 
   // TODO Uj metodusok, dokumentalni kell
+  //TODO átnevezni, mert már tök mást csinál
   public static void addCover(int doorID, Floor floor) {
     // If the door is already covered, remove the cover and add a new one
     ImageView doorView = map.get(doorID);
