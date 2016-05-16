@@ -4,10 +4,7 @@ import model.enumerations.Direction;
 import model.enumerations.ItemState;
 import model.game.Bullet;
 import model.game.Character;
-import model.game.Player;
-import model.game.Replicator;
 import model.game.ReplicatorContainer;
-import model.items.Item;
 import view.View;
 
 /**

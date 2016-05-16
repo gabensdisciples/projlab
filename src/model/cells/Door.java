@@ -63,12 +63,11 @@ public class Door extends LevelObject {
   public void setWalkable(boolean walkable) {
     this.walkable = walkable;
     if (walkable) {
-      Floor floor = new Floor(true, null);
-      View.addCover(this.ID, floor);
+      View.animateDoorOpen(this.ID);
     }
     
     else {
-      View.removeCover(this.ID);
+      View.animateDoorClose(this.ID);
     }
   }
 }

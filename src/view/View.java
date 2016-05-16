@@ -24,6 +24,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -33,7 +34,6 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import model.cells.Floor;
 import model.game.Replicator;
 import model.levelbuilder.LevelBuilder;
 import controller.GameController;
@@ -41,7 +41,6 @@ import controller.GameController;
 public class View extends Application {
 
   private static Map<Integer, ImageView> map;
-  private static Map<Integer, Floor> coveringFloors = new HashMap<Integer, Floor>();
   private static Stage stage;
   private static Scene gameScene;
   private static final int CELLSIZE = 96;
@@ -53,6 +52,7 @@ public class View extends Application {
   private static ImageView oneillCurrentBullet;
   private static ImageView jaffaCurrentBullet;
   private static Replicator replicator;
+  private static Scene menuScene;
 
   /**
    * JavaFX method, calls loadLevel()
@@ -111,7 +111,7 @@ public class View extends Application {
   @Override
   public void start(Stage stage) throws Exception {
     View.stage = stage;
-    Scene menuScene = setupMenuScene();
+    menuScene = setupMenuScene();
 
     stage.setScene(menuScene);
     stage.setTitle("GabeN's Disicples Project Laboratory Application");
@@ -150,6 +150,10 @@ public class View extends Application {
     ImageView menuBgView = new ImageView();
     menuBgView.setImage(menuBg);
 
+    // Init JavaFX Group, scene
+    Group root = new Group();
+    Scene scene = new Scene(root);
+    
     // Menu point labels
     Button start = new Button("Start");
     start.getStyleClass().clear();
@@ -188,7 +192,17 @@ public class View extends Application {
     help.setOnAction(new EventHandler<ActionEvent>() {
       @Override
       public void handle(ActionEvent e) {
-        help.setText("Helped");
+        //help.setText("Helped");
+        ImageView helpImage = new ImageView(new Image("entity_descriptions.png"));
+        root.getChildren().add(helpImage);
+        helpImage.toFront();
+        scene.setOnMouseClicked(new EventHandler<MouseEvent>() {
+          @Override
+          public void handle(MouseEvent e) {
+            root.getChildren().remove(helpImage);
+            scene.setOnMouseClicked(null);
+          }
+        });
       }
     });
 
@@ -210,9 +224,7 @@ public class View extends Application {
     menu.setPrefHeight(menuBg.getHeight());
     menu.setAlignment(Pos.CENTER);
 
-    // Init JavaFX Group, scene
-    Group root = new Group();
-    Scene scene = new Scene(root);
+
     scene.setFill(Color.BLACK);
     root.getChildren().add(menuBgView);
     root.getChildren().add(menu);
@@ -467,10 +479,12 @@ public class View extends Application {
     }
     map.put(ID, created);
   }
-
+/**
+ * Animate door opening with sprites
+ * @param doorID the door to animate
+ */
   // TODO Uj metodusok, dokumentalni kell
-  //TODO átnevezni, mert már tök mást csinál
-  public static void addCover(int doorID, Floor floor) {
+  public static void animateDoorOpen(int doorID) {
     // If the door is already covered, remove the cover and add a new one
     ImageView doorView = map.get(doorID);
     doorView.setImage(new Image("door_sprites.png", CELLSIZE * 4, CELLSIZE, true, false));
@@ -484,12 +498,13 @@ public class View extends Application {
       timeline.getKeyFrames().add(kfs[i]);
     }
     timeline.play();
-    // removeCover(doorID);
-    // coveringFloors.put(doorIDd, floor);
-    // create(floor.ID, doorID, "floor.png");
-  }
 
-  public static void removeCover(int doorID) {
+  }
+/**
+ * Animate door closing with sprites
+ * @param doorID door to animate
+ */
+  public static void animateDoorClose(int doorID) {
     ImageView doorView = map.get(doorID);
     doorView.setImage(new Image("door_sprites.png", CELLSIZE * 4, CELLSIZE, true, false));
     doorView.setViewport(new Rectangle2D(0, 0, CELLSIZE, CELLSIZE));
@@ -503,11 +518,6 @@ public class View extends Application {
     }
     // timeline.setRate(-1.0);
     timeline.play();
-    // If the door is already covered, remove the cover
-    // if (coveringFloors.containsKey(doorID)) {
-    // remove(coveringFloors.get(doorID).ID);
-    // coveringFloors.remove(doorID);
-    // }
   }
 
   /**
@@ -594,6 +604,15 @@ public class View extends Application {
         keyEvent.consume();
       }
     };
+    final EventHandler<MouseEvent> mouseEventHandler = new EventHandler<MouseEvent>() {
+      public void handle(final MouseEvent mouseEvent) {
+          loadLevel();
+          stage.setScene(setupMenuScene());
+          gameOverBg.toBack();
+          keyNode.setOnMouseClicked(null);
+        }
+    };
+    keyNode.setOnMouseClicked(mouseEventHandler);
     keyNode.setOnKeyPressed(keyEventHandler);
   }
 

@@ -48,7 +48,6 @@ public class WorkerThread implements Runnable{
           Thread.sleep(300);
           System.out.println(i++);
         } catch (InterruptedException e) {
-          // TODO Auto-generated catch block
           e.printStackTrace();
         }
       }
