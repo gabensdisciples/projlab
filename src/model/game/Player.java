@@ -2,13 +2,13 @@ package model.game;
 
 import java.util.Random;
 
+import controller.GameController;
 import model.cells.LevelObject;
 import model.enumerations.Color;
 import model.enumerations.Direction;
 import model.enumerations.ItemState;
 import model.items.Box;
 import model.items.Zpm;
-import model.menu.Menu;
 import view.View;
 
 /**
@@ -65,97 +65,65 @@ public class Player extends Character {
     zpmCount++;
 
     if (zpmCount == 2) {
-      // If randomizing is turned off, then place zpm at the given location
-      if (Menu.randomZpmOffset[0] != 0 || Menu.randomZpmOffset[1] != 0 ||
-          Menu.randomZpmOffset[2] != 0 || Menu.randomZpmOffset[3] != 0) {
-        LevelObject current = position;
+      Random rand = new Random();
+      // Randomize iteration limit
+      int limit = rand.nextInt(101);
+      boolean iterate = true;
 
-        // Iterate north
-        for (int i = 1; i <= Menu.randomZpmOffset[0]; i++) {
-          current = current.getNeighbour(Direction.NORTH, true);
+      // Randomize direction to step in
+      int direction = rand.nextInt(4);
+      int i = 0;
+      LevelObject current = position;
+      // Iterate until we find a cell where we can put a zpm
+      while (iterate) {
+        // Keep stepping until iteration limit
+        while (i < limit) {
+          // Move in the randomized direction
+          switch (direction) {
+            case 0:
+              if (current.getNeighbour(Direction.NORTH, false) != null) {
+                current = current.getNeighbour(Direction.NORTH, false);
+              }
+              break;
+            case 1:
+              if (current.getNeighbour(Direction.EAST, false) != null) {
+                current = current.getNeighbour(Direction.EAST, false);
+              }
+              break;
+            case 2:
+              if (current.getNeighbour(Direction.SOUTH, false) != null) {
+                current = current.getNeighbour(Direction.SOUTH, false);
+              }
+              break;
+            case 3:
+              if (current.getNeighbour(Direction.WEST, false) != null) {
+                current = current.getNeighbour(Direction.WEST, false);
+              }
+              break;
+          }
+          // Randomize next move's direction
+          direction = rand.nextInt(4);
+          i++;
         }
 
-        // Iterate east
-        for (int i = 1; i <= Menu.randomZpmOffset[1]; i++) {
-          current = current.getNeighbour(Direction.EAST, true);
-        }
-
-        // Iterate south
-        for (int i = 1; i <= Menu.randomZpmOffset[2]; i++) {
-          current = current.getNeighbour(Direction.SOUTH, true);
-        }
-
-        // Iterate west
-        for (int i = 1; i <= Menu.randomZpmOffset[3]; i++) {
-          current = current.getNeighbour(Direction.WEST, true);
-        }
-
-        // Try to place it
+        /*
+         * If it is possible to put a zpm on the cell we arrived at, then put
+         * it, and set iterate flag false
+         */
         if (current.hasItem() == ItemState.NOITEM) {
-          current.placeItem(new Zpm());
+          Zpm zpm = new Zpm();
+          current.placeItem(zpm);
+          View.create(zpm.ID, current.ID, "zpm.png");
+          iterate = false;
         }
-      }
-
-      //Else randomize
-      else {
-        Random rand = new Random();
-        // Randomize iteration limit
-        int limit = rand.nextInt(101);
-        boolean iterate = true;
-        
-        //Randomize direction to step in
-        int direction = rand.nextInt(4);
-        int i = 0;
-        LevelObject current = position;
-        //Iterate until we find a cell where we can put a zpm
-        while (iterate) {
-          //Keep stepping until iteration limit
-          while (i < limit) {
-            //Move in the randomized direction
-            switch (direction) {
-              case 0:
-                if (current.getNeighbour(Direction.NORTH, false) != null) {
-                  current = current.getNeighbour(Direction.NORTH, false);
-                }
-                break;
-              case 1:
-                if (current.getNeighbour(Direction.EAST, false) != null) {
-                  current = current.getNeighbour(Direction.EAST, false);
-                }
-                break;
-              case 2:
-                if (current.getNeighbour(Direction.SOUTH, false) != null) {
-                  current = current.getNeighbour(Direction.SOUTH, false);
-                }
-                break;
-              case 3:
-                if (current.getNeighbour(Direction.WEST, false) != null) {
-                  current = current.getNeighbour(Direction.WEST, false);
-                }
-                break;
-            }
-            //Randomize next move's direction
-            direction = rand.nextInt(4);
-            i++;
-          }
-          
-          /*If it is possible to put a zpm on the cell we arrived at, then put it,
-           *and set iterate flag false
-           */
-          if (current.hasItem() == ItemState.NOITEM) {
-            Zpm zpm = new Zpm();
-            current.placeItem(zpm);
-            View.create(zpm.ID, current.ID, "zpm.png");
-            iterate = false;
-          }
-          i = 0;
-        }
+        i = 0;
       }
     }
   }
 
   /**
    * Sets box attribute to the given value.
+   * 
    * @param box
    *          - the box to be set
    */
@@ -169,18 +137,17 @@ public class Player extends Character {
   }
 
   /**
-   * Attempts to drop the player's box on the cell it is currently on.
-   * If that cell is not a valid target or the player has no box, nothing happens.
+   * Attempts to drop the player's box on the cell it is currently on. If that
+   * cell is not a valid target or the player has no box, nothing happens.
    */
-  
+
   public void drop() {
     ItemState state = position.hasItem();
-    if (box != null && 
-        (state == ItemState.NOITEM || state == ItemState.STACKITEM)) {
-        position.placeItem(box);
-        View.create(box.ID, position.ID, "box.png");
-        box = null;
-     }
+    if (box != null && (state == ItemState.NOITEM || state == ItemState.STACKITEM)) {
+      position.placeItem(box);
+      View.create(box.ID, position.ID, "box.png");
+      box = null;
+    }
   }
 
   /**
@@ -192,15 +159,15 @@ public class Player extends Character {
       position.getItem(this);
     }
   }
-  
-  public Color getColor(){
+
+  public Color getColor() {
     return bulletColor;
   }
 
   public void die() {
     this.position = null;
     View.remove(this.ID);
-    Menu.gameOver(this, zpmCount);
+    GameController.gameOver(this, zpmCount);
   }
 
   public int getZpmCount() {

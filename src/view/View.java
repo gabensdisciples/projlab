@@ -101,8 +101,8 @@ public class View extends Application {
         }
       }
     }
-    controller = new GameController();
-    controller.startWorkerThread(levelBuilder.getOneill(), levelBuilder.getJaffa());
+    
+    controller = new GameController(levelBuilder.getOneill(), levelBuilder.getJaffa());
   }
 
   /**
@@ -130,7 +130,7 @@ public class View extends Application {
   private static void installEventHandler(final Scene keyNode) {
     final EventHandler<KeyEvent> keyEventHandler = new EventHandler<KeyEvent>() {
       public void handle(final KeyEvent keyEvent) {
-        controller.addPressedKey(keyEvent.getCode().toString());
+        controller.execute(keyEvent.getCode().toString());
         // System.out.println(keyEvent.getCode());
         keyEvent.consume();
       }

@@ -1,8 +1,8 @@
 package model.items;
 
+import controller.GameController;
 import model.enumerations.Color;
 import model.game.Player;
-import model.menu.Menu;
 import view.View;
 
 /**
@@ -34,7 +34,7 @@ public class Zpm extends Item {
       View.refreshZpmCount("jaffa", player.getZpmCount());
     }
     if (zpmsRemaining == 0) {
-      Menu.gameOver(player, zpmsMax);
+      GameController.gameOver(player, zpmsMax);
     }
   }
 }

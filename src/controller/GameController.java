@@ -1,8 +1,10 @@
 package controller;
 
+import model.enumerations.Color;
 import model.enumerations.Direction;
 import model.game.Player;
 import model.game.WorkerThread;
+import view.View;
 
 public class GameController {
   //
@@ -10,11 +12,12 @@ public class GameController {
   private Player jaffa;
   //
   
-  public GameController(){
-    
+  public GameController(Player oneill, Player jaffa) {
+    this.oneill = oneill;
+    this.jaffa = jaffa;
   }
 
-  public void addPressedKey(String keyCode){
+  public void execute(String keyCode){
     synchronized(WorkerThread.instructionQueue){
       WorkerThread.instructionQueue.add(keyCode);
     }
@@ -37,14 +40,36 @@ public class GameController {
       case "M": jaffa.drop();break;
       default: break;
     }
-    //worker.notify();
   }
   
-  public void startWorkerThread(Player oneill, Player jaffa){
-    this.oneill = oneill;
-    this.jaffa = jaffa;
-    //worker = new WorkerThread(oneill, jaffa, replicator);
-    //new Thread(worker).start();
+  public static void gameOver(Player player, int zpmsMax) {
+    if (player.getPosition() == null) {
+      if (player.getColor() == Color.BLUE || player.getColor() == Color.YELLOW) {
+        View.gameOver("O'Neill died, Jaffa won!");
+      } else {
+        View.gameOver("Jaffa died, O'Neill won!");
+      }
+
+    } else if (player.getZpmCount() > zpmsMax - player.getZpmCount()) {
+      if (player.getColor() == Color.BLUE || player.getColor() == Color.YELLOW) {
+        View.gameOver("O'Neill won!\nO'Neill zpm(s): " + player.getZpmCount() + "\nJaffa zpm(s): "
+            + (zpmsMax - player.getZpmCount()));
+      } else {
+        View.gameOver("Jaffa won!\nJaffa zpm(s): " + player.getZpmCount() + "\nO'Neill zpm(s): "
+            + (zpmsMax - player.getZpmCount()));
+      }
+    } else if (player.getZpmCount() == zpmsMax - player.getZpmCount()) {
+      View.gameOver("The game ended in a tie.\nO'Neill zpm(s): " + player.getZpmCount() + "\nJaffa zpm(s): "
+          + (zpmsMax - player.getZpmCount()));
+    } else {
+      if (player.getColor() != Color.BLUE && player.getColor() != Color.YELLOW) {
+        View.gameOver("O'Neill won!\nJaffa zpm(s): " + player.getZpmCount() + "\nO'Neill zpm(s): "
+            + (zpmsMax - player.getZpmCount()));
+      } else {
+        View.gameOver("Jaffa won\nO'Neill zpm(s): " + player.getZpmCount() + "\nJaffa zpm(s): "
+            + (zpmsMax - player.getZpmCount()));
+      }
+    }
   }
 }
 
