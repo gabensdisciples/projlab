@@ -1,18 +1,13 @@
 package controller;
 
-import model.game.Replicator;
 import model.enumerations.Direction;
 import model.game.Player;
 import model.game.WorkerThread;
 
 public class GameController {
-  private WorkerThread worker;
-  
-  
   //
   private Player oneill;
   private Player jaffa;
-  private Replicator replicator;
   //
   
   public GameController(){
@@ -45,10 +40,9 @@ public class GameController {
     //worker.notify();
   }
   
-  public void startWorkerThread(Player oneill, Player jaffa, Replicator replicator){
+  public void startWorkerThread(Player oneill, Player jaffa){
     this.oneill = oneill;
     this.jaffa = jaffa;
-    this.replicator = replicator;
     //worker = new WorkerThread(oneill, jaffa, replicator);
     //new Thread(worker).start();
   }

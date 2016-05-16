@@ -102,7 +102,7 @@ public class View extends Application {
       }
     }
     controller = new GameController();
-    controller.startWorkerThread(levelBuilder.getOneill(), levelBuilder.getJaffa(), levelBuilder.getReplicator());
+    controller.startWorkerThread(levelBuilder.getOneill(), levelBuilder.getJaffa());
   }
 
   /**
@@ -168,7 +168,7 @@ public class View extends Application {
         LevelBuilder levelBuilder = LevelBuilder.getInstance();
         replicator = levelBuilder.getReplicator();
         //Run replicator on a different thread using javagx Task and Platform.runLater
-        Task task = new Task<Void>() {
+        Task<Void>task = new Task<Void>() {
           @Override
           public Void call() throws Exception {
             while (replicator.running) {

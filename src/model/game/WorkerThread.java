@@ -7,13 +7,11 @@ import model.enumerations.Direction;
 public class WorkerThread implements Runnable{
   private Player oneill;
   private Player jaffa;
-  private Replicator replicator;
   public static LinkedList<String> instructionQueue = new LinkedList<String>();
   
-  public WorkerThread(Player oneill, Player jaffa, Replicator replicator){
+  public WorkerThread(Player oneill, Player jaffa){
     this.oneill = oneill;
     this.jaffa = jaffa;
-    this.replicator = replicator;
   }
   
   public void run(){

@@ -12,7 +12,6 @@ import model.enumerations.Color;
  */
 public class Menu {
 
-  private static MenuPoints points;
   public static int[] randomZpmOffset = { 0, 0, 0, 0 };
   private static String helpText = "loadmap <level file txt>\n"
       + "move <character name: oneill, jaffa, replicator> <direction n, e, s, w>\n"
