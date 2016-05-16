@@ -277,7 +277,6 @@ public class View extends Application {
    */
   public static void remove(int ID) {
     ImageView toRemove = map.get(ID);
-    System.out.println("Removing this: " + ID + " ");
     if (toRemove != null && toRemove.getStyleClass().contains("stargate")) {
       // Shrinking animation for dissappearing stargate
       addShrinkingAnimation(toRemove);
@@ -303,8 +302,6 @@ public class View extends Application {
    * @param toID
    */
   public static void move(int fromID, int toID) {
-    System.out.println("Moving this: " + fromID);
-    System.out.println("Moving to here: " + toID);
     ImageView toCell = map.get(toID);
     ImageView toMove = map.get(fromID);
     if (toMove != null && toCell != null) {
@@ -389,7 +386,6 @@ public class View extends Application {
       }
       
       if (toMove.getStyleClass().contains("replicator") && toCell.getStyleClass().contains("gap")) {
-        System.out.println("Replicator stepped in gap");
         addShrinkingAnimation(toMove);
         queuedImageViews.remove(toMove);
         toMove.getStyleClass().add("ingap");
@@ -574,7 +570,6 @@ public class View extends Application {
    * @param color
    */
   public static void refreshBulletColor(String color) {
-    System.out.println(color);
     if (color.equals("BLUE") || color.equals("YELLOW")) {
       oneillCurrentBullet
           .setImage(new Image(color.toLowerCase() + "_bullet.png", CELLSIZE / 2, CELLSIZE / 2, true, false));
@@ -582,7 +577,6 @@ public class View extends Application {
       jaffaCurrentBullet
           .setImage(new Image(color.toLowerCase() + "_bullet.png", CELLSIZE / 2, CELLSIZE / 2, true, false));
     }
-
   }
 
   /**
