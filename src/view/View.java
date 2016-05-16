@@ -88,7 +88,7 @@ public class View extends Application {
                 || imageNameArray[i][j][z].equals("jaffa_sprites.png")) {
               Image img = new Image(imageNameArray[i][j][z], CELLSIZE * 10, CELLSIZE, true, false);
               imgView = new ImageView(img);
-              imgView.setViewport(new Rectangle2D(posX, posY, CELLSIZE, CELLSIZE));
+              imgView.setViewport(new Rectangle2D(0, 0, CELLSIZE, CELLSIZE));
             } else {
               Image img = new Image(imageNameArray[i][j][z], CELLSIZE, CELLSIZE, true, false);
               imgView = new ImageView(img);
@@ -101,7 +101,7 @@ public class View extends Application {
         }
       }
     }
-    
+
     controller = new GameController(levelBuilder.getOneill(), levelBuilder.getJaffa());
   }
 
@@ -234,7 +234,8 @@ public class View extends Application {
 
   /**
    * Creates the game scene, iterates through the map, and adds the ImageViews
-   * to the scene.
+   * to the scene. Displays the game bar with current bullet color and zpm
+   * count.
    * 
    * @return the complete game scene
    */
@@ -290,6 +291,12 @@ public class View extends Application {
         addShrinkingAnimation(toRemove);
       } else {
         if (!toRemove.getStyleClass().contains("flying")) {
+          if (queuedImageViews.containsKey("replicator")) {
+            //If the replicator is on the same position as the shooter, the bullet never moves,
+            //never gets the flying class, and the replicator should be removed
+            ImageView replicator = queuedImageViews.get("replicator");
+            addShrinkingAnimation(replicator);
+          }
           mapPane.getChildren().removeAll(toRemove);
           map.remove(ID);
         }
@@ -590,7 +597,7 @@ public class View extends Application {
 
   /**
    * Key event handler for game over screen. Reloads the level, jumps to menu.
-   * Pushes game over pane to background.
+   * Pushes game over pane to background. Click anywhere handler is added.
    * 
    * @param keyNode
    * @param gameOverBg

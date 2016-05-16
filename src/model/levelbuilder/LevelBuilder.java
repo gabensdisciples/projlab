@@ -175,7 +175,7 @@ public class LevelBuilder {
         if (currentString.equals("O")) {
           Floor floor = new Floor(true, null);
           objectMatrix[i][j] = floor;
-          oneill = new Player(objectMatrix[i][j], Color.BLUE, Direction.NORTH);
+          oneill = new Player(objectMatrix[i][j], Color.BLUE, Direction.SOUTH);
           
           idMatrix[i][j][0] = floor.ID;
           idMatrix[i][j][1] = oneill.ID;
@@ -197,7 +197,7 @@ public class LevelBuilder {
         } else if (currentString.equals("J")) {
           Floor floor = new Floor(true, null);
           objectMatrix[i][j] = floor;
-          jaffa = new Player(objectMatrix[i][j], Color.GREEN, Direction.NORTH);
+          jaffa = new Player(objectMatrix[i][j], Color.GREEN, Direction.SOUTH);
           
           idMatrix[i][j][0] = floor.ID;
           idMatrix[i][j][1] = jaffa.ID;
