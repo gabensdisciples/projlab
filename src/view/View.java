@@ -153,7 +153,7 @@ public class View extends Application {
     // Init JavaFX Group, scene
     Group root = new Group();
     Scene scene = new Scene(root);
-    
+
     // Menu point labels
     Button start = new Button("Start");
     start.getStyleClass().clear();
@@ -164,11 +164,12 @@ public class View extends Application {
       public void handle(ActionEvent e) {
         gameScene = setupGameScene();
         stage.setScene(gameScene);
-        
+
         LevelBuilder levelBuilder = LevelBuilder.getInstance();
         replicator = levelBuilder.getReplicator();
-        //Run replicator on a different thread using javagx Task and Platform.runLater
-        Task<Void>task = new Task<Void>() {
+        // Run replicator on a different thread using javagx Task and
+        // Platform.runLater
+        Task<Void> task = new Task<Void>() {
           @Override
           public Void call() throws Exception {
             while (replicator.running) {
@@ -192,7 +193,7 @@ public class View extends Application {
     help.setOnAction(new EventHandler<ActionEvent>() {
       @Override
       public void handle(ActionEvent e) {
-        //help.setText("Helped");
+        // help.setText("Helped");
         ImageView helpImage = new ImageView(new Image("entity_descriptions.png"));
         root.getChildren().add(helpImage);
         helpImage.toFront();
@@ -223,7 +224,6 @@ public class View extends Application {
     menu.setPrefWidth(menuBg.getWidth());
     menu.setPrefHeight(menuBg.getHeight());
     menu.setAlignment(Pos.CENTER);
-
 
     scene.setFill(Color.BLACK);
     root.getChildren().add(menuBgView);
@@ -277,19 +277,22 @@ public class View extends Application {
    */
   public static void remove(int ID) {
     ImageView toRemove = map.get(ID);
-    if (toRemove != null && toRemove.getStyleClass().contains("stargate")) {
-      // Shrinking animation for dissappearing stargate
-      addShrinkingAnimation(toRemove);
-    } else if (toRemove.getStyleClass().contains("replicator")) {
-      // Queue replicator for removal when bullet gets to it or it steps in gap
-      queuedImageViews.put("replicator", toRemove);
-    } else
-      if (toRemove.getStyleClass().contains("oneill_sprites") || toRemove.getStyleClass().contains("jaffa_sprites")) {
-      addShrinkingAnimation(toRemove);
-    } else {
-      if (toRemove != null && !toRemove.getStyleClass().contains("flying")) {
-        mapPane.getChildren().removeAll(toRemove);
-        map.remove(ID);
+    if (toRemove != null) {
+      if (toRemove.getStyleClass().contains("stargate")) {
+        // Shrinking animation for dissappearing stargate
+        addShrinkingAnimation(toRemove);
+      } else if (toRemove.getStyleClass().contains("replicator")) {
+        // Queue replicator for removal when bullet gets to it or it steps in
+        // gap
+        queuedImageViews.put("replicator", toRemove);
+      } else if (toRemove.getStyleClass().contains("oneill_sprites")
+          || toRemove.getStyleClass().contains("jaffa_sprites")) {
+        addShrinkingAnimation(toRemove);
+      } else {
+        if (!toRemove.getStyleClass().contains("flying")) {
+          mapPane.getChildren().removeAll(toRemove);
+          map.remove(ID);
+        }
       }
     }
 
@@ -330,7 +333,7 @@ public class View extends Application {
 
       // Animation
       final Timeline timeline = new Timeline();
-      
+
       // Rotate players using sprites
       int spriteWalking = 0;
       int spriteWalking2 = 0;
@@ -368,12 +371,12 @@ public class View extends Application {
           spriteWalking2 = 2;
         }
         toMove.setViewport(new Rectangle2D(CELLSIZE * sprite, 0, CELLSIZE, CELLSIZE));
-        final KeyValue kvStand = new KeyValue(toMove.viewportProperty(),
-            new Rectangle2D(CELLSIZE * sprite, 0, CELLSIZE, CELLSIZE));
-        final KeyValue kvStep = new KeyValue(toMove.viewportProperty(),
-            new Rectangle2D(CELLSIZE * spriteWalking, 0, CELLSIZE, CELLSIZE));
-        final KeyValue kvStep2 = new KeyValue(toMove.viewportProperty(),
-            new Rectangle2D(CELLSIZE * spriteWalking2, 0, CELLSIZE, CELLSIZE));
+        final KeyValue kvStand = new KeyValue(toMove.viewportProperty(), new Rectangle2D(CELLSIZE * sprite, 0,
+            CELLSIZE, CELLSIZE));
+        final KeyValue kvStep = new KeyValue(toMove.viewportProperty(), new Rectangle2D(CELLSIZE * spriteWalking, 0,
+            CELLSIZE, CELLSIZE));
+        final KeyValue kvStep2 = new KeyValue(toMove.viewportProperty(), new Rectangle2D(CELLSIZE * spriteWalking2, 0,
+            CELLSIZE, CELLSIZE));
         final KeyFrame kfStanding = new KeyFrame(Duration.millis(duration), kvStand);
         // Add walking sprites 6 times while walking
         for (int i = 0; i < 6; i += 2) {
@@ -384,7 +387,7 @@ public class View extends Application {
         // Add standing frame before stopping movement
         timeline.getKeyFrames().add(kfStanding);
       }
-      
+
       if (toMove.getStyleClass().contains("replicator") && toCell.getStyleClass().contains("gap")) {
         addShrinkingAnimation(toMove);
         queuedImageViews.remove(toMove);
@@ -475,10 +478,13 @@ public class View extends Application {
     }
     map.put(ID, created);
   }
-/**
- * Animate door opening with sprites
- * @param doorID the door to animate
- */
+
+  /**
+   * Animate door opening with sprites
+   * 
+   * @param doorID
+   *          the door to animate
+   */
   // TODO Uj metodusok, dokumentalni kell
   public static void animateDoorOpen(int doorID) {
     // If the door is already covered, remove the cover and add a new one
@@ -496,10 +502,13 @@ public class View extends Application {
     timeline.play();
 
   }
-/**
- * Animate door closing with sprites
- * @param doorID door to animate
- */
+
+  /**
+   * Animate door closing with sprites
+   * 
+   * @param doorID
+   *          door to animate
+   */
   public static void animateDoorClose(int doorID) {
     ImageView doorView = map.get(doorID);
     doorView.setImage(new Image("door_sprites.png", CELLSIZE * 4, CELLSIZE, true, false));
@@ -524,7 +533,7 @@ public class View extends Application {
    */
   public static void gameOver(String why) {
     replicator.running = false;
-    
+
     BorderPane bg = new BorderPane();
     bg.setMinWidth(mapPane.getWidth());
     bg.setMinHeight(mapPane.getHeight());
@@ -571,11 +580,11 @@ public class View extends Application {
    */
   public static void refreshBulletColor(String color) {
     if (color.equals("BLUE") || color.equals("YELLOW")) {
-      oneillCurrentBullet
-          .setImage(new Image(color.toLowerCase() + "_bullet.png", CELLSIZE / 2, CELLSIZE / 2, true, false));
+      oneillCurrentBullet.setImage(new Image(color.toLowerCase() + "_bullet.png", CELLSIZE / 2, CELLSIZE / 2, true,
+          false));
     } else if (color.equals("GREEN") || color.equals("RED")) {
-      jaffaCurrentBullet
-          .setImage(new Image(color.toLowerCase() + "_bullet.png", CELLSIZE / 2, CELLSIZE / 2, true, false));
+      jaffaCurrentBullet.setImage(new Image(color.toLowerCase() + "_bullet.png", CELLSIZE / 2, CELLSIZE / 2, true,
+          false));
     }
   }
 
@@ -600,11 +609,11 @@ public class View extends Application {
     };
     final EventHandler<MouseEvent> mouseEventHandler = new EventHandler<MouseEvent>() {
       public void handle(final MouseEvent mouseEvent) {
-          loadLevel();
-          stage.setScene(setupMenuScene());
-          gameOverBg.toBack();
-          keyNode.setOnMouseClicked(null);
-        }
+        loadLevel();
+        stage.setScene(setupMenuScene());
+        gameOverBg.toBack();
+        keyNode.setOnMouseClicked(null);
+      }
     };
     keyNode.setOnMouseClicked(mouseEventHandler);
     keyNode.setOnKeyPressed(keyEventHandler);
